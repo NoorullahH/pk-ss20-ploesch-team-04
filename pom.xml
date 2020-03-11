@@ -65,4 +65,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+    <name>taskmgmt - Team 04</name>
 </project>
