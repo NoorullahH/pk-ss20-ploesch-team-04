@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #5E1B15;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.StartWindowController">
+   <children>
+      <Label layoutX="23.0" layoutY="32.0" text="Task Management" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Button layoutX="376.0" layoutY="339.0" mnemonicParsing="false" text="Import XML" AnchorPane.leftAnchor="376.0" />
+      <Button alignment="CENTER" layoutX="187.0" layoutY="185.0" mnemonicParsing="false" onAction="#createNewTask" prefHeight="31.0" prefWidth="143.0" text="Add new User" />
+      <Line endX="100.0" layoutX="224.0" layoutY="77.0" scaleX="2.0" scaleY="2.0" startX="-100.0" stroke="WHITE" />
+      <TextField layoutX="165.0" layoutY="136.0" />
+      <Label layoutX="184.0" layoutY="200.0" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="134.0" text="Username:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
