@@ -1,4 +1,4 @@
-package Frontend;
+package task;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class StartWindowController {
 
 	@FXML
-	private void createNewTask(ActionEvent event) throws IOException {
+	private void addNewUser(ActionEvent event) throws IOException {
 	
     	Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
     	Scene scene = new Scene (parent);
