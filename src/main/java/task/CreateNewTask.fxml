@@ -26,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="731.0" layoutY="167.0" prefHeight="339.0" prefWidth="242.0" />
+      <TextField fx:id="taskDetailField" layoutX="731.0" layoutY="167.0" prefHeight="339.0" prefWidth="242.0" />
       <Label layoutX="70.0" layoutY="217.0" text="Contributors:" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -81,7 +81,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="771.0" layoutY="732.0" mnemonicParsing="false" onAction="#buttonAdd" prefWidth="200.0" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+      <Button fx:id="addTask" layoutX="771.0" layoutY="732.0" mnemonicParsing="false" onAction="#buttonAdd" prefWidth="200.0" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

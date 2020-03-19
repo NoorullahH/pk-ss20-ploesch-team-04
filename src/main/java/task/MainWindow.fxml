@@ -70,8 +70,8 @@
       </Label>
       <TableView fx:id="tableView" layoutX="175.0" layoutY="69.0" prefHeight="714.0" prefWidth="864.0">
         <columns>
-          <TableColumn fx:id="colDes" prefWidth="130.0" text="description" />
-          <TableColumn fx:id="colDetdes" prefWidth="130.0" text="detail description" />
+            <TableColumn fx:id="colDes" prefWidth="130.0" text="description" />
+            <TableColumn fx:id="colDetdes" prefWidth="130.0" text="detail description" />
             <TableColumn fx:id="colDate" prefWidth="130.0" text="due date" />
             <TableColumn fx:id="colCont" prefWidth="130.0" text="contributors" />
             <TableColumn fx:id="colCate" prefWidth="130.0" text="category" />

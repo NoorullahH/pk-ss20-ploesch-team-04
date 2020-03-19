@@ -6,29 +6,32 @@ import javax.xml.bind.annotation.XmlElement;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Task implements Comparator<Task> {
+public class Task{
 
-	@XmlElement
+	
 	private String taskDescription;
-	@XmlElement
+	
 	private String detailsDescription;
-	@XmlElement
+	
 	private String contributors;
-	@XmlElement
+	
 	private String category;
-	@XmlElement
-	private String attachment;
-	@XmlElement
+	
+	//private String attachment;
+	
 	private LocalDate date;
+	
+	
+	public Task() {
+		
+	}
 
-	public Task(String taskDescription, String detailsDescription, String contributors, String category,
-			String attachment, LocalDate date) {
+	public Task(String taskDescription, String detailsDescription, String contributors, String category, LocalDate date) {
 		super();
 		this.taskDescription = taskDescription;
 		this.detailsDescription = detailsDescription;
 		this.contributors = contributors;
 		this.category = category;
-		this.attachment = attachment;
 		this.date = date;
 	}
 
@@ -64,14 +67,6 @@ public class Task implements Comparator<Task> {
 		this.category = category;
 	}
 
-	public String getAttachment() {
-		return attachment;
-	}
-
-	public void setAttachment(String attachment) {
-		this.attachment = attachment;
-	}
-
 	public LocalDate getDate() {
 		return date;
 	}
@@ -80,9 +75,5 @@ public class Task implements Comparator<Task> {
 		this.date = date;
 	}
 
-	public int compare(Task o1, Task o2) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

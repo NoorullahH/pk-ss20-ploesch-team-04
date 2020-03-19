@@ -3,14 +3,19 @@ package task;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,7 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class CreateNewTaskController {
+public class CreateNewTaskController{
+
 
 	@FXML
 	private TableView<Task> tableView;
@@ -34,19 +40,21 @@ public class CreateNewTaskController {
 	private TableColumn<Task, String> colAtt;
 	@FXML
 	private TableColumn<Task, LocalDate> colDate;
+	@FXML
+	private Button addTask;
 
 	@FXML
-	private TextField colDesField;
+	private TextField taskField;
 	@FXML
-	private TextField colDetdesField;
+	private TextField taskDetailField;
 	@FXML
-	private TextField colContField;
+	private TextField contributorsField;
 	@FXML
-	private TextField colCateField;
+	private TextField categoryField;
 	@FXML
 	private TextField colAttField;
 	@FXML
-	private DatePicker colDateField;
+	private DatePicker dateField;
 
 	/**
 	 * This method adds new Task
@@ -56,13 +64,44 @@ public class CreateNewTaskController {
 	@FXML
 	public void buttonAdd(ActionEvent event) throws IOException {
 
-		Task newTask = new Task(colDesField.getText(), colDetdesField.getText(), colContField.getText(),
-				colCateField.getText(), null, colDateField.getValue());
+		
+		Task task2 = new Task();
+		task2.setTaskDescription(taskField.getText());
+		task2.setDetailsDescription(taskDetailField.getText());
+		task2.setContributors(contributorsField.getText());
+		task2.setCategory(categoryField.getText());
+		// task2.setAttachment(colAttField.getText());
+		task2.setDate(dateField.getValue());
+		//taskField.clear();
+		//taskDetailField.clear();
+		//contributorsField.clear();
+		//categoryField.clear();
+		//colAttField.clear();
+		//dateField).clear();
+
+		
+		 /*Task newTask = new Task(taskField.getText(), taskDetailField.getText(),
+				 contributorsField.getText(), categoryField.getText(), dateField.getValue());
+		 
 
 		tableView.getItems().add(newTask);
+		*/
 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		Parent root = loader.load();
+		MainWindowController controller = loader.<MainWindowController>getController();
+		controller.setData(taskField.getText(), taskDetailField.getText().toString(), contributorsField.getText().toString(), categoryField.getText().toString(),dateField.getValue());
+		
+		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		Scene scene = new Scene(root);//parent
+		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		windowStage.setScene(scene);
+		windowStage.show();
 	}
-
+	
+	
+	
+	
 	@FXML
 	public void back(ActionEvent event) throws IOException {
 
@@ -73,16 +112,6 @@ public class CreateNewTaskController {
 		windowStage.show();
 
 	}
-
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		colDes.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));
-		colDetdes.setCellValueFactory(new PropertyValueFactory<Task, String>("detailsDescription"));
-		colCont.setCellValueFactory(new PropertyValueFactory<Task, String>("contributors"));
-		colCate.setCellValueFactory(new PropertyValueFactory<Task, String>("category"));
-		colAtt.setCellValueFactory(new PropertyValueFactory<Task, String>("attachment"));
-		colDate.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("date"));
-
-	}
+	
 
 }
