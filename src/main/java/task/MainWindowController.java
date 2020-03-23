@@ -61,50 +61,18 @@ public class MainWindowController implements Initializable {
 	 * This method adds new Task
 	 * 
 	 */
-	/*
-	 * @FXML public void buttonAdd() {
-	 * 
-	 * Task task2 = new Task(); task2.setTaskDescription(colDesField.getText());
-	 * task2.setDetailsDescription(colDetdesField.getText());
-	 * task2.setContributors(colContField.getText());
-	 * task2.setCategory(colCateField.getText()); //
-	 * task2.setAttachment(colAttField.getText());
-	 * task2.setDate(colDateField.getValue()); colDesField.clear();
-	 * colDetdesField.clear(); colContField.clear(); colCateField.clear();
-	 * colAttField.clear(); ((List<Task>) colDateField).clear();
-	 * 
-	 * 
-	 * /*Task newTask = new Task(colDes.getText(), colDetdes.getText(),
-	 * colCont.getText(), colCate.getText(), colAtt.getText(), null);
-	 * 
-	 */
-	/*
-	 * tableView.getItems().add(task2);
-	 * 
-	 * }
-	 */
-	/*
-	 * @FXML public void back(ActionEvent event) throws IOException {
-	 * 
-	 * Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-	 * Scene scene = new Scene(parent); Stage windowStage = (Stage) ((Node)
-	 * event.getSource()).getScene().getWindow(); windowStage.setScene(scene);
-	 * windowStage.show();
-	 * 
-	 * }
-	 * 
-	 */
+
 
 	ObservableList<Task> getTaskList() {
 		// ObservableList<Task> task = FXCollections.observableArrayList();
-		// task.add(new Task("Test", "Test", "Test", "Test", null));
+		task.add(new Task("Test", "Test", "Test", "Test", null));
 		// task.add(new Task("Test", "Test", "Test", null, null));
 		return task;
 
 	}
 
-	public void setData(String data, String x, String g, String m, LocalDate p) {
-		task.add(new Task(data, x, g, m, p));
+	public void setData(String des, String ddes, String cont, String cat, LocalDate date) {
+		task.add(new Task(des,ddes, cont, cat, date));
 
 	}
 

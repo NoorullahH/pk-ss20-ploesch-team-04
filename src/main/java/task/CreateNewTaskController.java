@@ -72,20 +72,7 @@ public class CreateNewTaskController{
 		task2.setCategory(categoryField.getText());
 		// task2.setAttachment(colAttField.getText());
 		task2.setDate(dateField.getValue());
-		//taskField.clear();
-		//taskDetailField.clear();
-		//contributorsField.clear();
-		//categoryField.clear();
-		//colAttField.clear();
-		//dateField).clear();
 
-		
-		 /*Task newTask = new Task(taskField.getText(), taskDetailField.getText(),
-				 contributorsField.getText(), categoryField.getText(), dateField.getValue());
-		 
-
-		tableView.getItems().add(newTask);
-		*/
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
 		Parent root = loader.load();
