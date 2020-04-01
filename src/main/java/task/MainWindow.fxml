@@ -15,7 +15,7 @@
       <Label layoutX="927.0" layoutY="18.0" text="Taskmanagement" textFill="WHITE" />
       <VBox layoutY="69.0" prefHeight="731.0" prefWidth="163.0" style="-fx-background-color: white;">
          <children>
-            <Button mnemonicParsing="false" onAction="#addNewUser" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="New Task" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#addNewTask" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="New Task" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" top="3.0" />
                </VBox.margin>

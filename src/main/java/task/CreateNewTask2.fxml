@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="task.CreateNewTaskController2">
+   <children>
+      <Label layoutX="440.0" layoutY="42.0" text="Add new Task" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="140.0" text="Task description:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="taskDescriptionField" layoutX="280.0" layoutY="132.0" prefHeight="35.0" prefWidth="236.0" />
+      <Label layoutX="745.0" layoutY="140.0" text="Detailed Task Description:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="detailedTaskDescriptionField" layoutX="745.0" layoutY="180.0" prefHeight="339.0" prefWidth="242.0" />
+      <Label layoutX="70.0" layoutY="217.0" text="Contributors:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="337.0" text="Due Date:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dueDateField" layoutX="280.0" layoutY="335.0" prefHeight="35.0" prefWidth="236.0" />
+      <Label layoutX="70.0" layoutY="410.0" text="Category:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="525.0" text="Reccurent?" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="recurrentBox" layoutX="280.0" layoutY="525.0" mnemonicParsing="false">
+         <font>
+            <Font size="16.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="monthlyBox" layoutX="70.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleMonthlyBox" text="Monthly" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="weeklyBox" layoutX="280.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleWeeklyBox" text="Weekly" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <ComboBox fx:id="monthday" layoutX="70.0" layoutY="630.0" prefHeight="30.0" prefWidth="175.0" />
+      <ComboBox fx:id="weekday" layoutX="280.0" layoutY="630.0" prefHeight="30.0" prefWidth="175.0" />
+      <Label layoutX="70.0" layoutY="699.0" text="Times?" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="695.0" prefHeight="35.0" prefWidth="236.0" />
+      <ListView fx:id="contributorList" layoutX="280.0" layoutY="213.0" prefHeight="80.0" prefWidth="236.0" />
+      <ListView fx:id="categoryList" layoutX="280.0" layoutY="410.0" prefHeight="80.0" prefWidth="236.0" />
+      <Label layoutX="745.0" layoutY="563.0" text="Attachment:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="attachmentField" layoutX="745.0" layoutY="605.0" prefHeight="35.0" prefWidth="242.0" />
+      <Button fx:id="addTask" layoutX="793.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonAdd" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="36.0" layoutY="744.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>

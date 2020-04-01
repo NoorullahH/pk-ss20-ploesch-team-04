@@ -3,9 +3,12 @@ package task;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import category.Category;
+import contributor.Contributor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +28,7 @@ import javafx.stage.Stage;
 
 public class MainWindowController implements Initializable {
 
-	ObservableList<Task> task = FXCollections.observableArrayList();
+	ObservableList<Task> taskList = FXCollections.observableArrayList();
 
 	@FXML
 	private TableView<Task> tableView;
@@ -34,65 +37,42 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private TableColumn<Task, String> colDetdes;
 	@FXML
-	private TableColumn<Task, String> colCont;
-	@FXML
-	private TableColumn<Task, String> colCate;
-	@FXML
-	private TableColumn<Task, String> colAtt;
+	private TableColumn<Task, LinkedList<Contributor>> colCont;
 	@FXML
 	private TableColumn<Task, LocalDate> colDate;
 	@FXML
+	private TableColumn<Task, LinkedList<Category>> colCate;
+	@FXML
+	private TableColumn<Task, String> colAtt;
+	@FXML
 	private Button addTask;
 
-	@FXML
-	private TextField taskField;
-	@FXML
-	private TextField taskDetailField;
-	@FXML
-	private TextField contributorsField;
-	@FXML
-	private TextField categoryField;
-	@FXML
-	private TextField colAttField;
-	@FXML
-	private DatePicker dateField;
-
-	/**
-	 * This method adds new Task
-	 * 
-	 */
-
-
-	ObservableList<Task> getTaskList() {
-		// ObservableList<Task> task = FXCollections.observableArrayList();
-		task.add(new Task("Test", "Test", "Test", "Test", null));
-		// task.add(new Task("Test", "Test", "Test", null, null));
-		return task;
-
-	}
-
-	public void setData(String des, String ddes, String cont, String cat, LocalDate date) {
-		task.add(new Task(des,ddes, cont, cat, date));
-
+	
+	public void setData(Task t) {
+		taskList.add(t);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		//set up the columns in the table
 		colDes.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));
-		colDetdes.setCellValueFactory(new PropertyValueFactory<Task, String>("detailsDescription"));
-		colCont.setCellValueFactory(new PropertyValueFactory<Task, String>("contributors"));
-		colCate.setCellValueFactory(new PropertyValueFactory<Task, String>("category"));
-		// colAtt.setCellValueFactory(new PropertyValueFactory<Task,
-		// String>("attachment"));
-		colDate.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("date"));
+		colDetdes.setCellValueFactory(new PropertyValueFactory<Task, String>("detailedTaskDescription"));
+		colCont.setCellValueFactory(new PropertyValueFactory<Task, LinkedList<Contributor>>("contributors"));
+		colCate.setCellValueFactory(new PropertyValueFactory<Task, LinkedList<Category>>("categories"));
+		colDate.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("dueDate"));
+		
+		//load Data
 		tableView.setItems(getTaskList());
-
+	}
+	
+	//This method will return an observableList of the Tasks
+	public ObservableList<Task> getTaskList() {
+		return taskList;
 	}
 
 	@FXML
-	private void addNewUser(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("CreateNewTask.fxml"));
+	private void addNewTask(ActionEvent event) throws IOException {
+		Parent parent = FXMLLoader.load(getClass().getResource("CreateNewTask2.fxml"));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
