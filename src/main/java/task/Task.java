@@ -21,21 +21,35 @@ public class Task{
 	private int monthday;
 	private int numberOfRepetitions;
 	private LinkedList<Category> categories;
-	private LinkedList<String> subtasks;
+	private LinkedList<Subtask> subtasks;
 	private LinkedList<String> attachments;
-	 	
 	
-	public Task(String taskDescription, String detailedTaskDescription,LocalDate dueDate, LinkedList<Contributor> contributors, boolean recurrent, boolean weekly, Weekday weekday, boolean monthly, int monthday, int numberOfRepetitions, LinkedList<Category> categories, LinkedList<String> subtasks, LinkedList<String> attachments) {
+	public Task() {	
+	}
+	
+	public Task(String taskDescription, String detailedTaskDescription,LocalDate dueDate, LinkedList<Contributor> contributors, boolean recurrent, boolean weekly, Weekday weekday, boolean monthly, int monthday, int numberOfRepetitions, LinkedList<Category> categories, LinkedList<Subtask> subtasks, LinkedList<String> attachments) {
+		if(taskDescription == null) {
+			throw new NullPointerException("Category must have a name!");
+		}
+		if(dueDate == null) {
+			throw new NullPointerException("Due date must be specified!");
+		}
+		
 		this.taskDescription = taskDescription;
 		this.detailedTaskDescription = detailedTaskDescription;
 		this.dueDate = dueDate;
 	 	this.contributors = contributors;
-		this.recurrent = recurrent;
-		this.weekly = weekly;
-		this.weekday = weekday;
-		this.monthly = monthly;
-		this.monthday = monthday;
-		this.numberOfRepetitions = numberOfRepetitions;
+	 	this.recurrent = recurrent;
+	 	if(recurrent) {
+	 		if(weekly) {
+	 			this.weekly = weekly;
+	 			this.weekday = weekday;
+	 		}else {
+	 			this.monthly = monthly;
+	 			this.monthday = monthday;
+	 		}
+	 		this.numberOfRepetitions = numberOfRepetitions;
+	 	}
 		this.categories = categories;
 		this.subtasks = subtasks;
 		this.attachments = attachments;
@@ -72,10 +86,14 @@ public class Task{
 	}
 
 
-	public LinkedList<Contributor> getContributors() {
-		return contributors;
+	public String getContributors() {
+		String s = "";
+		for(Contributor c:contributors) {
+			s = s + c.getPerson() + ", ";
+		}
+		return s;
 	}
-
+	
 
 	public void setContributors(LinkedList<Contributor> contributors) {
 		this.contributors = contributors;
@@ -142,8 +160,12 @@ public class Task{
 	}
 
 
-	public LinkedList<Category> getCategories() {
-		return categories;
+	public String getCategories() {
+		String s = "";
+		for(Category c:categories) {
+			s = s + c.getCategory() + ", ";
+		}
+		return s;
 	}
 
 
@@ -152,12 +174,12 @@ public class Task{
 	}
 
 
-	public LinkedList<String> getSubtasks() {
+	public LinkedList<Subtask> getSubtasks() {
 		return subtasks;
 	}
 
 
-	public void setSubtasks(LinkedList<String> subtasks) {
+	public void setSubtasks(LinkedList<Subtask> subtasks) {
 		this.subtasks = subtasks;
 	}
 
@@ -169,6 +191,18 @@ public class Task{
 
 	public void setAttachments(LinkedList<String> attachments) {
 		this.attachments = attachments;
+	}
+	
+	public void addSubtask(Subtask st) {
+		subtasks.add(st);
+	}
+	
+	public void removeSubtask(Subtask st) throws Exception {
+		if(!subtasks.contains(st)) {
+			throw new Exception("Subtask doe not exist!");
+		}else {
+			subtasks.remove(st);
+		}
 	}
 	 
 }
