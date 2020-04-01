@@ -1,4 +1,4 @@
-package task;
+package taskmanagerView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import task.Task;
 
 public class MainWindowController implements Initializable {
 

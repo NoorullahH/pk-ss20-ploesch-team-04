@@ -1,4 +1,4 @@
-package task;
+package taskmanagerView;
 
 import contributor.Contributor;
 
@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import task.Task;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="task.StartWindowController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.StartWindowController">
    <children>
       <Label layoutX="23.0" layoutY="32.0" text="Task Management" textFill="WHITE">
          <font>

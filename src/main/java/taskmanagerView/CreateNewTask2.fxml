@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="task.CreateNewTaskController2">
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.CreateNewTaskController2">
    <children>
       <Label layoutX="440.0" layoutY="42.0" text="Add new Task" textFill="WHITE">
          <font>

@@ -1,4 +1,4 @@
-package task;
+package taskmanagerView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
