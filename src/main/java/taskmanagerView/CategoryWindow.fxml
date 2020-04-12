@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.CategoryController">
+   <children>
+      <Pane prefHeight="800.0" prefWidth="441.0" style="-fx-background-color: #3D5B5D;">
+         <children>
+            <Label layoutX="114.0" layoutY="44.0" text="Category Manager" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="346.0" text="Category name:" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="categoryNameField" layoutX="191.0" layoutY="342.0" prefHeight="36.0" prefWidth="226.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Button fx:id="addCategoryButton" layoutX="116.0" layoutY="426.0" mnemonicParsing="false" onAction="#addCategory" style="-fx-background-color: #517E81;" text="Add Category" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backButton" layoutX="36.0" layoutY="741.0" mnemonicParsing="false" onAction="#backtoMain" text="Back">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <ListView fx:id="categoryList" fixedCellSize="45.0" layoutX="502.0" layoutY="145.0" prefHeight="574.0" prefWidth="490.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></ListView>
+      <Label layoutX="502.0" layoutY="82.0" prefHeight="44.0" prefWidth="490.0" style="-fx-background-color: #ffffff;" text="Categories:" textFill="#3d5b5d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteCategoryButton" layoutX="679.0" layoutY="737.0" mnemonicParsing="false" onAction="#deleteCategory" text="Delete Category">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

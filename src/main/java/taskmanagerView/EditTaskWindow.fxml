@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.CreateNewTaskController2">
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.EditTaskController">
    <children>
-      <Label layoutX="440.0" layoutY="42.0" text="Add new Task" textFill="WHITE">
+      <Label layoutX="478.0" layoutY="52.0" text="Edit Task" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -76,8 +76,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="attachmentField" layoutX="769.0" layoutY="435.0" prefHeight="30.0" prefWidth="141.0" />
-      <Button fx:id="addTaskButton" layoutX="770.0" layoutY="722.0" mnemonicParsing="false" onAction="#addTask" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+      <TextField fx:id="attachmentField" layoutX="763.0" layoutY="434.0" prefHeight="30.0" prefWidth="141.0" />
+      <Button fx:id="editTaskButton" layoutX="769.0" layoutY="722.0" mnemonicParsing="false" onAction="#editTask" style="-fx-background-color: #517E81;" text="Edit Task" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -88,35 +88,35 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="subtaskField" layoutX="742.0" layoutY="575.0" prefHeight="30.0" prefWidth="165.0" />
-      <Button fx:id="addSubtaskButton" layoutX="916.0" layoutY="574.0" mnemonicParsing="false" onAction="#addSubtask" prefHeight="29.0" prefWidth="126.0" text="Add Subtask">
+      <TextField fx:id="subtaskField" layoutX="740.0" layoutY="575.0" prefHeight="30.0" prefWidth="165.0" />
+      <Button fx:id="addSubtaskButton" layoutX="919.0" layoutY="574.0" mnemonicParsing="false" onAction="#addSubtask" prefHeight="29.0" prefWidth="126.0" text="Add Subtask">
          <font>
-            <Font size="13.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <ListView fx:id="attachmentsList" layoutX="660.0" layoutY="481.0" prefHeight="66.0" prefWidth="248.0" />
-      <Button fx:id="addAttachmentButton" layoutX="916.0" layoutY="436.0" mnemonicParsing="false" onAction="#addAttachment" prefHeight="29.0" prefWidth="126.0" text="Add Attachment">
+      <Button fx:id="addAttachmentButton" layoutX="919.0" layoutY="436.0" mnemonicParsing="false" onAction="#addAttachment" prefHeight="29.0" prefWidth="126.0" text="Add Attachment">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="deleteAttachmentButton" layoutX="916.0" layoutY="481.0" mnemonicParsing="false" onAction="#deleteAttachment" prefHeight="29.0" prefWidth="126.0" text="Delete Attachment">
+      <Button fx:id="deleteAttachmentButton" layoutX="919.0" layoutY="481.0" mnemonicParsing="false" onAction="#deleteAttachment" prefHeight="29.0" prefWidth="126.0" text="Delete Attachment">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="deleteSubtaskButton" layoutX="916.0" layoutY="616.0" mnemonicParsing="false" onAction="#deleteSubtask" prefHeight="29.0" prefWidth="126.0" text="Delete Subtask">
+      <Button fx:id="deleteSubtaskButton" layoutX="919.0" layoutY="618.0" mnemonicParsing="false" onAction="#deleteSubtask" prefHeight="29.0" prefWidth="126.0" text="Delete Subtask">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <TableView fx:id="subtaskView" layoutX="657.0" layoutY="613.0" prefHeight="90.0" prefWidth="250.0">
+      <TableView fx:id="subtaskView" layoutX="657.0" layoutY="618.0" prefHeight="90.0" prefWidth="250.0">
         <columns>
-          <TableColumn fx:id="subtaskNameColumn" prefWidth="182.0" text="Subtasks" />
-          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="67.0" text="Done?" />
+          <TableColumn fx:id="subtaskNameColumn" prefWidth="183.0" text="Subtask" />
+          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="66.0" text="Done?" />
         </columns>
       </TableView>
-      <Label fx:id="infoTextField" layoutX="57.0" layoutY="38.0" prefHeight="44.0" prefWidth="347.0" textFill="#fc0505">
+      <Label fx:id="infoTextField" layoutX="70.0" layoutY="48.0" prefHeight="44.0" prefWidth="361.0" textFill="#f80606">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

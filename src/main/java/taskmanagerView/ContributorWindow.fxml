@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.ContributorController">
+   <children>
+      <Pane prefHeight="800.0" prefWidth="441.0" style="-fx-background-color: #3D5B5D;">
+         <children>
+            <Label layoutX="99.0" layoutY="45.0" text="Contributor Manager" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="345.0" text="Contributor name:" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="contributorNameField" layoutX="191.0" layoutY="342.0" prefHeight="36.0" prefWidth="226.0">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <Button fx:id="addContributorButton" layoutX="105.0" layoutY="426.0" mnemonicParsing="false" onAction="#addContributor" style="-fx-background-color: #517E81;" text="Add Contributor" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backButton" layoutX="36.0" layoutY="741.0" mnemonicParsing="false" onAction="#backtoMain" text="Back">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="502.0" layoutY="82.0" prefHeight="36.0" prefWidth="490.0" text="Contributors:" textFill="#3d5b5d">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ListView fx:id="contributorList" fixedCellSize="45.0" layoutX="502.0" layoutY="145.0" prefHeight="574.0" prefWidth="490.0" />
+      <Button fx:id="deleteContributorButton" layoutX="670.0" layoutY="737.0" mnemonicParsing="false" onAction="#deleteContributor" text="Delete Contributor">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

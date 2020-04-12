@@ -1,50 +1,107 @@
 package category;
 
 import java.util.Collection;
-import java.util.LinkedList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class Categorymanager {
 	
-	private LinkedList<Category> categories;
+	private static Categorymanager INSTANCE;
 	
-	public Categorymanager() {
-		categories = new LinkedList<Category>();
+	private ObservableList<Category> categories;
+	
+	/**
+     * this method returns the single instance of the Categorymanager
+     * @return the single instance of the Categorymanager
+     */
+	public static synchronized Categorymanager getInstance() {
+		if(INSTANCE == null) {
+			INSTANCE = new Categorymanager();
+		}
+		return INSTANCE;
 	}
-		
-	public Categorymanager(LinkedList<Category> categories) { //falls aus XML Datei importiert
-		this.categories = categories;
+	
+	/**
+     * private constructor which initializes the Categorymanager
+     */
+	private Categorymanager() {
+		categories = FXCollections.observableArrayList();
 	}
-		
-	public void addCategory(Category category) throws Exception {
+	
+	/**
+     * this method adds a new Category to the Categorymanager
+     * @param category 	the name of the Category
+     * @return indicates if the category was added successfully
+     * 
+     */
+	public boolean addCategory(String category) {
+		if(categories == null) {
+			return false;
+		}
 		for(Category c:categories) {
-			if(c.getCategory().equals(category.getCategory())) {
-				throw new Exception("Category already exists!"); //falls Kategorie bereits existiert
+			if(c.getCategory().equals(category)) {
+				return false;
 			}
 		}
-		categories.add(category);
+		categories.add(new Category(category));
+		return true;
 	}
-		
-	public void removeCategory(Category category) throws Exception {
-		if(categories.contains(category) == false) {
-			throw new Exception("Category does not exist!"); //falls Kategorie nicht existiert 
+	
+	/**
+     * this method removes a new Category from the Categorymanager
+     * @param category 	the name of the Category
+     * @return indicates if the category was removed successfully
+     * 
+     */
+	public boolean removeCategory(String category) {
+		if(categories == null) {
+			return false;
+		}		
+		int index = -1;	
+		for(Category c:categories) {
+			if(c.getCategory().equals(category)) {
+				index = categories.indexOf(c);
+			}
+		}
+		if(index==-1) {
+			return false;
 		}else {
-			categories.remove(category);
+			categories.remove(index);
+			return true;
 		}
 	}
 	
-	public LinkedList<Category> getCategories() {
+	/**
+     * this method checks if the categories have been initialized
+     * @return indicates if categories have already been initialized
+     */
+	public boolean isEmpty() {
+		if(categories == null) {
+			return false;
+		}else {
+			return categories.isEmpty();
+		}
+	}
+	
+	/**
+     * this method returns a list of the categories
+     * @return list of the categories
+     */
+	public ObservableList<Category> getCategories() {
 		return categories;
 	}
 	
-	public void setCategories(LinkedList<Category> categories) {
-		this.categories = categories;
-	}
-	
-	public boolean isEmpty() {
-		return categories.isEmpty();
-	}
-	
-	public boolean containsAll(Collection<?> arg0) {
-		return categories.containsAll(arg0);
+	/**
+     * this method checks if a Collection has the same elements as categories
+     * @param list	elements to be compared
+     * @return indicates if a Collection has the same elements as categories
+     */
+	public boolean containsAll(Collection<?> list) {
+		if(categories == null) {
+			return false;
+		}else {
+			return categories.containsAll(list);
+		}
 	}
 }
