@@ -7,7 +7,7 @@ public class Subtask {
 	
 	//Subtask besteht aus Text und der Checkbox
 	private String subtask;
-	private BooleanProperty done;
+	private BooleanProperty done = new SimpleBooleanProperty(false);
 	
 	/**
      * constructor which initializes this Subtask
@@ -15,7 +15,7 @@ public class Subtask {
      */
 	public Subtask(String subtask) {
 		this.subtask = subtask;
-		this.done = new SimpleBooleanProperty(false);
+		this.done.set(false);
 	}
 
 	/**

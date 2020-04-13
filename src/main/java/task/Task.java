@@ -30,9 +30,13 @@ public class Task {
 	private ObservableList<Category> categories;
 	private ObservableList<Subtask> subtasks;
 	private ObservableList<String> attachments;
-	private BooleanProperty done;
+	private BooleanProperty done = new SimpleBooleanProperty(false);
 	private LocalDate creationDate;
 	
+	
+	public Task() {
+		
+	}
 	
 	//einfache Task
 	public Task(String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments) {	
@@ -46,7 +50,8 @@ public class Task {
 		this.subtasks = subtasks;
 		this.attachments = attachments;
 		this.recurrent = false;
-		this.done = new SimpleBooleanProperty(false);
+		this.weekly = false;
+		this.monthly = false;
 		this.creationDate = LocalDate.now();
 	}
 	
@@ -63,9 +68,9 @@ public class Task {
 		this.attachments = attachments;
 		this.recurrent = recurrent;
 		this.weekly = weekly;
+		this.monthly = false;
 		this.weekday = weekday;
 		this.numberOfRepetitions = numberOfRepetitions;
-		this.done = new SimpleBooleanProperty(false);
 		this.creationDate = LocalDate.now(); //ÄNDERN
 	}
 	
@@ -82,15 +87,19 @@ public class Task {
 		this.attachments = attachments;
 		this.recurrent = recurrent;
 		this.monthly = monthly;
+		this.weekly = false;
 		this.monthday = monthday;
 		this.numberOfRepetitions = numberOfRepetitions;
-		this.done = new SimpleBooleanProperty(false);
 		this.creationDate = LocalDate.now();
 	}
 	
 	
 	public int getTaskNumber() {
 		return taskNumber;
+	}
+	
+	public void setTaskNumber(int taskNumber) {
+		this.taskNumber = taskNumber;
 	}
 	
 	public void setDone(boolean done) {

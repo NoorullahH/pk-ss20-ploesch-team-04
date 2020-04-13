@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <Categories>
+        <category>Software Engineering</category>
+        <category>Informationsmanagement</category>
+        <category>Haushalt</category>
+        <category>Datenmodellierung</category>
+    </Categories>
+    <Contributors>
+        <contributor>Mara</contributor>
+        <contributor>Dajana</contributor>
+        <contributor>Maja</contributor>
+    </Contributors>
+    <Tasks>
+        <Task>
+            <taskNumber>1</taskNumber>
+            <taskDescription>Aufgabe1</taskDescription>
+            <detailedTaskDescription/>
+            <dueDate>2020-04-14</dueDate>
+            <Contributors>
+                <contributor>Mara</contributor>
+                <contributor>Dajana</contributor>
+            </Contributors>
+            <isRecurrent>false</isRecurrent>
+            <isWeekly>false</isWeekly>
+            <isMonthly>false</isMonthly>
+            <monthday>0</monthday>
+            <weekday>null</weekday>
+            <numberOfRepititions>0</numberOfRepititions>
+            <Categories>
+                <category>Informationsmanagement</category>
+            </Categories>
+            <Attachments>
+                <attachment>URL1</attachment>
+                <attachment>URL2</attachment>
+            </Attachments>
+            <creationDate>2020-01-01</creationDate>
+            <isDone>false</isDone>
+            <Subtasks>
+                <subtask type="false">A1</subtask>
+                <subtask type="true">A2</subtask>
+            </Subtasks>
+        </Task>
+    </Tasks>
+</Data>
