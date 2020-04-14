@@ -14,19 +14,28 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Button layoutX="376.0" layoutY="339.0" mnemonicParsing="false" text="Import XML" AnchorPane.leftAnchor="376.0" />
-      <Button alignment="CENTER" layoutX="187.0" layoutY="185.0" mnemonicParsing="false" onAction="#addNewUser" prefHeight="31.0" prefWidth="143.0" text="Add new User" />
+      <Button layoutX="376.0" layoutY="339.0" mnemonicParsing="false" onAction="#importXML" text="Import XML" AnchorPane.leftAnchor="376.0" />
+      <Button alignment="CENTER" layoutX="179.0" layoutY="257.0" mnemonicParsing="false" onAction="#logIn" prefHeight="31.0" prefWidth="143.0" text="Log in">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <Line endX="100.0" layoutX="224.0" layoutY="77.0" scaleX="2.0" scaleY="2.0" startX="-100.0" stroke="WHITE" />
-      <TextField layoutX="165.0" layoutY="136.0" />
+      <TextField layoutX="165.0" layoutY="136.0" prefHeight="35.0" prefWidth="195.0" />
       <Label layoutX="184.0" layoutY="200.0" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="134.0" text="Username:" textFill="WHITE">
+      <Label layoutX="39.0" layoutY="131.0" text="Username:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Label layoutX="39.0" layoutY="189.0" text="Password:" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="165.0" layoutY="189.0" prefHeight="35.0" prefWidth="195.0" />
    </children>
 </AnchorPane>

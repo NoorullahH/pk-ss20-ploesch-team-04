@@ -46,11 +46,6 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#readXML" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Import from XML" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Button>
             <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="CSV" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" />

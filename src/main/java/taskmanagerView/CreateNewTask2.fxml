@@ -63,12 +63,12 @@
       </CheckBox>
       <ComboBox fx:id="monthday" layoutX="70.0" layoutY="630.0" onAction="#handleMonthday" prefHeight="30.0" prefWidth="175.0" />
       <ComboBox fx:id="weekday" layoutX="280.0" layoutY="630.0" onAction="#handleWeekday" prefHeight="30.0" prefWidth="175.0" />
-      <Label layoutX="70.0" layoutY="699.0" text="Times?" textFill="WHITE">
+      <Label layoutX="141.0" layoutY="682.0" text="Times?" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="695.0" prefHeight="35.0" prefWidth="236.0" />
+      <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="678.0" prefHeight="35.0" prefWidth="236.0" />
       <ListView fx:id="contributorList" layoutX="280.0" layoutY="213.0" prefHeight="80.0" prefWidth="236.0" />
       <ListView fx:id="categoryList" layoutX="280.0" layoutY="410.0" prefHeight="80.0" prefWidth="236.0" />
       <Label layoutX="660.0" layoutY="435.0" text="Attachment:" textFill="WHITE">
@@ -82,7 +82,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" layoutX="36.0" layoutY="744.0" mnemonicParsing="false" onAction="#backtoMain" text="Back" />
+      <Button fx:id="backButton" layoutX="37.0" layoutY="751.0" mnemonicParsing="false" onAction="#backtoMain" text="Back" />
       <Label layoutX="660.0" layoutY="575.0" text="Subtask:" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -119,6 +119,12 @@
       <Label fx:id="infoTextField" layoutX="57.0" layoutY="38.0" prefHeight="44.0" prefWidth="347.0" textFill="#fc0505">
          <font>
             <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="repetitionDateField" layoutX="281.0" layoutY="732.0" onAction="#handleRepetitionDateField" prefHeight="35.0" prefWidth="236.0" />
+      <Label layoutX="137.0" layoutY="736.0" text="Repeat until:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
    </children>

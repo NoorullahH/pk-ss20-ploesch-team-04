@@ -69,6 +69,8 @@ public class CreateNewTaskController2 implements Initializable{
 	@FXML
 	private TextField timesOfRepititionsField;
 	@FXML
+	private DatePicker repetitionDateField;
+	@FXML
 	private ListView<String> contributorList = new ListView<>();
 	@FXML
 	private ListView<String> categoryList = new ListView<>();
@@ -108,8 +110,10 @@ public class CreateNewTaskController2 implements Initializable{
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		        if (newValue.matches("\\d*")) {
 		            int value = Integer.parseInt(newValue);
+		            repetitionDateField.setValue(null);
 		        } else {
 		        	timesOfRepititionsField.setText(oldValue);
+		        	repetitionDateField.setValue(null);
 		        }
 		    }
 		});
@@ -222,6 +226,15 @@ public class CreateNewTaskController2 implements Initializable{
 		}
 	}
 	
+	//Ensures that it is not possible to select monthly and weekly at the same time
+	@FXML
+	private void handleRepetitionDateField() {
+		if(repetitionDateField.getValue()!=null) {
+			timesOfRepititionsField.setText("");
+		}
+	}
+	
+	
 	//This Method adds a new Task
 	@FXML
 	public void addTask(ActionEvent event) throws IOException {
@@ -264,10 +277,10 @@ public class CreateNewTaskController2 implements Initializable{
 		if(recurrentBox.isSelected()) {
 			//wöchentlich
 			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (Weekday) weekday.getValue(), times);
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
 			//monatlich
 			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (int) monthday.getValue(), times);
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
 			}

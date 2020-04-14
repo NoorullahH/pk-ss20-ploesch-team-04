@@ -27,6 +27,7 @@ public class Task {
 	private boolean monthly;
 	private int monthday;
 	private int numberOfRepetitions;
+	private LocalDate repetitionDate;
 	private ObservableList<Category> categories;
 	private ObservableList<Subtask> subtasks;
 	private ObservableList<String> attachments;
@@ -56,7 +57,7 @@ public class Task {
 	}
 	
 	//wöchentlich wiederholende Task
-	public Task(String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean weekly, Weekday weekday, int numberOfRepetitions) {
+	public Task(String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean weekly, Weekday weekday, int numberOfRepetitions, LocalDate repetitionDate) {
 		numberOfTasks++;
 		taskNumber = numberOfTasks;
 		this.taskDescription = taskDes;
@@ -71,11 +72,12 @@ public class Task {
 		this.monthly = false;
 		this.weekday = weekday;
 		this.numberOfRepetitions = numberOfRepetitions;
+		this.repetitionDate = repetitionDate;
 		this.creationDate = LocalDate.now(); //ÄNDERN
 	}
 	
 	//monatlich wiederholende Task
-	public Task(String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, int monthday, int numberOfRepetitions) {
+	public Task(String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, int monthday, int numberOfRepetitions, LocalDate repetitionDate) {
 		numberOfTasks++;
 		taskNumber = numberOfTasks;
 		this.taskDescription = taskDes;
@@ -90,6 +92,7 @@ public class Task {
 		this.weekly = false;
 		this.monthday = monthday;
 		this.numberOfRepetitions = numberOfRepetitions;
+		this.repetitionDate = repetitionDate;
 		this.creationDate = LocalDate.now();
 	}
 	
@@ -266,5 +269,13 @@ public class Task {
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
-	 
+
+	public LocalDate getRepetitionDate() {
+		return repetitionDate;
+	}
+
+	public void setRepetitionDate(LocalDate repetitionDate) {
+		this.repetitionDate = repetitionDate;
+	}
+	
 }

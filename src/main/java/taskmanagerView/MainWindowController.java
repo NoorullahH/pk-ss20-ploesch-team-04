@@ -10,6 +10,7 @@ import org.w3c.dom.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
@@ -240,18 +241,16 @@ public class MainWindowController implements Initializable {
 	
 	@FXML
 	private void handleTasks(ActionEvent event) {
-		System.out.println(taskList.getSize());
 		int size = taskList.getSize();
 		for(int i = 0;  i < size; i++) {
 			Task t = taskList.getTasks().get(i);
-			System.out.println(t.getTaskNumber()+" "+t.getCreationDate());
 			if(t.isRecurrent()) {
 				taskList.handleRecurrentTasks(t);
 			}
 		}
 	}
 	
-	public void editData(int taskNumber, String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, boolean weekly,  Weekday weekday, int monthday, int numberOfRepetitions) {
+	public void editData(int taskNumber, String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, boolean weekly,  Weekday weekday, int monthday, int numberOfRepetitions, LocalDate repetitionDate) {
 		for(Task t:taskList.getTasks()) {
 			if(t.getTaskNumber()==taskNumber) {
 				t.setTaskDescription(taskDes);
@@ -267,6 +266,7 @@ public class MainWindowController implements Initializable {
 				t.setWeekday(weekday);
 				t.setMonthday(monthday);
 				t.setNumberOfRepetitions(numberOfRepetitions);
+				t.setRepetitionDate(repetitionDate);
 			}
 		}
 	}
@@ -274,97 +274,26 @@ public class MainWindowController implements Initializable {
 	
 	@FXML
 	private void saveToXML(ActionEvent event) {
-		taskList.saveToXML();
-	}
-	
-			
-//			
-//				private static int numberOfTasks;
-//				private int taskNumber;
-//				
-//				private LocalDate dueDate;
-//				private ObservableList<Contributor> contributors;
-//				private boolean recurrent;
-//				private boolean weekly;
-//				private Weekday weekday;  
-//				private boolean monthly;
-//				private int monthday;
-//				private int numberOfRepetitions;
-//				private ObservableList<Category> categories;
-//				private ObservableList<Subtask> subtasks;
-//				private ObservableList<String> attachments;
-//				private BooleanProperty done;
-//				private LocalDate creationDate;7
-			
+		FileChooser fileChooser = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
 		
-//		try {
-//			FileOutputStream fos = new FileOutputStream(new File("./tasks.xml"));
-//			XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(fos));
-//			encoder.writeObject(taskList);
-//			System.out.println(taskList.getSize());
-//			encoder.close();
-//			fos.close();
-//		}catch(IOException ex) {
-//			ex.printStackTrace();
-//		}
-	
-	
-	@FXML
-	private void readXML(ActionEvent event) {
-		taskList.readXML();
-	}		
-		
-//		taskList = null;
-//        Document dom;
-//        // Make an  instance of the DocumentBuilderFactory
-//        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//        try {
-//            // use the factory to take an instance of the document builder
-//            DocumentBuilder db = dbf.newDocumentBuilder();
-//            // parse using the builder to get the DOM mapping of the    
-//            // XML file
-//            dom = db.parse("./tasks.xml");
-//
-//            Element doc = dom.getDocumentElement();
-//            
-//            NodeList nl = doc.getElementsByTagName("taskDescription");
-//            String value = nl.item(0).getFirstChild().getNodeValue();
-//            System.out.println(value);
-//            
-//       
-//        } catch (ParserConfigurationException pce) {
-//            System.out.println(pce.getMessage());
-//        } catch (SAXException se) {
-//            System.out.println(se.getMessage());
-//        } catch (IOException ioe) {
-//            System.err.println(ioe.getMessage());
-//        }
+		Node source = (Node) event.getSource();
+    	Stage window = (Stage) source.getScene().getWindow();
 
-		
-//		try {
-//			FileInputStream fis = new FileInputStream(new File("./tasks.xml"));
-//			XMLDecoder decoder = new XMLDecoder(fis);
-//			System.out.println("Hallo");
-//			taskList = (Taskmanager) decoder.readObject();
-//			System.out.println(taskList.getSize());
-//			decoder.close();
-//			fis.close();
-//		}catch(IOException ex) {
-//			ex.printStackTrace();
-//		}
-//		
-//		taskView.setItems(getTaskList());
-//		System.out.println(taskList.getSize());
-//		
-	
-	private String getTextValue(String def, Element doc, String tag) {
-		String value = def;
-		NodeList nl;
-		nl = doc.getElementsByTagName(tag);
-		if (nl.getLength() > 0 && nl.item(0).hasChildNodes()) {
-			value = nl.item(0).getFirstChild().getNodeValue();
+		File file = fileChooser.showSaveDialog(window);
+
+		if (file != null) {
+			// Make sure it has the correct extension
+            if (!file.getPath().endsWith(".xml")) {
+                file = new File(file.getPath() + ".xml");
+            }
+			taskList.saveToXML(file);
+		}else {
+			String xmlFile = "./tasks.xml";
+			File fileDefault = new File(xmlFile);
+			taskList.saveToXML(fileDefault);
 		}
-		return value;
-	}
+	}	
 
 }

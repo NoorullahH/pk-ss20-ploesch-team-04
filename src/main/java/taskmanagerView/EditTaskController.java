@@ -65,6 +65,8 @@ public class EditTaskController {
 	@FXML
 	private TextField timesOfRepititionsField;
 	@FXML
+	private DatePicker repetitionDateField;
+	@FXML
 	private ListView<String> contributorList = new ListView<>();
 	@FXML
 	private ListView<String> categoryList = new ListView<>();
@@ -119,13 +121,16 @@ public class EditTaskController {
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		        if (newValue.matches("\\d*")) {
 		            int value = Integer.parseInt(newValue);
+		            repetitionDateField.setValue(null);
 		        } else {
 		        	timesOfRepititionsField.setText(oldValue);
+		        	repetitionDateField.setValue(null);
 		        }
 		    }
 		});
 		
 		timesOfRepititionsField.setText(""+t.getNumberOfRepetitions()+"");
+		repetitionDateField.setValue(t.getRepetitionDate());
 		
 		//Initialize AttachmentListView
 		attachmentItems.setAll(t.getAttachments());
@@ -245,6 +250,14 @@ public class EditTaskController {
 		}
 	}
 	
+	//Ensures that it is not possible to select monthly and weekly at the same time
+	@FXML
+	private void handleRepetitionDateField() {
+		if(repetitionDateField.getValue()!=null) {
+			timesOfRepititionsField.setText("");
+		}
+	}
+	
 	//Add Subtask to SubtaskItems
 	@FXML
 	public void addSubtask(ActionEvent event) {
@@ -321,14 +334,14 @@ public class EditTaskController {
 		
 		if(recurrentBox.isSelected()) {
 			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times);
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
 			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times);
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0);
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
 			}
 		}else {
-			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0);
+			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
 		}
 		
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));

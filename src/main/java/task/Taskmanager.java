@@ -110,12 +110,20 @@ public class Taskmanager {
 		
 		if(t.isRecurrent() && (t.getNumberOfRepetitions()>0)) {
 			if(t.isMonthly()) {//monatlich
+				if (t.getMonthday() == 31 && (t.getCreationDate().plusMonths(1).getMonthValue() == 4 || t.getCreationDate().plusMonths(1).getMonthValue() == 6
+						|| t.getCreationDate().plusMonths(1).getMonthValue() == 9 || t.getCreationDate().plusMonths(1).getMonthValue() == 11)) {
+					t.setMonthday(30);
+				} else if (t.getMonthday() > 28 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && !t.getCreationDate().isLeapYear()) {
+					t.setMonthday(28);
+				} else if (t.getMonthday() > 29 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && t.getCreationDate().isLeapYear()) {
+					t.setMonthday(29);
+				}
+				
 				if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-					System.out.println("Monatlich");
-					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isMonthly(), t.getMonthday(), (t.getNumberOfRepetitions()-1));
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isMonthly(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
 					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
-					System.out.println("Ja");
 					tasks.add(newTask);
+					System.out.println("NewTask "+newTask.getCreationDate());
 					size++;
 					for(Task task:tasks) {
 						if(task.getTaskNumber()==t.getTaskNumber()) {
@@ -124,19 +132,56 @@ public class Taskmanager {
 					}
 				}
 			}else if(t.isWeekly()) {//wöchentlich
-				System.out.println("Wöchentlich");
-				newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isWeekly(), t.getWeekday(), (t.getNumberOfRepetitions()-1));
-				newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
-				System.out.println("Ja");
-				tasks.add(newTask);
-				size++;
-				for(Task task:tasks) {
-					if(task.getTaskNumber()==t.getTaskNumber()) {
-						task.setNumberOfRepetitions(0);
+				if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isWeekly(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
+					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+					tasks.add(newTask);
+					size++;
+					for(Task task:tasks) {
+						if(task.getTaskNumber()==t.getTaskNumber()) {
+							task.setNumberOfRepetitions(0);
+						}
+					}
+				}
+				
+			}
+		}else if(t.getRepetitionDate()!=null && t.isRecurrent() && LocalDate.now().isBefore(t.getRepetitionDate())) { 
+			if(t.isMonthly()){
+				if (t.getMonthday() == 31 && (t.getCreationDate().plusMonths(1).getMonthValue() == 4 || t.getCreationDate().plusMonths(1).getMonthValue() == 6
+						|| t.getCreationDate().plusMonths(1).getMonthValue() == 9 || t.getCreationDate().plusMonths(1).getMonthValue() == 11)) {
+					t.setMonthday(30);
+				} else if (t.getMonthday() > 28 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && !t.getCreationDate().isLeapYear()) {
+					t.setMonthday(28);
+				} else if (t.getMonthday() > 29 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && t.getCreationDate().isLeapYear()) {
+					t.setMonthday(29);
+				}
+				
+				if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isMonthly(), t.getMonthday(), 0, t.getRepetitionDate());
+					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
+					tasks.add(newTask);
+					size++;
+					for(Task task:tasks) {
+						if(task.getTaskNumber()==t.getTaskNumber()) {
+							task.setRepetitionDate(null);
+						}
+					}
+				}
+			}else if(t.isWeekly()) {
+				if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isWeekly(), t.getWeekday(), 0 , t.getRepetitionDate());
+					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+					System.out.println("Task: "+newTask.getTaskNumber()+" "+newTask.getRepetitionDate());
+					tasks.add(newTask);
+					size++;
+					for(Task task:tasks) {
+						if(task.getTaskNumber()==t.getTaskNumber()) {
+							task.setRepetitionDate(null);
+						}
 					}
 				}
 			}
-		}	
+		}
 	}
 
 	public static int getSize() {
@@ -148,7 +193,7 @@ public class Taskmanager {
 	}
 	
 	
-	public void saveToXML() {		
+	public void saveToXML(File fileName) {		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		
@@ -182,11 +227,19 @@ public class Taskmanager {
 			
 			Element rootTasks = doc.createElement("Tasks");
 			rootElement.appendChild(rootTasks);
-		
-			for(Task t:tasks) {
-				rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks()));
-			}
 			
+			System.out.println("Tasks Size: "+tasks.size());
+			for(Task t:tasks) {
+				if(t.getRepetitionDate() == null && t.getDueDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+				}else if(t.getDueDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+				}else if(t.getRepetitionDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+				}else {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+				}
+			}
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             //for pretty print
@@ -195,8 +248,8 @@ public class Taskmanager {
 
             //write to console or file
             StreamResult console = new StreamResult(System.out);
-            StreamResult file = new StreamResult(new File("./tasks.xml"));
-
+            StreamResult file = new StreamResult(fileName);
+            
             //write data
             transformer.transform(source, console);
             transformer.transform(source, file);
@@ -208,7 +261,7 @@ public class Taskmanager {
     }
 	
 		
-	private static Node getTask(Document doc, String taskNumber, String taskDescription, String detailedTaskDescription, String dueDate, ObservableList<Contributor> contributors, String isRecurrent, String isWeekly, String isMonthly, String monthday, String weekday, String numberOfRepetitions, ObservableList<Category> categories, ObservableList<String> attachments, String creationDate, String isDone, ObservableList<Subtask> subtasks) {
+	private static Node getTask(Document doc, String taskNumber, String taskDescription, String detailedTaskDescription, String dueDate, ObservableList<Contributor> contributors, String isRecurrent, String isWeekly, String isMonthly, String monthday, String weekday, String numberOfRepetitions, ObservableList<Category> categories, ObservableList<String> attachments, String creationDate, String isDone, ObservableList<Subtask> subtasks, String repetitionDate) {
         Element task = doc.createElement("Task");
         
         task.appendChild(getTaskElements(doc, "taskNumber", taskNumber));
@@ -232,6 +285,8 @@ public class Taskmanager {
         task.appendChild(getTaskElements(doc, "weekday", weekday));
         
         task.appendChild(getTaskElements(doc, "numberOfRepititions", numberOfRepetitions));
+        
+        task.appendChild(getTaskElements(doc, "repetitionDate", repetitionDate));
         
         task.appendChild(getCategoriesElements(doc, "category", categories));
         
@@ -304,10 +359,9 @@ public class Taskmanager {
         return con;
     }
     
-    public void readXML() {
+    public void readXML(File fileName) {
     	
-    	String filePath = "tasks.xml";
-    	File xmlFile = new File(filePath);
+    	File xmlFile =	fileName;
     	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     	DocumentBuilder dBuilder;
     	try {
@@ -367,7 +421,10 @@ public class Taskmanager {
     		Element element = (Element) node;
     		emp.setTaskDescription(getTagValue("taskDescription", element));
     		emp.setDetailedTaskDescription(getTagValue("detailedTaskDescription",element));
-    		emp.setDueDate(LocalDate.parse(getTagValue("dueDate",element)));
+    		String date = getTagValue("dueDate",element);
+    		if(!date.isEmpty()) {
+    			emp.setDueDate(LocalDate.parse(date));
+    		}
     		emp.setTaskNumber(Integer.parseInt(getTagValue("taskNumber",element)));
     		
     		ObservableList<Contributor> contri = FXCollections.observableArrayList();
@@ -460,6 +517,10 @@ public class Taskmanager {
     		emp.setMonthday(Integer.parseInt(getTagValue("monthday", element)));
     		emp.setWeekday(handleWeekday(getTagValue("weekday",element)));
     		emp.setNumberOfRepetitions(Integer.parseInt(getTagValue("numberOfRepititions", element)));
+    		date = getTagValue("repetitionDate", element);
+    		if(!date.isEmpty()) {
+    			emp.setRepetitionDate(LocalDate.parse(date));
+    		}
     		emp.setCreationDate(LocalDate.parse(getTagValue("creationDate",element)));
     		dummy = getTagValue("isDone", element);
     		emp.setDone("true".equals(dummy));
