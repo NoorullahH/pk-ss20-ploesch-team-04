@@ -277,10 +277,10 @@ public class CreateNewTaskController2 implements Initializable{
 		if(recurrentBox.isSelected()) {
 			//wöchentlich
 			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
 			//monatlich
 			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, (int) monthday.getValue(), times, repetitionDateField.getValue());
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
 			}

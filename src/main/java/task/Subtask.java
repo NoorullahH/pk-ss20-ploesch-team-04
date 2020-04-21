@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Subtask {
 	
-	//Subtask besteht aus Text und der Checkbox
 	private String subtask;
 	private BooleanProperty done = new SimpleBooleanProperty(false);
 	
@@ -27,22 +26,34 @@ public class Subtask {
 	}
 
 	/**
-     * this method sets this Subtask
+     * this method sets the name of this Subtask
      * @param subtask	the name of this Subtask
      */
 	public void setSubtask(String subtask) {
 		this.subtask = subtask;
 	}
 	
+	/**
+     * this method sets the done value of this Subtask
+     * @param done	the value of done (true/false)
+     */
 	public void setDone(boolean done) {
 		this.done.set(done);
 	}
-
+	
+	/**
+     * this method returns the done Property of this Subtask
+     * @return done Property of this Subtask
+     */
 	public BooleanProperty getDone() {
 		return done;
 	}
 	
+	/**
+     * this method returns the done value of this Subtask
+     * @return done value of this Subtask
+     */
 	public boolean isDone() {
-	      return done.get();
-	    }
+		return done.get();
+	}
 }

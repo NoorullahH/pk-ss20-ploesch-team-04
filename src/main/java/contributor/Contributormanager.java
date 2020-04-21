@@ -1,6 +1,5 @@
 package contributor;
 
-import java.util.Collection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,16 +21,16 @@ public class Contributormanager {
 	}
 	
 	/**
-     * default constructor which initializes the Contributormanager
+     * private constructor which initializes the Contributormanager
      */
 	private Contributormanager() {
 		contributors = FXCollections.observableArrayList();
 	}
 	
 	/**
-     * this method adds a new Category to the Categorymanager
-     * @param category 	the name of the Category
-     * @return indicates if the category was added successfully
+     * this method adds a new Contributor to the Contributormanager
+     * @param contributor 	the name of the Contributor
+     * @return indicates if the contributor was added successfully
      * 
      */
 	public boolean addContributor(String contributor) {
@@ -48,9 +47,9 @@ public class Contributormanager {
 	}
 	
 	/**
-     * this method removes a new Category from the Categorymanager
-     * @param category 	the name of the Category
-     * @return indicates if the category was removed successfully
+     * this method removes a Contributor from the Contributormanager
+     * @param contributor 	the name of the Contributor
+     * @return indicates if the contributor was removed successfully
      * 
      */
 	public boolean removeContributor(String contributor) {
@@ -71,10 +70,9 @@ public class Contributormanager {
 		}
 	}
 	
-	
 	/**
-     * this method checks if categories have already been added
-     * @return indicates if categories have already been added
+     * this method checks if the contributors have been initialized
+     * @return indicates if contributors have already been initialized
      */
 	public boolean isEmpty() {
 		if(contributors == null) {
@@ -84,20 +82,18 @@ public class Contributormanager {
 		}
 	}
 	
+	/**
+     * this method returns a list of the contributors
+     * @return list of the contributors
+     */
 	public ObservableList<Contributor> getContributors() {
 		return contributors;
 	}
 	
 	/**
-     * this method checks if a Collection has the same elements as categories
-     * @param list	list of elements to be compared
-     * @return indicates if a Collection has the same elements as categories
+     * this method sets the contributors to null
      */
-	public boolean containsAll(Collection<?> list) {
-		if(contributors == null) {
-			return false;
-		}else {
-			return contributors.containsAll(list);
-		}
+	public void setContributorsNull() {
+		contributors = null;
 	}
 }

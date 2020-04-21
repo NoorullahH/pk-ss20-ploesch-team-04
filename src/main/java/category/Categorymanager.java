@@ -41,7 +41,7 @@ public class Categorymanager {
 		}
 		for(Category c:categories) {
 			if(c.getCategory().equals(category)) {
-				return false;
+				return false; 
 			}
 		}
 		categories.add(new Category(category));
@@ -49,7 +49,7 @@ public class Categorymanager {
 	}
 	
 	/**
-     * this method removes a new Category from the Categorymanager
+     * this method removes a Category from the Categorymanager
      * @param category 	the name of the Category
      * @return indicates if the category was removed successfully
      * 
@@ -93,15 +93,9 @@ public class Categorymanager {
 	}
 	
 	/**
-     * this method checks if a Collection has the same elements as categories
-     * @param list	elements to be compared
-     * @return indicates if a Collection has the same elements as categories
+     * this method sets the categories to null
      */
-	public boolean containsAll(Collection<?> list) {
-		if(categories == null) {
-			return false;
-		}else {
-			return categories.containsAll(list);
-		}
+	public void setCategoriesNull() {
+		categories = null;
 	}
 }

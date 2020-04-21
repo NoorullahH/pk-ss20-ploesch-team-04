@@ -2,13 +2,8 @@ package task;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,8 +25,6 @@ import contributor.Contributor;
 import contributor.Contributormanager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import weekday.Weekday;
 
 public class Taskmanager {
@@ -41,21 +34,38 @@ public class Taskmanager {
 	private ObservableList<Task> tasks;
 	private static int size;
 	
+	/**
+     * this method returns the single instance of the Taskmanager
+     * @return the single instance of the Taskmanager
+     */
 	public static synchronized Taskmanager getInstance() {
 		if(INSTANCE == null) {
 			INSTANCE = new Taskmanager();
 		}
 		return INSTANCE;
 	}
-		
+	
+	/**
+     * private constructor which initializes the Taskmanager
+     */
 	private Taskmanager() {
 		this.tasks = FXCollections.observableArrayList();
 	}
 		
+	/**
+     * this method returns a list of the tasks
+     * @return list of the tasks
+     */
 	public ObservableList<Task> getTasks() {
 		return tasks;
 	}
-
+	
+	/**
+     * this method adds a new Task to the Taskmanager
+     * @param task 	the Task which should be added to the Taskmanager
+     * @return indicates if the Task was added successfully
+     * 
+     */
 	public boolean addTask(Task task) {
 		if(tasks == null) {
 			return false;
@@ -64,7 +74,13 @@ public class Taskmanager {
 		size++;
 		return true;
 	}
-		
+	
+	/**
+     * this method removes a Task from the Taskmanager
+     * @param task 	the Task which should be removed to the Taskmanager
+     * @return indicates if the Task was removed successfully
+     * 
+     */
 	public boolean removeTask(Task task) {
 		if(tasks == null) {
 			return false;
@@ -84,6 +100,12 @@ public class Taskmanager {
 		}
 	}
 	
+	/**
+     * this method removes a Category from all tasks of the Taskmanager
+     * @param category 	the name of the Category
+     * @return indicates if the Category was removed successfully
+     * 
+     */
 	public boolean removeCategoryFromTasks(String category) {
 		if(tasks == null) {
 			return false;
@@ -104,90 +126,113 @@ public class Taskmanager {
 		return true;
 	}
 	
-	public void handleRecurrentTasks(Task t) {
+	/**
+     * this method checks if the tasks have been initialized
+     * @return indicates if tasks have already been initialized
+     */
+	public boolean isEmpty() {
+		if(tasks == null) {
+			return false;
+		}else {
+			return tasks.isEmpty();
+		}
+	}
+	
+	/**
+     * this method sets the tasks to null
+     */
+	public void setTasksNull() {
+		tasks = null;
+	}
+	
+	/**
+     * this method handles a recurrent Task
+     * the method first checks if a task is repeated monthly or weekly
+     * after that the method checks if the task is repeated to a specific date or repeated by a number
+     * if the creationDate has been exceeded, a new task can be added to the Taskmanager
+     * the new created task is repeated from now on and the task passed in the parameter is no longer repeated
+     * @param Task 	the Task which should be checked
+     * @return new added Task
+     */
+	public Task handleRecurrentTasks(Task t) {
 		
 		Task newTask = null;
 		
-		if(t.isRecurrent() && (t.getNumberOfRepetitions()>0)) {
-			if(t.isMonthly()) {//monatlich
+		if(t.isRecurrent()) {
+			if(t.isMonthly()) {
 				if (t.getMonthday() == 31 && (t.getCreationDate().plusMonths(1).getMonthValue() == 4 || t.getCreationDate().plusMonths(1).getMonthValue() == 6
 						|| t.getCreationDate().plusMonths(1).getMonthValue() == 9 || t.getCreationDate().plusMonths(1).getMonthValue() == 11)) {
 					t.setMonthday(30);
+				}else if (t.getMonthday() > 29 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && t.getCreationDate().isLeapYear()) {
+					t.setMonthday(29);
 				} else if (t.getMonthday() > 28 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && !t.getCreationDate().isLeapYear()) {
 					t.setMonthday(28);
-				} else if (t.getMonthday() > 29 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && t.getCreationDate().isLeapYear()) {
-					t.setMonthday(29);
 				}
 				
-				if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isMonthly(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
-					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
-					tasks.add(newTask);
-					System.out.println("NewTask "+newTask.getCreationDate());
-					size++;
-					for(Task task:tasks) {
-						if(task.getTaskNumber()==t.getTaskNumber()) {
-							task.setNumberOfRepetitions(0);
+				if(t.getNumberOfRepetitions()>0){
+					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
+						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
+						tasks.add(newTask);
+						for(Task task:tasks) {
+							if(task.getTaskNumber()==t.getTaskNumber()) {
+								task.setNumberOfRepetitions(0);
+							}
 						}
 					}
-				}
-			}else if(t.isWeekly()) {//wöchentlich
-				if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isWeekly(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
-					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
-					tasks.add(newTask);
-					size++;
-					for(Task task:tasks) {
-						if(task.getTaskNumber()==t.getTaskNumber()) {
-							task.setNumberOfRepetitions(0);
-						}
-					}
-				}
-				
-			}
-		}else if(t.getRepetitionDate()!=null && t.isRecurrent() && LocalDate.now().isBefore(t.getRepetitionDate())) { 
-			if(t.isMonthly()){
-				if (t.getMonthday() == 31 && (t.getCreationDate().plusMonths(1).getMonthValue() == 4 || t.getCreationDate().plusMonths(1).getMonthValue() == 6
-						|| t.getCreationDate().plusMonths(1).getMonthValue() == 9 || t.getCreationDate().plusMonths(1).getMonthValue() == 11)) {
-					t.setMonthday(30);
-				} else if (t.getMonthday() > 28 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && !t.getCreationDate().isLeapYear()) {
-					t.setMonthday(28);
-				} else if (t.getMonthday() > 29 && t.getCreationDate().plusMonths(1).getMonthValue() == 2 && t.getCreationDate().isLeapYear()) {
-					t.setMonthday(29);
-				}
-				
-				if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isMonthly(), t.getMonthday(), 0, t.getRepetitionDate());
-					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
-					tasks.add(newTask);
-					size++;
-					for(Task task:tasks) {
-						if(task.getTaskNumber()==t.getTaskNumber()) {
-							task.setRepetitionDate(null);
+				}else if(t.getRepetitionDate()!=null) {
+					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), 0, t.getRepetitionDate());
+						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
+						tasks.add(newTask);
+						for(Task task:tasks) {
+							if(task.getTaskNumber()==t.getTaskNumber()) {
+								task.setRepetitionDate(null);
+							}
 						}
 					}
 				}
 			}else if(t.isWeekly()) {
-				if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.isRecurrent(), t.isWeekly(), t.getWeekday(), 0 , t.getRepetitionDate());
-					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
-					System.out.println("Task: "+newTask.getTaskNumber()+" "+newTask.getRepetitionDate());
-					tasks.add(newTask);
-					size++;
-					for(Task task:tasks) {
-						if(task.getTaskNumber()==t.getTaskNumber()) {
-							task.setRepetitionDate(null);
+				if(t.getNumberOfRepetitions()>0){
+					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
+						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+						tasks.add(newTask);
+						for(Task task:tasks) {
+							if(task.getTaskNumber()==t.getTaskNumber()) {
+								task.setNumberOfRepetitions(0);
+							}
+						}
+					}
+				}else if(t.getRepetitionDate()!=null) {
+					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), 0 , t.getRepetitionDate());
+						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+						tasks.add(newTask);
+						for(Task task:tasks) {
+							if(task.getTaskNumber()==t.getTaskNumber()) {
+								task.setRepetitionDate(null);
+							}
 						}
 					}
 				}
-			}
+			}	
 		}
+		return newTask;
 	}
-
+	
+	/**
+     * this method returns the size of the Taskmanager
+     * @return the size of the Taskmanager
+     */
 	public static int getSize() {
 		return size;
 	}
-
+	
+	/**
+     * this method sets the size of the Taskmanager
+     * @param size  the size of the Taskmanager
+     */
 	public static void setSize(int size) {
 		Taskmanager.size = size;
 	}
