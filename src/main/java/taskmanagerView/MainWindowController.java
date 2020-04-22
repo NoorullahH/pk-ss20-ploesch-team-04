@@ -46,11 +46,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import task.Subtask;
 import task.Task;
+import task.Subtask;
 import task.Taskmanager;
 import weekday.Weekday;
 
@@ -108,6 +109,15 @@ public class MainWindowController implements Initializable {
 		categoriesColumn.setCellValueFactory(new PropertyValueFactory<Task, List<Category>>("categories"));
 		dueDateColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("dueDate"));
 		attachmentsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<String>>("attachments"));
+		
+
+		
+		descriptionColumn.setStyle("-fx-font-size: 15 ;");
+		detailedDescriptionColumn.setStyle("-fx-font-size: 15 ;");
+		contributorsColumn.setStyle("-fx-font-size: 15 ;");
+		categoriesColumn.setStyle("-fx-font-size: 15 ;");
+		dueDateColumn.setStyle("-fx-font-size: 15 ;");
+		attachmentsColumn.setStyle("-fx-font-size: 15 ;");
 		
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));

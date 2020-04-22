@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -11,9 +12,9 @@
    <children>
       <Pane prefHeight="800.0" prefWidth="441.0" style="-fx-background-color: #3D5B5D;">
          <children>
-            <Label layoutX="114.0" layoutY="44.0" text="Category Manager" textFill="WHITE">
+            <Label layoutX="91.0" layoutY="43.0" text="Category Manager" textFill="WHITE">
                <font>
-                  <Font size="26.0" />
+                  <Font name="System Bold" size="26.0" />
                </font>
             </Label>
             <Label layoutX="36.0" layoutY="346.0" text="Category name:" textFill="WHITE">
@@ -36,6 +37,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
+            <Line endX="160.0" layoutX="207.0" layoutY="98.0" startX="-150.0" stroke="WHITE" strokeWidth="3.0" />
          </children>
       </Pane>
       <ListView fx:id="categoryList" fixedCellSize="45.0" layoutX="502.0" layoutY="145.0" prefHeight="574.0" prefWidth="490.0">

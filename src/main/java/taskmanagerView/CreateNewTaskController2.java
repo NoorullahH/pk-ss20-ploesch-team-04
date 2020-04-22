@@ -119,7 +119,12 @@ public class CreateNewTaskController2 implements Initializable{
 		});
 		
 		monthday.setItems(monthdayList);
+		monthday.setStyle("-fx-font-size: 16 ;");
 		weekday.setItems(weekdayList);
+		weekday.setStyle("-fx-font-size: 16 ;");
+		
+		dueDateField.setStyle("-fx-font-size: 16 ;");
+		repetitionDateField.setStyle("-fx-font-size: 16 ;");
 		
 		//Initialize ContributorListView
 		FXMLLoader loaderCon = new FXMLLoader(getClass().getResource("ContributorWindow.fxml"));
@@ -132,6 +137,7 @@ public class CreateNewTaskController2 implements Initializable{
 		ContributorController conController = loaderCon.<ContributorController>getController();
 		contributorList.setItems(conController.getContributorList());
 		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		contributorList.setStyle("-fx-font-size: 16 ;");
 		
 		//Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(getClass().getResource("CategoryWindow.fxml"));
@@ -144,13 +150,16 @@ public class CreateNewTaskController2 implements Initializable{
 		CategoryController catController = loaderCat.<CategoryController>getController();
 		categoryList.setItems(catController.getCategoryList());
 		categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		categoryList.setStyle("-fx-font-size: 16 ;");
 	
 		//Initialize AttachmentListView
 		attachmentsList.setItems(attachmentItems);
+		attachmentsList.setStyle("-fx-font-size: 14 ;");
 		
 		//Initialize SubtasksListView
 		subtaskView.setItems(subtaskItems);
 		subtaskView.setEditable(true);
+		subtaskView.setStyle("-fx-font-size: 14 ;");
 		
 		subtaskView.setRowFactory(row -> new TableRow<Subtask>(){
 			@Override
@@ -308,6 +317,7 @@ public class CreateNewTaskController2 implements Initializable{
 	public void addSubtask(ActionEvent event) {
 		subtaskItems.add(new Subtask(subtaskField.getText()));
 		subtaskView.setItems(subtaskItems);
+		subtaskField.setText("");
 	}
 	
 	//Delete SubtaskItem
@@ -322,6 +332,7 @@ public class CreateNewTaskController2 implements Initializable{
 	public void addAttachment(ActionEvent event) {
 		attachmentItems.add(attachmentField.getText());
 		attachmentsList.setItems(attachmentItems);
+		attachmentField.setText("");
 	}
 	
 	//Delete Attachment

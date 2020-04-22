@@ -42,6 +42,7 @@ public class CategoryController implements Initializable{
 		categories = categories.getInstance();
 		
 		categoryList.setItems(getCategoryList());
+		categoryList.setStyle("-fx-font-size: 16 ;");
 	}
 	
 	//This method will return an observableList of the Categoryy
@@ -59,6 +60,7 @@ public class CategoryController implements Initializable{
 	public void addCategory(ActionEvent event) {
 		categories.addCategory(categoryNameField.getText());
 		categoryList.setItems(getCategoryList());
+		categoryNameField.setText("");
 	}
 	
 	@FXML 

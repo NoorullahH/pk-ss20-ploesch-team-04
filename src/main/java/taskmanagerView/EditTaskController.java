@@ -116,6 +116,12 @@ public class EditTaskController {
 			monthday.setValue(t.getMonthday());
 		}
 		
+		monthday.setStyle("-fx-font-size: 16 ;");
+		weekday.setStyle("-fx-font-size: 16 ;");
+		
+		dueDateField.setStyle("-fx-font-size: 16 ;");
+		repetitionDateField.setStyle("-fx-font-size: 16 ;");
+		
 		timesOfRepititionsField.textProperty().addListener(new ChangeListener<String>() {
 		    @Override 
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -135,8 +141,8 @@ public class EditTaskController {
 		//Initialize AttachmentListView
 		attachmentItems.setAll(t.getAttachments());
 		attachmentsList.setItems(attachmentItems);
+		attachmentsList.setStyle("-fx-font-size: 14 ;");
 		
-	
 		//Initialize ContributorListView
 		FXMLLoader loaderCon = new FXMLLoader(getClass().getResource("ContributorWindow.fxml"));
 		try {
@@ -148,6 +154,7 @@ public class EditTaskController {
 		ContributorController conController = loaderCon.<ContributorController>getController();
 		contributorList.setItems(conController.getContributorList());
 		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		contributorList.setStyle("-fx-font-size: 16 ;");
 		
 		ObservableList<Contributor> conList = t.getContributors();
 		for (Contributor c:conList) {
@@ -165,6 +172,7 @@ public class EditTaskController {
 		CategoryController catController = loaderCat.<CategoryController>getController();
 		categoryList.setItems(catController.getCategoryList());
 		categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		categoryList.setStyle("-fx-font-size: 16 ;");
 		
 		ObservableList<Category> catList = t.getCategories();
 		for (Category c:catList) {
@@ -175,6 +183,7 @@ public class EditTaskController {
 		subtaskItems = t.getSubtasks();
 		subtaskView.setItems(subtaskItems);
 		subtaskView.setEditable(true);
+		subtaskView.setStyle("-fx-font-size: 14 ;");
 			
 		subtaskView.setRowFactory(row -> new TableRow<Subtask>(){
 			@Override
@@ -263,6 +272,7 @@ public class EditTaskController {
 	public void addSubtask(ActionEvent event) {
 		subtaskItems.add(new Subtask(subtaskField.getText()));
 		subtaskView.setItems(subtaskItems);
+		subtaskField.setText("");
 	}
 		
 	@FXML 
@@ -276,6 +286,7 @@ public class EditTaskController {
 	public void addAttachment(ActionEvent event) {
 		attachmentItems.add(attachmentField.getText());
 		attachmentsList.setItems(attachmentItems);
+		attachmentField.setText("");
 	}
 	
 	@FXML 

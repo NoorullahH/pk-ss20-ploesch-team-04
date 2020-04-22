@@ -40,6 +40,7 @@ public class ContributorController implements Initializable{
 		contributors = contributors.getInstance();
 		
 		contributorList.setItems(getContributorList());
+		contributorList.setStyle("-fx-font-size: 16 ;");
 	}
 	
 	//This method will return an observableList of the Categoryy
@@ -56,6 +57,7 @@ public class ContributorController implements Initializable{
 	public void addContributor(ActionEvent event) {
 		contributors.addContributor(contributorNameField.getText());
 		contributorList.setItems(getContributorList());
+		contributorNameField.setText("");
 	}
 	
 	@FXML 

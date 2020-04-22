@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -9,9 +10,9 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.CreateNewTaskController2">
    <children>
-      <Label layoutX="440.0" layoutY="42.0" text="Add new Task" textFill="WHITE">
+      <Label layoutX="424.0" layoutY="40.0" text="Add new Task" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="28.0" />
          </font>
       </Label>
       <Label layoutX="70.0" layoutY="140.0" text="Task description:" textFill="WHITE">
@@ -19,76 +20,94 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="taskDescriptionField" layoutX="280.0" layoutY="132.0" prefHeight="35.0" prefWidth="236.0" />
+      <TextField fx:id="taskDescriptionField" layoutX="280.0" layoutY="132.0" prefHeight="35.0" prefWidth="236.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
       <Label layoutX="660.0" layoutY="140.0" text="Detailed Task Description:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="detailedTaskDescriptionField" layoutX="660.0" layoutY="180.0" prefHeight="238.0" prefWidth="248.0" />
-      <Label layoutX="70.0" layoutY="217.0" text="Contributors:" textFill="WHITE">
+      <TextArea fx:id="detailedTaskDescriptionField" layoutX="660.0" layoutY="180.0" prefHeight="238.0" prefWidth="248.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextArea>
+      <Label layoutX="70.0" layoutY="200.0" text="Contributors:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="337.0" text="Due Date:" textFill="WHITE">
+      <Label layoutX="70.0" layoutY="312.0" text="Due Date:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dueDateField" layoutX="280.0" layoutY="335.0" prefHeight="35.0" prefWidth="236.0" />
-      <Label layoutX="70.0" layoutY="410.0" text="Category:" textFill="WHITE">
+      <DatePicker fx:id="dueDateField" layoutX="280.0" layoutY="308.0" prefHeight="35.0" prefWidth="236.0" />
+      <Label layoutX="70.0" layoutY="373.0" text="Category:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="525.0" text="Reccurent?" textFill="WHITE">
+      <Label layoutX="70.0" layoutY="485.0" text="Reccurent?" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox fx:id="recurrentBox" layoutX="280.0" layoutY="525.0" mnemonicParsing="false">
+      <CheckBox fx:id="recurrentBox" layoutX="280.0" layoutY="483.0" mnemonicParsing="false">
          <font>
             <Font size="16.0" />
          </font></CheckBox>
-      <CheckBox fx:id="monthlyBox" layoutX="70.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleMonthlyBox" text="Monthly" textFill="WHITE">
+      <CheckBox fx:id="monthlyBox" layoutX="70.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleMonthlyBox" text="Monthly" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="weeklyBox" layoutX="280.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleWeeklyBox" text="Weekly" textFill="WHITE">
+      <CheckBox fx:id="weeklyBox" layoutX="280.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleWeeklyBox" text="Weekly" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <ComboBox fx:id="monthday" layoutX="70.0" layoutY="630.0" onAction="#handleMonthday" prefHeight="30.0" prefWidth="175.0" />
-      <ComboBox fx:id="weekday" layoutX="280.0" layoutY="630.0" onAction="#handleWeekday" prefHeight="30.0" prefWidth="175.0" />
-      <Label layoutX="141.0" layoutY="682.0" text="Times?" textFill="WHITE">
+      <ComboBox fx:id="monthday" layoutX="70.0" layoutY="590.0" onAction="#handleMonthday" prefHeight="30.0" prefWidth="175.0" />
+      <ComboBox fx:id="weekday" layoutX="280.0" layoutY="590.0" onAction="#handleWeekday" prefHeight="30.0" prefWidth="175.0" />
+      <Label layoutX="70.0" layoutY="647.0" text="Times?" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="678.0" prefHeight="35.0" prefWidth="236.0" />
-      <ListView fx:id="contributorList" layoutX="280.0" layoutY="213.0" prefHeight="80.0" prefWidth="236.0" />
-      <ListView fx:id="categoryList" layoutX="280.0" layoutY="410.0" prefHeight="80.0" prefWidth="236.0" />
+      <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="641.0" prefHeight="35.0" prefWidth="236.0">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <ListView fx:id="contributorList" layoutX="280.0" layoutY="200.0" prefHeight="80.0" prefWidth="236.0" />
+      <ListView fx:id="categoryList" layoutX="280.0" layoutY="378.0" prefHeight="80.0" prefWidth="236.0" />
       <Label layoutX="660.0" layoutY="435.0" text="Attachment:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="attachmentField" layoutX="769.0" layoutY="435.0" prefHeight="30.0" prefWidth="141.0" />
-      <Button fx:id="addTaskButton" layoutX="770.0" layoutY="722.0" mnemonicParsing="false" onAction="#addTask" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+      <TextField fx:id="attachmentField" layoutX="769.0" layoutY="435.0" prefHeight="30.0" prefWidth="141.0">
          <font>
-            <Font size="20.0" />
+            <Font size="14.0" />
+         </font></TextField>
+      <Button fx:id="addTaskButton" layoutX="712.0" layoutY="728.0" mnemonicParsing="false" onAction="#addTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" layoutX="37.0" layoutY="751.0" mnemonicParsing="false" onAction="#backtoMain" text="Back" />
+      <Button fx:id="backButton" layoutX="23.0" layoutY="750.0" mnemonicParsing="false" onAction="#backtoMain" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <Label layoutX="660.0" layoutY="575.0" text="Subtask:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="subtaskField" layoutX="742.0" layoutY="575.0" prefHeight="30.0" prefWidth="165.0" />
+      <TextField fx:id="subtaskField" layoutX="742.0" layoutY="575.0" prefHeight="30.0" prefWidth="165.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
       <Button fx:id="addSubtaskButton" layoutX="916.0" layoutY="574.0" mnemonicParsing="false" onAction="#addSubtask" prefHeight="29.0" prefWidth="126.0" text="Add Subtask">
          <font>
             <Font size="13.0" />
@@ -110,10 +129,10 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <TableView fx:id="subtaskView" layoutX="657.0" layoutY="613.0" prefHeight="90.0" prefWidth="250.0">
+      <TableView fx:id="subtaskView" layoutX="659.0" layoutY="616.0" prefHeight="90.0" prefWidth="250.0">
         <columns>
-          <TableColumn fx:id="subtaskNameColumn" prefWidth="182.0" text="Subtasks" />
-          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="67.0" text="Done?" />
+          <TableColumn fx:id="subtaskNameColumn" prefWidth="172.0" text="Subtasks" />
+          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="77.0" text="Done?" />
         </columns>
       </TableView>
       <Label fx:id="infoTextField" layoutX="57.0" layoutY="38.0" prefHeight="44.0" prefWidth="347.0" textFill="#fc0505">
@@ -121,11 +140,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <DatePicker fx:id="repetitionDateField" layoutX="281.0" layoutY="732.0" onAction="#handleRepetitionDateField" prefHeight="35.0" prefWidth="236.0" />
-      <Label layoutX="137.0" layoutY="736.0" text="Repeat until:" textFill="WHITE">
+      <DatePicker fx:id="repetitionDateField" layoutX="280.0" layoutY="702.0" onAction="#handleRepetitionDateField" prefHeight="35.0" prefWidth="236.0" />
+      <Label layoutX="72.0" layoutY="706.0" text="Repeat until:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Line endX="400.0" layoutX="505.0" layoutY="94.0" startX="-400.0" stroke="WHITE" strokeWidth="3.0" />
    </children>
 </AnchorPane>
