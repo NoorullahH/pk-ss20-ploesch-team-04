@@ -280,7 +280,7 @@ public class Taskmanager {
 				}else if(t.getDueDate() == null) {
 					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
 				}else if(t.getRepetitionDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
 				}else {
 					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
 				}
@@ -417,6 +417,7 @@ public class Taskmanager {
     		//now XML is loaded as Document in memory, lets convert it to Object List
     		for (int i = 0; i < nodeList.getLength(); i++) {
     			tasks.add(getTask(nodeList.item(i)));
+    			size++;
     		}
     		
     		Categorymanager catManager = Categorymanager.getInstance();

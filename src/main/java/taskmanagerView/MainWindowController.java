@@ -116,6 +116,7 @@ public class MainWindowController implements Initializable {
 		categoriesColumn.setStyle("-fx-font-size: 15 ;");
 		dueDateColumn.setStyle("-fx-font-size: 15 ;");
 		attachmentsColumn.setStyle("-fx-font-size: 15 ;");
+		doneCheckBoxColumn.setStyle("-fx-font-size: 15 ;");
 		
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
@@ -136,7 +137,7 @@ public class MainWindowController implements Initializable {
 				cellValue.setDone(false);
 				property = cellValue.getDone();
 			}
-			return property;	
+			return property;
 		});
 		
 		taskView.setEditable(true);
@@ -147,7 +148,10 @@ public class MainWindowController implements Initializable {
 				if (item == null || empty) {
 					setStyle("");
 				} else {
-					if (item.isDone()) {
+					System.out.println(item.getTaskNumber()+" "+item.isDone());
+					if (!item.isDone()) {
+						setStyle("");
+					}else if(item.isDone()) {
 						setStyle("-fx-background-color: lightgreen;");
 					}else if(item.getDueDate()!=null) {
 						if((!item.isDone()) && item.getDueDate().isBefore(LocalDate.now())) {
@@ -159,7 +163,7 @@ public class MainWindowController implements Initializable {
 				}
 			}
 		});
-        
+		
 		//load Data
 		taskView.setItems(getTaskList());
 	}
