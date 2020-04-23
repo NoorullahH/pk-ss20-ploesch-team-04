@@ -113,13 +113,13 @@ public class Taskmanager {
 		int index = -1;
 		int taskIndex = 0;
 		for(Task t:tasks) {
-			for(Category c:t.getCategories()) {
+			for(Category c:t.getCategoriesList()) {
 				if(c.getCategory().equals(category)) {
-					index = t.getCategories().indexOf(c);
+					index = t.getCategoriesList().indexOf(c);
 				}
 			}
 			if(index!=-1) {
-				t.getCategories().remove(index);
+				t.getCategoriesList().remove(index);
 			}
 			index = -1;
 		}
@@ -171,7 +171,7 @@ public class Taskmanager {
 				
 				if(t.getNumberOfRepetitions()>0){
 					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
 						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
 						tasks.add(newTask);
 						for(Task task:tasks) {
@@ -182,7 +182,7 @@ public class Taskmanager {
 					}
 				}else if(t.getRepetitionDate()!=null) {
 					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), 0, t.getRepetitionDate());
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), 0, t.getRepetitionDate());
 						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
 						tasks.add(newTask);
 						for(Task task:tasks) {
@@ -195,7 +195,7 @@ public class Taskmanager {
 			}else if(t.isWeekly()) {
 				if(t.getNumberOfRepetitions()>0){
 					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
 						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
 						tasks.add(newTask);
 						for(Task task:tasks) {
@@ -206,7 +206,7 @@ public class Taskmanager {
 					}
 				}else if(t.getRepetitionDate()!=null) {
 					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributors(), t.getCategories(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), 0 , t.getRepetitionDate());
+						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), 0 , t.getRepetitionDate());
 						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
 						tasks.add(newTask);
 						for(Task task:tasks) {
@@ -276,13 +276,13 @@ public class Taskmanager {
 			System.out.println("Tasks Size: "+tasks.size());
 			for(Task t:tasks) {
 				if(t.getRepetitionDate() == null && t.getDueDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
 				}else if(t.getDueDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
 				}else if(t.getRepetitionDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
 				}else {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributors(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategories(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
 				}
 			}
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

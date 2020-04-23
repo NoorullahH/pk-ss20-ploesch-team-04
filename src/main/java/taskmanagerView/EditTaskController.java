@@ -94,8 +94,6 @@ public class EditTaskController {
 	private Button editTaskButton;
 	@FXML
 	private Button backButton;
-	@FXML
-	private Label infoTextField;
 	
 	
 	@FXML
@@ -156,7 +154,7 @@ public class EditTaskController {
 		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		contributorList.setStyle("-fx-font-size: 16 ;");
 		
-		ObservableList<Contributor> conList = t.getContributors();
+		ObservableList<Contributor> conList = t.getContributorsList();
 		for (Contributor c:conList) {
 			contributorList.getSelectionModel().select(c.getPerson());
 		}
@@ -174,7 +172,7 @@ public class EditTaskController {
 		categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		categoryList.setStyle("-fx-font-size: 16 ;");
 		
-		ObservableList<Category> catList = t.getCategories();
+		ObservableList<Category> catList = t.getCategoriesList();
 		for (Category c:catList) {
 			categoryList.getSelectionModel().select(c.getCategory());
 		}
@@ -211,8 +209,7 @@ public class EditTaskController {
 			BooleanProperty property = cellValue.getDone();
 			property.addListener((observable, oldValue, newValue) -> cellValue.setDone(newValue));
 			return property;
-		});		
-		
+		});			
 	}
 	
 	//Ensures that it is not possible to select monthly and weekly at the same time
@@ -310,12 +307,28 @@ public class EditTaskController {
 	private void editTask(ActionEvent event) throws IOException {
 		
 		if(taskDescriptionField.getText().isEmpty()) {
-			infoTextField.setText("Name of the task must be specified!");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root = loader.load();
+			InfoScreenController controller = loader.<InfoScreenController>getController();
+			controller.setInfoText("Task Description must be specified!");
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
 			return;
 		}
 		
 		if(dueDateField.getValue() == null) {
-			infoTextField.setText("Due date must be specified!");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root = loader.load();
+			InfoScreenController controller = loader.<InfoScreenController>getController();
+			controller.setInfoText("Due date must be specified!");
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
 			return;
 		}
 		

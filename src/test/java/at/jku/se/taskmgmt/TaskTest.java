@@ -51,8 +51,8 @@ public class TaskTest {
 		assertEquals(newOne.getTaskDescription(), "First Assignment");
 		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
-		assertTrue(newOne.getContributors().containsAll(con));
-		assertTrue(newOne.getCategories().containsAll(cat));
+		assertTrue(newOne.getContributorsList().containsAll(con));
+		assertTrue(newOne.getCategoriesList().containsAll(cat));
 		assertTrue(newOne.getSubtasks().containsAll(sub));
 		assertTrue(newOne.getAttachments().containsAll(att));
 		assertFalse(newOne.isRecurrent());
@@ -80,8 +80,8 @@ public class TaskTest {
 		assertEquals(newOne.getTaskDescription(), "First Assignment");
 		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
-		assertTrue(newOne.getContributors().containsAll(con));
-		assertTrue(newOne.getCategories().containsAll(cat));
+		assertTrue(newOne.getContributorsList().containsAll(con));
+		assertTrue(newOne.getCategoriesList().containsAll(cat));
 		assertTrue(newOne.getSubtasks().containsAll(sub));
 		assertTrue(newOne.getAttachments().containsAll(att));
 		assertTrue(newOne.isRecurrent());
@@ -114,8 +114,8 @@ public class TaskTest {
 		assertEquals(newOne.getTaskDescription(), "First Assignment");
 		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
-		assertTrue(newOne.getContributors().containsAll(con));
-		assertTrue(newOne.getCategories().containsAll(cat));
+		assertTrue(newOne.getContributorsList().containsAll(con));
+		assertTrue(newOne.getCategoriesList().containsAll(cat));
 		assertTrue(newOne.getSubtasks().containsAll(sub));
 		assertTrue(newOne.getAttachments().containsAll(att));
 		assertTrue(newOne.isRecurrent());
@@ -167,7 +167,7 @@ public class TaskTest {
     	con.add(new Contributor("Luke"));
     	t.setContributors(con);
     	for(Contributor c:con) {
-			assertTrue(t.getContributors().contains(c));
+			assertTrue(t.getContributorsList().contains(c));
     	}
     }
     
@@ -245,7 +245,7 @@ public class TaskTest {
     	cat.add(new Category("Household"));
     	t.setCategories(cat);
     	for(Category c:cat) {
-			assertTrue(t.getCategories().contains(c));
+			assertTrue(t.getCategoriesList().contains(c));
     	}
     }
 

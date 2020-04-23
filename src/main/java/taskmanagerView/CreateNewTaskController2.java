@@ -98,8 +98,6 @@ public class CreateNewTaskController2 implements Initializable{
 	private Button addTaskButton;
 	@FXML
 	private Button backButton;
-	@FXML
-	private Label infoTextField;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
@@ -187,8 +185,6 @@ public class CreateNewTaskController2 implements Initializable{
 			property.addListener((observable, oldValue, newValue) -> cellValue.setDone(newValue));
 			return property;
 		});
-			
-		infoTextField.setStyle("-fx-text-inner-color: red;");
 	}
 
 	//Ensures that it is not possible to select monthly and weekly at the same time
@@ -251,12 +247,28 @@ public class CreateNewTaskController2 implements Initializable{
 		Task taskNew = null;
 		
 		if(taskDescriptionField.getText().isEmpty()) {
-			infoTextField.setText("Name of the task must be specified!");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root = loader.load();
+			InfoScreenController controller = loader.<InfoScreenController>getController();
+			controller.setInfoText("Task Description must be specified!");
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
 			return;
 		}
 		
 		if(dueDateField.getValue() == null) {
-			infoTextField.setText("Due date must be specified!");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root = loader.load();
+			InfoScreenController controller = loader.<InfoScreenController>getController();
+			controller.setInfoText("Due date must be specified!");
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
 			return;
 		}
 		

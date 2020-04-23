@@ -135,11 +135,6 @@
           <TableColumn fx:id="doneCheckBoxColumn" prefWidth="77.0" text="Done?" />
         </columns>
       </TableView>
-      <Label fx:id="infoTextField" layoutX="57.0" layoutY="38.0" prefHeight="44.0" prefWidth="347.0" textFill="#fc0505">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
       <DatePicker fx:id="repetitionDateField" layoutX="280.0" layoutY="702.0" onAction="#handleRepetitionDateField" prefHeight="35.0" prefWidth="236.0" />
       <Label layoutX="72.0" layoutY="706.0" text="Repeat until:" textFill="WHITE">
          <font>

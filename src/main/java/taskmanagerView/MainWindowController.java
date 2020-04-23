@@ -50,6 +50,7 @@ import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import task.Task;
 import task.Subtask;
 import task.Taskmanager;
@@ -66,11 +67,11 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private TableColumn<Task, String> detailedDescriptionColumn;
 	@FXML
-	private TableColumn<Task, List<Contributor>> contributorsColumn;
+	private TableColumn<Task, String> contributorsColumn;
 	@FXML
 	private TableColumn<Task, LocalDate> dueDateColumn;
 	@FXML
-	private TableColumn<Task, List<Category>> categoriesColumn;
+	private TableColumn<Task, String> categoriesColumn;
 	@FXML
 	private TableColumn<Task, List<String>> attachmentsColumn;
 	@FXML
@@ -93,7 +94,6 @@ public class MainWindowController implements Initializable {
 	//this method adds a new Task to the List
 	public void setData(Task t) {
 		taskList.addTask(t);
-	//	recurrentTaskList.addRecurrentTask(t);
 	}
 	
 	//this method initializes the main page
@@ -105,12 +105,10 @@ public class MainWindowController implements Initializable {
 		//set up the columns in the table
 		descriptionColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));
 		detailedDescriptionColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("detailedTaskDescription"));
-		contributorsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<Contributor>>("contributors"));
-		categoriesColumn.setCellValueFactory(new PropertyValueFactory<Task, List<Category>>("categories"));
+		contributorsColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("contributors"));
+		categoriesColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("categories"));
 		dueDateColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("dueDate"));
 		attachmentsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<String>>("attachments"));
-		
-
 		
 		descriptionColumn.setStyle("-fx-font-size: 15 ;");
 		detailedDescriptionColumn.setStyle("-fx-font-size: 15 ;");

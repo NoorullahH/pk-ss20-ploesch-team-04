@@ -7,7 +7,11 @@
         <category>Software Engineering</category>
         <category>Datenmodellierung</category>
     </Categories>
-    <Contributors/>
+    <Contributors>
+        <contributor>Mara Vukadinovic</contributor>
+        <contributor>Dino Osmanagic</contributor>
+        <contributor>Noorullah Hamid</contributor>
+    </Contributors>
     <Tasks>
         <Task>
             <taskNumber>2</taskNumber>

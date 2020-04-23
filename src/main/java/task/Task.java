@@ -238,8 +238,23 @@ public class Task {
      * this method returns a list of the contributors of this Task
      * @return list of contributors of this Task
      */
-	public ObservableList<Contributor> getContributors() {
+	public ObservableList<Contributor> getContributorsList() {
 		return contributors;
+	}
+	
+	/**
+     * this method returns a String of the contributors of this Task
+     * @return String of contributors of this Task
+     */
+	public String getContributors() {
+		String res = "";
+		for(Contributor c: contributors) {
+			res = res + c.getPerson() +",";
+		}
+		if(!res.contentEquals("")) {
+			res.substring(0, res.length()-1);
+		}
+		return res;
 	}
 	
 	/**
@@ -350,8 +365,23 @@ public class Task {
      * this method returns a list of the categories of this Task
      * @return list of categories of this Task
      */
-	public ObservableList<Category> getCategories() {
+	public ObservableList<Category> getCategoriesList() {
 		return categories;
+	}
+	
+	/**
+     * this method returns a String of the contributors of this Task
+     * @return String of contributors of this Task
+     */
+	public String getCategories() {
+		String res = "";
+		for(Category c: categories) {
+			res = res + c.getCategory() +",";
+		}
+		if(!res.contentEquals("")) {
+			res.substring(0, res.length()-1);
+		}
+		return res;
 	}
 	
 	/**
