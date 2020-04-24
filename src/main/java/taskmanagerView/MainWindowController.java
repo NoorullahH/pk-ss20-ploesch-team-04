@@ -148,7 +148,6 @@ public class MainWindowController implements Initializable {
 				if (item == null || empty) {
 					setStyle("");
 				} else {
-					System.out.println(item.getTaskNumber()+" "+item.isDone());
 					if (!item.isDone()) {
 						setStyle("");
 					}else if(item.isDone()) {

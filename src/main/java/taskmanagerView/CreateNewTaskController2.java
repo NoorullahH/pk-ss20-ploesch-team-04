@@ -249,7 +249,7 @@ public class CreateNewTaskController2 implements Initializable{
 		if(taskDescriptionField.getText().isEmpty()) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 			Parent root = loader.load();
-			InfoScreenController controller = loader.<InfoScreenController>getController();
+			InfoWindowController controller = loader.<InfoWindowController>getController();
 			controller.setInfoText("Task Description must be specified!");
 			
 			Stage newstage = new Stage();
@@ -262,7 +262,7 @@ public class CreateNewTaskController2 implements Initializable{
 		if(dueDateField.getValue() == null) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 			Parent root = loader.load();
-			InfoScreenController controller = loader.<InfoScreenController>getController();
+			InfoWindowController controller = loader.<InfoWindowController>getController();
 			controller.setInfoText("Due date must be specified!");
 			
 			Stage newstage = new Stage();
@@ -327,9 +327,28 @@ public class CreateNewTaskController2 implements Initializable{
 	//Add Subtask to SubtaskItems
 	@FXML
 	public void addSubtask(ActionEvent event) {
-		subtaskItems.add(new Subtask(subtaskField.getText()));
-		subtaskView.setItems(subtaskItems);
-		subtaskField.setText("");
+		if(subtaskField.getText()!= null && !subtaskField.getText().isEmpty()) {
+			subtaskItems.add(new Subtask(subtaskField.getText()));
+			subtaskView.setItems(subtaskItems);
+			subtaskField.setText("");
+		}else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root;
+			try {
+				root = loader.load();
+				InfoWindowController controller = loader.<InfoWindowController>getController();
+				controller.setInfoText("Subtask name must be specified!");
+				
+				Stage newstage = new Stage();
+				newstage.setTitle("Info");
+				newstage.setScene(new Scene(root));
+				newstage.showAndWait();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	//Delete SubtaskItem
@@ -342,9 +361,29 @@ public class CreateNewTaskController2 implements Initializable{
 	//Add Attachment
 	@FXML
 	public void addAttachment(ActionEvent event) {
-		attachmentItems.add(attachmentField.getText());
-		attachmentsList.setItems(attachmentItems);
-		attachmentField.setText("");
+		if(attachmentField.getText()!= null && attachmentField.getText().length()>8) {
+			if(attachmentField.getText().substring(0, 8).equals("https://")) {
+				attachmentItems.add(attachmentField.getText());
+				attachmentsList.setItems(attachmentItems);
+				attachmentField.setText("");
+			}
+		}else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			Parent root;
+			try {
+				root = loader.load();
+				InfoWindowController controller = loader.<InfoWindowController>getController();
+				controller.setInfoText("Invalid Attachment!");
+				
+				Stage newstage = new Stage();
+				newstage.setTitle("Info");
+				newstage.setScene(new Scene(root));
+				newstage.showAndWait();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 	}
 	
 	//Delete Attachment

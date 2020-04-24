@@ -1,15 +1,12 @@
 package taskmanagerView;
 
-import java.awt.Button;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.fxml.FXML;
 /**
  * This class controls the UI of an info screen
  * This info screen is used for confirmation and error messages
  */
-public class InfoScreenController {
+public class InfoWindowController {
 	
 	@FXML
     private Label infoText;
@@ -24,5 +21,4 @@ public class InfoScreenController {
 
     }
 
-    
 }
