@@ -111,7 +111,6 @@ public class Taskmanager {
 			return false;
 		}
 		int index = -1;
-		int taskIndex = 0;
 		for(Task t:tasks) {
 			for(Category c:t.getCategoriesList()) {
 				if(c.getCategory().equals(category)) {

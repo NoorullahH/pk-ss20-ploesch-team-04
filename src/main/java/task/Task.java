@@ -252,7 +252,7 @@ public class Task {
 			res = res + c.getPerson() +",";
 		}
 		if(!res.contentEquals("")) {
-			res.substring(0, res.length()-1);
+			res = res.substring(0, res.length()-1);
 		}
 		return res;
 	}
@@ -370,8 +370,8 @@ public class Task {
 	}
 	
 	/**
-     * this method returns a String of the contributors of this Task
-     * @return String of contributors of this Task
+     * this method returns a String of the categories of this Task
+     * @return String of categories of this Task
      */
 	public String getCategories() {
 		String res = "";
@@ -379,7 +379,7 @@ public class Task {
 			res = res + c.getCategory() +",";
 		}
 		if(!res.contentEquals("")) {
-			res.substring(0, res.length()-1);
+			res = res.substring(0, res.length()-1);
 		}
 		return res;
 	}

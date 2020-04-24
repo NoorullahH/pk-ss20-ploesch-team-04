@@ -37,7 +37,7 @@ public class ContributorController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		contributors = contributors.getInstance();
+		contributors = Contributormanager.getInstance();
 		
 		contributorList.setItems(getContributorList());
 		contributorList.setStyle("-fx-font-size: 16 ;");

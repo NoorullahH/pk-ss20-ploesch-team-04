@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import task.Task;
 
 public class CategoryController implements Initializable{
 	
@@ -39,7 +38,7 @@ public class CategoryController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		categories = categories.getInstance();
+		categories = Categorymanager.getInstance();
 		
 		categoryList.setItems(getCategoryList());
 		categoryList.setStyle("-fx-font-size: 16 ;");

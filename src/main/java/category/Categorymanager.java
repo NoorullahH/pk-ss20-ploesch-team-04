@@ -1,6 +1,5 @@
 package category;
 
-import java.util.Collection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

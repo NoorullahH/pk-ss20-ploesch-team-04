@@ -1,37 +1,18 @@
 package taskmanagerView;
 
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-import org.xml.sax.*;
-import org.w3c.dom.*;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.beans.XMLEncoder;
-import java.beans.XMLDecoder;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-
 import java.util.Comparator;
 
 import category.Category;
-import category.Categorymanager;
 import contributor.Contributor;
 import javafx.beans.property.BooleanProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,16 +22,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import task.Task;
 import task.Subtask;
 import task.Taskmanager;
@@ -100,7 +77,7 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//initialize taskList
-		taskList = taskList.getInstance();
+		taskList = Taskmanager.getInstance();
 		
 		//set up the columns in the table
 		descriptionColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("taskDescription"));

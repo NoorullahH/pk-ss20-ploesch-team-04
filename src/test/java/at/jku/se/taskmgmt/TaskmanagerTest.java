@@ -13,7 +13,6 @@ import org.junit.After;
 import org.junit.Test;
 
 import category.Category;
-import category.Categorymanager;
 import contributor.Contributor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

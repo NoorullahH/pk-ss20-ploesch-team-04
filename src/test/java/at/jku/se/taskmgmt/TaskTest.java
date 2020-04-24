@@ -157,6 +157,21 @@ public class TaskTest {
     }
     
     /**
+     * Test of getContributorsList, of class Task.
+     */
+    @Test
+    public void getContributorsList() {
+    	ObservableList<Contributor> con = FXCollections.observableArrayList();
+    	con.add(new Contributor("Max"));
+    	con.add(new Contributor("Anna"));
+    	con.add(new Contributor("Luke"));
+    	t.setContributors(con);
+    	for(Contributor c:con) {
+			assertTrue(t.getContributorsList().contains(c));
+    	}
+    }
+    
+    /**
      * Test of getContributors, of class Task.
      */
     @Test
@@ -166,9 +181,10 @@ public class TaskTest {
     	con.add(new Contributor("Anna"));
     	con.add(new Contributor("Luke"));
     	t.setContributors(con);
-    	for(Contributor c:con) {
-			assertTrue(t.getContributorsList().contains(c));
-    	}
+    	assertEquals(t.getContributors(),"Max,Anna,Luke");
+    	ObservableList<Contributor> con2 = FXCollections.observableArrayList();
+    	t.setContributors(con2);
+    	assertEquals(t.getContributors(),"");
     }
     
     /**
@@ -235,6 +251,21 @@ public class TaskTest {
     }
     
     /**
+     * Test of getCategoriesList, of class Task.
+     */
+    @Test
+    public void getCategoriesList() {
+    	ObservableList<Category> cat = FXCollections.observableArrayList();
+    	cat.add(new Category("Homework"));
+    	cat.add(new Category("School"));
+    	cat.add(new Category("Household"));
+    	t.setCategories(cat);
+    	for(Category c:cat) {
+			assertTrue(t.getCategoriesList().contains(c));
+    	}
+    }
+    
+    /**
      * Test of getCategories, of class Task.
      */
     @Test
@@ -244,9 +275,10 @@ public class TaskTest {
     	cat.add(new Category("School"));
     	cat.add(new Category("Household"));
     	t.setCategories(cat);
-    	for(Category c:cat) {
-			assertTrue(t.getCategoriesList().contains(c));
-    	}
+    	assertEquals(t.getCategories(),"Homework,School,Household");
+    	ObservableList<Category> cat2 = FXCollections.observableArrayList();
+    	t.setCategories(cat2);
+    	assertEquals(t.getCategories(),"");
     }
 
     /**
