@@ -1,10 +1,11 @@
 package at.jku.se.taskmgmt;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Field;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
 import category.Category;
 import category.Categorymanager;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ public class CategorymanagerTest {
      * this method sets the instance of the Categorymanager to null after each test,
      * so that the test cases can be executed more easily
      */
-	@After
+	@AfterEach
 	public void resetCategoryManager() throws Exception{
 		Field instance = Categorymanager.class.getDeclaredField("INSTANCE");
 		instance.setAccessible(true);

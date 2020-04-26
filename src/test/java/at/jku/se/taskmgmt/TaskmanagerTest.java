@@ -1,16 +1,15 @@
 package at.jku.se.taskmgmt;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 
 import category.Category;
 import contributor.Contributor;
@@ -29,7 +28,7 @@ public class TaskmanagerTest {
      * this method sets the instance of the Taskmanager to null after each test,
      * so that the test cases can be executed more easily
      */
-	@After
+	@AfterEach
 	public void resetTaskManager() throws Exception{
 		Field instance = Taskmanager.class.getDeclaredField("INSTANCE");
 		instance.setAccessible(true);

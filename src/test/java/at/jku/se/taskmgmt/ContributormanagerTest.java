@@ -1,12 +1,11 @@
 package at.jku.se.taskmgmt;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
-
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import contributor.Contributor;
 import contributor.Contributormanager;
@@ -20,7 +19,7 @@ private static Contributormanager cm;
      * this method sets the instance of the Contributormanager to null after each test,
      * so that the test cases can be executed more easily
      */
-	@After
+	@AfterEach
 	public void resetContributorManager() throws Exception{
 		Field instance = Contributormanager.class.getDeclaredField("INSTANCE");
 		instance.setAccessible(true);

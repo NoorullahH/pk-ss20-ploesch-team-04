@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="at.jku.se.taskmgmt.TaskTest" time="0.088" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="at.jku.se.taskmgmt.TaskTest" time="0.152" tests="26" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -7,7 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\charl\git\pk-ss20-ploesch-team-04\target\test-classes;C:\Users\charl\git\pk-ss20-ploesch-team-04\target\classes;C:\Users\charl\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\charl\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.class.path" value="C:\Users\Mara\git\pk-ss20-ploesch-team-04\target\test-classes;C:\Users\Mara\git\pk-ss20-ploesch-team-04\target\classes;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.3.1\junit-jupiter-api-5.3.1.jar;C:\Users\Mara\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\Mara\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\Mara\.m2\repository\org\junit\platform\junit-platform-commons\1.3.1\junit-platform-commons-1.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.3.1\junit-jupiter-params-5.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.3.1\junit-jupiter-engine-5.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\platform\junit-platform-engine\1.3.1\junit-platform-engine-1.3.1.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-controls\11\javafx-controls-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-controls\11\javafx-controls-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-graphics\11\javafx-graphics-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-graphics\11\javafx-graphics-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-base\11\javafx-base-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-base\11\javafx-base-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-fxml\11\javafx-fxml-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-fxml\11\javafx-fxml-11-win.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -17,73 +17,73 @@
     <property name="os.name" value="Windows 10"/>
     <property name="user.country" value="AT"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\charl\AppData\Local\Temp\surefire4091290800331070225\surefirebooter7854444929739830394.jar C:\Users\charl\AppData\Local\Temp\surefire4091290800331070225 2020-04-25T20-33-55_434-jvmRun1 surefire4780770991504716178tmp surefire_05021454953698773970tmp"/>
-    <property name="surefire.test.class.path" value="C:\Users\charl\git\pk-ss20-ploesch-team-04\target\test-classes;C:\Users\charl\git\pk-ss20-ploesch-team-04\target\classes;C:\Users\charl\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\charl\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_251\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\Mara\AppData\Local\Temp\surefire8352372229454523416\surefirebooter1022899267557629804.jar C:\Users\Mara\AppData\Local\Temp\surefire8352372229454523416 2020-04-26T11-08-16_257-jvmRun1 surefire3085208529719902652tmp surefire_01515727216889868602tmp"/>
+    <property name="surefire.test.class.path" value="C:\Users\Mara\git\pk-ss20-ploesch-team-04\target\test-classes;C:\Users\Mara\git\pk-ss20-ploesch-team-04\target\classes;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.3.1\junit-jupiter-api-5.3.1.jar;C:\Users\Mara\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\Mara\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\Mara\.m2\repository\org\junit\platform\junit-platform-commons\1.3.1\junit-platform-commons-1.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.3.1\junit-jupiter-params-5.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.3.1\junit-jupiter-engine-5.3.1.jar;C:\Users\Mara\.m2\repository\org\junit\platform\junit-platform-engine\1.3.1\junit-platform-engine-1.3.1.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-controls\11\javafx-controls-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-controls\11\javafx-controls-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-graphics\11\javafx-graphics-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-graphics\11\javafx-graphics-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-base\11\javafx-base-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-base\11\javafx-base-11-win.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-fxml\11\javafx-fxml-11.jar;C:\Users\Mara\.m2\repository\org\openjfx\javafx-fxml\11\javafx-fxml-11-win.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\charl"/>
+    <property name="user.home" value="C:\Users\Mara"/>
     <property name="user.language" value="de"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_191\jre"/>
-    <property name="basedir" value="C:\Users\charl\git\pk-ss20-ploesch-team-04"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_251\jre"/>
+    <property name="basedir" value="C:\Users\Mara\git\pk-ss20-ploesch-team-04"/>
     <property name="file.separator" value="\"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\charl\AppData\Local\Temp\surefire4091290800331070225\surefirebooter7854444929739830394.jar"/>
-    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_191\jre\classes"/>
+    <property name="surefire.real.class.path" value="C:\Users\Mara\AppData\Local\Temp\surefire8352372229454523416\surefirebooter1022899267557629804.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_251\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_251\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_251\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="1.8.0_191-b12"/>
-    <property name="user.name" value="charl"/>
+    <property name="java.runtime.version" value="1.8.0_251-b08"/>
+    <property name="user.name" value="Mara"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
-    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\endorsed"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_251\jre\lib\endorsed"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\charl\.m2\repository"/>
+    <property name="localRepository" value="C:\Users\Mara\.m2\repository"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\charl\AppData\Local\Temp\"/>
-    <property name="java.version" value="1.8.0_191"/>
-    <property name="user.dir" value="C:\Users\charl\git\pk-ss20-ploesch-team-04"/>
+    <property name="java.io.tmpdir" value="C:\Users\Mara\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_251"/>
+    <property name="user.dir" value="C:\Users\Mara\git\pk-ss20-ploesch-team-04"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Users\charl\Downloads\apache-maven-3.6.0-bin\apache-maven-3.6.0\bin;C:\Users\charl\Downloads\apache-jena-3.10.0\apache-jena-3.10.0\bat;C:\Python\Scripts\;C:\Python\;C:\Users\charl\AppData\Local\Microsoft\WindowsApps;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_251\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_251/bin/server;C:/Program Files/Java/jre1.8.0_251/bin;C:/Program Files/Java/jre1.8.0_251/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Mara\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-10.0.2\bin;C:\Users\Mara\Desktop\Programmieren;;C:\Users\Mara\Desktop;;."/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="25.191-b12"/>
-    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="java.vm.version" value="25.251-b08"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_251\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="monthlyRecurringTask" classname="at.jku.se.taskmgmt.TaskTest" time="0.059"/>
-  <testcase name="getWeekday" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="monthlyRecurringTask" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
+  <testcase name="getWeekday" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="getContributorsList" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
-  <testcase name="isRecurrent" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
-  <testcase name="getNumberOfRepetitions" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getTaskDescroption" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getAttachments" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="isRecurrent" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="getNumberOfRepetitions" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
+  <testcase name="getTaskDescroption" classname="at.jku.se.taskmgmt.TaskTest" time="0.003"/>
+  <testcase name="getAttachments" classname="at.jku.se.taskmgmt.TaskTest" time="0.003"/>
   <testcase name="getContributors" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
-  <testcase name="getDueDate" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="getDueDate" classname="at.jku.se.taskmgmt.TaskTest" time="0.049"/>
   <testcase name="getCreationDate" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="getRepetitionDate" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="removeSubtask" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="isWeekly" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getDetailedTaskDescription" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="isWeekly" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
+  <testcase name="getDetailedTaskDescription" classname="at.jku.se.taskmgmt.TaskTest" time="0.002"/>
   <testcase name="getSubtasks" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="addSubtask" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getCategoriesList" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="addSubtask" classname="at.jku.se.taskmgmt.TaskTest" time="0.009"/>
+  <testcase name="getCategoriesList" classname="at.jku.se.taskmgmt.TaskTest" time="0.003"/>
   <testcase name="getTaskNumber" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="isMonthly" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="isMonthly" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="getDoneProperty" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="getCategories" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="weeklyRecurringTask" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="weeklyRecurringTask" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="nonRecurringTask" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getMonthday" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
-  <testcase name="getNumberOfTasks" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
+  <testcase name="getMonthday" classname="at.jku.se.taskmgmt.TaskTest" time="0.002"/>
+  <testcase name="getNumberOfTasks" classname="at.jku.se.taskmgmt.TaskTest" time="0.001"/>
   <testcase name="setDone" classname="at.jku.se.taskmgmt.TaskTest" time="0"/>
 </testsuite>
