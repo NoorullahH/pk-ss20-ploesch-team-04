@@ -1,8 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FilterView.FilterController">
+   <children>
+
+     <TableView fx:id="taskView" layoutX="58.0" layoutY="242.0" prefHeight="543.0" prefWidth="925.0">
+        <columns>
+            <TableColumn fx:id="descriptionColumn" prefWidth="138.13336563110352" text="Description" />
+            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="143.46664428710938" text="Detail description" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="132.79995727539062" sortType="DESCENDING" text="Due date" />
+            <TableColumn fx:id="contributorsColumn" prefWidth="129.60000610351562" text="Contributors" />
+            <TableColumn fx:id="categoriesColumn" prefWidth="142.39996337890625" text="Categories" />
+            <TableColumn fx:id="attachmentsColumn" prefWidth="120.53326416015625" text="Attachments" />
+            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="119.99996337890627" text="Done?" />
+        </columns>
+      </TableView>
+      <Pane layoutX="56.0" layoutY="73.0" prefHeight="158.0" prefWidth="927.0" style="-fx-background-color: #355C7D;">
+         <children>
+            <TextField layoutX="24.0" layoutY="15.0" prefHeight="32.0" prefWidth="170.0" promptText="Description" />
+            <TextField layoutX="24.0" layoutY="63.0" prefHeight="32.0" prefWidth="170.0" promptText="Detail description" />
+            <DatePicker fx:id="from" layoutX="207.0" layoutY="16.0" prefHeight="32.0" prefWidth="81.0" promptText="From" />
+            <DatePicker fx:id="until" layoutX="207.0" layoutY="64.0" prefHeight="32.0" prefWidth="81.0" promptText="Until" />
+             <ListView fx:id="contributorList" layoutX="300.0" layoutY="16.0" prefHeight="82.0" prefWidth="183.0" />
+      <ListView fx:id="categoryList" layoutX="500.0" layoutY="16.0" prefHeight="81.0" prefWidth="205.0" />
+            <Button fx:id="submit" layoutX="811.0" layoutY="108.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="SUBMIT" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <RadioButton fx:id="no" layoutX="815.0" layoutY="70.0" mnemonicParsing="false" text="NO" textFill="WHITE" />
+            <RadioButton fx:id="yes" layoutX="815.0" layoutY="47.0" mnemonicParsing="false" text="YES" textFill="WHITE" />
+            <RadioButton fx:id="closed" layoutX="727.0" layoutY="69.0" mnemonicParsing="false" text="Closed" textFill="WHITE" />
+            <RadioButton fx:id="open" layoutX="727.0" layoutY="46.0" mnemonicParsing="false" text="Open" textFill="WHITE" />
+            <Label fx:id="Attatchment" layoutX="807.0" layoutY="16.0" text="Attatchment" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="status" layoutX="732.0" layoutY="15.0" text="Status" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="csv" layoutX="26.0" layoutY="108.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="CSV" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="62.0" layoutY="11.0" text="Advanced Task Search " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="39.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
-

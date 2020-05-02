@@ -67,6 +67,10 @@ public class MainWindowController implements Initializable {
 	private Button xmlExport;
 	@FXML
 	private Button updateTask;
+	
+	//dino
+	@FXML
+	private Button filterTask;
 
 	//this method adds a new Task to the List
 	public void setData(Task t) {
@@ -282,6 +286,15 @@ public class MainWindowController implements Initializable {
 			File fileDefault = new File(xmlFile);
 			taskList.saveToXML(fileDefault);
 		}
-	}	
+	}
+	//dino to do 
+	@FXML
+	private void filterTasks (ActionEvent event) throws IOException {
+		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("FilterView/FilterWindow.fxml"));
+		Scene scene = new Scene(parent);
+		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		windowStage.setScene(scene);
+		windowStage.show();
+	}
 
 }
