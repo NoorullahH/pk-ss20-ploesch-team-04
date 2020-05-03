@@ -16,6 +16,7 @@ category\Categorymanager.class
 taskmanagerView\MainWindowController.class
 taskmanagerView\InfoWindowController.class
 contributor\Contributor.class
+FilterView\FilterController.class
 task\Taskmanager.class
 taskmanagerView\EditTaskController.class
 taskmanagerView\StartWindowController.class

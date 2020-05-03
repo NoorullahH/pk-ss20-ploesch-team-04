@@ -57,7 +57,6 @@
 		<!-- <sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
 	</properties>
 	<build>
-		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
@@ -107,7 +106,6 @@
 					</executions>
 				</plugin>
 			</plugins>
-		</pluginManagement>
 	</build>
 	<name>taskmgmt - Team 04</name>
 </project>

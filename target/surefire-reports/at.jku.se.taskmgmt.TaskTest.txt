@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: at.jku.se.taskmgmt.TaskTest
 -------------------------------------------------------------------------------
-Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in at.jku.se.taskmgmt.TaskTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s - in at.jku.se.taskmgmt.TaskTest
