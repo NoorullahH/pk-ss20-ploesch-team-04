@@ -14,32 +14,35 @@
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
-      <Button layoutX="376.0" layoutY="339.0" mnemonicParsing="false" onAction="#importXML" text="Import XML" AnchorPane.leftAnchor="376.0" />
-      <Button alignment="CENTER" layoutX="179.0" layoutY="257.0" mnemonicParsing="false" onAction="#logIn" prefHeight="31.0" prefWidth="143.0" text="Log in">
+      <Button alignment="CENTER" layoutX="380.0" layoutY="339.0" mnemonicParsing="false" onAction="#importXML" prefHeight="40.0" prefWidth="106.0" text="Import XML" />
+      <Button alignment="CENTER" layoutX="218.0" layoutY="235.0" mnemonicParsing="false" onAction="#logIn" prefHeight="42.0" prefWidth="90.0" text="Log in">
          <font>
             <Font size="16.0" />
          </font></Button>
       <Line endX="100.0" layoutX="224.0" layoutY="77.0" scaleX="2.0" scaleY="2.0" startX="-100.0" stroke="WHITE" />
-      <TextField layoutX="165.0" layoutY="136.0" prefHeight="35.0" prefWidth="195.0">
+      <TextField alignment="CENTER" layoutX="164.0" layoutY="131.0" prefHeight="35.0" prefWidth="195.0">
          <font>
             <Font size="14.0" />
-         </font></TextField>
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></TextField>
       <Label layoutX="184.0" layoutY="200.0" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="131.0" text="Username:" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="39.0" layoutY="131.0" text="Username:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="189.0" text="Password:" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="39.0" layoutY="189.0" text="Password:" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="165.0" layoutY="189.0" prefHeight="35.0" prefWidth="195.0">
+      <TextField alignment="CENTER" layoutX="165.0" layoutY="189.0" prefHeight="35.0" prefWidth="195.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
