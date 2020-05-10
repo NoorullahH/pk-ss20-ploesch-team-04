@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import category.Category;
 import contributor.Contributor;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -60,6 +62,8 @@ public class FilterController implements Initializable {
     @FXML
     private Button csv;
     @FXML
+    private Button resetFilters;
+    @FXML
     private TextField taskDescriptionField;
     @FXML
     private TextField detailedTaskDescriptionField;
@@ -89,6 +93,7 @@ public class FilterController implements Initializable {
     Taskmanager taskList;
     ObservableList<Task> toFilterTasks;
     FilteredList<Task> filteredData;
+	ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
 
    
     /**
@@ -210,6 +215,7 @@ public class FilterController implements Initializable {
 			newCatList.add(new Category(s));
 		}
 		System.out.println(newCat.toString());
+		
 		//get selected Contributors
 		ObservableList<String> newCon = contributorList.getSelectionModel().getSelectedItems();
 		ObservableList<Contributor> newConList = FXCollections.observableArrayList();
@@ -218,11 +224,19 @@ public class FilterController implements Initializable {
 			newConList.add(new Contributor(s));
 		}
 		System.out.println(newCon.toString());
-
 		System.out.println(this.from.getValue());
 		System.out.println(this.until.getValue());
 		System.out.println(this.taskDescriptionField.getText());
 		System.out.println(this.detailedTaskDescriptionField.getText());
+//------------------------------------------------------------------
+		filteredData.predicateProperty().bind(Bindings.createObjectBinding(() ->
+	    filters.stream().reduce(x -> true, Predicate::and),
+	    filters));
+		filters.add(FilterBuilder.description(this.taskDescriptionField.getText()));
+		filters.add(FilterBuilder.detail_desc(this.detailedTaskDescriptionField.getText()));
+		filters.add(FilterBuilder.date_filter(this.from.getValue(),this.until.getValue()));
+		filters.add(FilterBuilder.category(newCatList));
+		filters.add(FilterBuilder.contributes(newConList));
 
 		}
 
@@ -239,6 +253,14 @@ public class FilterController implements Initializable {
         Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         windowStage.setScene(scene);
         windowStage.show();
+    }
+    @FXML
+    private void removeAllFilters(ActionEvent event) throws IOException {
+    	filters.clear();
+    	contributorList.getSelectionModel().clearSelection();
+    	categoryList.getSelectionModel().clearSelection();
+
+    //	this.filteredData.setPredicate(x -> true);
     }
 
 

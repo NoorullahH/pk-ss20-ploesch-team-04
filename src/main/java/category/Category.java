@@ -26,6 +26,29 @@ public class Category {
      */
 	public void setCategory(String category) {
 		this.category = category;
-	}	
+	}
+
+	/**
+	 *@author Dino
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		   if (obj == null) {
+	            return false;
+	        }
+
+	        if (!Category.class.isAssignableFrom(obj.getClass())) {
+	            return false;
+	        }
+
+	        final Category other = (Category) obj;
+	        if ((this.category == null) ? (other.category != null) : !this.category.equals(other.category)) {
+	            return false;
+	        }
+
+	        return true;	
+	        }	
+	
 		
 }

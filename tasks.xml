@@ -1,113 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Data>
-    <Categories>
-        <category>Haushalt</category>
-        <category>Geschenke</category>
-        <category>Telefonate</category>
-        <category>Software Engineering</category>
-        <category>Datenmodellierung</category>
-    </Categories>
-    <Contributors>
-        <contributor>Mara Vukadinovic</contributor>
-        <contributor>Dino Osmanagic</contributor>
-        <contributor>Noorullah Hamid</contributor>
-    </Contributors>
-    <Tasks>
-        <Task>
-            <taskNumber>4</taskNumber>
-            <taskDescription>Lebensmittel einkaufen</taskDescription>
-            <detailedTaskDescription>Brot, Milch, Eier</detailedTaskDescription>
-            <dueDate/>
-            <Contributors>
-                <contributor>Mara Vukadinovic</contributor>
-            </Contributors>
-            <isRecurrent>true</isRecurrent>
-            <isWeekly>true</isWeekly>
-            <isMonthly>false</isMonthly>
-            <monthday>0</monthday>
-            <weekday>MONDAY</weekday>
-            <numberOfRepititions>9</numberOfRepititions>
-            <repetitionDate/>
-            <Categories>
-                <category>Haushalt</category>
-            </Categories>
-            <Attachments/>
-            <creationDate>2020-01-06</creationDate>
-            <isDone>false</isDone>
-            <Subtasks/>
-        </Task>
-        <Task>
-            <taskNumber>3</taskNumber>
-            <taskDescription>Präsentation</taskDescription>
-            <detailedTaskDescription/>
-            <dueDate>2020-04-23</dueDate>
-            <Contributors>
-                <contributor>Mara Vukadinovic</contributor>
-            </Contributors>
-            <isRecurrent>false</isRecurrent>
-            <isWeekly>false</isWeekly>
-            <isMonthly>false</isMonthly>
-            <monthday>0</monthday>
-            <weekday>null</weekday>
-            <numberOfRepititions>0</numberOfRepititions>
-            <repetitionDate/>
-            <Categories>
-                <category>Datenmodellierung</category>
-            </Categories>
-            <Attachments/>
-            <creationDate>2020-01-01</creationDate>
-            <isDone>false</isDone>
-            <Subtasks/>
-        </Task>
-        <Task>
-            <taskNumber>2</taskNumber>
-            <taskDescription>Hausübung SE</taskDescription>
-            <detailedTaskDescription>Release 1</detailedTaskDescription>
-            <dueDate>2020-04-23</dueDate>
-            <Contributors>
-                <contributor>Mara Vukadinovic</contributor>
-                <contributor>Dino Osmanagic</contributor>
-                <contributor>Noorullah Hamid</contributor>
-            </Contributors>
-            <isRecurrent>false</isRecurrent>
-            <isWeekly>false</isWeekly>
-            <isMonthly>false</isMonthly>
-            <monthday>0</monthday>
-            <weekday>null</weekday>
-            <numberOfRepititions>0</numberOfRepititions>
-            <repetitionDate/>
-            <Categories>
-                <category>Software Engineering</category>
-            </Categories>
-            <Attachments/>
-            <creationDate>2020-01-08</creationDate>
-            <isDone>false</isDone>
-            <Subtasks>
-                <subtask type="false">Anforderungne definieren</subtask>
-            </Subtasks>
-        </Task>
-        <Task>
-            <taskNumber>1</taskNumber>
-            <taskDescription>Lebensmittel einkaufen</taskDescription>
-            <detailedTaskDescription>Brot, Milch, Eier</detailedTaskDescription>
-            <dueDate/>
-            <Contributors>
-                <contributor>Mara Vukadinovic</contributor>
-            </Contributors>
-            <isRecurrent>true</isRecurrent>
-            <isWeekly>true</isWeekly>
-            <isMonthly>false</isMonthly>
-            <monthday>0</monthday>
-            <weekday>MONDAY</weekday>
-            <numberOfRepititions>0</numberOfRepititions>
-            <repetitionDate/>
-            <Categories>
-                <category>Haushalt</category>
-            </Categories>
-            <Attachments/>
-            <creationDate>2020-01-01</creationDate>
-            <isDone>false</isDone>
-            <Subtasks/>
-        </Task>
-    </Tasks>
+<Categories>
+<category>Haushalt</category>
+<category>Geschenke</category>
+<category>Telefonate</category>
+<category>Software Engineering</category>
+<category>Datenmodellierung</category>
+</Categories>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+<contributor>Dino Osmanagic</contributor>
+<contributor>Noorullah Hamid</contributor>
+</Contributors>
+<Tasks>
+<Task>
+<taskNumber>3</taskNumber>
+<taskDescription>task3</taskDescription>
+<detailedTaskDescription>dess</detailedTaskDescription>
+<dueDate>2020-05-26</dueDate>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Haushalt</category>
+</Categories>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
+<Task>
+<taskNumber>2</taskNumber>
+<taskDescription>task2</taskDescription>
+<detailedTaskDescription>566sdfgydfg</detailedTaskDescription>
+<dueDate>2020-05-26</dueDate>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+<contributor>Noorullah Hamid</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories/>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
+<Task>
+<taskNumber>1</taskNumber>
+<taskDescription>task1</taskDescription>
+<detailedTaskDescription>tgs</detailedTaskDescription>
+<dueDate>2020-05-14</dueDate>
+<Contributors>
+<contributor>Dino Osmanagic</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Geschenke</category>
+</Categories>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
+</Tasks>
 </Data>

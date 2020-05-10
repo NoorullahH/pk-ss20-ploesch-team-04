@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import category.Category;
 import contributor.Contributor;
+import javafx.collections.ObservableList;
 import task.Task;
 
 /**
@@ -20,7 +21,7 @@ public class FilterBuilder {
 	 * @return
 	 */
 	public static Predicate<Task> description(String description) {
-		return task -> task.getTaskDescription().equals(description);
+		return task -> task.getTaskDescription().contains(description);
 	}
 
 	// filter detail_desc
@@ -38,8 +39,18 @@ public class FilterBuilder {
 	 * @param until
 	 * @return
 	 */
-	Predicate<Task> date(LocalDate from, LocalDate until) {
-		return task -> task.getDueDate().isAfter(from) && task.getDueDate().isBefore(until);
+	public static Predicate<Task> date_filter(LocalDate from, LocalDate until) {
+		if (from == null && until == null) {
+			return x -> true;
+		} else if (until == null) {
+			return task -> task.getDueDate().isAfter(from);
+		} else if (from != null) {
+			return task -> task.getDueDate().isBefore(until);
+
+		} else {
+			return task -> task.getDueDate().isAfter(from) && task.getDueDate().isBefore(until);
+
+		}
 	}
 
 	// filter category
@@ -47,7 +58,7 @@ public class FilterBuilder {
 	 * @param categories
 	 * @return
 	 */
-	public static Predicate<Task> category(ArrayList<String> categories) {
+	public static Predicate<Task> category(ObservableList<Category> categories) {
 		return task -> task.getCategoriesList().containsAll(categories);
 	}
 
@@ -56,7 +67,7 @@ public class FilterBuilder {
 	 * @param Contributors
 	 * @return
 	 */
-	public static Predicate<Task> contributes(ArrayList<Contributor> Contributors) {
+	public static Predicate<Task> contributes(ObservableList<Contributor> Contributors) {
 		return task -> task.getContributorsList().containsAll(Contributors);
 	}
 

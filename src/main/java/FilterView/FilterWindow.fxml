@@ -65,6 +65,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button fx:id="resetFilters" layoutX="693.0" layoutY="108.0" mnemonicParsing="false" onAction="#removeAllFilters" prefHeight="39.0" prefWidth="95.0" text="RESET" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Label layoutX="62.0" layoutY="11.0" text="Advanced Task Search " textFill="WHITE">
