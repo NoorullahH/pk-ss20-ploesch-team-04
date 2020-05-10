@@ -7,11 +7,17 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.files.UploadErrorException;
+
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+
 import java.util.Comparator;
 
 import category.Category;
 import contributor.Contributor;
+import dropbox.DropboxApi;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -295,6 +301,20 @@ public class MainWindowController implements Initializable {
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
 		windowStage.show();
+	}
+	@FXML
+	private void dropboxUpload (ActionEvent event) throws IOException, UploadErrorException, DbxException {
+		DropboxApi dropboxuploader= new DropboxApi();
+		dropboxuploader.uploadFile("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+		Parent root = loader.load();
+		InfoWindowController controller = loader.<InfoWindowController>getController();
+		controller.setInfoText("file uploaded to dropbox");
+		
+		Stage newstage = new Stage();
+		newstage.setTitle("Info");
+		newstage.setScene(new Scene(root));
+		newstage.showAndWait();
 	}
 
 }

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -32,21 +29,27 @@
       </TableView>
       <Pane layoutX="56.0" layoutY="73.0" prefHeight="158.0" prefWidth="927.0" style="-fx-background-color: #355C7D;">
          <children>
-            <TextField layoutX="24.0" layoutY="15.0" prefHeight="32.0" prefWidth="170.0" promptText="Description" />
-            <TextField layoutX="24.0" layoutY="63.0" prefHeight="32.0" prefWidth="170.0" promptText="Detail description" />
+            <TextField fx:id="taskDescriptionField" layoutX="24.0" layoutY="15.0" prefHeight="32.0" prefWidth="170.0" promptText="Description" />
+            <TextField fx:id="detailedTaskDescriptionField" layoutX="24.0" layoutY="63.0" prefHeight="32.0" prefWidth="170.0" promptText="Detail description" />
             <DatePicker fx:id="from" layoutX="207.0" layoutY="16.0" prefHeight="32.0" prefWidth="81.0" promptText="From" />
             <DatePicker fx:id="until" layoutX="207.0" layoutY="64.0" prefHeight="32.0" prefWidth="81.0" promptText="Until" />
              <ListView fx:id="contributorList" layoutX="300.0" layoutY="16.0" prefHeight="82.0" prefWidth="183.0" />
       <ListView fx:id="categoryList" layoutX="500.0" layoutY="16.0" prefHeight="81.0" prefWidth="205.0" />
-            <Button fx:id="submit" layoutX="811.0" layoutY="108.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="SUBMIT" textAlignment="CENTER">
+            <Button fx:id="submit" layoutX="811.0" layoutY="108.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="95.0" text="SUBMIT" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <RadioButton fx:id="no" layoutX="815.0" layoutY="70.0" mnemonicParsing="false" text="NO" textFill="WHITE" />
-            <RadioButton fx:id="yes" layoutX="815.0" layoutY="47.0" mnemonicParsing="false" text="YES" textFill="WHITE" />
-            <RadioButton fx:id="closed" layoutX="727.0" layoutY="69.0" mnemonicParsing="false" text="Closed" textFill="WHITE" />
-            <RadioButton fx:id="open" layoutX="727.0" layoutY="46.0" mnemonicParsing="false" text="Open" textFill="WHITE" />
+            <RadioButton fx:id="no" layoutX="815.0" layoutY="70.0" mnemonicParsing="false" text="no" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="attachment" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="yes" layoutX="815.0" layoutY="47.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
+            <RadioButton fx:id="closed" layoutX="727.0" layoutY="69.0" mnemonicParsing="false" text="closed" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="task_done" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="open" layoutX="727.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
             <Label fx:id="Attatchment" layoutX="807.0" layoutY="16.0" text="Attatchment" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
