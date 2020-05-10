@@ -33,7 +33,7 @@
 </Categories>
 <Attachments/>
 <creationDate>2020-01-01</creationDate>
-<isDone>false</isDone>
+<isDone>true</isDone>
 <Subtasks/>
 </Task>
 <Task>
@@ -43,6 +43,52 @@
 <dueDate>2020-05-26</dueDate>
 <Contributors>
 <contributor>Mara Vukadinovic</contributor>
+<contributor>Noorullah Hamid</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories/>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>true</isDone>
+<Subtasks/>
+</Task>
+<Task>
+<taskNumber>5</taskNumber>
+<taskDescription>fsgdrfg</taskDescription>
+<detailedTaskDescription>adfsef</detailedTaskDescription>
+<dueDate>2020-05-22</dueDate>
+<Contributors>
+<contributor>Dino Osmanagic</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Geschenke</category>
+</Categories>
+<Attachments>
+<attachment>https://stackoverflow.com/questions/4301637/how-to-show-the-hidden-toolbar-of-eclipse</attachment>
+</Attachments>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
+<Task>
+<taskNumber>4</taskNumber>
+<taskDescription>tesrt</taskDescription>
+<detailedTaskDescription/>
+<dueDate>2020-05-22</dueDate>
+<Contributors>
 <contributor>Noorullah Hamid</contributor>
 </Contributors>
 <isRecurrent>false</isRecurrent>

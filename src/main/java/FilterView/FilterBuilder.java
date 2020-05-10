@@ -77,6 +77,8 @@ public class FilterBuilder {
 	 * @return
 	 */
 	public static Predicate<Task> attachment(String attachment) {
+		if(attachment==null) {return null;};
+
 		if (attachment.equals("yes")) {
 			return task -> task.getAttachments().size() != 0;
 		} else {
@@ -90,10 +92,11 @@ public class FilterBuilder {
 	 * @return
 	 */
 	public static Predicate<Task> status(String status) {
+		if(status==null) {return null;};
 		if (status.equals("open")) {
-			return task -> task.getDone().isBound() == false;
+			return task -> task.getDone().getValue()== false;
 		} else {
-			return task -> task.getDone().isBound() == true;
+			return task -> task.getDone().getValue()== true;
 		}
 	}
 

@@ -195,18 +195,6 @@ public class FilterController implements Initializable {
     @FXML
     private void submit(ActionEvent event) throws IOException {
 
-        System.out.println("find" + this.filteredData.size());
-		if (attachment.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.attachment.getSelectedToggle();
-			String toogleGroupValue = selectedRadioButton.getText();		
-			System.out.println(toogleGroupValue);
-
-		}
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton2 = (RadioButton) this.task_done.getSelectedToggle();
-			String toogleGroupValue2 = selectedRadioButton2.getText();
-			System.out.println(toogleGroupValue2);
-		}
 		//get selected Kategorien
 		ObservableList<String> newCat = categoryList.getSelectionModel().getSelectedItems();
 		ObservableList<Category> newCatList = FXCollections.observableArrayList();
@@ -237,6 +225,19 @@ public class FilterController implements Initializable {
 		filters.add(FilterBuilder.date_filter(this.from.getValue(),this.until.getValue()));
 		filters.add(FilterBuilder.category(newCatList));
 		filters.add(FilterBuilder.contributes(newConList));
+		
+		if (attachment.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.attachment.getSelectedToggle();
+			String toogleGroupValue = selectedRadioButton.getText();		
+			filters.add(FilterBuilder.attachment(toogleGroupValue));
+		}
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton2 = (RadioButton) this.task_done.getSelectedToggle();
+			String toogleGroupValue2 = selectedRadioButton2.getText();
+			filters.add(FilterBuilder.status(toogleGroupValue2));
+		}
+
+
 
 		}
 
@@ -259,6 +260,8 @@ public class FilterController implements Initializable {
     	filters.clear();
     	contributorList.getSelectionModel().clearSelection();
     	categoryList.getSelectionModel().clearSelection();
+    	attachment.selectToggle(null);
+    	task_done.selectToggle(null);
 
     //	this.filteredData.setPredicate(x -> true);
     }
