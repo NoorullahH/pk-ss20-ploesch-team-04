@@ -73,7 +73,10 @@ public class MainWindowController implements Initializable {
 	private Button xmlExport;
 	@FXML
 	private Button updateTask;
-	
+	@FXML
+	private Button importDropbox;
+	@FXML
+	private Button exportDropbox;
 	//dino
 	@FXML
 	private Button filterTask;
@@ -310,6 +313,30 @@ public class MainWindowController implements Initializable {
 		Parent root = loader.load();
 		InfoWindowController controller = loader.<InfoWindowController>getController();
 		controller.setInfoText("file uploaded to dropbox");
+		
+		Stage newstage = new Stage();
+		newstage.setTitle("Info");
+		newstage.setScene(new Scene(root));
+		newstage.showAndWait();
+	}
+	
+	@FXML
+	private void importDropboxWriter (ActionEvent event) throws IOException, UploadErrorException, DbxException {
+	/*	File f = new File("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
+		if(f.exists()){
+			f.delete();
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}*/
+		DropboxApi dropboxdownloader= new DropboxApi();
+		dropboxdownloader.downloadFile("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+		Parent root = loader.load();
+		InfoWindowController controller = loader.<InfoWindowController>getController();
+		controller.setInfoText("file downloaded from dropbox");
 		
 		Stage newstage = new Stage();
 		newstage.setTitle("Info");

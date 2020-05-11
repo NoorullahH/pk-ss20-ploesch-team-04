@@ -73,7 +73,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#dropboxUpload" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Dropbox" textFill="WHITE">
+            <Button fx:id="exportDropbox" mnemonicParsing="false" onAction="#dropboxUpload" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Upload to Dropbox" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -91,7 +91,15 @@
                <Button fx:id="filterTask" mnemonicParsing="false" onAction="#filterTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Filter" textFill="WHITE">
                <font>
                   <Font size="15.0" />
-               </font></Button>
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Button>
+            <Button fx:id="importDropbox" mnemonicParsing="false" onAction="#importDropboxWriter" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Import from Dropbox" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
       <Label layoutX="14.0" layoutY="27.0" prefHeight="35.0" prefWidth="291.0" text="Taskmanagement" textFill="#fffdfd">
