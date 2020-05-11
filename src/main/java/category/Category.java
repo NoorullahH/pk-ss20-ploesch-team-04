@@ -37,18 +37,26 @@ public class Category {
 		   if (obj == null) {
 	            return false;
 	        }
+		   if (this.getClass() != obj.getClass())
+			    return false;
 
 	        if (!Category.class.isAssignableFrom(obj.getClass())) {
 	            return false;
 	        }
 
-	        final Category other = (Category) obj;
+	         Category other = (Category) obj;
 	        if ((this.category == null) ? (other.category != null) : !this.category.equals(other.category)) {
 	            return false;
 	        }
 
 	        return true;	
-	        }	
+	        }
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}	
 	
 		
 }

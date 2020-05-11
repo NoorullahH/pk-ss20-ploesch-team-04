@@ -16,17 +16,10 @@ public class ReadPropertiesFile{
 public static Properties get(String fileName) throws IOException {
       FileInputStream fis = null;
       Properties prop = null;
-      try {
-         fis = new FileInputStream(fileName);
-         prop = new Properties();
-         prop.load(fis);
-      } catch(FileNotFoundException fnfe) {
-         fnfe.printStackTrace();
-      } catch(IOException ioe) {
-         ioe.printStackTrace();
-      } finally {
-         fis.close();
-      }
+      fis = new FileInputStream(fileName);
+      prop = new Properties();
+      prop.load(fis);
+      fis.close();
       return prop;
    }
 }

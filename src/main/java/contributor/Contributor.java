@@ -38,16 +38,24 @@ public class Contributor {
 		   if (obj == null) {
 	            return false;
 	        }
+		   if (this.getClass() != obj.getClass())
+			    return false;
 
 	        if (!Contributor.class.isAssignableFrom(obj.getClass())) {
 	            return false;
 	        }
 
-	        final Contributor other = (Contributor) obj;
+	        Contributor other = (Contributor) obj;
 	        if ((this.person == null) ? (other.person != null) : !this.person.equals(other.person)) {
 	            return false;
 	        }
 
 	        return true;	
 	        }	
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}	
 }
