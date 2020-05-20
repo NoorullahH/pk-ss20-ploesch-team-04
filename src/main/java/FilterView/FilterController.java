@@ -60,7 +60,7 @@ public class FilterController implements Initializable {
     @FXML
     private Button submit;
     @FXML
-    private Button csv;
+    private Button chart;
     @FXML
     private Button resetFilters;
     @FXML
@@ -241,6 +241,16 @@ public class FilterController implements Initializable {
 
 		}
 
+    @FXML
+    private void chart(ActionEvent event) throws IOException {
+    	
+    	ChartBuilder newChart = new ChartBuilder();
+    	Stage stage = new Stage();
+    	newChart.initdata(filteredData);
+    	newChart.start(stage);
+    	
+    }
+    
 
     /**
      * @param event

@@ -606,4 +606,72 @@ public class Taskmanager {
     	Node node = (Node) nodeList.item(0);
     	return node.getNodeValue();
     }
+    
+    public void saveToCsv(File fileName) {		
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.newDocument();
+			
+			Element rootElement = doc.createElement("Data");
+			doc.appendChild(rootElement);
+			
+			Element rootCategory = doc.createElement("Categories");
+			rootElement.appendChild(rootCategory);
+			
+			Categorymanager catManager = Categorymanager.getInstance();
+			for(Category c: catManager.getCategories()) {
+	        	Element e = doc.createElement("category");
+	            e.appendChild(doc.createTextNode(c.getCategory()));
+	            rootCategory.appendChild(e);
+			}
+			
+			Element rootContributors = doc.createElement("Contributors");
+			rootElement.appendChild(rootContributors);
+			Contributormanager conManager = Contributormanager.getInstance();
+			for(Contributor c: conManager.getContributors()) {
+				Element e = doc.createElement("contributor");
+				e.appendChild(doc.createTextNode(c.getPerson()));
+				rootContributors.appendChild(e);
+			}
+			
+			String empty = "";
+			
+			Element rootTasks = doc.createElement("Tasks");
+			rootElement.appendChild(rootTasks);
+			
+			System.out.println("Tasks Size: "+tasks.size());
+			for(Task t:tasks) {
+				if(t.getRepetitionDate() == null && t.getDueDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+				}else if(t.getDueDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+				}else if(t.getRepetitionDate() == null) {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
+				}else {
+					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
+				}
+			}
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            //for pretty print
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+
+            //write to console or file
+            StreamResult console = new StreamResult(System.out);
+            StreamResult file = new StreamResult(fileName);
+            
+            //write data
+            transformer.transform(source, console);
+            transformer.transform(source, file);
+            System.out.println("DONE");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

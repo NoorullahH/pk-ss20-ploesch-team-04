@@ -127,5 +127,26 @@
 <isDone>false</isDone>
 <Subtasks/>
 </Task>
+<Task>
+<taskNumber>7</taskNumber>
+<taskDescription>jhhjdjud</taskDescription>
+<detailedTaskDescription/>
+<dueDate>2020-05-12</dueDate>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories/>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
 </Tasks>
 </Data>

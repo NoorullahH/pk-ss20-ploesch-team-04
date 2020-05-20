@@ -64,6 +64,7 @@ public class Task {
 		this.weekly = false;
 		this.monthly = false;
 		this.creationDate = LocalDate.now();
+		
 	}
 	
 	/**
@@ -96,6 +97,7 @@ public class Task {
 		this.numberOfRepetitions = numberOfRepetitions;
 		this.repetitionDate = repetitionDate;
 		this.creationDate = LocalDate.now(); //ÄNDERN
+		
 	}
 	
 	/**

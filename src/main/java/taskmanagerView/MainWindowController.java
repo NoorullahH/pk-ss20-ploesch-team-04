@@ -3,9 +3,13 @@ package taskmanagerView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.io.FileWriter;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.files.UploadErrorException;
@@ -296,6 +300,40 @@ public class MainWindowController implements Initializable {
 			taskList.saveToXML(fileDefault);
 		}
 	}
+	
+	
+	@FXML
+	private void saveToCsv(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+		fileChooser.getExtensionFilters().add(extFilter);
+		
+		Node source = (Node) event.getSource();
+    	Stage window = (Stage) source.getScene().getWindow();
+
+		File file = fileChooser.showSaveDialog(window);
+
+		if (file != null) {
+			
+			file = new File(file.getPath());
+			taskList.saveToCsv(file);
+			
+		}
+	}
+	
+	@FXML
+	private void createChart (ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Chart.fxml"));
+		Parent root = loader.load();
+		
+		Stage newstage = new Stage();
+		newstage.setTitle("Chart");
+		newstage.setScene(new Scene(root));
+		newstage.showAndWait();
+		
+	}
+	
+		
 	//dino to do 
 	@FXML
 	private void filterTasks (ActionEvent event) throws IOException {
