@@ -303,7 +303,7 @@ public class MainWindowController implements Initializable {
 	
 	
 	@FXML
-	private void saveToCsv(ActionEvent event) {
+	private void saveToCsv(ActionEvent event) throws IOException{
 		FileChooser fileChooser = new FileChooser();
 		//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 		//fileChooser.getExtensionFilters().add(extFilter);
