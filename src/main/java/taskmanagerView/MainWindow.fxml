@@ -49,7 +49,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#createChart" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Chart" textFill="WHITE">
+            <Button mnemonicParsing="false"  prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Chart" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>

@@ -44,14 +44,27 @@ public class FilterBuilder {
 			return x -> true;
 		} else if (until == null) {
 			return task -> task.getDueDate().isAfter(from);
-		} else if (from != null) {
+		} else if (from == null) {
 			return task -> task.getDueDate().isBefore(until);
 
 		} else {
-			return task -> task.getDueDate().isAfter(from) && task.getDueDate().isBefore(until);
+			return task -> (task.getDueDate().isAfter(from) || task.getDueDate().equals(from)) && (task.getDueDate().isBefore(until) || task.getDueDate().equals(until));
 
 		}
 	}
+	
+	// filter date
+		/**
+		 * @param from
+		 * @return
+		 */
+		public static Predicate<Task> date_filter_day(LocalDate from) {
+			if (from == null ) {
+				return x -> true;
+			}  else {
+				return task -> task.getDueDate().isEqual(from);
+			} 
+		}
 
 	// filter category
 	/**
@@ -70,6 +83,15 @@ public class FilterBuilder {
 	public static Predicate<Task> contributes(ObservableList<Contributor> Contributors) {
 		return task -> task.getContributorsList().containsAll(Contributors);
 	}
+	
+	// filter contributes
+		/**
+		 * @param Contributors
+		 * @return
+		 */
+		public static Predicate<Task> mulContributes() {
+			return task -> task.getContributorsList().size() > 1;
+		}
 
 	// filter attachment
 	/**

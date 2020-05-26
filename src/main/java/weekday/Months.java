@@ -1,6 +1,6 @@
 package weekday;
 
 public enum Months {
-	January, February, March, April, May, June, July, August, September, Oktober, November, December
+	Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember,
 
 }

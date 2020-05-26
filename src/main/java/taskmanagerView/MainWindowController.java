@@ -305,8 +305,11 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void saveToCsv(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-		fileChooser.getExtensionFilters().add(extFilter);
+		//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+		//fileChooser.getExtensionFilters().add(extFilter);
+		
+		fileChooser.getExtensionFilters().addAll(
+		        new FileChooser.ExtensionFilter("Comma-Separated Values (CSV)", "*.csv"));
 		
 		Node source = (Node) event.getSource();
     	Stage window = (Stage) source.getScene().getWindow();
@@ -319,18 +322,6 @@ public class MainWindowController implements Initializable {
 			taskList.saveToCsv(file);
 			
 		}
-	}
-	
-	@FXML
-	private void createChart (ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Chart.fxml"));
-		Parent root = loader.load();
-		
-		Stage newstage = new Stage();
-		newstage.setTitle("Chart");
-		newstage.setScene(new Scene(root));
-		newstage.showAndWait();
-		
 	}
 	
 		

@@ -1,6 +1,7 @@
 package task;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ import category.Category;
 import category.Categorymanager;
 import contributor.Contributor;
 import contributor.Contributormanager;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import weekday.Weekday;
@@ -607,66 +609,53 @@ public class Taskmanager {
     	return node.getNodeValue();
     }
     
-    public void saveToCsv(File fileName) {		
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
+    /**
+	 * @author Noorullah
+	 */
+    
+public void saveToCsv(File fileName) {		
 		
 		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.newDocument();
-			
-			Element rootElement = doc.createElement("Data");
-			doc.appendChild(rootElement);
-			
-			Element rootCategory = doc.createElement("Categories");
-			rootElement.appendChild(rootCategory);
-			
-			Categorymanager catManager = Categorymanager.getInstance();
-			for(Category c: catManager.getCategories()) {
-	        	Element e = doc.createElement("category");
-	            e.appendChild(doc.createTextNode(c.getCategory()));
-	            rootCategory.appendChild(e);
-			}
-			
-			Element rootContributors = doc.createElement("Contributors");
-			rootElement.appendChild(rootContributors);
-			Contributormanager conManager = Contributormanager.getInstance();
-			for(Contributor c: conManager.getContributors()) {
-				Element e = doc.createElement("contributor");
-				e.appendChild(doc.createTextNode(c.getPerson()));
-				rootContributors.appendChild(e);
-			}
-			
-			String empty = "";
-			
-			Element rootTasks = doc.createElement("Tasks");
-			rootElement.appendChild(rootTasks);
-			
-			System.out.println("Tasks Size: "+tasks.size());
-			for(Task t:tasks) {
-				if(t.getRepetitionDate() == null && t.getDueDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
-				}else if(t.getDueDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
-				}else if(t.getRepetitionDate() == null) {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty));
-				}else {
-					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), t.getDueDate().toString(), t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachments(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasks(), empty+t.getRepetitionDate().toString()));
-				}
-			}
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            //for pretty print
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource source = new DOMSource(doc);
 
-            //write to console or file
-            StreamResult console = new StreamResult(System.out);
-            StreamResult file = new StreamResult(fileName);
-            
-            //write data
-            transformer.transform(source, console);
-            transformer.transform(source, file);
+			FileWriter csvWriter = new FileWriter(fileName);
+			//Headers of Csv file "," is use to make new column
+			csvWriter.append("Task No");
+			csvWriter.append(";");
+			csvWriter.append("Description");
+			csvWriter.append(";");
+			csvWriter.append("Detail Description");
+			csvWriter.append(";");
+			csvWriter.append("Due Date");
+			csvWriter.append(";");
+			csvWriter.append("Contributors");
+			csvWriter.append(";");
+			csvWriter.append("Categories");
+			csvWriter.append(";");
+			csvWriter.append("Done");
+			csvWriter.append("\n");				
+			//System.out.println("Save to csv function:::::::::::::::::::");
+			//Adding data in CSV file
+			for (Task t:tasks) {
+				BooleanProperty done = t.getDone();
+				String doneVal = String.valueOf(done.getValue());
+				
+				//If there is two or more Contributors, then split these Contributors on the basis of ";" and make new string with single quote
+				String con = t.getContributors();
+				if(t.getContributors().contains(",")) {
+					String[] conArray = t.getContributors().split(",");
+					con = "";
+					for(int count = 0; count < conArray.length; count++) {
+						con = con + "'"+conArray[count]+"' ";
+					}
+				}
+				
+				csvWriter.append(String.join(";", t.getTaskNumber()+";"+t.getTaskDescription()+";"+t.getDetailedTaskDescription()+";"+t.getDueDate()
+				+ ";" + con + ";" + t.getCategories() + ";" + doneVal));
+			    csvWriter.append("\n");
+			}
+
+			csvWriter.flush();
+			csvWriter.close();
             System.out.println("DONE");
 
         } catch (Exception e) {
