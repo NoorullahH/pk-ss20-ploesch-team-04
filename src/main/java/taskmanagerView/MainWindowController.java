@@ -303,7 +303,7 @@ public class MainWindowController implements Initializable {
 	
 	
 	@FXML
-	private void saveToCsv(ActionEvent event) throws IOException{
+	private void saveToCsv(ActionEvent event){
 		FileChooser fileChooser = new FileChooser();
 		//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 		//fileChooser.getExtensionFilters().add(extFilter);
@@ -319,13 +319,19 @@ public class MainWindowController implements Initializable {
 		if (file != null) {
 			
 			file = new File(file.getPath());
-			taskList.saveToCsv(file);
+			
+				try {
+					taskList.saveToCsv(file);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			
 		}
 	}
 	
 		
-	//dino to do 
+	
 	@FXML
 	private void filterTasks (ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("FilterView/FilterWindow.fxml"));
@@ -337,7 +343,7 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void dropboxUpload (ActionEvent event) throws IOException, UploadErrorException, DbxException {
 		DropboxApi dropboxuploader= new DropboxApi();
-		dropboxuploader.uploadFile("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
+		dropboxuploader.uploadFile("tasks.xml");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 		Parent root = loader.load();
 		InfoWindowController controller = loader.<InfoWindowController>getController();
@@ -351,17 +357,9 @@ public class MainWindowController implements Initializable {
 	
 	@FXML
 	private void importDropboxWriter (ActionEvent event) throws IOException, UploadErrorException, DbxException {
-	/*	File f = new File("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
-		if(f.exists()){
-			f.delete();
-			try {
-				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}*/
+
 		DropboxApi dropboxdownloader= new DropboxApi();
-		dropboxdownloader.downloadFile("C:\\Users\\Hamed\\Documents\\GitHub\\pk-ss20-ploesch-team-04\\tasks.xml");
+		dropboxdownloader.downloadFile("tasks.xml");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 		Parent root = loader.load();
 		InfoWindowController controller = loader.<InfoWindowController>getController();

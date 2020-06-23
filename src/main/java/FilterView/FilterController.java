@@ -5,10 +5,16 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -111,6 +117,9 @@ public class FilterController implements Initializable {
 	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.Januar, Months.Februar, Months.März,
 			Months.April, Months.Mai, Months.Juni, Months.Juli, Months.August, Months.September, Months.Oktober, Months.November, Months.Dezember);
 	
+//	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
+//			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
+	
 
 	/**
 	 *
@@ -156,8 +165,10 @@ public class FilterController implements Initializable {
 		contributorList.setItems(conController.getContributorList());
 		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		contributorList.setStyle("-fx-font-size: 16 ;");
-		
-	
+		/**
+		 * @author Noorullah
+		 */
+		//month.setItems(monthList);
 
 		// Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(
@@ -203,9 +214,6 @@ public class FilterController implements Initializable {
 
 	}
 	
-	/**
-	 * @author Noorullah
-	 */
 	private void addMonthsInCombo() {
 		//Adding months In Month Combobox
 		for(int count = 0; count < monthList.size(); count++) {
@@ -273,6 +281,118 @@ public class FilterController implements Initializable {
 
 	}
 
+	@FXML
+	private void chart(ActionEvent event) throws IOException {
+		//Get selected month from combobox
+		Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();		
+		
+		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		//Format From date from Local date to String
+		String startdate = "";
+		if(this.from.getValue() != null) {
+			startdate=(this.from.getValue()).format(formatter_1);
+		}
+		
+		//Format Until date from Local date to String
+		String endDate = "";
+		if(this.until.getValue() != null) {
+			endDate =  (this.until.getValue()).format(formatter_1);
+		}
+		
+		String toogleGroupValue = "";
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+			toogleGroupValue = selectedRadioButton.getText();
+		}
+	  
+	   //Calling chartBuilder Class Constructor with param 
+	  ChartBuilder newChart = new ChartBuilder(month,filteredData, startdate, endDate, toogleGroupValue);
+	  Stage stage = new Stage();
+	  newChart.start(stage);
+	}
+	
+	@FXML
+	private void chartMulCont(ActionEvent event) throws IOException{
+		//Get selected month from combobox
+		Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();		
+		
+		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//Format From date from Local date to String
+		String startdate = "";
+		if(this.from.getValue() != null) {
+			startdate=(this.from.getValue()).format(formatter_1);
+		}
+		
+		//Format Until date from Local date to String
+		String endDate = "";
+		if(this.until.getValue() != null) {
+			endDate =  (this.until.getValue()).format(formatter_1);
+		}
+		
+		String toogleGroupValue = "";
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+			toogleGroupValue = selectedRadioButton.getText();
+		}
+		
+		//Calling ChartBuilderForMulContributors Class Constructor with param 
+		ChartBuilderForMulContributors newChart = new ChartBuilderForMulContributors(month,filteredData, startdate, endDate,toogleGroupValue );
+		Stage stage = new Stage();
+		newChart.start(stage);
+	}
+	
+	@FXML
+	public void openWeekChart(ActionEvent event) throws IOException{
+		String toogleGroupValue = "";
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+			toogleGroupValue = selectedRadioButton.getText();
+		}
+		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//Format From date from Local date to String
+		String startdate = "";
+		if(this.from.getValue() != null) {
+			startdate=(this.from.getValue()).format(formatter_1);
+		}
+		
+		//Format Until date from Local date to String
+		String endDate = "";
+		if(this.until.getValue() != null) {
+			endDate =  (this.until.getValue()).format(formatter_1);
+		}
+		//Calling ChartBuilderForMulContributors Class Constructor with param 
+		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
+		Stage stage = new Stage();
+		newChart.start(stage);
+	}
+	
+	@FXML
+	public void openWeekChartMulCont(ActionEvent event) throws IOException{
+		String toogleGroupValue = "";
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+			toogleGroupValue = selectedRadioButton.getText();
+		}
+		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//Format From date from Local date to String
+		String startdate = "";
+		if(this.from.getValue() != null) {
+			startdate=(this.from.getValue()).format(formatter_1);
+		}
+		
+		//Format Until date from Local date to String
+		String endDate = "";
+		if(this.until.getValue() != null) {
+			endDate =  (this.until.getValue()).format(formatter_1);
+		}
+		//Calling ChartBuilderForMulContributors Class Constructor with param 
+		WeekChartBuilderForMulContrubutors newChart = new WeekChartBuilderForMulContrubutors(filteredData, toogleGroupValue, startdate, endDate);
+		Stage stage = new Stage();
+		newChart.start(stage);
+	}
+
+
 
 	/**
 	 * @param event
@@ -302,4 +422,112 @@ public class FilterController implements Initializable {
 		this.until.setValue(null);
 		// this.filteredData.setPredicate(x -> true);
 	}
+	//januar, februar, märz, april, mai, juni, juli, august, september, oktober, november, dezember
+	@FXML
+	public void performActionOnMonthCombo() {
+		String startDate = "";
+		String endDate = "";
+		String year = "2020";
+		if(cmbMonth.getSelectionModel().getSelectedItem() != null) {
+			Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();
+			if(month.toString().equalsIgnoreCase("January") || month.toString().equalsIgnoreCase("januar")) {
+				startDate = year+"-01-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-01-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("February") || month.toString().equalsIgnoreCase("februar")) {
+				startDate = year+"-02-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-02-28";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("March") || month.toString().equalsIgnoreCase("märz")) {
+				startDate = year+"-03-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-03-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("April")) {
+				startDate = year+"-04-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-04-30";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("May") || month.toString().equalsIgnoreCase("mai")) {
+				startDate = year+"-05-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-05-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("June") || month.toString().equalsIgnoreCase("juni")) {
+				startDate = year+"-06-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-06-30";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("July") || month.toString().equalsIgnoreCase("juli")) {
+				startDate = year+"-07-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-07-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("August")) {
+				startDate = year+"-08-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-08-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("September")) {
+				startDate = year+"-09-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-09-30";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("October") || month.toString().equalsIgnoreCase("oktober")) {
+				startDate = year+"-10-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-10-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("November")) {
+				startDate = year+"-11-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-11-30";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}else if(month.toString().equalsIgnoreCase("December") || month.toString().equalsIgnoreCase("dezember")) {
+				startDate = year+"-12-01";
+				LocalDate valStart = LocalDate.parse(startDate);
+				this.from.setValue(valStart);
+				
+				endDate = year+"-12-31";
+				LocalDate valEnd = LocalDate.parse(endDate);
+				this.until.setValue(valEnd);
+			}
+		}
+	}
+
 }
