@@ -6,6 +6,7 @@ taskmanagerView\EditTaskController$1.class
 dropbox\DropboxApi.class
 FilterView\FilterController$1.class
 FilterView\FilterController.class
+FilterView\ChartBuilder.class
 ReadPropertiesFile.class
 taskmanagerView\MainWindowController$2.class
 dropbox\ReadPropertiesFile.class
@@ -14,9 +15,11 @@ FilterView\FilterBuilder.class
 taskmanagerView\CategoryController.class
 taskmanagerView\Main.class
 category\Category.class
+FilterView\WeekChartBuilder.class
 task\Task.class
 taskmanagerView\CreateNewTaskController2$2.class
 weekday\Months.class
+FilterView\ChartController.class
 taskmanagerView\CreateNewTaskController2.class
 taskmanagerView\EditTaskController$2.class
 category\Categorymanager.class

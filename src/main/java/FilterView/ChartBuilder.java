@@ -391,4 +391,108 @@ public class ChartBuilder extends Application {
 		return startDate +","+endDate;
 	}
 	
+	public void start2(Stage stage) {
+		stage.setTitle("Taskmanagement Chart");
+		if(month != null) {
+			barChart.setTitle("Tasks of the month "+month);
+		}
+		//If user do not select month from combo then it shows Only Task
+		else if(this.filterStartDate != null && !this.filterStartDate.equals("") && this.filterEndDate != null && !this.filterEndDate.equals("")){
+			barChart.setTitle("Tasks");
+		}
+		//If user select only start date then it shows Only start date
+		else if(this.filterStartDate != null && !this.filterStartDate.equals("")){
+			barChart.setTitle("Tasks of "+this.filterStartDate);
+		}
+		
+		xAxis.setLabel("Months");
+		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(January, February, March, April,
+				May, June, July, August, September, October, November, December)));
+		
+		yAxis.setLabel("Value");
+		stack1.setName("Open Tasks");
+
+		// getTableView().getItems().size()
+		//taskView.getItems().size()
+		//Make Open task Bars with Open task count
+		for(int count = 0; count < monthList.size(); count++) {
+			Months month = monthList.get(count);
+			openTaskCount = 0;
+			if(lstFilteredMonth != null && lstFilteredMonth.size() > 0) {
+				for(int i = 0; i < lstFilteredMonth.size(); i++) {
+					String filterMonth = lstFilteredMonth.get(i);
+					if(month.toString().contentEquals(filterMonth)) {
+						getOpentaskCount(month.toString());
+						if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
+							if(toogleGroupValue.equalsIgnoreCase("open")) {
+								openTaskCount = openTaskCount;
+							}else {
+								openTaskCount = 0;
+							}
+						}
+						stack1.getData().add(new XYChart.Data<String, Number>(month.toString(), openTaskCount));
+					}
+					else {
+						stack1.getData().add(new XYChart.Data<String, Number>(month.toString(), 0));
+					}
+				}
+			}else {
+				
+				getOpentaskCount(month.toString());
+				if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
+					if(toogleGroupValue.equalsIgnoreCase("open")) {
+						openTaskCount = openTaskCount;
+					}else {
+						openTaskCount = 0;
+					}
+				}
+				stack1.getData().add(new XYChart.Data<String, Number>(month.toString(), openTaskCount));
+			}
+		}
+
+
+		stack2.setName("Closed Tasks");
+		//Make Closed task Bars with Closed task count
+		for(int count = 0; count < monthList.size(); count++) {
+			Months month = monthList.get(count);
+			closeTaskCount = 0;
+			
+			if(lstFilteredMonth != null && lstFilteredMonth.size() > 0) {
+				for(int i = 0; i < lstFilteredMonth.size(); i++) {
+					String filterMonth = lstFilteredMonth.get(i);
+					if(month.toString().contentEquals(filterMonth)) {
+						getClosetaskCount(month.toString());
+						if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
+							if(toogleGroupValue.equalsIgnoreCase("closed")) {
+								closeTaskCount = closeTaskCount;
+							}else {
+								closeTaskCount = 0;
+							}
+						}
+						stack2.getData().add(new XYChart.Data<String, Number>(month.toString(), closeTaskCount));
+					}
+					else {
+						stack2.getData().add(new XYChart.Data<String, Number>(month.toString(), 0));
+					}
+				}
+			}else {
+				getClosetaskCount(month.toString());
+				if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
+					if(toogleGroupValue.equalsIgnoreCase("closed")) {
+						closeTaskCount = closeTaskCount;
+					}else {
+						closeTaskCount = 0;
+					}
+				}
+				stack2.getData().add(new XYChart.Data<String, Number>(month.toString(), closeTaskCount));
+			}
+		}
+
+		Scene scene = new Scene(barChart, 800, 600);
+		barChart.getData().addAll(stack1, stack2);
+		stage.setScene(scene);
+		stage.show();
+	
+	}
+	
 }

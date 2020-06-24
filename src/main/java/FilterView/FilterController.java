@@ -337,9 +337,9 @@ public class FilterController implements Initializable {
 		}
 		
 		//Calling ChartBuilderForMulContributors Class Constructor with param 
-		ChartBuilderForMulContributors newChart = new ChartBuilderForMulContributors(month,filteredData, startdate, endDate,toogleGroupValue );
-		Stage stage = new Stage();
-		newChart.start(stage);
+		ChartBuilder newChart = new ChartBuilder(month,filteredData, startdate, endDate, toogleGroupValue);
+		  Stage stage = new Stage();
+		  newChart.start(stage);
 	}
 	
 	@FXML
@@ -387,7 +387,7 @@ public class FilterController implements Initializable {
 			endDate =  (this.until.getValue()).format(formatter_1);
 		}
 		//Calling ChartBuilderForMulContributors Class Constructor with param 
-		WeekChartBuilderForMulContrubutors newChart = new WeekChartBuilderForMulContrubutors(filteredData, toogleGroupValue, startdate, endDate);
+		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
 		Stage stage = new Stage();
 		newChart.start(stage);
 	}
