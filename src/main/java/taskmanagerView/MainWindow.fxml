@@ -28,16 +28,12 @@
             </Button>
             <Button fx:id="editTask" mnemonicParsing="false" onAction="#editTask" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Change Task" textFill="WHITE">
                <VBox.margin>
-                  <Insets bottom="5.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="deleteTask" mnemonicParsing="false" onAction="#deleteTask" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Delete Task" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font></Button>
             <Button fx:id="editCategories" mnemonicParsing="false" onAction="#editCategories" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Categories" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -106,13 +102,14 @@
       </Label>
       <TableView fx:id="taskView" layoutX="175.0" layoutY="80.0" prefHeight="722.0" prefWidth="864.0">
         <columns>
-            <TableColumn fx:id="descriptionColumn" prefWidth="129.0" text="Description" />
-            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="145.0" text="Detail description" />
-            <TableColumn fx:id="dueDateColumn" prefWidth="125.0" sortType="DESCENDING" text="Due date" />
-            <TableColumn fx:id="contributorsColumn" prefWidth="121.0" text="Contributors" />
-            <TableColumn fx:id="categoriesColumn" prefWidth="130.0" text="Categories" />
-            <TableColumn fx:id="attachmentsColumn" prefWidth="130.0" text="Attachments" />
-            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="83.0" text="Done?" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="115.0" text="Description" />
+            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="115.0" text="Detail description" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="115.0" sortType="DESCENDING" text="Due date" />
+            <TableColumn fx:id="contributorsColumn" prefWidth="115.0" text="Contributors" />
+            <TableColumn fx:id="categoriesColumn" prefWidth="115.0" text="Categories" />
+            <TableColumn fx:id="attachmentsColumn" prefWidth="115.0" text="Attachments" />
+            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="85.0" text="Done?" />
+            <TableColumn fx:id="deleteButton" prefWidth="85.0" style="-fx-alignment: CENTER;" text="Delete" />
         </columns>
       </TableView>
    </children>

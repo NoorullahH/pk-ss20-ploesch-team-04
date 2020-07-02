@@ -39,15 +39,17 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
-public class CreateNewTaskController2 implements Initializable{
+public class TaskController implements Initializable{
 		
-	ObservableList<Integer> monthdayList = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
+	private ObservableList<Integer> monthdayList = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
 	
-	ObservableList<Weekday> weekdayList = FXCollections.observableArrayList(Weekday.MONDAY,Weekday.TUESDAY,Weekday.WEDNESDAY,Weekday.THURSDAY,Weekday.FRIDAY,Weekday.SATURDAY,Weekday.SUNDAY);
+	private ObservableList<Weekday> weekdayList = FXCollections.observableArrayList(Weekday.MONDAY,Weekday.TUESDAY,Weekday.WEDNESDAY,Weekday.THURSDAY,Weekday.FRIDAY,Weekday.SATURDAY,Weekday.SUNDAY);
 	
-	ObservableList<Subtask> subtaskItems = FXCollections.observableArrayList();
+	private ObservableList<Subtask> subtaskItems = FXCollections.observableArrayList();
 	
-	ObservableList<String> attachmentItems = FXCollections.observableArrayList();
+	private ObservableList<String> attachmentItems = FXCollections.observableArrayList();
+	
+	private int taskNumber;
 		
 	@FXML
 	private TextField taskDescriptionField;
@@ -95,6 +97,8 @@ public class CreateNewTaskController2 implements Initializable{
 	private TableColumn<Subtask, Boolean> doneCheckBoxColumn;
 	@FXML
 	private Button addTaskButton;
+	@FXML
+	private Button editTaskButton;
 	@FXML
 	private Button backButton;
 	
@@ -184,6 +188,8 @@ public class CreateNewTaskController2 implements Initializable{
 			property.addListener((observable, oldValue, newValue) -> cellValue.setDone(newValue));
 			return property;
 		});
+		
+		editTaskButton.setVisible(false);
 	}
 
 	//Ensures that it is not possible to select monthly and weekly at the same time
@@ -239,37 +245,57 @@ public class CreateNewTaskController2 implements Initializable{
 	}
 	
 	
-	//This Method adds a new Task
-	@FXML
-	public void addTask(ActionEvent event) throws IOException {
-		
-		Task taskNew = null;
+	private boolean checkEntries() {
 		
 		if(taskDescriptionField.getText().isEmpty()) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
-			Parent root = loader.load();
-			InfoWindowController controller = loader.<InfoWindowController>getController();
-			controller.setInfoText("Task Description must be specified!");
-			
-			Stage newstage = new Stage();
-			newstage.setTitle("Info");
-			newstage.setScene(new Scene(root));
-			newstage.showAndWait();
-			return;
+			Parent root;
+			try {
+				root = loader.load();
+				InfoWindowController controller = loader.<InfoWindowController>getController();
+				controller.setInfoText("Task Description must be specified!");
+				
+				Stage newstage = new Stage();
+				newstage.setTitle("Info");
+				newstage.setScene(new Scene(root));
+				newstage.showAndWait();
+				return false;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		if(dueDateField.getValue() == null) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
-			Parent root = loader.load();
-			InfoWindowController controller = loader.<InfoWindowController>getController();
-			controller.setInfoText("Due date must be specified!");
-			
-			Stage newstage = new Stage();
-			newstage.setTitle("Info");
-			newstage.setScene(new Scene(root));
-			newstage.showAndWait();
+			Parent root;
+			try {
+				root = loader.load();
+				InfoWindowController controller = loader.<InfoWindowController>getController();
+				controller.setInfoText("Due date must be specified!");
+				
+				Stage newstage = new Stage();
+				newstage.setTitle("Info");
+				newstage.setScene(new Scene(root));
+				newstage.showAndWait();
+				return false;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+		return true;
+	}
+	
+	
+	//This Method adds a new Task
+	@FXML
+	public void addTask(ActionEvent event) throws IOException {
+		
+		if(!checkEntries()) {
 			return;
 		}
+		Task taskNew = null;
 		
 		//Set selected Contributors
 		ObservableList<String> newCon = contributorList.getSelectionModel().getSelectedItems();
@@ -403,4 +429,95 @@ public class CreateNewTaskController2 implements Initializable{
 		windowStage.show();
 	}
 	
+	@FXML
+	public void initializeTask(Task t) {
+		
+		taskNumber = t.getTaskNumber();
+	
+		taskDescriptionField.setText(t.getTaskDescription());
+		detailedTaskDescriptionField.setText(t.getDetailedTaskDescription());
+		dueDateField.setValue(t.getDueDate());
+		recurrentBox.setSelected(t.isRecurrent());
+		monthlyBox.setSelected(t.isMonthly());
+		weeklyBox.setSelected(t.isWeekly());
+		weekday.getSelectionModel().select(t.getWeekday());
+		if(t.getMonthday() != 0) {
+			monthday.setValue(t.getMonthday());
+		}
+		
+		timesOfRepititionsField.setText(""+t.getNumberOfRepetitions()+"");
+		repetitionDateField.setValue(t.getRepetitionDate());
+		
+		//Initialize AttachmentListView
+		attachmentItems.setAll(t.getAttachments());
+	
+		
+		ObservableList<Contributor> conList = t.getContributorsList();
+		for (Contributor c:conList) {
+			contributorList.getSelectionModel().select(c.getPerson());
+		}
+		
+		
+		ObservableList<Category> catList = t.getCategoriesList();
+		for (Category c:catList) {
+			categoryList.getSelectionModel().select(c.getCategory());
+		}
+		
+		//Initialize SubtasksListView
+		subtaskItems = t.getSubtasks();
+		subtaskView.setItems(subtaskItems);
+		
+		addTaskButton.setVisible(false);
+		editTaskButton.setVisible(true);
+	}
+	
+	@FXML
+	private void editTask(ActionEvent event) throws IOException {
+		
+		if(!checkEntries()) {
+			return;
+		}
+		
+		//Set selected Contributors
+		ObservableList<String> newCon = contributorList.getSelectionModel().getSelectedItems();
+		ObservableList<Contributor> newConList = FXCollections.observableArrayList();
+		
+		for(String s:newCon) {
+			newConList.add(new Contributor(s));
+		}
+				
+		ObservableList<String> newCat = categoryList.getSelectionModel().getSelectedItems();
+		ObservableList<Category> newCatList = FXCollections.observableArrayList();
+
+		for(String s:newCat) {
+			newCatList.add(new Category(s));
+		}
+		
+		int times = 0;
+		if(!timesOfRepititionsField.getText().isEmpty()) {
+			times = Integer.parseInt(timesOfRepititionsField.getText());
+		}
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		Parent root = loader.load();
+		MainWindowController controller = loader.<MainWindowController>getController();
+		
+		if(recurrentBox.isSelected()) {
+			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
+			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
+			}else {
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
+			}
+		}else {
+			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
+		}
+		
+		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		Scene scene = new Scene(root);//parent
+		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		windowStage.setScene(scene);
+		windowStage.show();
+	}
 }

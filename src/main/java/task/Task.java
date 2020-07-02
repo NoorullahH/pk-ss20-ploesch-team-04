@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
-
 import category.Category;
 import contributor.Contributor;
 import weekday.Weekday;
@@ -64,7 +63,6 @@ public class Task {
 		this.weekly = false;
 		this.monthly = false;
 		this.creationDate = LocalDate.now();
-		
 	}
 	
 	/**
@@ -97,7 +95,6 @@ public class Task {
 		this.numberOfRepetitions = numberOfRepetitions;
 		this.repetitionDate = repetitionDate;
 		this.creationDate = LocalDate.now(); //ÄNDERN
-		
 	}
 	
 	/**
@@ -494,4 +491,5 @@ public class Task {
 	public void setRepetitionDate(LocalDate repetitionDate) {
 		this.repetitionDate = repetitionDate;
 	}
+
 }

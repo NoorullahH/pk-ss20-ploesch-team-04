@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.CreateNewTaskController2">
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.TaskController">
    <children>
       <Label layoutX="424.0" layoutY="40.0" text="Add new Task" textFill="WHITE">
          <font>
@@ -142,5 +142,10 @@
          </font>
       </Label>
       <Line endX="400.0" layoutX="505.0" layoutY="94.0" startX="-400.0" stroke="WHITE" strokeWidth="3.0" />
+      <Button fx:id="editTaskButton" layoutX="712.0" layoutY="728.0" mnemonicParsing="false" onAction="#editTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Edit Task" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -59,7 +59,8 @@ public class Taskmanager {
      * @return list of the tasks
      */
 	public ObservableList<Task> getTasks() {
-		return tasks;
+		ObservableList<Task> newTasks = tasks;
+		return newTasks;
 	}
 	
 	/**
@@ -417,8 +418,11 @@ public class Taskmanager {
     		NodeList nodeList = doc.getElementsByTagName("Task");
     		//now XML is loaded as Document in memory, lets convert it to Object List
     		for (int i = 0; i < nodeList.getLength(); i++) {
-    			tasks.add(getTask(nodeList.item(i)));
     			size++;
+    			Task t = getTask(nodeList.item(i));
+    			t.setTaskNumber(size);
+    			tasks.add(t);
+    			System.out.println("TaskNumber Import: "+t.getTaskNumber());
     		}
     		
     		Categorymanager catManager = Categorymanager.getInstance();

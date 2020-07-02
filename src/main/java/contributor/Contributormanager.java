@@ -87,7 +87,8 @@ public class Contributormanager {
      * @return list of the contributors
      */
 	public ObservableList<Contributor> getContributors() {
-		return contributors;
+		ObservableList<Contributor> newContributors = contributors;
+		return newContributors;
 	}
 	
 	/**

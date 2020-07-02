@@ -88,7 +88,8 @@ public class Categorymanager {
      * @return list of the categories
      */
 	public ObservableList<Category> getCategories() {
-		return categories;
+		ObservableList<Category> newCategories = categories;
+		return newCategories;
 	}
 	
 	/**
