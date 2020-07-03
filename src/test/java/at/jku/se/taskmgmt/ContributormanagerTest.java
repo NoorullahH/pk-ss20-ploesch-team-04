@@ -31,7 +31,7 @@ private static Contributormanager cm;
      * these methods must return all false because the list of contributors is not initialized
      */
 	@Test
-	public void emptyContributormanager() {
+	public void testEmptyContributormanager() {
 		cm = Contributormanager.getInstance();
 		cm.setContributorsNull();
 		assertFalse(cm.addContributor("Chris"));
@@ -44,7 +44,7 @@ private static Contributormanager cm;
      * checks if the contributor name is added to the Contributormanager
      */
 	@Test
-	public void addContributor() {
+	public void testAddContributor() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addContributor("Chris"));
@@ -57,7 +57,7 @@ private static Contributormanager cm;
      * contributors must be unique, it is checked if the contributor already exists
      */
 	@Test
-	public void addContributorTwice() {
+	public void testAddContributorTwice() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addContributor("Chris"));
@@ -71,7 +71,7 @@ private static Contributormanager cm;
      * checks it the Contributormanager has a single instance
      */
 	@Test
-	public void checkContributormanagerInstance() {
+	public void testContributormanagerInstance() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addContributor("Chris"));
@@ -85,7 +85,7 @@ private static Contributormanager cm;
      * checks if the contributor name is removed from the Contributormanager
      */
 	@Test
-	public void removeContributor() {
+	public void testRemoveContributor() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addContributor("Chris"));
@@ -99,7 +99,7 @@ private static Contributormanager cm;
      * contributor which does not exist, can not be removed
      */
 	@Test
-	public void removeContributorTwice() {
+	public void testRemoveContributorTwice() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addContributor("Chris"));
@@ -112,7 +112,7 @@ private static Contributormanager cm;
      * Test of getContributors method, of class Contributormanager
      */
 	@Test
-	public void getContributors() {
+	public void testGetContributors() {
 		cm = Contributormanager.getInstance();
 		assertTrue(cm.addContributor("Chris"));
 		assertTrue(cm.addContributor("Anna"));

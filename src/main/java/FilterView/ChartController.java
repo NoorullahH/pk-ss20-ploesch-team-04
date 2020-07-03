@@ -12,7 +12,7 @@ import weekday.Months;
 
 public class ChartController implements Initializable{
 	
-	ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.Januar,Months.Februar,Months.März,Months.April);
+	private ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.JANUAR,Months.FEBRUAR,Months.MÄRZ,Months.APRIL);
 	
 //	ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);

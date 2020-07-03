@@ -5,6 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,6 +40,8 @@ public class Taskmanager {
 	private ObservableList<Task> tasks;
 	private static int size;
 	
+	private static final Logger LOGGER = Logger.getLogger(Taskmanager.class.getName());
+	
 	/**
      * this method returns the single instance of the Taskmanager
      * @return the single instance of the Taskmanager
@@ -59,8 +65,7 @@ public class Taskmanager {
      * @return list of the tasks
      */
 	public ObservableList<Task> getTasks() {
-		ObservableList<Task> newTasks = tasks;
-		return newTasks;
+		return tasks;
 	}
 	
 	/**
@@ -288,6 +293,7 @@ public class Taskmanager {
 				}
 			}
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             Transformer transformer = transformerFactory.newTransformer();
             //for pretty print
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -303,7 +309,7 @@ public class Taskmanager {
             System.out.println("DONE");
 
         } catch (Exception e) {
-            e.printStackTrace();
+        	LOGGER.log(Level.SEVERE, "Exception occured (Save To XML)", e);
         }
     }
 	
@@ -461,7 +467,7 @@ public class Taskmanager {
     			}	
     		}
     	} catch (SAXException | ParserConfigurationException | IOException e1) {
-    		e1.printStackTrace();
+    		LOGGER.log(Level.SEVERE, "Exception occured (read XML)", e1);
     	}
     }
 
@@ -614,11 +620,9 @@ public class Taskmanager {
     }
     
     
-public void saveToCsv(File fileName) throws IOException{		
+    public void saveToCsv(File fileName) throws IOException{		
 		
-		try {
-
-			FileWriter csvWriter = new FileWriter(fileName);
+		try (FileWriter csvWriter = new FileWriter(fileName)){
 			//Headers of Csv file "," is use to make new column
 			csvWriter.append("Task No");
 			csvWriter.append(";");
@@ -660,7 +664,7 @@ public void saveToCsv(File fileName) throws IOException{
             System.out.println("DONE");
 
         } catch (Exception e) {
-            e.printStackTrace();
+        	LOGGER.log(Level.SEVERE, "Exception occured (Save To CSV)", e);
         }
     }
     

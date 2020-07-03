@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,8 +6,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.dropbox.core.DbxException;
-import com.dropbox.core.v2.files.UploadErrorException;
 
 import javafx.stage.FileChooser;
 import java.util.Comparator;
@@ -40,7 +42,7 @@ import weekday.Weekday;
 
 public class MainWindowController implements Initializable {
 	
-	Taskmanager taskList;
+	protected Taskmanager taskList;
 
 	@FXML
 	private TableView<Task> taskView;
@@ -79,6 +81,8 @@ public class MainWindowController implements Initializable {
 	//dino
 	@FXML
 	private Button filterTask;
+	
+	private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
 
 	//this method adds a new Task to the List
 	public void setData(Task t) {
@@ -100,14 +104,6 @@ public class MainWindowController implements Initializable {
 		attachmentsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<String>>("attachments"));
 		
 		addDeleteButtonToTable();
-		
-		descriptionColumn.setStyle("-fx-font-size: 12 ;");
-		detailedDescriptionColumn.setStyle("-fx-font-size: 12 ;");
-		contributorsColumn.setStyle("-fx-font-size: 12 ;");
-		categoriesColumn.setStyle("-fx-font-size: 12 ;");
-		dueDateColumn.setStyle("-fx-font-size: 12 ;");
-		attachmentsColumn.setStyle("-fx-font-size: 12 ;");
-		doneCheckBoxColumn.setStyle("-fx-font-size: 12 ;");
 		
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
@@ -353,8 +349,7 @@ public class MainWindowController implements Initializable {
 				try {
 					taskList.saveToCsv(file);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					LOGGER.log(Level.SEVERE, "Exception occured (Save To CSV)", e);
 				}
 			
 		}
@@ -370,8 +365,9 @@ public class MainWindowController implements Initializable {
 		windowStage.setScene(scene);
 		windowStage.show();
 	}
+	
 	@FXML
-	private void dropboxUpload (ActionEvent event) throws IOException, UploadErrorException, DbxException {
+	private void dropboxUpload (ActionEvent event) throws IOException, DbxException {
 		DropboxApi dropboxuploader= new DropboxApi();
 		dropboxuploader.uploadFile("tasks.xml");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
@@ -386,7 +382,7 @@ public class MainWindowController implements Initializable {
 	}
 	
 	@FXML
-	private void importDropboxWriter (ActionEvent event) throws IOException, UploadErrorException, DbxException {
+	private void importDropboxWriter (ActionEvent event) throws IOException, DbxException {
 
 		DropboxApi dropboxdownloader= new DropboxApi();
 		dropboxdownloader.downloadFile("tasks.xml");

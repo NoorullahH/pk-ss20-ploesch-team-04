@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -29,18 +31,18 @@ import weekday.Months;
 
 public class ChartBuilder extends Application {
 
-	final static String January = "Januar";
-	final static String February = "Februar";
-	final static String March = "März";
-	final static String April = "April";
-	final static String May = "Mai";
-	final static String June = "Juni";
-	final static String July = "Juli";
-	final static String August = "August";
-	final static String September = "September";
-	final static String October = "Oktober";
-	final static String November = "November";
-	final static String December = "Dezember";
+	private static final String january = "Januar";
+	private static final String february = "Februar";
+	private static final String march = "März";
+	private static final String april = "April";
+	private static final String may = "Mai";
+	private static final String june = "Juni";
+	private static final String july = "Juli";
+	private static final String august = "August";
+	private static final String september = "September";
+	private static final String october = "Oktober";
+	private static final String november = "November";
+	private static final String december = "Dezember";
 	
 //	final static String January = "January";
 //	final static String February = "February";
@@ -56,38 +58,41 @@ public class ChartBuilder extends Application {
 //	final static String December = "December";
 
 
-	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.Januar, Months.Februar, Months.März,
-			Months.April, Months.Mai, Months.Juni, Months.Juli, Months.August, Months.September, Months.Oktober, Months.November, Months.Dezember);
+	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUAR, Months.FEBRUAR, Months.MÄRZ,
+			Months.APRIL, Months.MAI, Months.JUNI, Months.JULI, Months.AUGUST, Months.SEPTEMBER, Months.OKTOBER, Months.NOVEMBER, Months.DEZEMBER);
 	
 //	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
 
-    FilteredList<Task> filteredData;
-    ObservableList<Task> toFilterTasks;
-    Taskmanager taskList;
-    ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
-    Months month;
-    String filterStartDate = "";
-    String filterEndDate = "";
+    private FilteredList<Task> filteredData;
+    private ObservableList<Task> toFilterTasks;
+    private Taskmanager taskList;
+    private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
+    private Months month;
+    private String filterStartDate = "";
+    private String filterEndDate = "";
+    
+    private static final Logger LOGGER = Logger.getLogger(ChartBuilder.class.getName());
 
-	 @FXML
+	@FXML
 	private TableView<Task> taskView;
-	FilterController filterC = new FilterController();
-	Task taskChart = new Task();
+//	private FilterController filter = new FilterController();
+//	private Task taskChart = new Task();
 
-	final CategoryAxis xAxis = new CategoryAxis();
-	final NumberAxis yAxis = new NumberAxis();
-	final StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
-	final XYChart.Series<String, Number> stack1 = new XYChart.Series<String, Number>();
-	final XYChart.Series<String, Number> stack2 = new XYChart.Series<String, Number>();
-	int openTaskCount = 0;
-	int closeTaskCount = 0;
-	String toogleGroupValue = "";
+	private final CategoryAxis xAxis = new CategoryAxis();
+	private final NumberAxis yAxis = new NumberAxis();
+	private final StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
+	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<String, Number>();
+	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<String, Number>();
+	private int openTaskCount = 0;
+	private int closeTaskCount = 0;
+	private String toogleGroupValue = "";
 	
-	List<String> lstFilteredMonth = new ArrayList<String>();
+	private List<String> lstFilteredMonth = new ArrayList<String>();
+	
 	public ChartBuilder(Months month, FilteredList<Task> filteredData, String startDate, String endDate, String toogleGroupValue) {
 		this.month = month;
-		this.filteredData = filteredData;
+		this.filteredData = new FilteredList<Task>(filteredData);
 		this.filterStartDate = startDate;
 		this.filterEndDate = endDate;
 		this.toogleGroupValue = toogleGroupValue;
@@ -122,7 +127,7 @@ public class ChartBuilder extends Application {
 	        		finishCalendar.setTime(formater.parse(date2));
 	        	}
 	        } catch (ParseException e) {
-	            e.printStackTrace();
+	        	LOGGER.log(Level.SEVERE, "Exception occured", e);
 	        }
 	        if(date1 != null && !date1.equals("") && date2 != null && !date2.equals("")) {
 		        while (beginCalendar.before(finishCalendar)  || beginCalendar.equals(finishCalendar)) {
@@ -152,7 +157,7 @@ public class ChartBuilder extends Application {
 	        
 	        
 		}catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured (Filter Month List)", e);
 		}
 		
 
@@ -174,8 +179,8 @@ public class ChartBuilder extends Application {
 		}
 		
 		xAxis.setLabel("Months");
-		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(January, February, March, April,
-				May, June, July, August, September, October, November, December)));
+		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(january, february, march, april,
+				may, june, july, august, september, october, november, december)));
 		
 		yAxis.setLabel("Value");
 		stack1.setName("Open Tasks");
@@ -264,7 +269,7 @@ public class ChartBuilder extends Application {
 	}
 	
 	public void initdata(FilteredList<Task> data) {
-		this.filteredData = data;
+		this.filteredData = new FilteredList<Task>(data);
 	}
 	
 	public void getOpentaskCount(String month) {
@@ -406,8 +411,8 @@ public class ChartBuilder extends Application {
 		}
 		
 		xAxis.setLabel("Months");
-		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(January, February, March, April,
-				May, June, July, August, September, October, November, December)));
+		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(january, february, march, april,
+				may, june, july, august, september, october, november, december)));
 		
 		yAxis.setLabel("Value");
 		stack1.setName("Open Tasks");

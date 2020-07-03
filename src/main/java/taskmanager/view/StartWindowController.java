@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,13 +14,13 @@ import javafx.stage.Stage;
 
 public class StartWindowController {
 	
-	private boolean fileChosen = false;
+	private boolean fileChosen;
 
 	@FXML
 	private void logIn(ActionEvent event) throws IOException {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-		Parent root = loader.load();
+		loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
 		//if no file was selected
@@ -48,7 +48,7 @@ public class StartWindowController {
 		fileChooser.getExtensionFilters().add(extFilter);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-		Parent root = loader.load();
+		loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
 		File file = fileChooser.showSaveDialog(window);

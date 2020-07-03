@@ -32,31 +32,31 @@ import weekday.Months;
 
 public class WeekChartBuilder extends Application {
 
-    FilteredList<Task> filteredData;
-    ObservableList<Task> toFilterTasks;
-    Taskmanager taskList;
-    ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
-    Months month;
-    String filterStartDate = "";
-    String filterEndDate = "";
+    private FilteredList<Task> filteredData;
+    private ObservableList<Task> toFilterTasks;
+    private Taskmanager taskList;
+    private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
+    private Months month;
+    private String filterStartDate = "";
+    private String filterEndDate = "";
 
-	 @FXML
+	@FXML
 	private TableView<Task> taskView;
 	FilterController filterC = new FilterController();
 	Task taskChart = new Task();
 
-	final CategoryAxis xAxis = new CategoryAxis();
-	final NumberAxis yAxis = new NumberAxis();
-	final StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
-	final XYChart.Series<String, Number> stack1 = new XYChart.Series<String, Number>();
-	final XYChart.Series<String, Number> stack2 = new XYChart.Series<String, Number>();
-	int openTaskCount = 0;
-	int closeTaskCount = 0;
-	String toogleGroupValue = "";
+	private final CategoryAxis xAxis = new CategoryAxis();
+	private final NumberAxis yAxis = new NumberAxis();
+	private final StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
+	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<String, Number>();
+	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<String, Number>();
+	private int openTaskCount = 0;
+	private int closeTaskCount = 0;
+	private String toogleGroupValue = "";
 	
 	//Initializing filteredData, startDate, endDate
 	public WeekChartBuilder(FilteredList<Task> filteredData, String toogleGroupValue, String startDate, String endDate) {
-		this.filteredData = filteredData;
+		this.filteredData = new FilteredList<Task>(filteredData);
 		this.filterStartDate = startDate;
 		this.filterEndDate = endDate;
 		taskList = Taskmanager.getInstance();
@@ -129,7 +129,7 @@ public class WeekChartBuilder extends Application {
 	}
 	
 	public void initdata(FilteredList<Task> data) {
-		this.filteredData = data;
+		this.filteredData = new FilteredList<Task>(data);
 	}
 	
 	public void getStartAndEndDateOfWeek(int week) {

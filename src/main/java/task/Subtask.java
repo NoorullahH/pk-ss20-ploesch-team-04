@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Subtask {
 	
-	private String subtask;
+	private String task;
 	private BooleanProperty done = new SimpleBooleanProperty(false);
 	
 	/**
@@ -13,7 +13,7 @@ public class Subtask {
      * @param subtask	the name of this Subtask
      */
 	public Subtask(String subtask) {
-		this.subtask = subtask;
+		this.task = subtask;
 		this.done.set(false);
 	}
 
@@ -22,7 +22,7 @@ public class Subtask {
      * @return the name of this Subtask
      */
 	public String getSubtask() {
-		return subtask;
+		return task;
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class Subtask {
      * @param subtask	the name of this Subtask
      */
 	public void setSubtask(String subtask) {
-		this.subtask = subtask;
+		this.task = subtask;
 	}
 	
 	/**

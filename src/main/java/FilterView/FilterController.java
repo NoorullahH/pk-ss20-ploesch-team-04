@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
@@ -45,8 +47,8 @@ import javafx.stage.Stage;
 import task.Subtask;
 import task.Task;
 import task.Taskmanager;
-import taskmanagerView.CategoryController;
-import taskmanagerView.ContributorController;
+import taskmanager.view.CategoryController;
+import taskmanager.view.ContributorController;
 import weekday.Months;
 import weekday.Weekday;
 
@@ -102,20 +104,23 @@ public class FilterController implements Initializable {
 	@FXML
 	private RadioButton no = new RadioButton();
 	@FXML
-	ToggleGroup attachment = new ToggleGroup(); // I called it right in SceneBuilder.
+	private ToggleGroup attachment = new ToggleGroup(); // I called it right in SceneBuilder.
 	@FXML
-	ToggleGroup task_done = new ToggleGroup(); // I called it right in SceneBuilder.
-	Taskmanager taskList;
-	ObservableList<Task> toFilterTasks;
-	FilteredList<Task> filteredData;
-	ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
+	private ToggleGroup task_done = new ToggleGroup(); // I called it right in SceneBuilder.
+	private Taskmanager taskList;
+	private ObservableList<Task> toFilterTasks;
+	private FilteredList<Task> filteredData;
+	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
+	
+	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
+	
 	/**
 	 * @author Noorullah
 	 */
 	@FXML
 	private ComboBox cmbMonth;
-	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.Januar, Months.Februar, Months.März,
-			Months.April, Months.Mai, Months.Juni, Months.Juli, Months.August, Months.September, Months.Oktober, Months.November, Months.Dezember);
+	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUAR, Months.FEBRUAR, Months.MÄRZ,
+			Months.APRIL, Months.MAI, Months.JUNI, Months.JULI, Months.AUGUST, Months.SEPTEMBER, Months.OKTOBER, Months.NOVEMBER, Months.DEZEMBER);
 	
 //	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
@@ -126,7 +131,6 @@ public class FilterController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 		addMonthsInCombo();
 		
@@ -153,18 +157,19 @@ public class FilterController implements Initializable {
 
 		
 		// Initialize ContributorListView
-		FXMLLoader loaderCon = new FXMLLoader(
-				getClass().getClassLoader().getResource("taskmanagerView/ContributorWindow.fxml"));
+		FXMLLoader loaderCon = new FXMLLoader(getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
+		
 		try {
 			Parent rootCon = loaderCon.load();
+			ContributorController conController = loaderCon.<ContributorController>getController();
+			contributorList.setItems(conController.getContributorList());
+			contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured (Contributors)", e);
 		}
-		ContributorController conController = loaderCon.<ContributorController>getController();
-		contributorList.setItems(conController.getContributorList());
-		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		contributorList.setStyle("-fx-font-size: 16 ;");
+		
 		/**
 		 * @author Noorullah
 		 */
@@ -172,16 +177,16 @@ public class FilterController implements Initializable {
 
 		// Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(
-				getClass().getClassLoader().getResource("taskmanagerView/CategoryWindow.fxml"));
+				getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 		try {
 			Parent rootCat = loaderCat.load();
+			CategoryController catController = loaderCat.<CategoryController>getController();
+			categoryList.setItems(catController.getCategoryList());
+			categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured (Categories)", e);
 		}
-		CategoryController catController = loaderCat.<CategoryController>getController();
-		categoryList.setItems(catController.getCategoryList());
-		categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		categoryList.setStyle("-fx-font-size: 16 ;");
 
 		taskView.setEditable(true);
@@ -401,7 +406,7 @@ public class FilterController implements Initializable {
 	 */
 	@FXML
 	private void backtoMain(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("taskmanagerView/MainWindow.fxml"));
+		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("taskmanager/view/MainWindow.fxml"));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);

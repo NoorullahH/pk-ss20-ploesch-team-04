@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import contributor.Contributor;
 import javafx.beans.value.ChangeListener;
@@ -38,6 +38,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TaskController implements Initializable{
 		
@@ -102,10 +105,11 @@ public class TaskController implements Initializable{
 	@FXML
 	private Button backButton;
 	
+	private static final Logger LOGGER = Logger.getLogger(TaskController.class.getName());
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
 		
-		//Number
 		timesOfRepititionsField.textProperty().addListener(new ChangeListener<String>() {
 		    @Override 
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -131,36 +135,30 @@ public class TaskController implements Initializable{
 		FXMLLoader loaderCon = new FXMLLoader(getClass().getResource("ContributorWindow.fxml"));
 		try {
 			Parent rootCon = loaderCon.load();
+			ContributorController conController = loaderCon.<ContributorController>getController();
+			contributorList.setItems(conController.getContributorList());
+			contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured (Contributors)", e);
 		}
-		ContributorController conController = loaderCon.<ContributorController>getController();
-		contributorList.setItems(conController.getContributorList());
-		contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		contributorList.setStyle("-fx-font-size: 16 ;");
 		
 		//Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(getClass().getResource("CategoryWindow.fxml"));
 		try {
 			Parent rootCat = loaderCat.load();
+			CategoryController catController = loaderCat.<CategoryController>getController();
+			categoryList.setItems(catController.getCategoryList());
+			categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured (Categories)", e);
 		}
-		CategoryController catController = loaderCat.<CategoryController>getController();
-		categoryList.setItems(catController.getCategoryList());
-		categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		categoryList.setStyle("-fx-font-size: 16 ;");
 	
 		//Initialize AttachmentListView
 		attachmentsList.setItems(attachmentItems);
-		attachmentsList.setStyle("-fx-font-size: 14 ;");
 		
 		//Initialize SubtasksListView
 		subtaskView.setItems(subtaskItems);
 		subtaskView.setEditable(true);
-		subtaskView.setStyle("-fx-font-size: 14 ;");
 		
 		subtaskView.setRowFactory(row -> new TableRow<Subtask>(){
 			@Override
@@ -244,49 +242,72 @@ public class TaskController implements Initializable{
 		}
 	}
 	
-	
-	private boolean checkEntries() {
-		
-		if(taskDescriptionField.getText().isEmpty()) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
-			Parent root;
-			try {
-				root = loader.load();
-				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Task Description must be specified!");
-				
-				Stage newstage = new Stage();
-				newstage.setTitle("Info");
-				newstage.setScene(new Scene(root));
-				newstage.showAndWait();
-				return false;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	//Add Attachment
+	@FXML
+	public void addAttachment(ActionEvent event) {
+		if(attachmentField.getText()!= null && attachmentField.getText().length()>8) {
+			if("https://".equals(attachmentField.getText().substring(0, 8))) {
+				attachmentItems.add(attachmentField.getText());
+				attachmentsList.setItems(attachmentItems);
+				attachmentField.setText("");
 			}
-		}
-		
-		if(dueDateField.getValue() == null) {
+		}else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 			Parent root;
 			try {
 				root = loader.load();
 				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Due date must be specified!");
+				controller.setInfoText("Invalid Attachment!");
 				
 				Stage newstage = new Stage();
 				newstage.setTitle("Info");
 				newstage.setScene(new Scene(root));
 				newstage.showAndWait();
-				return false;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-		}
-		return true;
+				LOGGER.log(Level.SEVERE, "Exception occured (Add Attachment)", e);
+			}
+		}	
 	}
 	
+	//Delete Attachment
+	@FXML 
+	public void deleteAttachment(ActionEvent event) {
+		attachmentItems.remove(attachmentsList.getSelectionModel().getSelectedItem());
+		attachmentsList.setItems(attachmentItems);
+	}
+	
+	//Add Subtask to SubtaskItems
+		@FXML
+		public void addSubtask(ActionEvent event) {
+			if(subtaskField.getText()!= null && !subtaskField.getText().isEmpty()) {
+				subtaskItems.add(new Subtask(subtaskField.getText()));
+				subtaskView.setItems(subtaskItems);
+				subtaskField.setText("");
+			}else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+				Parent root;
+				try {
+					root = loader.load();
+					InfoWindowController controller = loader.<InfoWindowController>getController();
+					controller.setInfoText("Subtask name must be specified!");
+					
+					Stage newstage = new Stage();
+					newstage.setTitle("Info");
+					newstage.setScene(new Scene(root));
+					newstage.showAndWait();
+				} catch (IOException e) {
+					LOGGER.log(Level.SEVERE, "Exception occured (Add Subtask)", e);
+				}
+			}
+			
+		}
+		
+	//Delete SubtaskItem
+	@FXML 
+	public void deleteSubtask(ActionEvent event) {
+		subtaskItems.remove(subtaskView.getSelectionModel().getSelectedItem());
+		subtaskView.setItems(subtaskItems);
+	}
 	
 	//This Method adds a new Task
 	@FXML
@@ -322,10 +343,10 @@ public class TaskController implements Initializable{
 		//wiederkehrende Task?
 		if(recurrentBox.isSelected()) {
 			//wöchentlich
-			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
+			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
 			//monatlich
-			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
+			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue())))) {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
@@ -334,7 +355,7 @@ public class TaskController implements Initializable{
 			taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
 		}
 		
-		taskNew.setCreationDate(LocalDate.of(2020, 01, 01)); //Änderen
+		taskNew.setCreationDate(LocalDate.of(2020, 1, 1)); //Änderen
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
 		Parent root = loader.load();
@@ -348,85 +369,44 @@ public class TaskController implements Initializable{
 		windowStage.show();
 	}
 	
-
-	//Add Subtask to SubtaskItems
-	@FXML
-	public void addSubtask(ActionEvent event) {
-		if(subtaskField.getText()!= null && !subtaskField.getText().isEmpty()) {
-			subtaskItems.add(new Subtask(subtaskField.getText()));
-			subtaskView.setItems(subtaskItems);
-			subtaskField.setText("");
-		}else {
+	private boolean checkEntries() {
+		
+		if(taskDescriptionField.getText().isEmpty()) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 			Parent root;
 			try {
 				root = loader.load();
 				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Subtask name must be specified!");
+				controller.setInfoText("Task Description must be specified!");
 				
 				Stage newstage = new Stage();
 				newstage.setTitle("Info");
 				newstage.setScene(new Scene(root));
 				newstage.showAndWait();
+				return false;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Exception occured (Info Screen)", e);
 			}
 		}
 		
-	}
-	
-	//Delete SubtaskItem
-	@FXML 
-	public void deleteSubtask(ActionEvent event) {
-		subtaskItems.remove(subtaskView.getSelectionModel().getSelectedItem());
-		subtaskView.setItems(subtaskItems);
-	}
-	
-	//Add Attachment
-	@FXML
-	public void addAttachment(ActionEvent event) {
-		if(attachmentField.getText()!= null && attachmentField.getText().length()>8) {
-			if(attachmentField.getText().substring(0, 8).equals("https://")) {
-				attachmentItems.add(attachmentField.getText());
-				attachmentsList.setItems(attachmentItems);
-				attachmentField.setText("");
-			}
-		}else {
+		if(dueDateField.getValue() == null) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
 			Parent root;
 			try {
 				root = loader.load();
 				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Invalid Attachment!");
+				controller.setInfoText("Due date must be specified!");
 				
 				Stage newstage = new Stage();
 				newstage.setTitle("Info");
 				newstage.setScene(new Scene(root));
 				newstage.showAndWait();
+				return false;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}	
-	}
-	
-	//Delete Attachment
-	@FXML 
-	public void deleteAttachment(ActionEvent event) {
-		attachmentItems.remove(attachmentsList.getSelectionModel().getSelectedItem());
-		attachmentsList.setItems(attachmentItems);
-	}
-		
-	//Navigate back to MainWindow
-	@FXML
-	public void backtoMain(ActionEvent event) throws IOException {
-
-		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-		Scene scene = new Scene(parent);
-		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		windowStage.setScene(scene);
-		windowStage.show();
+				LOGGER.log(Level.SEVERE, "Exception occured (Info Screen)", e);
+			}	
+		}
+		return true;
 	}
 	
 	@FXML
@@ -503,9 +483,9 @@ public class TaskController implements Initializable{
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
 		if(recurrentBox.isSelected()) {
-			if((weeklyBox.isSelected()) && (!(weekday.getValue().toString().equals("")))) {
+			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
-			}else if((monthlyBox.isSelected()) && (!(monthday.getValue().equals("")))) {
+			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue())))) {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
@@ -516,6 +496,16 @@ public class TaskController implements Initializable{
 		
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(root);//parent
+		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		windowStage.setScene(scene);
+		windowStage.show();
+	}
+	
+	//Navigate back to MainWindow
+	@FXML
+	public void backtoMain(ActionEvent event) throws IOException {
+		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
 		windowStage.show();

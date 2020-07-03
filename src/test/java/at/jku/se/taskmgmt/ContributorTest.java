@@ -13,8 +13,8 @@ public class ContributorTest {
      * checks if the person name is queried correctly
      */
 	@Test
-	public void getPersonName() {
-		assertEquals(c.getPerson(), "Chris");
+	public void testGetPersonName() {
+		assertEquals("Chris", c.getPerson());
 	}
 	
 	/**
@@ -22,9 +22,9 @@ public class ContributorTest {
      * checks if the person name is changed correctly
      */
 	@Test
-	public void setPersonName() {
+	public void testSetPersonName() {
 		c.setPerson("Anna");
-		assertEquals(c.getPerson(), "Anna");
+		assertEquals("Anna", c.getPerson());
 	}
 
 }

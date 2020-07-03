@@ -30,7 +30,7 @@ public class CategorymanagerTest {
      * checks it the Categorymanager has a single instance
      */
 	@Test
-	public void checkCategorymanagerInstance() {
+	public void testCategorymanagerInstance() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addCategory("Homework"));
@@ -44,7 +44,7 @@ public class CategorymanagerTest {
      * these methods must return all false because the list of categories is not initialized
      */
 	@Test
-	public void emptyCategorymanager() {
+	public void testEmptyCategorymanager() {
 		cm = Categorymanager.getInstance();
 		cm.setCategoriesNull();
 		assertFalse(cm.addCategory("Homework"));
@@ -57,7 +57,7 @@ public class CategorymanagerTest {
      * checks if the category name is added to the Categorymanager
      */
 	@Test
-	public void addCategory() {
+	public void testAddCategory() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addCategory("Homework"));
@@ -70,7 +70,7 @@ public class CategorymanagerTest {
      * categories must be unique, it is checked if the category already exists
      */
 	@Test
-	public void addCategoryTwice() {
+	public void testAddCategoryTwice() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addCategory("Homework"));
@@ -84,7 +84,7 @@ public class CategorymanagerTest {
      * checks if the category name is removed from the Categorymanager
      */
 	@Test
-	public void removeCategory() {
+	public void testRemoveCategory() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addCategory("Software Engineering"));
@@ -98,7 +98,7 @@ public class CategorymanagerTest {
      * category which does not exist, can not be removed
      */
 	@Test
-	public void removeCategoryTwice() {
+	public void testRemoveCategoryTwice() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.isEmpty());
 		assertTrue(cm.addCategory("Homework"));
@@ -111,7 +111,7 @@ public class CategorymanagerTest {
      * Test of getCategories method, of class Categorymanager
      */
 	@Test
-	public void getCategories() {
+	public void testGetCategories() {
 		cm = Categorymanager.getInstance();
 		assertTrue(cm.addCategory("Homework"));
 		assertTrue(cm.addCategory("Software Engineering"));

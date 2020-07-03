@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;

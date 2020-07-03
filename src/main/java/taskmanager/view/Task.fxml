@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.TaskController">
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanager.view.TaskController">
    <children>
       <Label layoutX="424.0" layoutY="40.0" text="Add new Task" textFill="WHITE">
          <font>
@@ -79,8 +79,8 @@
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <ListView fx:id="contributorList" layoutX="280.0" layoutY="200.0" prefHeight="80.0" prefWidth="236.0" />
-      <ListView fx:id="categoryList" layoutX="280.0" layoutY="378.0" prefHeight="80.0" prefWidth="236.0" />
+      <ListView fx:id="contributorList" layoutX="280.0" layoutY="200.0" prefHeight="80.0" prefWidth="236.0" style="-fx-font-size: 14;" />
+      <ListView fx:id="categoryList" layoutX="280.0" layoutY="378.0" prefHeight="80.0" prefWidth="236.0" style="-fx-font-size: 14;" />
       <Label layoutX="660.0" layoutY="435.0" text="Attachment:" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -113,7 +113,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <ListView fx:id="attachmentsList" layoutX="660.0" layoutY="481.0" prefHeight="66.0" prefWidth="248.0" />
+      <ListView fx:id="attachmentsList" layoutX="660.0" layoutY="481.0" prefHeight="66.0" prefWidth="248.0" style="-fx-font-size: 14;" />
       <Button fx:id="addAttachmentButton" layoutX="916.0" layoutY="436.0" mnemonicParsing="false" onAction="#addAttachment" prefHeight="29.0" prefWidth="126.0" text="Add Attachment">
          <font>
             <Font size="13.0" />
@@ -129,7 +129,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <TableView fx:id="subtaskView" layoutX="659.0" layoutY="616.0" prefHeight="90.0" prefWidth="250.0">
+      <TableView fx:id="subtaskView" layoutX="659.0" layoutY="616.0" prefHeight="90.0" prefWidth="250.0" style="-fx-font-size: 14;">
         <columns>
           <TableColumn fx:id="subtaskNameColumn" prefWidth="172.0" text="Subtasks" />
           <TableColumn fx:id="doneCheckBoxColumn" prefWidth="77.0" text="Done?" />

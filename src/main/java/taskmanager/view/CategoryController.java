@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,6 +9,7 @@ import category.Categorymanager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 
 public class CategoryController implements Initializable{
 	
-	Categorymanager categories;
+	private Categorymanager categories;
 	
 	@FXML
 	private TextField categoryNameField;
@@ -67,7 +68,7 @@ public class CategoryController implements Initializable{
 		String category = categoryList.getSelectionModel().getSelectedItem();
 		if(categories.removeCategory(categoryList.getSelectionModel().getSelectedItem())) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-			Parent root = loader.load();
+			loader.load();
 			MainWindowController controller = loader.<MainWindowController>getController();
 			controller.deleteCategoryFromTask(category);
 		}
@@ -75,7 +76,7 @@ public class CategoryController implements Initializable{
 	}
 	
 	@FXML
-	public void backtoMain(ActionEvent event) throws IOException {
+	public void backtoMain(Event event) throws IOException {
 
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(parent);

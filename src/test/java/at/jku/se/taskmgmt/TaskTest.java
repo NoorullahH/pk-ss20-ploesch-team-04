@@ -34,7 +34,7 @@ public class TaskTest {
      * checks if the parameters are queried correctly
      */
 	@Test
-	public void nonRecurringTask() {
+	public void testNonRecurringTask() {
 		ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));
     	con.add(new Contributor("Anna"));
@@ -48,8 +48,8 @@ public class TaskTest {
     	att.add("URL1");
     	att.add("URL2");
 		Task newOne = new Task("First Assignment", "Create a prototype", LocalDate.of(2020, 4, 23),con, cat, sub, att);
-		assertEquals(newOne.getTaskDescription(), "First Assignment");
-		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
+		assertEquals("First Assignment", newOne.getTaskDescription());
+		assertEquals("Create a prototype", newOne.getDetailedTaskDescription());
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
@@ -63,7 +63,7 @@ public class TaskTest {
      * checks if the parameters are queried correctly
      */
 	@Test
-	public void weeklyRecurringTask() {
+	public void testWeeklyRecurringTask() {
 		ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));
     	con.add(new Contributor("Anna"));
@@ -77,8 +77,8 @@ public class TaskTest {
     	att.add("URL1");
     	att.add("URL2");
 		Task newOne = new Task("First Assignment", "Create a prototype", LocalDate.of(2020, 4, 23),con, cat, sub, att, Weekday.MONDAY, 0, LocalDate.of(2020, 5, 23));		
-		assertEquals(newOne.getTaskDescription(), "First Assignment");
-		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
+		assertEquals("First Assignment", newOne.getTaskDescription());
+		assertEquals("Create a prototype", newOne.getDetailedTaskDescription());
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
@@ -87,8 +87,8 @@ public class TaskTest {
 		assertTrue(newOne.isRecurrent());
 		assertTrue(newOne.isWeekly());
 		assertFalse(newOne.isMonthly());
-		assertEquals(newOne.getWeekday(), Weekday.MONDAY);
-		assertEquals(newOne.getNumberOfRepetitions(), 0);
+		assertEquals(Weekday.MONDAY, newOne.getWeekday());
+		assertEquals(0, newOne.getNumberOfRepetitions());
 		assertEquals(newOne.getRepetitionDate(), LocalDate.of(2020, 5, 23));
 	}
 	
@@ -97,7 +97,7 @@ public class TaskTest {
      * checks if the parameters are queried correctly
      */
 	@Test
-	public void monthlyRecurringTask() {
+	public void testMonthlyRecurringTask() {
 		ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));
     	con.add(new Contributor("Anna"));
@@ -111,8 +111,8 @@ public class TaskTest {
     	att.add("URL1");
     	att.add("URL2");
 		Task newOne = new Task("First Assignment", "Create a prototype", LocalDate.of(2020, 4, 23),con, cat, sub, att, 10, 0, LocalDate.of(2020, 5, 23));		
-		assertEquals(newOne.getTaskDescription(), "First Assignment");
-		assertEquals(newOne.getDetailedTaskDescription(), "Create a prototype");
+		assertEquals("First Assignment", newOne.getTaskDescription());
+		assertEquals("Create a prototype", newOne.getDetailedTaskDescription());
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
@@ -121,8 +121,8 @@ public class TaskTest {
 		assertTrue(newOne.isRecurrent());
 		assertTrue(newOne.isMonthly());
 		assertFalse(newOne.isWeekly());
-		assertEquals(newOne.getMonthday(), 10);
-		assertEquals(newOne.getNumberOfRepetitions(), 0);
+		assertEquals(10, newOne.getMonthday());
+		assertEquals(0, newOne.getNumberOfRepetitions());
 		assertEquals(newOne.getRepetitionDate(), LocalDate.of(2020, 5, 23));
 	}
 	
@@ -131,9 +131,9 @@ public class TaskTest {
      * checks if the task Description name is queried correctly
      */
     @Test
-    public void getTaskDescroption() {
+    public void testGetTaskDescroption() {
     	t.setTaskDescription("Shopping");
-    	assertEquals(t.getTaskDescription(), "Shopping");
+    	assertEquals("Shopping", t.getTaskDescription());
     }
     
     /**
@@ -141,9 +141,9 @@ public class TaskTest {
      * checks if the detailed task Description name is queried correctly
      */
     @Test
-    public void getDetailedTaskDescription() {
+    public void testGetDetailedTaskDescription() {
     	t.setDetailedTaskDescription("Create a prototype");
-    	assertEquals(t.getDetailedTaskDescription(), "Create a prototype");
+    	assertEquals("Create a prototype", t.getDetailedTaskDescription());
     }
     
     /**
@@ -151,7 +151,7 @@ public class TaskTest {
      * checks if the due Date is queried correctly
      */
     @Test
-    public void getDueDate() {
+    public void testGetDueDate() {
     	t.setDueDate(LocalDate.of(2020, 10, 4));
     	assertEquals(t.getDueDate(), LocalDate.of(2020, 10, 4));
     }
@@ -160,7 +160,7 @@ public class TaskTest {
      * Test of getContributorsList, of class Task.
      */
     @Test
-    public void getContributorsList() {
+    public void testGetContributorsList() {
     	ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));
     	con.add(new Contributor("Anna"));
@@ -175,16 +175,16 @@ public class TaskTest {
      * Test of getContributors, of class Task.
      */
     @Test
-    public void getContributors() {
+    public void testGetContributors() {
     	ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));
     	con.add(new Contributor("Anna"));
     	con.add(new Contributor("Luke"));
     	t.setContributors(con);
-    	assertEquals(t.getContributors(),"Max,Anna,Luke");
+    	assertEquals("Max, Anna, Luke", t.getContributors());
     	ObservableList<Contributor> con2 = FXCollections.observableArrayList();
     	t.setContributors(con2);
-    	assertEquals(t.getContributors(),"");
+    	assertEquals("", t.getContributors());
     }
     
     /**
@@ -192,7 +192,7 @@ public class TaskTest {
      * checks if a Task is recurrent
      */
     @Test
-    public void isRecurrent() {
+    public void testIsRecurrent() {
     	t.setRecurrent(true);
     	assertTrue(t.isRecurrent());
     	t.setRecurrent(false);
@@ -204,7 +204,7 @@ public class TaskTest {
      * checks if a Task is repeated weekly
      */
     @Test
-    public void isWeekly() {
+    public void testIsWeekly() {
     	t.setWeekly(true);
     	assertTrue(t.isWeekly());
     	t.setWeekly(false);
@@ -215,9 +215,9 @@ public class TaskTest {
      * Test of  getWeekday, of class Task.
      */
     @Test
-    public void getWeekday() {
+    public void testGetWeekday() {
     	t.setWeekday(Weekday.MONDAY);
-    	assertEquals(t.getWeekday(), Weekday.MONDAY);
+    	assertEquals(Weekday.MONDAY, t.getWeekday());
     }
     
     /**
@@ -225,7 +225,7 @@ public class TaskTest {
      * checks if a Task is repeated monthly
      */
     @Test
-    public void isMonthly() {
+    public void testIsMonthly() {
     	t.setMonthly(true);
     	assertTrue(t.isMonthly());
     	t.setMonthly(false);
@@ -236,25 +236,25 @@ public class TaskTest {
      * Test of  getMonthday, of class Task.
      */
     @Test
-    public void getMonthday() {
+    public void testGetMonthday() {
     	t.setMonthday(10);
-    	assertEquals(t.getMonthday(), 10);
+    	assertEquals(10, t.getMonthday());
     }
     
     /**
      * Test of  getNumberOfRepetitions, of class Task.
      */
     @Test
-    public void getNumberOfRepetitions() {
+    public void testGetNumberOfRepetitions() {
     	t.setNumberOfRepetitions(5);
-    	assertEquals(t.getNumberOfRepetitions(), 5);
+    	assertEquals(5, t.getNumberOfRepetitions());
     }
     
     /**
      * Test of getCategoriesList, of class Task.
      */
     @Test
-    public void getCategoriesList() {
+    public void testGetCategoriesList() {
     	ObservableList<Category> cat = FXCollections.observableArrayList();
     	cat.add(new Category("Homework"));
     	cat.add(new Category("School"));
@@ -269,23 +269,23 @@ public class TaskTest {
      * Test of getCategories, of class Task.
      */
     @Test
-    public void getCategories() {
+    public void testGetCategories() {
     	ObservableList<Category> cat = FXCollections.observableArrayList();
     	cat.add(new Category("Homework"));
     	cat.add(new Category("School"));
     	cat.add(new Category("Household"));
     	t.setCategories(cat);
-    	assertEquals(t.getCategories(),"Homework,School,Household");
+    	assertEquals("Homework, School, Household", t.getCategories());
     	ObservableList<Category> cat2 = FXCollections.observableArrayList();
     	t.setCategories(cat2);
-    	assertEquals(t.getCategories(),"");
+    	assertEquals("", t.getCategories());
     }
 
     /**
      * Test of getSubtasks, of class Task.
      */
     @Test
-    public void getSubtasks() {
+    public void testGetSubtasks() {
     	ObservableList<Subtask> sub = FXCollections.observableArrayList();
     	sub.add(new Subtask("Define requirements"));
     	sub.add(new Subtask("Complete Task"));
@@ -300,7 +300,7 @@ public class TaskTest {
      * Test of getAttachments, of class Task.
      */
     @Test
-    public void getAttachments() {
+    public void testGetAttachments() {
     	ObservableList<String> att = FXCollections.observableArrayList();
     	att.add("URL1");
     	att.add("URL2");
@@ -316,7 +316,7 @@ public class TaskTest {
      */
     //Test of addSubtask, of class Task.
     @Test
-    public void addSubtask() {
+    public void testAddSubtask() {
     	assertFalse(t.addSubtask("Example"));
     	ObservableList<Subtask> sub = FXCollections.observableArrayList();
     	sub.add(new Subtask("Define requirements"));
@@ -331,7 +331,7 @@ public class TaskTest {
      * checks if the subtask name is removed correctly
      */
     @Test
-    public void removeSubtask() {
+    public void testRemoveSubtask() {
     	assertFalse(t.removeSubtask("Example"));
     	ObservableList<Subtask> sub = FXCollections.observableArrayList();
     	sub.add(new Subtask("Define requirements"));
@@ -347,7 +347,7 @@ public class TaskTest {
      * checks if the creation Date is queried correctly
      */
     @Test
-    public void getCreationDate() {
+    public void testGetCreationDate() {
     	t.setCreationDate(LocalDate.of(2020, 10, 4));
     	assertEquals(t.getCreationDate(), LocalDate.of(2020, 10, 4));
     }
@@ -357,7 +357,7 @@ public class TaskTest {
      * checks if the repetition Date is queried correctly
      */
     @Test
-    public void getRepetitionDate() {
+    public void testGetRepetitionDate() {
     	t.setRepetitionDate(LocalDate.of(2020, 05, 10));;
     	assertEquals(t.getRepetitionDate(), LocalDate.of(2020, 05, 10));
     }
@@ -366,18 +366,18 @@ public class TaskTest {
      * Test of getNumberOfTasks method, of class Task.
      */
     @Test
-    public void getNumberOfTasks() {
+    public void testGetNumberOfTasks() {
     	Task.setNumberOfTasks(25);
-    	assertEquals(Task.getNumberOfTasks(), 25);
+    	assertEquals(25, Task.getNumberOfTasks());
     }
     
     /**
      * Test of getTaskNumber method, of class Task.
      */
     @Test
-    public void getTaskNumber() {
+    public void testGetTaskNumber() {
     	t.setTaskNumber(30);
-    	assertEquals(t.getTaskNumber(), 30);
+    	assertEquals(30, t.getTaskNumber());
     }
     
     /**
@@ -385,7 +385,7 @@ public class TaskTest {
      * checks if the done value is changed correctly
      */
 	@Test
-	public void setDone() {
+	public void testSetDone() {
 		assertFalse(t.isDone());
 		t.setDone(true);
 		assertTrue(t.isDone());
@@ -396,7 +396,7 @@ public class TaskTest {
      * checks if the done value is returned correctly
      */
 	@Test
-	public void getDoneProperty() {
+	public void testGetDoneProperty() {
 		t.setDone(true);
 		assertTrue(t.isDone());
 		BooleanProperty b = t.getDone();

@@ -40,7 +40,7 @@ public class TaskmanagerTest {
      * checks it the Taskmanager has a single instance
      */
 	@Test
-	public void checkTaskmanagerInstance() {
+	public void testTaskmanagerInstance() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		assertTrue(tm.addTask(new Task()));
@@ -53,7 +53,7 @@ public class TaskmanagerTest {
      * these methods must return all false because the list of tasks is not initialized
      */
 	@Test
-	public void emptyTaskmanager() {
+	public void testEmptyTaskmanager() {
 		tm =Taskmanager.getInstance();
 		tm.setTasksNull();
 		assertFalse(tm.addTask(new Task()));
@@ -67,7 +67,7 @@ public class TaskmanagerTest {
      * checks if a Task is added to the Taskmanager
      */
 	@Test
-	public void addTask() {
+	public void testAddTask() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		Task newOne = new Task();
@@ -81,7 +81,7 @@ public class TaskmanagerTest {
      * checks if a Task is removed from the  Taskmanager
      */
 	@Test
-	public void removeTask() {
+	public void testRemoveTask() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		Task newOne = new Task();
@@ -102,7 +102,7 @@ public class TaskmanagerTest {
      * checks if a Category is removed from the tasks of the Taskmanager
      */
 	@Test
-	public void removeCategoryFromTasks() {
+	public void testRemoveCategoryFromTasks() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -137,7 +137,7 @@ public class TaskmanagerTest {
      * check if a weekly Task is added correctly
      */
 	@Test
-	public void handleRecurrentWeeklyTaskWithRepetitionDate() {
+	public void testHandleRecurrentWeeklyTaskWithRepetitionDate() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -170,7 +170,7 @@ public class TaskmanagerTest {
      * check if a weekly Task is added correctly
      */
 	@Test
-	public void handleRecurrentWeeklyTaskWithNumberOfRepetitions() {
+	public void testHandleRecurrentWeeklyTaskWithNumberOfRepetitions() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -202,7 +202,7 @@ public class TaskmanagerTest {
      * check if a monthly Task is added correctly
      */
 	@Test
-	public void handleRecurrentMonthlyTaskWithRepetitionDate() {
+	public void testHandleRecurrentMonthlyTaskWithRepetitionDate() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -272,7 +272,7 @@ public class TaskmanagerTest {
      * check if a monthly Task is added correctly
      */
 	@Test
-	public void handleRecurrentMonthlyTaskWithNumberOfRepetitions() {
+	public void testHandleRecurrentMonthlyTaskWithNumberOfRepetitions() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -304,7 +304,7 @@ public class TaskmanagerTest {
      * check if a non-recurring Task is added correctly
      */
 	@Test
-	public void handleNonRecurringTask() {
+	public void testHandleNonRecurringTask() {
 		tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		
@@ -333,8 +333,8 @@ public class TaskmanagerTest {
      * Test of getSize method, of class Taskmanager.
      */
     @Test
-    public void getSize() {
+    public void testGetSize() {
     	Taskmanager.setSize(50);
-    	assertEquals(Taskmanager.getSize(), 50);
+    	assertEquals(50, Taskmanager.getSize());
     }
 }

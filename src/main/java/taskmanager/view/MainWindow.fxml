@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanagerView.MainWindowController">
+<AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanager.view.MainWindowController">
    <children>
       <VBox layoutY="80.0" prefHeight="722.0" prefWidth="163.0" style="-fx-background-color: white;">
          <children>
@@ -102,13 +102,13 @@
       </Label>
       <TableView fx:id="taskView" layoutX="175.0" layoutY="80.0" prefHeight="722.0" prefWidth="864.0">
         <columns>
-            <TableColumn fx:id="descriptionColumn" prefWidth="115.0" text="Description" />
-            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="115.0" text="Detail description" />
-            <TableColumn fx:id="dueDateColumn" prefWidth="115.0" sortType="DESCENDING" text="Due date" />
-            <TableColumn fx:id="contributorsColumn" prefWidth="115.0" text="Contributors" />
-            <TableColumn fx:id="categoriesColumn" prefWidth="115.0" text="Categories" />
-            <TableColumn fx:id="attachmentsColumn" prefWidth="115.0" text="Attachments" />
-            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="85.0" text="Done?" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="115.0" style="-fx-font-size: 12;" text="Description" />
+            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="115.0" style="-fx-font-size: 12;" text="Detail description" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="115.0" sortType="DESCENDING" style="-fx-font-size: 12;" text="Due date" />
+            <TableColumn fx:id="contributorsColumn" prefWidth="115.0" style="-fx-font-size: 12;" text="Contributors" />
+            <TableColumn fx:id="categoriesColumn" prefWidth="115.0" style="-fx-font-size: 12;" text="Categories" />
+            <TableColumn fx:id="attachmentsColumn" prefWidth="115.0" style="-fx-font-size: 12;" text="Attachments" />
+            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="85.0" style="-fx-font-size: 12;" text="Done?" />
             <TableColumn fx:id="deleteButton" prefWidth="85.0" style="-fx-alignment: CENTER;" text="Delete" />
         </columns>
       </TableView>

@@ -17,8 +17,8 @@ public class SubtaskTest {
      * checks if the subtask name is queried correctly
      */
 	@Test
-	public void getSubtaskName() {
-		assertEquals(s.getSubtask(), "Homework");
+	public void testGetSubtaskName() {
+		assertEquals("Homework", s.getSubtask());
 	}
 	
 	/**
@@ -26,9 +26,9 @@ public class SubtaskTest {
      * checks if the subtask name is changed correctly
      */
 	@Test
-	public void setSubtaskName() {
+	public void testSetSubtaskName() {
 		s.setSubtask("NewHomework");
-		assertEquals(s.getSubtask(), "NewHomework");
+		assertEquals("NewHomework", s.getSubtask());
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class SubtaskTest {
      * checks if the done value is changed correctly
      */
 	@Test
-	public void setDone() {
+	public void testSetDone() {
 		assertFalse(s.isDone());
 		s.setDone(true);
 		assertTrue(s.isDone());
@@ -47,7 +47,7 @@ public class SubtaskTest {
      * checks if the done value is returned correctly
      */
 	@Test
-	public void getDoneProperty() {
+	public void testGetDoneProperty() {
 		s.setDone(true);
 		assertTrue(s.isDone());
 		BooleanProperty b = s.getDone();

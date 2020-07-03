@@ -1,4 +1,4 @@
-package taskmanagerView;
+package taskmanager.view;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,6 +9,7 @@ import contributor.Contributormanager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 
 public class ContributorController implements Initializable{
 
-	Contributormanager contributors;
+	private Contributormanager contributors;
 	
 	@FXML
 	private TextField contributorNameField;
@@ -67,8 +68,7 @@ public class ContributorController implements Initializable{
 	}
 	
 	@FXML
-	public void backtoMain(ActionEvent event) throws IOException {
-
+	public void backtoMain(Event event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -15,8 +15,8 @@ public class CategoryTest {
      * checks if the category name is queried correctly
      */
 	@Test
-	public void getCategoryName() {
-		assertEquals(c.getCategory(), "Homework");
+	public void testGetCategoryName() {
+		assertEquals("Homework", c.getCategory());
 	}
 	
 	/**
@@ -24,9 +24,9 @@ public class CategoryTest {
      * checks if the category name is changed correctly
      */
 	@Test
-	public void setCategoryName() {
+	public void testSetCategoryName() {
 		c.setCategory("NewHomework");
-		assertEquals(c.getCategory(), "NewHomework");
+		assertEquals("NewHomework", c.getCategory());
 	}
 	
 }

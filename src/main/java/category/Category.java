@@ -2,14 +2,14 @@ package category;
 
 public class Category {
 	
-	private String category;
+	private String name;
 	
 	/**
      * constructor which initializes this Category
      * @param category	the name of this Category
      */
 	public Category(String category) {
-		this.category = category;
+		this.name = category;
 	}
 	
 	/**
@@ -17,7 +17,7 @@ public class Category {
      * @return the name of this Category
      */
 	public String getCategory() {
-		return category;
+		return name;
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class Category {
      * @param category	the name of this Category
      */
 	public void setCategory(String category) {
-		this.category = category;
+		this.name = category;
 	}
 
 	/**
@@ -33,30 +33,22 @@ public class Category {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		   if (obj == null) {
-	            return false;
-	        }
-		   if (this.getClass() != obj.getClass())
-			    return false;
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
 
-	        if (!Category.class.isAssignableFrom(obj.getClass())) {
-	            return false;
-	        }
-
-	         Category other = (Category) obj;
-	        if ((this.category == null) ? (other.category != null) : !this.category.equals(other.category)) {
-	            return false;
-	        }
-
-	        return true;	
-	        }
+	    Category other = (Category) obj;
+	    if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+	    	return false;
+	    }
+	    return true;	
+	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
-	}	
-	
-		
+	}		
 }

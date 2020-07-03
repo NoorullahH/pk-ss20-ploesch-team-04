@@ -3,6 +3,7 @@ package task;
 import java.time.LocalDate;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import category.Category;
 import contributor.Contributor;
@@ -55,10 +56,10 @@ public class Task {
 		this.taskDescription = taskDes;
 		this.detailedTaskDescription = detailedTaskDes;
 		this.dueDate = dueDate;
-		this.contributors = contributors;
-		this.categories = categories;
-		this.subtasks = subtasks;
-		this.attachments = attachments;
+		this.contributors = FXCollections.observableList(contributors);
+		this.categories = FXCollections.observableList(categories);
+		this.subtasks = FXCollections.observableList(subtasks);
+		this.attachments = FXCollections.observableList(attachments);
 		this.recurrent = false;
 		this.weekly = false;
 		this.monthly = false;
@@ -84,10 +85,10 @@ public class Task {
 		this.taskDescription = taskDes;
 		this.detailedTaskDescription = detailedTaskDes;
 		this.dueDate = dueDate;
-		this.contributors = contributors;
-		this.categories = categories;
-		this.subtasks = subtasks;
-		this.attachments = attachments;
+		this.contributors = FXCollections.observableList(contributors);
+		this.categories = FXCollections.observableList(categories);
+		this.subtasks = FXCollections.observableList(subtasks);
+		this.attachments = FXCollections.observableList(attachments);
 		this.recurrent = true;
 		this.weekly = true;
 		this.monthly = false;
@@ -116,10 +117,10 @@ public class Task {
 		this.taskDescription = taskDes;
 		this.detailedTaskDescription = detailedTaskDes;
 		this.dueDate = dueDate;
-		this.contributors = contributors;
-		this.categories = categories;
-		this.subtasks = subtasks;
-		this.attachments = attachments;
+		this.contributors = FXCollections.observableList(contributors);
+		this.categories = FXCollections.observableList(categories);
+		this.subtasks = FXCollections.observableList(subtasks);
+		this.attachments = FXCollections.observableList(attachments);
 		this.recurrent = true;
 		this.monthly = true;
 		this.weekly = false;
@@ -238,7 +239,7 @@ public class Task {
      * @return list of contributors of this Task
      */
 	public ObservableList<Contributor> getContributorsList() {
-		return contributors;
+		return FXCollections.observableList(this.contributors);
 	}
 	
 	/**
@@ -246,14 +247,14 @@ public class Task {
      * @return String of contributors of this Task
      */
 	public String getContributors() {
-		String res = "";
+		StringBuilder str = new StringBuilder();
 		for(Contributor c: contributors) {
-			res = res + c.getPerson() +",";
+			str.append(c.getPerson()+", ");
 		}
-		if(!res.contentEquals("")) {
-			res = res.substring(0, res.length()-1);
+		if(!str.toString().isEmpty()){
+			str.delete(str.length()-2, str.length());
 		}
-		return res;
+		return str.toString();
 	}
 	
 	/**
@@ -261,7 +262,7 @@ public class Task {
      * @param contributors	list of contributors assigned to the Task
      */
 	public void setContributors(ObservableList<Contributor> contributors) {
-		this.contributors = contributors;
+		this.contributors = FXCollections.observableList(contributors);
 	}
 	
 	/**
@@ -365,7 +366,7 @@ public class Task {
      * @return list of categories of this Task
      */
 	public ObservableList<Category> getCategoriesList() {
-		return categories;
+		return FXCollections.observableList(this.categories);
 	}
 	
 	/**
@@ -373,14 +374,14 @@ public class Task {
      * @return String of categories of this Task
      */
 	public String getCategories() {
-		String res = "";
+		StringBuilder str = new StringBuilder();
 		for(Category c: categories) {
-			res = res + c.getCategory() +",";
+			str.append(c.getCategory()+", ");
 		}
-		if(!res.contentEquals("")) {
-			res = res.substring(0, res.length()-1);
+		if(!str.toString().isEmpty()){
+			str.delete(str.length()-2, str.length());
 		}
-		return res;
+		return str.toString();
 	}
 	
 	/**
@@ -388,7 +389,7 @@ public class Task {
      * @param categories	list of categories assigned to the Task
      */
 	public void setCategories(ObservableList<Category> categories) {
-		this.categories = categories;
+		this.categories = FXCollections.observableList(categories);
 	}
 	
 	/**
@@ -396,7 +397,7 @@ public class Task {
      * @return list of subtasks of this Task
      */
 	public ObservableList<Subtask> getSubtasks() {
-		return subtasks;
+		return FXCollections.observableList(this.subtasks);
 	}
 	
 	/**
@@ -404,7 +405,7 @@ public class Task {
      * @param subtasks	list of subtasks assigned to the Task
      */
 	public void setSubtasks(ObservableList<Subtask> subtasks) {
-		this.subtasks = subtasks;
+		this.subtasks = FXCollections.observableList(subtasks);
 	}
 	
 	/**
@@ -412,7 +413,7 @@ public class Task {
      * @return list of attachments of this Task
      */
 	public ObservableList<String> getAttachments() {
-		return attachments;
+		return FXCollections.observableList(this.attachments);
 	}
 	
 	/**
@@ -420,7 +421,7 @@ public class Task {
      * @param attachments	list of attachments assigned to the Task
      */
 	public void setAttachments(ObservableList<String> attachments) {
-		this.attachments = attachments;
+		this.attachments = FXCollections.observableList(attachments);
 	}
 		
 	/**
