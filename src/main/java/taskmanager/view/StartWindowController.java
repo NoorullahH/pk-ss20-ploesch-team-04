@@ -3,6 +3,8 @@ package taskmanager.view;
 import java.io.File;
 import java.io.IOException;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,7 @@ public class StartWindowController {
 	private boolean fileChosen;
 
 	@FXML
-	private void logIn(ActionEvent event) throws IOException {
+	private void logIn(ActionEvent event) throws IOException, ParserConfigurationException {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
 		loader.load();
@@ -38,7 +40,7 @@ public class StartWindowController {
     }
 	
 	@FXML
-	private void importXML(ActionEvent event) throws IOException {
+	private void importXML(ActionEvent event) throws IOException, ParserConfigurationException {
 		Node source = (Node) event.getSource();
     	Stage window = (Stage) source.getScene().getWindow();
 		

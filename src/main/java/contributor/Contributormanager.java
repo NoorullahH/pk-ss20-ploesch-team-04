@@ -87,7 +87,7 @@ public class Contributormanager {
      * @return list of the contributors
      */
 	public ObservableList<Contributor> getContributors() {
-		return contributors;
+		return FXCollections.observableList(contributors);
 	}
 	
 	/**

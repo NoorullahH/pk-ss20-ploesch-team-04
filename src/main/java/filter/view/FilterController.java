@@ -1,4 +1,4 @@
-package FilterView;
+package filter.view;
 
 import java.io.IOException;
 import java.net.URL;
@@ -119,8 +119,8 @@ public class FilterController implements Initializable {
 	 */
 	@FXML
 	private ComboBox cmbMonth;
-	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUAR, Months.FEBRUAR, Months.MÄRZ,
-			Months.APRIL, Months.MAI, Months.JUNI, Months.JULI, Months.AUGUST, Months.SEPTEMBER, Months.OKTOBER, Months.NOVEMBER, Months.DEZEMBER);
+	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY, Months.MARCH,
+			Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER, Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 	
 //	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
@@ -322,7 +322,7 @@ public class FilterController implements Initializable {
 		//Get selected month from combobox
 		Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();		
 		
-		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 		//Format From date from Local date to String
 		String startdate = "";
 		if(this.from.getValue() != null) {
@@ -435,7 +435,7 @@ public class FilterController implements Initializable {
 		String year = "2020";
 		if(cmbMonth.getSelectionModel().getSelectedItem() != null) {
 			Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();
-			if(month.toString().equalsIgnoreCase("January") || month.toString().equalsIgnoreCase("januar")) {
+			if(month.toString().equalsIgnoreCase("JANUARY") || month.toString().equalsIgnoreCase("januar")) {
 				startDate = year+"-01-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -443,7 +443,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-01-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("February") || month.toString().equalsIgnoreCase("februar")) {
+			}else if(month.toString().equalsIgnoreCase("FEBRUARY") || month.toString().equalsIgnoreCase("februar")) {
 				startDate = year+"-02-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -451,7 +451,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-02-28";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("March") || month.toString().equalsIgnoreCase("märz")) {
+			}else if(month.toString().equalsIgnoreCase("MARCH") || month.toString().equalsIgnoreCase("märz")) {
 				startDate = year+"-03-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -459,7 +459,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-03-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("April")) {
+			}else if(month.toString().equalsIgnoreCase("APRIL")) {
 				startDate = year+"-04-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -467,7 +467,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-04-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("May") || month.toString().equalsIgnoreCase("mai")) {
+			}else if(month.toString().equalsIgnoreCase("MAY") || month.toString().equalsIgnoreCase("mai")) {
 				startDate = year+"-05-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -475,7 +475,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-05-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("June") || month.toString().equalsIgnoreCase("juni")) {
+			}else if(month.toString().equalsIgnoreCase("JUNE") || month.toString().equalsIgnoreCase("juni")) {
 				startDate = year+"-06-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -483,7 +483,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-06-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("July") || month.toString().equalsIgnoreCase("juli")) {
+			}else if(month.toString().equalsIgnoreCase("JULY") || month.toString().equalsIgnoreCase("juli")) {
 				startDate = year+"-07-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -491,7 +491,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-07-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("August")) {
+			}else if(month.toString().equalsIgnoreCase("AUGUST")) {
 				startDate = year+"-08-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -499,7 +499,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-08-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("September")) {
+			}else if(month.toString().equalsIgnoreCase("SEPTEMBER")) {
 				startDate = year+"-09-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -507,7 +507,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-09-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("October") || month.toString().equalsIgnoreCase("oktober")) {
+			}else if(month.toString().equalsIgnoreCase("OCTOBER") || month.toString().equalsIgnoreCase("oktober")) {
 				startDate = year+"-10-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -515,7 +515,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-10-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("November")) {
+			}else if(month.toString().equalsIgnoreCase("NOVEMEBER")) {
 				startDate = year+"-11-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
@@ -523,7 +523,7 @@ public class FilterController implements Initializable {
 				endDate = year+"-11-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("December") || month.toString().equalsIgnoreCase("dezember")) {
+			}else if(month.toString().equalsIgnoreCase("DECEMBER") || month.toString().equalsIgnoreCase("dezember")) {
 				startDate = year+"-12-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);

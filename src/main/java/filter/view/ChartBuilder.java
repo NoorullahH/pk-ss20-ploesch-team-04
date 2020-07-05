@@ -1,4 +1,4 @@
-package FilterView;
+package filter.view;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,18 +32,18 @@ import weekday.Months;
 
 public class ChartBuilder extends Application {
 
-	private static final String january = "Januar";
-	private static final String february = "Februar";
-	private static final String march = "März";
-	private static final String april = "April";
-	private static final String may = "Mai";
-	private static final String june = "Juni";
-	private static final String july = "Juli";
-	private static final String august = "August";
-	private static final String september = "September";
-	private static final String october = "Oktober";
-	private static final String november = "November";
-	private static final String december = "Dezember";
+	private static final String JANUARY = "JANUARY";
+	private static final String FEBRUARY = "FEBRUARY";
+	private static final String MARCH = "MARCH";
+	private static final String APRIL = "APRIL";
+	private static final String MAY = "MAY";
+	private static final String JUNE = "JUNE";
+	private static final String JULY = "JULY";
+	private static final String AUGUST = "AUGUST";
+	private static final String SEPTEMBER = "SEPTEMBER";
+	private static final String OCTOBER = "OCTOBER";
+	private static final String NOVEMBER = "NOVEMBER";
+	private static final String DECEMBER = "DECEMBER";
 	
 //	final static String January = "January";
 //	final static String February = "February";
@@ -58,8 +59,8 @@ public class ChartBuilder extends Application {
 //	final static String December = "December";
 
 
-	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUAR, Months.FEBRUAR, Months.MÄRZ,
-			Months.APRIL, Months.MAI, Months.JUNI, Months.JULI, Months.AUGUST, Months.SEPTEMBER, Months.OKTOBER, Months.NOVEMBER, Months.DEZEMBER);
+	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY, Months.MARCH,
+			Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER, Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 	
 //	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
@@ -132,29 +133,28 @@ public class ChartBuilder extends Application {
 	        if(date1 != null && !date1.equals("") && date2 != null && !date2.equals("")) {
 		        while (beginCalendar.before(finishCalendar)  || beginCalendar.equals(finishCalendar)) {
 		            // add one month to date per loop
-		            String date =     formater.format(beginCalendar.getTime()).toUpperCase();
+		            String date = formater.format(beginCalendar.getTime()).toUpperCase();
 		            java.text.SimpleDateFormat sdf = 
-		                    new java.text.SimpleDateFormat( dateInputPattern );
+		                    new java.text.SimpleDateFormat( dateInputPattern, Locale.ENGLISH );
 		            
-		                java.util.Date date12 = sdf.parse( date );
-	
-		                sdf.applyPattern( dateTargetPattern );
-		            sdf.applyPattern( dateTargetPattern );
+		            java.util.Date date12 = sdf.parse(date);
+		                
+		            sdf.applyPattern(dateTargetPattern);
+		            sdf.applyPattern(dateTargetPattern);
 		            
-		            lstFilteredMonth.add(sdf.format(date12));
+		            lstFilteredMonth.add(sdf.format(date12).toUpperCase());
 		            beginCalendar.add(Calendar.MONTH, 1);
 		        }
 	        }else if(date1 != null && !date1.equals("") && (date2 != null || !date2.equals(""))) {
 	        	String date =     formater.format(beginCalendar.getTime()).toUpperCase();
 	            java.text.SimpleDateFormat sdf = 
-	                    new java.text.SimpleDateFormat( dateInputPattern );
+	                    new java.text.SimpleDateFormat( dateInputPattern, Locale.ENGLISH );
 	            java.util.Date date12 = sdf.parse( date );
 	            
 	            sdf.applyPattern( dateTargetPattern );
 	            sdf.applyPattern( dateTargetPattern );
-	            lstFilteredMonth.add(sdf.format(date12));
+	            lstFilteredMonth.add(sdf.format(date12).toUpperCase());
 	        }
-	        
 	        
 		}catch(Exception e) {
 			LOGGER.log(Level.SEVERE, "Exception occured (Filter Month List)", e);
@@ -179,8 +179,8 @@ public class ChartBuilder extends Application {
 		}
 		
 		xAxis.setLabel("Months");
-		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(january, february, march, april,
-				may, june, july, august, september, october, november, december)));
+		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(JANUARY,FEBRUARY,MARCH,APRIL,
+				MAY,JUNE,JULY,AUGUST,SEPTEMBER,OCTOBER,NOVEMBER,DECEMBER)));
 		
 		yAxis.setLabel("Value");
 		stack1.setName("Open Tasks");
@@ -204,8 +204,7 @@ public class ChartBuilder extends Application {
 							}
 						}
 						stack1.getData().add(new XYChart.Data<String, Number>(month.toString(), openTaskCount));
-					}
-					else {
+					}else {
 						stack1.getData().add(new XYChart.Data<String, Number>(month.toString(), 0));
 					}
 				}
@@ -275,6 +274,9 @@ public class ChartBuilder extends Application {
 	public void getOpentaskCount(String month) {
 		if(this.filterStartDate != null && !this.filterStartDate.equals("") && (this.filterEndDate == null || this.filterEndDate.equals(""))) {
 			LocalDate valStart = LocalDate.parse(filterStartDate);
+			
+			System.out.println("h "+valStart);
+			
 			//applying filter for open task and set list size on openTaskCount variable
 			filteredData.predicateProperty()
 			.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
@@ -343,51 +345,51 @@ public class ChartBuilder extends Application {
 		String startDate = "";
 		String endDate = "";
 		String year = "2020";
-		if(month.toString().equals("January") || month.toString().equals("januar")) {
+		if(month.toString().equals("JANUARY") || month.toString().equals("JANUAR")) {
 			startDate = year+"-01-01";
 			
 			endDate = year+"-01-31";
-		}else if(month.toString().equalsIgnoreCase("February") || month.toString().equalsIgnoreCase("februar")) {
+		}else if(month.toString().equalsIgnoreCase("FEBRUARY") || month.toString().equalsIgnoreCase("FEBRUAR")) {
 			startDate = year+"-02-01";
 			endDate = year+"-02-28";
-		}else if(month.toString().equalsIgnoreCase("March") || month.toString().equalsIgnoreCase("märz")) {
+		}else if(month.toString().equalsIgnoreCase("MARCH") || month.toString().equalsIgnoreCase("MÄRZ")) {
 			startDate = year+"-03-01";
 			
 			endDate = year+"-03-31";
-		}else if(month.toString().equalsIgnoreCase("April")) {
+		}else if(month.toString().equalsIgnoreCase("APRIL")) {
 			startDate = year+"-04-01";
 			
 			endDate = year+"-04-30";
 			LocalDate valEnd = LocalDate.parse(endDate);
-		}else if(month.toString().equalsIgnoreCase("May") || month.toString().equalsIgnoreCase("mai")) {
+		}else if(month.toString().equalsIgnoreCase("MAY") || month.toString().equalsIgnoreCase("MAI")) {
 			startDate = year+"-05-01";
 			
 			endDate = year+"-05-31";
-		}else if(month.toString().equalsIgnoreCase("June") || month.toString().equalsIgnoreCase("juni")) {
+		}else if(month.toString().equalsIgnoreCase("JUNE") || month.toString().equalsIgnoreCase("JUNI")) {
 			startDate = year+"-06-01";
 			
 			endDate = year+"-06-30";
-		}else if(month.toString().equalsIgnoreCase("July") || month.toString().equalsIgnoreCase("juli")) {
+		}else if(month.toString().equalsIgnoreCase("JULY") || month.toString().equalsIgnoreCase("JULI")) {
 			startDate = year+"-07-01";
 			
 			endDate = year+"-07-31";
-		}else if(month.toString().equalsIgnoreCase("August") || month.toString().equalsIgnoreCase("august")) {
+		}else if(month.toString().equalsIgnoreCase("AUGUST")) {
 			startDate = year+"-08-01";
 			
 			endDate = year+"-08-31";
-		}else if(month.toString().equalsIgnoreCase("September") || month.toString().equalsIgnoreCase("september")) {
+		}else if(month.toString().equalsIgnoreCase("SEPTEMBER")) {
 			startDate = year+"-09-01";
 			
 			endDate = year+"-09-30";
-		}else if(month.toString().equalsIgnoreCase("October") || month.toString().equalsIgnoreCase("oktober")) {
+		}else if(month.toString().equalsIgnoreCase("OCTOBER") || month.toString().equalsIgnoreCase("OKTOBER")) {
 			startDate = year+"-10-01";
 			
 			endDate = year+"-10-31";
-		}else if(month.toString().equalsIgnoreCase("November") || month.toString().equalsIgnoreCase("november")) {
+		}else if(month.toString().equalsIgnoreCase("NOVEMBER")) {
 			startDate = year+"-11-01";
 			
 			endDate = year+"-11-30";
-		}else if(month.toString().equalsIgnoreCase("December") || month.toString().equalsIgnoreCase("dezember")) {
+		}else if(month.toString().equalsIgnoreCase("DECEMBER") || month.toString().equalsIgnoreCase("DEZEMBER")) {
 			startDate = year+"-12-01";
 			
 			endDate = year+"-12-31";
@@ -411,8 +413,8 @@ public class ChartBuilder extends Application {
 		}
 		
 		xAxis.setLabel("Months");
-		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(january, february, march, april,
-				may, june, july, august, september, october, november, december)));
+		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(JANUARY, FEBRUARY, MARCH, APRIL,
+				MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER)));
 		
 		yAxis.setLabel("Value");
 		stack1.setName("Open Tasks");
@@ -426,7 +428,7 @@ public class ChartBuilder extends Application {
 			if(lstFilteredMonth != null && lstFilteredMonth.size() > 0) {
 				for(int i = 0; i < lstFilteredMonth.size(); i++) {
 					String filterMonth = lstFilteredMonth.get(i);
-					if(month.toString().contentEquals(filterMonth)) {
+					if(month.toString().equals(filterMonth)) {				
 						getOpentaskCount(month.toString());
 						if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
 							if(toogleGroupValue.equalsIgnoreCase("open")) {

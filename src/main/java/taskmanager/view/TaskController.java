@@ -67,9 +67,9 @@ public class TaskController implements Initializable{
 	@FXML
 	private CheckBox weeklyBox;
 	@FXML
-	private ComboBox weekday;
+	private ComboBox<Weekday> weekday;
 	@FXML
-	private ComboBox monthday;
+	private ComboBox<Integer> monthday;
 	@FXML
 	private TextField timesOfRepititionsField;
 	@FXML
@@ -114,7 +114,6 @@ public class TaskController implements Initializable{
 		    @Override 
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		        if (newValue.matches("\\d*")) {
-		            int value = Integer.parseInt(newValue);
 		            repetitionDateField.setValue(null);
 		        } else {
 		        	timesOfRepititionsField.setText(oldValue);
@@ -124,17 +123,12 @@ public class TaskController implements Initializable{
 		});
 		
 		monthday.setItems(monthdayList);
-		monthday.setStyle("-fx-font-size: 16 ;");
 		weekday.setItems(weekdayList);
-		weekday.setStyle("-fx-font-size: 16 ;");
-		
-		dueDateField.setStyle("-fx-font-size: 16 ;");
-		repetitionDateField.setStyle("-fx-font-size: 16 ;");
 		
 		//Initialize ContributorListView
 		FXMLLoader loaderCon = new FXMLLoader(getClass().getResource("ContributorWindow.fxml"));
 		try {
-			Parent rootCon = loaderCon.load();
+			loaderCon.load();
 			ContributorController conController = loaderCon.<ContributorController>getController();
 			contributorList.setItems(conController.getContributorList());
 			contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -145,7 +139,7 @@ public class TaskController implements Initializable{
 		//Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(getClass().getResource("CategoryWindow.fxml"));
 		try {
-			Parent rootCat = loaderCat.load();
+			loaderCat.load();
 			CategoryController catController = loaderCat.<CategoryController>getController();
 			categoryList.setItems(catController.getCategoryList());
 			categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -195,7 +189,7 @@ public class TaskController implements Initializable{
 	private void handleMonthlyBox() {
 		if(monthlyBox.isSelected()) {
 			weeklyBox.setSelected(false);
-			weekday.setValue("");
+			weekday.setValue(null);
 			recurrentBox.setSelected(true);
 		}
 	}
@@ -205,7 +199,7 @@ public class TaskController implements Initializable{
 	private void handleWeeklyBox() {
 		if(weeklyBox.isSelected()) {
 			monthlyBox.setSelected(false);
-			monthday.setValue("");
+			monthday.setValue(null);
 			recurrentBox.setSelected(true);
 		}
 	}
@@ -213,24 +207,24 @@ public class TaskController implements Initializable{
 	//Ensures that it is not possible to select monthday and weeekday at the same time
 	@FXML
 	private void handleMonthday(){
-		Object o = monthday.getValue();
+		Integer mday = monthday.getValue();
 		if(monthday.getValue()!=null) {
 			weeklyBox.setSelected(false);
 			monthlyBox.setSelected(true);
 			handleMonthlyBox();
-			monthday.setValue(o);
+			monthday.setValue(mday);
 		}
 	}
 	
 	//Ensures that it is not possible to select monthday and weeekday at the same time
 	@FXML
 	private void handleWeekday(){
-		Object o = weekday.getValue();
+		Weekday wday = weekday.getValue();
 		if(weekday.getValue()!=null) {
 			monthlyBox.setSelected(false);
 			weeklyBox.setSelected(true);
 			handleWeeklyBox();
-			weekday.setValue(o);
+			weekday.setValue(wday);
 		}
 	}
 	
@@ -346,7 +340,7 @@ public class TaskController implements Initializable{
 			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
 			//monatlich
-			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue())))) {
+			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue().toString())))) {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
@@ -362,7 +356,7 @@ public class TaskController implements Initializable{
 		MainWindowController controller = loader.<MainWindowController>getController();
 		controller.setData(taskNew);
 		
-		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -410,41 +404,39 @@ public class TaskController implements Initializable{
 	}
 	
 	@FXML
-	public void initializeTask(Task t) {
+	public void initializeTask(Task task) {
 		
-		taskNumber = t.getTaskNumber();
+		taskNumber = task.getTaskNumber();
 	
-		taskDescriptionField.setText(t.getTaskDescription());
-		detailedTaskDescriptionField.setText(t.getDetailedTaskDescription());
-		dueDateField.setValue(t.getDueDate());
-		recurrentBox.setSelected(t.isRecurrent());
-		monthlyBox.setSelected(t.isMonthly());
-		weeklyBox.setSelected(t.isWeekly());
-		weekday.getSelectionModel().select(t.getWeekday());
-		if(t.getMonthday() != 0) {
-			monthday.setValue(t.getMonthday());
+		taskDescriptionField.setText(task.getTaskDescription());
+		detailedTaskDescriptionField.setText(task.getDetailedTaskDescription());
+		dueDateField.setValue(task.getDueDate());
+		recurrentBox.setSelected(task.isRecurrent());
+		monthlyBox.setSelected(task.isMonthly());
+		weeklyBox.setSelected(task.isWeekly());
+		weekday.getSelectionModel().select(task.getWeekday());
+		if(task.getMonthday() != 0) {
+			monthday.setValue(task.getMonthday());
 		}
 		
-		timesOfRepititionsField.setText(""+t.getNumberOfRepetitions()+"");
-		repetitionDateField.setValue(t.getRepetitionDate());
+		timesOfRepititionsField.setText(""+task.getNumberOfRepetitions()+"");
+		repetitionDateField.setValue(task.getRepetitionDate());
 		
 		//Initialize AttachmentListView
-		attachmentItems.setAll(t.getAttachments());
+		attachmentItems.setAll(task.getAttachments());
 	
-		
-		ObservableList<Contributor> conList = t.getContributorsList();
+		ObservableList<Contributor> conList = task.getContributorsList();
 		for (Contributor c:conList) {
 			contributorList.getSelectionModel().select(c.getPerson());
 		}
 		
-		
-		ObservableList<Category> catList = t.getCategoriesList();
+		ObservableList<Category> catList = task.getCategoriesList();
 		for (Category c:catList) {
 			categoryList.getSelectionModel().select(c.getCategory());
 		}
 		
 		//Initialize SubtasksListView
-		subtaskItems = t.getSubtasks();
+		subtaskItems = task.getSubtasks();
 		subtaskView.setItems(subtaskItems);
 		
 		addTaskButton.setVisible(false);
@@ -485,7 +477,7 @@ public class TaskController implements Initializable{
 		if(recurrentBox.isSelected()) {
 			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
-			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue())))) {
+			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue().toString())))) {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
 				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
@@ -494,7 +486,7 @@ public class TaskController implements Initializable{
 			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
 		}
 		
-		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);

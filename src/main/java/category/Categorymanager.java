@@ -88,7 +88,7 @@ public class Categorymanager {
      * @return list of the categories
      */
 	public ObservableList<Category> getCategories() {
-		return categories;
+		return FXCollections.observableList(categories);
 	}
 	
 	/**

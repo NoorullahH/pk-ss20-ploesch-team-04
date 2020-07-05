@@ -65,7 +65,7 @@ public class Taskmanager {
      * @return list of the tasks
      */
 	public ObservableList<Task> getTasks() {
-		return tasks;
+		return FXCollections.observableList(tasks);
 	}
 	
 	/**
@@ -103,6 +103,7 @@ public class Taskmanager {
 			return false;
 		}else {
 			tasks.remove(index);
+			System.out.println("Removed:"+ task.getTaskNumber());
 			size--;
 			return true;
 		}
@@ -245,8 +246,9 @@ public class Taskmanager {
 	}
 	
 	
-	public void saveToXML(File fileName) {		
+	public void saveToXML(File fileName) throws ParserConfigurationException {		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, Boolean.TRUE);
 		DocumentBuilder dBuilder;
 		
 		try {
@@ -412,10 +414,11 @@ public class Taskmanager {
         return con;
     }
     
-    public void readXML(File fileName) {
+    public void readXML(File fileName) throws ParserConfigurationException {
     	
     	File xmlFile =	fileName;
     	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    	dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, Boolean.TRUE);
     	DocumentBuilder dBuilder;
     	try {
     		dBuilder = dbFactory.newDocumentBuilder();

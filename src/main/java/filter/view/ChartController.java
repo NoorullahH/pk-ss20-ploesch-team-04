@@ -1,4 +1,4 @@
-package FilterView;
+package filter.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +12,7 @@ import weekday.Months;
 
 public class ChartController implements Initializable{
 	
-	private ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.JANUAR,Months.FEBRUAR,Months.MÄRZ,Months.APRIL);
+	private ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.JANUARY,Months.FEBRUARY,Months.MARCH,Months.APRIL);
 	
 //	ObservableList<Months> monthsList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
 //			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);

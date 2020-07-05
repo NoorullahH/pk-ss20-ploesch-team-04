@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import com.dropbox.core.DbxException;
 
 import javafx.stage.FileChooser;
@@ -20,6 +22,7 @@ import dropbox.DropboxApi;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,7 +64,7 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private TableColumn<Task, Boolean> doneCheckBoxColumn;
 	@FXML
-	private TableColumn<Task, Void> deleteButton;
+	private TableColumn<Task, Boolean> deleteButton;
 	@FXML
 	private Button addTask;
 	@FXML
@@ -103,8 +106,6 @@ public class MainWindowController implements Initializable {
 		dueDateColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("dueDate"));
 		attachmentsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<String>>("attachments"));
 		
-		addDeleteButtonToTable();
-		
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
 		doneCheckBoxColumn.setEditable(true);
@@ -125,6 +126,14 @@ public class MainWindowController implements Initializable {
 				property = cellValue.getDone();
 			}
 			return property;
+		});
+		
+		deleteButton.setCellFactory(new Callback<TableColumn<Task, Boolean>, TableCell<Task, Boolean>>(){
+
+			@Override
+			public TableCell<Task, Boolean> call(TableColumn<Task, Boolean> param) {
+				return new ButtonCell();
+			}
 		});
 		
 		taskView.setEditable(true);
@@ -153,6 +162,35 @@ public class MainWindowController implements Initializable {
 		//load Data
 		taskView.setItems(getTaskList());
 	}
+	
+	private class ButtonCell extends TableCell<Task, Boolean>{
+		private final Button delete = new Button("delete");
+		
+		ButtonCell(){
+			
+			delete.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent t) {
+					Task currentTask = ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
+					taskList.removeTask(currentTask);
+					taskView.refresh();
+				}
+				
+			});
+		}
+		
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(delete);
+            }else {
+            	setGraphic(null);
+            }
+		}
+	}
+	
 	
 	//This method will return an observableList of the Tasks
 	public ObservableList<Task> getTaskList() {
@@ -196,40 +234,6 @@ public class MainWindowController implements Initializable {
 		windowStage.show();
 	}
 	
-	
-	private void addDeleteButtonToTable() {
-		
-		Callback<TableColumn<Task, Void>, TableCell<Task, Void>> cellFactory = new Callback<TableColumn<Task, Void>, TableCell<Task, Void>>() {
-            @Override
-            public TableCell<Task, Void> call(final TableColumn<Task, Void> param) {
-                final TableCell<Task, Void> cell = new TableCell<Task, Void>() {
-
-                    private final Button btn = new Button("delete");
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            Task task = getTableView().getItems().get(getIndex());
-                            taskList.removeTask(task);
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
-        deleteButton.setCellFactory(cellFactory);
-	}
-	
 	@FXML
 	private void editCategories(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("CategoryWindow.fxml"));
@@ -255,7 +259,7 @@ public class MainWindowController implements Initializable {
 		TaskController controller = loader.<TaskController>getController();
 		controller.initializeTask(taskView.getSelectionModel().getSelectedItem());
 		
-		Parent parent = FXMLLoader.load(getClass().getResource("Task.fxml"));
+		FXMLLoader.load(getClass().getResource("Task.fxml"));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -304,7 +308,7 @@ public class MainWindowController implements Initializable {
 	
 	
 	@FXML
-	private void saveToXML(ActionEvent event) {
+	private void saveToXML(ActionEvent event) throws ParserConfigurationException {
 		FileChooser fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
 		fileChooser.getExtensionFilters().add(extFilter);
@@ -355,11 +359,9 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
-		
-	
 	@FXML
-	private void filterTasks (ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("FilterView/FilterWindow.fxml"));
+	private void filterTasks(ActionEvent event) throws IOException {
+		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("filter/view/FilterWindow.fxml"));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -382,7 +384,7 @@ public class MainWindowController implements Initializable {
 	}
 	
 	@FXML
-	private void importDropboxWriter (ActionEvent event) throws IOException, DbxException {
+	private void importDropboxWriter(ActionEvent event) throws IOException, DbxException {
 
 		DropboxApi dropboxdownloader= new DropboxApi();
 		dropboxdownloader.downloadFile("tasks.xml");

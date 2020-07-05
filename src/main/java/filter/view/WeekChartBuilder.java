@@ -1,15 +1,11 @@
-package FilterView;
+package filter.view;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
@@ -56,7 +52,7 @@ public class WeekChartBuilder extends Application {
 	
 	//Initializing filteredData, startDate, endDate
 	public WeekChartBuilder(FilteredList<Task> filteredData, String toogleGroupValue, String startDate, String endDate) {
-		this.filteredData = new FilteredList<Task>(filteredData);
+		this.filteredData = new FilteredList<>(filteredData);
 		this.filterStartDate = startDate;
 		this.filterEndDate = endDate;
 		taskList = Taskmanager.getInstance();
@@ -186,7 +182,7 @@ public class WeekChartBuilder extends Application {
 	
 	public void initData() {
 		this.toFilterTasks = this.taskList.getTasks();
-		this.filteredData = new FilteredList<Task>(toFilterTasks, prad -> true);
+		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 	
 }
