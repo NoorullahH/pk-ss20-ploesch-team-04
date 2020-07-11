@@ -24,7 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import task.Task;
 import task.Taskmanager;
-import weekday.Months;
+
 
 public class WeekChartBuilder extends Application {
 
@@ -32,20 +32,19 @@ public class WeekChartBuilder extends Application {
     private ObservableList<Task> toFilterTasks;
     private Taskmanager taskList;
     private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
-    private Months month;
     private String filterStartDate = "";
     private String filterEndDate = "";
 
 	@FXML
 	private TableView<Task> taskView;
-	FilterController filterC = new FilterController();
-	Task taskChart = new Task();
+	//public FilterController filterC = new FilterController();
+	//public Task taskChart = new Task();
 
 	private final CategoryAxis xAxis = new CategoryAxis();
 	private final NumberAxis yAxis = new NumberAxis();
-	private final StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(xAxis, yAxis);
-	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<String, Number>();
-	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<String, Number>();
+	private final StackedBarChart<String, Number> barChart = new StackedBarChart<>(xAxis, yAxis);
+	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<>();
+	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<>();
 	private int openTaskCount = 0;
 	private int closeTaskCount = 0;
 	private String toogleGroupValue = "";
@@ -79,7 +78,7 @@ public class WeekChartBuilder extends Application {
 		stack2.setName("Closed Tasks");
 		int sWeek = 0;
 		int eWeek = 0;
-		if(filterStartDate != null && !filterStartDate.equals("") && filterEndDate!= null && !filterEndDate.equals("")){
+		if(filterStartDate != null && !("").equals(filterEndDate) && filterEndDate!= null && !filterEndDate.equals("")){
 			LocalDate sDate = LocalDate.parse(filterStartDate);
 			TemporalField woyS = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     sWeek = sDate.get(woyS);
@@ -90,12 +89,12 @@ public class WeekChartBuilder extends Application {
 		     eWeek = eDate.get(woyE);
 //		    System.out.println("eWeek:::::::::::: "+eWeek);
 		    showDataOnChart(sWeek, eWeek);
-		}else if(filterStartDate != null && !filterStartDate.equals("") && (filterEndDate == null || filterEndDate.equals(""))) {
+		}else if(filterStartDate != null && !("").equals(filterEndDate) && (filterEndDate == null || ("").equals(filterEndDate))) {
 			LocalDate sDate = LocalDate.parse(filterStartDate);
 			TemporalField woyS = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     sWeek = sDate.get(woyS);
 		     showDataOnChart(sWeek, 52);
-		}else if(filterEndDate != null && !filterEndDate.equals("") && (filterStartDate == null || filterEndDate.equals(""))) {
+		}else if(filterEndDate != null && !("").equals(filterEndDate) && (filterStartDate == null || ("").equals(filterEndDate))) {
 			LocalDate eDate = LocalDate.parse(filterEndDate);
 		    TemporalField woyE = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     eWeek = eDate.get(woyE);
@@ -141,7 +140,7 @@ public class WeekChartBuilder extends Application {
 		calendare.setWeekDate(year, week, dayE);
 		String formattedEnd = format1.format(calendare.getTime());
 //		System.out.println("formattedEnd::::END::::::::::: "+formattedEnd);
-		if(toogleGroupValue != null && !toogleGroupValue.equals("")) {
+		if(toogleGroupValue != null && !("").equals(toogleGroupValue)) {
 			if(toogleGroupValue.equalsIgnoreCase("closed")) {
 				getClosetaskCount(formattedStart, formattedEnd);
 			}else if(toogleGroupValue.equalsIgnoreCase("open")) {
