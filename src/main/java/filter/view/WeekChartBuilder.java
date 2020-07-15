@@ -37,16 +37,13 @@ public class WeekChartBuilder extends Application {
 
 	@FXML
 	private TableView<Task> taskView;
-	//public FilterController filterC = new FilterController();
-	//public Task taskChart = new Task();
-
 	private final CategoryAxis xAxis = new CategoryAxis();
 	private final NumberAxis yAxis = new NumberAxis();
 	private final StackedBarChart<String, Number> barChart = new StackedBarChart<>(xAxis, yAxis);
 	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<>();
 	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<>();
-	private int openTaskCount = 0;
-	private int closeTaskCount = 0;
+	private int openTaskCount;
+	private int closeTaskCount;
 	private String toogleGroupValue = "";
 	
 	//Initializing filteredData, startDate, endDate
@@ -66,7 +63,7 @@ public class WeekChartBuilder extends Application {
 
 		xAxis.setLabel("Weeks");
 		
-		yAxis.setLabel("Value");
+		yAxis.setLabel("Tasks");
 		stack1.setName("Open Tasks");
 
 		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("1", "2", "3", "4",
@@ -82,12 +79,9 @@ public class WeekChartBuilder extends Application {
 			LocalDate sDate = LocalDate.parse(filterStartDate);
 			TemporalField woyS = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     sWeek = sDate.get(woyS);
-//		    System.out.println("sWeek:::::::::::: "+sWeek);
-		    
 		    LocalDate eDate = LocalDate.parse(filterEndDate);
 		    TemporalField woyE = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     eWeek = eDate.get(woyE);
-//		    System.out.println("eWeek:::::::::::: "+eWeek);
 		    showDataOnChart(sWeek, eWeek);
 		}else if(filterStartDate != null && !("").equals(filterEndDate) && (filterEndDate == null || ("").equals(filterEndDate))) {
 			LocalDate sDate = LocalDate.parse(filterStartDate);
@@ -108,16 +102,11 @@ public class WeekChartBuilder extends Application {
 		barChart.getData().addAll(stack1, stack2);
 		stage.setScene(scene);
 		stage.show();
-//        System.out.println(this.filteredData.size());
-	
 	}
 	
 	public void showDataOnChart(int countStart, int countEnd) {
 		for(int count = countStart; count <= countEnd; count++) {
 			getStartAndEndDateOfWeek(count);
-//			System.out.println("week::::::::::: "+count);
-//			System.out.println("openTaskCount::::::::::: "+openTaskCount);
-//			System.out.println("closeTaskCount::::::::::: "+closeTaskCount);
 			stack1.getData().add(new XYChart.Data<String, Number>(count+"", openTaskCount));
 			stack2.getData().add(new XYChart.Data<String, Number>(count+"", closeTaskCount));
 		}
@@ -135,15 +124,13 @@ public class WeekChartBuilder extends Application {
 		calendar.setWeekDate(year, week, day);
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedStart = format1.format(calendar.getTime());
-//		System.out.println("formattedStart::::::::::::::: "+formattedStart);
 		Calendar calendare = Calendar.getInstance();
 		calendare.setWeekDate(year, week, dayE);
 		String formattedEnd = format1.format(calendare.getTime());
-//		System.out.println("formattedEnd::::END::::::::::: "+formattedEnd);
 		if(toogleGroupValue != null && !("").equals(toogleGroupValue)) {
-			if(toogleGroupValue.equalsIgnoreCase("closed")) {
+			if(("closed").equalsIgnoreCase(toogleGroupValue)) {
 				getClosetaskCount(formattedStart, formattedEnd);
-			}else if(toogleGroupValue.equalsIgnoreCase("open")) {
+			}else if(("open").equalsIgnoreCase(toogleGroupValue)) {
 				getOpentaskCount(formattedStart, formattedEnd);
 			}
 		}else {
@@ -161,7 +148,7 @@ public class WeekChartBuilder extends Application {
 				filters.add(FilterBuilder.date_filter(valStart, valEnd));
 				filters.add(FilterBuilder.status("open"));
 				openTaskCount = filteredData.size();
-				initData();
+				initData1();
 				filters.clear();
 	}
 	
@@ -175,11 +162,11 @@ public class WeekChartBuilder extends Application {
 				filters.add(FilterBuilder.date_filter(valStart, valEnd));
 				filters.add(FilterBuilder.status("close"));
 				closeTaskCount = filteredData.size();
-				initData();
+				initData1();
 				filters.clear();
 	}
 	
-	public void initData() {
+	public void initData1() {
 		this.toFilterTasks = this.taskList.getTasks();
 		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}

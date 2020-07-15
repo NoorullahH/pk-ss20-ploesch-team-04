@@ -10,7 +10,7 @@ public class Main extends Application {
 
 
 	public void start(Stage primaryStage) throws Exception {
-//test commit github
+		
 		Parent parent = FXMLLoader.load(getClass().getResource("StartWindow.fxml"));
 		Scene scene = new Scene(parent);
 		primaryStage.setScene(scene);

@@ -38,43 +38,41 @@
             <TextField fx:id="detailedTaskDescriptionField" layoutX="24.0" layoutY="63.0" prefHeight="32.0" prefWidth="170.0" promptText="Detail description" />
             <DatePicker fx:id="from" layoutX="207.0" layoutY="16.0" prefHeight="32.0" prefWidth="219.0" promptText="From" />
             <DatePicker fx:id="until" layoutX="207.0" layoutY="64.0" prefHeight="32.0" prefWidth="219.0" promptText="Until" />
-             <ListView fx:id="contributorList" layoutX="452.0" layoutY="16.0" prefHeight="81.0" prefWidth="197.0" />
-      <ListView fx:id="categoryList" layoutX="665.0" layoutY="16.0" prefHeight="81.0" prefWidth="197.0" />
-            <Button fx:id="submit" layoutX="986.0" layoutY="105.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="95.0" text="Submit" textAlignment="CENTER">
+             <ListView fx:id="contributorList" layoutX="452.0" layoutY="16.0" prefHeight="129.0" prefWidth="197.0" />
+      <ListView fx:id="categoryList" layoutX="665.0" layoutY="16.0" prefHeight="129.0" prefWidth="197.0" />
+            <Button fx:id="submit" layoutX="990.0" layoutY="105.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="95.0" text="Submit" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <RadioButton fx:id="no" layoutX="1001.0" layoutY="74.0" mnemonicParsing="false" text="no" textFill="WHITE">
+            <RadioButton fx:id="no" layoutX="993.0" layoutY="74.0" mnemonicParsing="false" text="no" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="attachment" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="yes" layoutX="1001.0" layoutY="46.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
-            <RadioButton fx:id="closed" layoutX="918.0" layoutY="74.0" mnemonicParsing="false" text="closed" textFill="WHITE">
+            <RadioButton fx:id="yes" layoutX="992.0" layoutY="46.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
+            <RadioButton fx:id="closed" layoutX="886.0" layoutY="74.0" mnemonicParsing="false" text="closed" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="task_done" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="open" layoutX="918.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
-            <Label fx:id="Attatchment" layoutX="991.0" layoutY="15.0" text="Attatchment" textFill="WHITE">
+            <RadioButton fx:id="open" layoutX="886.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
+            <Label fx:id="Attatchment" layoutX="990.0" layoutY="15.0" text="Attatchment" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="status" layoutX="920.0" layoutY="15.0" text="Status" textFill="WHITE">
+            <Label fx:id="status" layoutX="886.0" layoutY="15.0" text="Status" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <Button fx:id="chart" layoutX="207.0" layoutY="105.0" mnemonicParsing="false" onAction="#chart" prefHeight="39.0" prefWidth="106.0" text="Month Chart" textAlignment="CENTER" />
-            <Button fx:id="resetFilters" layoutX="871.0" layoutY="105.0" mnemonicParsing="false" onAction="#removeAllFilters" prefHeight="39.0" prefWidth="95.0" text="Reset" textAlignment="CENTER">
+            <Button fx:id="resetFilters" layoutX="882.0" layoutY="105.0" mnemonicParsing="false" onAction="#removeAllFilters" prefHeight="39.0" prefWidth="95.0" text="Reset" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
             <ComboBox fx:id="cmbMonth" layoutX="24.0" layoutY="108.0" onAction="#performActionOnMonthCombo" prefHeight="32.0" prefWidth="170.0" promptText="Month" />
-            <Button fx:id="chartMulContributors" layoutX="452.0" layoutY="105.0" mnemonicParsing="false" onAction="#chartMulCont" prefHeight="39.0" prefWidth="197.0" text="Contributors Month Chart" textAlignment="CENTER" />
             <Button fx:id="btnWeekChart" layoutX="319.0" layoutY="105.0" mnemonicParsing="false" onAction="#openWeekChart" prefHeight="39.0" prefWidth="106.0" text="Week Chart" textAlignment="CENTER" />
-            <Button fx:id="weekChartMulContributors" layoutX="665.0" layoutY="105.0" mnemonicParsing="false" onAction="#openWeekChartMulCont" prefHeight="39.0" prefWidth="197.0" text="Contributors Week Chart" textAlignment="CENTER" />
          </children>
       </Pane>
       <Label layoutX="62.0" layoutY="11.0" text="Advanced Task Search " textFill="WHITE">

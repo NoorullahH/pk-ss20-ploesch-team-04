@@ -2,38 +2,20 @@ package filter.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
-import javax.swing.JOptionPane;
-
 import category.Category;
 import contributor.Contributor;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,13 +26,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import task.Subtask;
 import task.Task;
 import task.Taskmanager;
 import taskmanager.view.CategoryController;
 import taskmanager.view.ContributorController;
 import weekday.Months;
-import weekday.Weekday;
 
 //to do class
 /**
@@ -58,7 +38,7 @@ import weekday.Weekday;
  *
  */
 public class FilterController implements Initializable {
-	
+
 	@FXML
 	private TableView<Task> taskView;
 	@FXML
@@ -104,36 +84,33 @@ public class FilterController implements Initializable {
 	@FXML
 	private RadioButton no = new RadioButton();
 	@FXML
-	private ToggleGroup attachment = new ToggleGroup(); // I called it right in SceneBuilder.
+	private ToggleGroup attachment = new ToggleGroup();
 	@FXML
-	private ToggleGroup task_done = new ToggleGroup(); // I called it right in SceneBuilder.
+	private ToggleGroup task_done = new ToggleGroup();
 	private Taskmanager taskList;
 	private ObservableList<Task> toFilterTasks;
 	private FilteredList<Task> filteredData;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
-	
+
 	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
-	
+
 	/**
 	 * @author Noorullah
 	 */
 	@FXML
 	private ComboBox cmbMonth;
-	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY, Months.MARCH,
-			Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER, Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
-	
-//	ObservableList<Months> monthList = FXCollections.observableArrayList(Months.January, Months.February, Months.March,
-//			Months.April, Months.May, Months.June, Months.July, Months.August, Months.September, Months.October, Months.November, Months.December);
-	
+	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY,
+			Months.MARCH, Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER,
+			Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 
 	/**
 	 *
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		addMonthsInCombo();
-		
+
 		// initialize taskList
 		taskList = Taskmanager.getInstance();
 		// set up the columns in the table
@@ -155,10 +132,10 @@ public class FilterController implements Initializable {
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
 		doneCheckBoxColumn.setEditable(true);
 
-		
 		// Initialize ContributorListView
-		FXMLLoader loaderCon = new FXMLLoader(getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
-		
+		FXMLLoader loaderCon = new FXMLLoader(
+				getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
+
 		try {
 			Parent rootCon = loaderCon.load();
 			ContributorController conController = loaderCon.<ContributorController>getController();
@@ -167,13 +144,12 @@ public class FilterController implements Initializable {
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Exception occured (Contributors)", e);
 		}
-		
+
 		contributorList.setStyle("-fx-font-size: 16 ;");
-		
+
 		/**
 		 * @author Noorullah
 		 */
-		//month.setItems(monthList);
 
 		// Initialize CategoryListView
 		FXMLLoader loaderCat = new FXMLLoader(
@@ -186,7 +162,7 @@ public class FilterController implements Initializable {
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Exception occured (Categories)", e);
 		}
-		
+
 		categoryList.setStyle("-fx-font-size: 16 ;");
 
 		taskView.setEditable(true);
@@ -218,10 +194,10 @@ public class FilterController implements Initializable {
 		taskView.setItems(this.filteredData);
 
 	}
-	
+
 	private void addMonthsInCombo() {
-		//Adding months In Month Combobox
-		for(int count = 0; count < monthList.size(); count++) {
+		// Adding months In Month Combobox
+		for (int count = 0; count < monthList.size(); count++) {
 			Months month = monthList.get(count);
 			cmbMonth.getItems().add(month);
 		}
@@ -264,7 +240,7 @@ public class FilterController implements Initializable {
 		System.out.println(this.taskDescriptionField.getText());
 		System.out.println(this.detailedTaskDescriptionField.getText());
 		// ------------------------------------------------------------------
-		
+
 		filteredData.predicateProperty()
 				.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
 		filters.add(FilterBuilder.description(this.taskDescriptionField.getText()));
@@ -283,121 +259,63 @@ public class FilterController implements Initializable {
 			filters.add(FilterBuilder.status(toogleGroupValue2));
 		}
 
-
 	}
 
 	@FXML
-	private void chart(ActionEvent event) throws IOException {
-		//Get selected month from combobox
-		Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();		
-		
+	private void chart(ActionEvent event) {
+		// Get selected month from combobox
+		Months month = (Months) cmbMonth.getSelectionModel().getSelectedItem();
+
 		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
-		//Format From date from Local date to String
+
+		// Format From date from Local date to String
 		String startdate = "";
-		if(this.from.getValue() != null) {
-			startdate=(this.from.getValue()).format(formatter_1);
+		if (this.from.getValue() != null) {
+			startdate = (this.from.getValue()).format(formatter_1);
 		}
-		
-		//Format Until date from Local date to String
+
+		// Format Until date from Local date to String
 		String endDate = "";
-		if(this.until.getValue() != null) {
-			endDate =  (this.until.getValue()).format(formatter_1);
+		if (this.until.getValue() != null) {
+			endDate = (this.until.getValue()).format(formatter_1);
 		}
-		
+
 		String toogleGroupValue = "";
 		if (task_done.getSelectedToggle() != null) {
 			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
-	  
-	   //Calling chartBuilder Class Constructor with param 
-	  ChartBuilder newChart = new ChartBuilder(month,filteredData, startdate, endDate, toogleGroupValue);
-	  Stage stage = new Stage();
-	  newChart.start(stage);
-	}
-	
-	@FXML
-	private void chartMulCont(ActionEvent event) throws IOException{
-		//Get selected month from combobox
-		Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();		
-		
-		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
-		//Format From date from Local date to String
-		String startdate = "";
-		if(this.from.getValue() != null) {
-			startdate=(this.from.getValue()).format(formatter_1);
-		}
-		
-		//Format Until date from Local date to String
-		String endDate = "";
-		if(this.until.getValue() != null) {
-			endDate =  (this.until.getValue()).format(formatter_1);
-		}
-		
-		String toogleGroupValue = "";
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
-			toogleGroupValue = selectedRadioButton.getText();
-		}
-		
-		//Calling ChartBuilderForMulContributors Class Constructor with param 
-		ChartBuilder newChart = new ChartBuilder(month,filteredData, startdate, endDate, toogleGroupValue);
-		  Stage stage = new Stage();
-		  newChart.start(stage);
-	}
-	
-	@FXML
-	public void openWeekChart(ActionEvent event) throws IOException{
-		String toogleGroupValue = "";
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
-			toogleGroupValue = selectedRadioButton.getText();
-		}
-		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		//Format From date from Local date to String
-		String startdate = "";
-		if(this.from.getValue() != null) {
-			startdate=(this.from.getValue()).format(formatter_1);
-		}
-		
-		//Format Until date from Local date to String
-		String endDate = "";
-		if(this.until.getValue() != null) {
-			endDate =  (this.until.getValue()).format(formatter_1);
-		}
-		//Calling ChartBuilderForMulContributors Class Constructor with param 
-		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
-		Stage stage = new Stage();
-		newChart.start(stage);
-	}
-	
-	@FXML
-	public void openWeekChartMulCont(ActionEvent event) throws IOException{
-		String toogleGroupValue = "";
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
-			toogleGroupValue = selectedRadioButton.getText();
-		}
-		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		//Format From date from Local date to String
-		String startdate = "";
-		if(this.from.getValue() != null) {
-			startdate=(this.from.getValue()).format(formatter_1);
-		}
-		
-		//Format Until date from Local date to String
-		String endDate = "";
-		if(this.until.getValue() != null) {
-			endDate =  (this.until.getValue()).format(formatter_1);
-		}
-		//Calling ChartBuilderForMulContributors Class Constructor with param 
-		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
+
+		// Calling chartBuilder Class Constructor with param
+		ChartBuilder newChart = new ChartBuilder(month, filteredData, startdate, endDate, toogleGroupValue);
 		Stage stage = new Stage();
 		newChart.start(stage);
 	}
 
+	@FXML
+	public void openWeekChart(ActionEvent event) {
+		String toogleGroupValue = "";
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+			toogleGroupValue = selectedRadioButton.getText();
+		}
+		DateTimeFormatter formatter_3 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// Format From date from Local date to String
+		String startdate = "";
+		if (this.from.getValue() != null) {
+			startdate = (this.from.getValue()).format(formatter_3);
+		}
 
+		// Format Until date from Local date to String
+		String endDate = "";
+		if (this.until.getValue() != null) {
+			endDate = (this.until.getValue()).format(formatter_3);
+		}
+		// Calling ChartBuilderForMulContributors Class Constructor with param
+		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
+		Stage stage = new Stage();
+		newChart.start(stage);
+	}
 
 	/**
 	 * @param event
@@ -425,110 +343,109 @@ public class FilterController implements Initializable {
 		cmbMonth.setPromptText("Month");
 		this.from.setValue(null);
 		this.until.setValue(null);
-		// this.filteredData.setPredicate(x -> true);
 	}
-	//januar, februar, märz, april, mai, juni, juli, august, september, oktober, november, dezember
+
 	@FXML
 	public void performActionOnMonthCombo() {
 		String startDate = "";
 		String endDate = "";
 		String year = "2020";
-		if(cmbMonth.getSelectionModel().getSelectedItem() != null) {
-			Months month = (Months)cmbMonth.getSelectionModel().getSelectedItem();
-			if(month.toString().equalsIgnoreCase("JANUARY") || month.toString().equalsIgnoreCase("januar")) {
-				startDate = year+"-01-01";
+		if (cmbMonth.getSelectionModel().getSelectedItem() != null) {
+			Months month = (Months) cmbMonth.getSelectionModel().getSelectedItem();
+			if (("JANUARY").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-01-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-01-31";
+
+				endDate = year + "-01-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("FEBRUARY") || month.toString().equalsIgnoreCase("februar")) {
-				startDate = year+"-02-01";
+			} else if (("FEBRUARY").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-02-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-02-28";
+
+				endDate = year + "-02-28";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("MARCH") || month.toString().equalsIgnoreCase("märz")) {
-				startDate = year+"-03-01";
+			} else if (("MARCH").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-03-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-03-31";
+
+				endDate = year + "-03-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("APRIL")) {
-				startDate = year+"-04-01";
+			} else if (("APRIL").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-04-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-04-30";
+
+				endDate = year + "-04-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("MAY") || month.toString().equalsIgnoreCase("mai")) {
-				startDate = year+"-05-01";
+			} else if (("MAY").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-05-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-05-31";
+
+				endDate = year + "-05-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("JUNE") || month.toString().equalsIgnoreCase("juni")) {
-				startDate = year+"-06-01";
+			} else if (("JUNE").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-06-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-06-30";
+
+				endDate = year + "-06-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("JULY") || month.toString().equalsIgnoreCase("juli")) {
-				startDate = year+"-07-01";
+			} else if (("JULY").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-07-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-07-31";
+
+				endDate = year + "-07-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("AUGUST")) {
-				startDate = year+"-08-01";
+			} else if (("AUGUST").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-08-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-08-31";
+
+				endDate = year + "-08-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("SEPTEMBER")) {
-				startDate = year+"-09-01";
+			} else if (("SEPTEMBER").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-09-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-09-30";
+
+				endDate = year + "-09-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("OCTOBER") || month.toString().equalsIgnoreCase("oktober")) {
-				startDate = year+"-10-01";
+			} else if (("OCTOBER").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-10-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-10-31";
+
+				endDate = year + "-10-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("NOVEMEBER")) {
-				startDate = year+"-11-01";
+			} else if (("NOVEMBER").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-11-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-11-30";
+
+				endDate = year + "-11-30";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
-			}else if(month.toString().equalsIgnoreCase("DECEMBER") || month.toString().equalsIgnoreCase("dezember")) {
-				startDate = year+"-12-01";
+			} else if (("DECEMBER").equalsIgnoreCase(month.toString())) {
+				startDate = year + "-12-01";
 				LocalDate valStart = LocalDate.parse(startDate);
 				this.from.setValue(valStart);
-				
-				endDate = year+"-12-31";
+
+				endDate = year + "-12-31";
 				LocalDate valEnd = LocalDate.parse(endDate);
 				this.until.setValue(valEnd);
 			}

@@ -22,7 +22,6 @@ taskmanager\view\MainWindowController$2.class
 taskmanager\view\InfoWindowController.class
 weekday\Months.class
 category\Categorymanager.class
-filter\view\ChartController.class
 taskmanager\view\MainWindowController$ButtonCell$1.class
 filter\view\FilterController$1.class
 contributor\Contributor.class

@@ -335,9 +335,6 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void saveToCsv(ActionEvent event){
 		FileChooser fileChooser = new FileChooser();
-		//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-		//fileChooser.getExtensionFilters().add(extFilter);
-		
 		fileChooser.getExtensionFilters().addAll(
 		        new FileChooser.ExtensionFilter("Comma-Separated Values (CSV)", "*.csv"));
 		

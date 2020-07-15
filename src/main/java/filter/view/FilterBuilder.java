@@ -1,7 +1,6 @@
 package filter.view;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import category.Category;
