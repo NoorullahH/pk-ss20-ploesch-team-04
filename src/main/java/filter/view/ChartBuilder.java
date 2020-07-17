@@ -30,6 +30,10 @@ import task.Task;
 import task.Taskmanager;
 import weekday.Months;
 
+/**
+ * @author Noorullah 
+ * This class creates the graphs for months
+ */
 public class ChartBuilder extends Application {
 
 	private static final String JANUARY = "JANUARY";
@@ -72,6 +76,10 @@ public class ChartBuilder extends Application {
 
 	private List<String> lstFilteredMonth = new ArrayList<>();
 
+	/**
+	 * @param Months,List of filtered tasks, startDate, endDate 
+	 * Constructor for Initializing toogleGroupValue, months,filteredData, filterStartDate, filterEndDate
+	 */
 	public ChartBuilder(Months month, FilteredList<Task> filteredData, String startDate, String endDate,
 			String toogleGroupValue) {
 		this.month = month;
@@ -87,19 +95,18 @@ public class ChartBuilder extends Application {
 
 	}
 
-	// This function calculate the number of months between start and end date In
-	// the format only Month.
+	/**
+	 * This function calculate the number of 
+	 * months between start and end date in the format only Month.
+	 */
 	public void prepareFilterMonthList() {
 		lstFilteredMonth = new ArrayList<>();
 		try {
 			String date1 = filterStartDate;
 			String date2 = filterEndDate;
-
 			DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-
 			String dateInputPattern = "yyyy-MM-dd";
 			String dateTargetPattern = "MMMM";
-
 			Calendar beginCalendar = Calendar.getInstance();
 			Calendar finishCalendar = Calendar.getInstance();
 
@@ -142,7 +149,11 @@ public class ChartBuilder extends Application {
 		}
 
 	}
-
+	/**
+	 * @param stage (window) contains all the objects of a JavaFx application.
+	 * This method generates graphs based on criteria selected by the user. 
+	 * The graphs are displayed monthly.
+	 */
 	@Override
 	public void start(Stage stage) {
 		stage.setTitle("Taskmanagement Chart");
@@ -239,11 +250,18 @@ public class ChartBuilder extends Application {
 		stage.show();
 
 	}
-
+	/**
+	 * @param source list (Task).
+	 * This method creates a new list of filtered data and assigns it to filteredData.
+	 */
 	public void initdata(FilteredList<Task> data) {
 		this.filteredData = new FilteredList<Task>(data);
 	}
 
+	/**
+	 * @param month
+	 * This method counts all open tasks of a month or a period of time.
+	 */
 	public void getOpentaskCount(String month) {
 		if (this.filterStartDate != null && !this.filterStartDate.equals("")
 				&& (this.filterEndDate == null || this.filterEndDate.equals(""))) {
@@ -277,7 +295,10 @@ public class ChartBuilder extends Application {
 			filters.clear();
 		}
 	}
-
+	/**
+	 * @param month
+	 * This method counts all closed tasks of a month or a period of time.
+	 */
 	public void getClosetaskCount(String month) {
 		// If user select only From date
 		if (this.filterStartDate != null && !this.filterStartDate.equals("")
@@ -307,14 +328,19 @@ public class ChartBuilder extends Application {
 			initData();
 			filters.clear();
 		}
-
 	}
-
+	/**
+	 * This method saves filtered open and closed tasks.
+	 */
 	public void initData() {
 		this.toFilterTasks = this.taskList.getTasks();
 		this.filteredData = new FilteredList<Task>(toFilterTasks, prad -> true);
 	}
-
+	/**
+	 * @param month
+	 * @return startDate, endDate
+	 * This function determines start and end date of a month.
+	 */
 	public String getStartAndEndDateOfMonth(String month) {
 		String startDate = "";
 		String endDate = "";

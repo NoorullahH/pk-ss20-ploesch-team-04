@@ -26,6 +26,10 @@ import task.Task;
 import task.Taskmanager;
 
 
+/**
+ * @author Noorullah 
+ * This class creates the graphs for weeks
+ */
 public class WeekChartBuilder extends Application {
 
     private FilteredList<Task> filteredData;
@@ -46,7 +50,10 @@ public class WeekChartBuilder extends Application {
 	private int closeTaskCount;
 	private String toogleGroupValue = "";
 	
-	//Initializing filteredData, startDate, endDate
+	/**
+	 * @param filteredData,toogleGroupValue,startDate,endDate
+	 * Initializing filteredData, startDate, endDate
+	 */
 	public WeekChartBuilder(FilteredList<Task> filteredData, String toogleGroupValue, String startDate, String endDate) {
 		this.filteredData = new FilteredList<>(filteredData);
 		this.filterStartDate = startDate;
@@ -54,7 +61,11 @@ public class WeekChartBuilder extends Application {
 		taskList = Taskmanager.getInstance();
 		this.toogleGroupValue = toogleGroupValue;
 	}
-	
+	/**
+	 * @param stage (window) contains all the objects of a JavaFx application.
+	 * This method generates graphs based on criteria selected by the user. 
+	 * The graphs are displayed weekly.
+	 */
 	@Override
 	public void start(Stage stage) {
 		stage.setTitle("Taskmanagement Chart");
@@ -103,7 +114,10 @@ public class WeekChartBuilder extends Application {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+	/**
+	 * @param countStart,countEnd 
+	 * This method shows all open and closed tasks on chart. 
+	 */
 	public void showDataOnChart(int countStart, int countEnd) {
 		for(int count = countStart; count <= countEnd; count++) {
 			getStartAndEndDateOfWeek(count);
@@ -115,7 +129,10 @@ public class WeekChartBuilder extends Application {
 	public void initdata(FilteredList<Task> data) {
 		this.filteredData = new FilteredList<Task>(data);
 	}
-	
+	/**
+	 * @param week 
+	 * This method determines the start and end of a week. 
+	 */
 	public void getStartAndEndDateOfWeek(int week) {
 		int year = 2020;
 		int day = 2;
@@ -151,7 +168,10 @@ public class WeekChartBuilder extends Application {
 				initData1();
 				filters.clear();
 	}
-	
+	/**
+	 * @param startDate,endDate
+	 * This method counts all closed between tasks a period of time.
+	 */
 	public void getClosetaskCount(String startDate, String endDate) {
 		closeTaskCount = 0;
 			

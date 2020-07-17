@@ -32,7 +32,6 @@ import taskmanager.view.CategoryController;
 import taskmanager.view.ContributorController;
 import weekday.Months;
 
-//to do class
 /**
  * @author Dino
  *
@@ -93,6 +92,8 @@ public class FilterController implements Initializable {
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
 
 	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
+	private static final String STYLE = "-fx-font-size: 15 ;";
+	
 
 	/**
 	 * @author Noorullah
@@ -121,13 +122,13 @@ public class FilterController implements Initializable {
 		categoriesColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("categories"));
 		dueDateColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>("dueDate"));
 		attachmentsColumn.setCellValueFactory(new PropertyValueFactory<Task, List<String>>("attachments"));
-		descriptionColumn.setStyle("-fx-font-size: 15 ;");
-		detailedDescriptionColumn.setStyle("-fx-font-size: 15 ;");
-		contributorsColumn.setStyle("-fx-font-size: 15 ;");
-		categoriesColumn.setStyle("-fx-font-size: 15 ;");
-		dueDateColumn.setStyle("-fx-font-size: 15 ;");
-		attachmentsColumn.setStyle("-fx-font-size: 15 ;");
-		doneCheckBoxColumn.setStyle("-fx-font-size: 15 ;");
+		descriptionColumn.setStyle(STYLE);
+		detailedDescriptionColumn.setStyle(STYLE);
+		contributorsColumn.setStyle(STYLE);
+		categoriesColumn.setStyle(STYLE);
+		dueDateColumn.setStyle(STYLE);
+		attachmentsColumn.setStyle(STYLE);
+		doneCheckBoxColumn.setStyle(STYLE);
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
 		doneCheckBoxColumn.setEditable(true);
@@ -149,9 +150,8 @@ public class FilterController implements Initializable {
 
 		/**
 		 * @author Noorullah
-		 */
-
-		// Initialize CategoryListView
+		 * Initialize CategoryListView
+		 */ 
 		FXMLLoader loaderCat = new FXMLLoader(
 				getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 		try {
@@ -166,7 +166,6 @@ public class FilterController implements Initializable {
 		categoryList.setStyle("-fx-font-size: 16 ;");
 
 		taskView.setEditable(true);
-
 		taskView.setRowFactory(row -> new TableRow<Task>() {
 			@Override
 			public void updateItem(Task item, boolean empty) {
@@ -195,14 +194,15 @@ public class FilterController implements Initializable {
 
 	}
 
+	/**
+	 * Adding months In Month Combobox
+	 */ 
 	private void addMonthsInCombo() {
-		// Adding months In Month Combobox
 		for (int count = 0; count < monthList.size(); count++) {
 			Months month = monthList.get(count);
 			cmbMonth.getItems().add(month);
 		}
 	}
-	// https://stackoverflow.com/questions/50708559/filtering-observablelist-with-checkbox-in-javafx
 
 	/**
 	 * 
@@ -239,7 +239,6 @@ public class FilterController implements Initializable {
 		System.out.println(this.until.getValue());
 		System.out.println(this.taskDescriptionField.getText());
 		System.out.println(this.detailedTaskDescriptionField.getText());
-		// ------------------------------------------------------------------
 
 		filteredData.predicateProperty()
 				.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
@@ -261,6 +260,11 @@ public class FilterController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * This method stores user input and passes 
+	 * this information to chartBuilder class where graphs are created.
+	 */ 
 	@FXML
 	private void chart(ActionEvent event) {
 		// Get selected month from combobox
@@ -292,6 +296,11 @@ public class FilterController implements Initializable {
 		newChart.start(stage);
 	}
 
+	/**
+	 * @param event
+	 * This method stores user input including open or closed tasks and passes 
+	 * this information to chartBuilder class where graphs are created.
+	 */ 
 	@FXML
 	public void openWeekChart(ActionEvent event) {
 		String toogleGroupValue = "";
@@ -311,7 +320,7 @@ public class FilterController implements Initializable {
 		if (this.until.getValue() != null) {
 			endDate = (this.until.getValue()).format(formatter_3);
 		}
-		// Calling ChartBuilderForMulContributors Class Constructor with param
+		// Calling WeekChartBuilder Class Constructor with param
 		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
 		Stage stage = new Stage();
 		newChart.start(stage);
@@ -345,6 +354,9 @@ public class FilterController implements Initializable {
 		this.until.setValue(null);
 	}
 
+	/**
+	 * This method sets start and end dates of a month. 
+	 */
 	@FXML
 	public void performActionOnMonthCombo() {
 		String startDate = "";
