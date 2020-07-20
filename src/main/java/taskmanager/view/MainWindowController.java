@@ -9,8 +9,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import com.dropbox.core.DbxException;
 
 import javafx.stage.FileChooser;
@@ -22,7 +20,6 @@ import dropbox.DropboxApi;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,7 +34,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import task.Task;
 import task.Subtask;
 import task.Taskmanager;
@@ -85,6 +81,8 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private Button filterTask;
 	
+	private static final String LINKTOTASK = "Task.fxml";
+	
 	private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
 
 	//this method adds a new Task to the List
@@ -128,13 +126,7 @@ public class MainWindowController implements Initializable {
 			return property;
 		});
 		
-		deleteButton.setCellFactory(new Callback<TableColumn<Task, Boolean>, TableCell<Task, Boolean>>(){
-
-			@Override
-			public TableCell<Task, Boolean> call(TableColumn<Task, Boolean> param) {
-				return new ButtonCell();
-			}
-		});
+		deleteButton.setCellFactory(para -> new ButtonCell());
 		
 		taskView.setEditable(true);
 		
@@ -168,16 +160,8 @@ public class MainWindowController implements Initializable {
 		
 		ButtonCell(){
 			
-			delete.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent t) {
-					Task currentTask = ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-					taskList.removeTask(currentTask);
-					taskView.refresh();
-				}
-				
-			});
+			delete.setOnAction(e -> {taskList.removeTask(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));taskView.setItems(taskList.getTasks());});
+
 		}
 		
 		@Override
@@ -227,7 +211,7 @@ public class MainWindowController implements Initializable {
 
 	@FXML
 	private void addNewTask(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("Task.fxml"));
+		Parent parent = FXMLLoader.load(getClass().getResource(LINKTOTASK));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -254,12 +238,12 @@ public class MainWindowController implements Initializable {
 	
 	@FXML
 	private void editTask(ActionEvent event) throws IOException {		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Task.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOTASK));
 		Parent root = loader.load();
 		TaskController controller = loader.<TaskController>getController();
 		controller.initializeTask(taskView.getSelectionModel().getSelectedItem());
 		
-		FXMLLoader.load(getClass().getResource("Task.fxml"));
+		FXMLLoader.load(getClass().getResource(LINKTOTASK));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -274,18 +258,19 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void handleTasks(ActionEvent event) {
 		int size = Taskmanager.getSize();
-		for(int i = 0;  i < size; i++) {
-			Task t = taskList.getTasks().get(i);
+		System.out.println("Recurrent Tasks handel: "+size);
+		for(Task t:taskList.getTasks()) {
 			if(t.isRecurrent()) {
 				taskList.handleRecurrentTasks(t);
+				System.out.println(t.getTaskNumber()+" is recurrent");
 			}
 		}
+		taskView.setItems(taskList.getTasks());
 	}
 	
 	public void editData(int taskNumber, String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, boolean weekly,  Weekday weekday, int monthday, int numberOfRepetitions, LocalDate repetitionDate) {
 		ObservableList<Task> tasks = taskList.getTasks();
 		for(Task t:tasks) {
-			System.out.println("Task:"+t.getTaskNumber());
 			if(t.getTaskNumber()==taskNumber) {
 				t.setTaskDescription(taskDes);
 				t.setDetailedTaskDescription(detailedTaskDes);
@@ -301,14 +286,13 @@ public class MainWindowController implements Initializable {
 				t.setMonthday(monthday);
 				t.setNumberOfRepetitions(numberOfRepetitions);
 				t.setRepetitionDate(repetitionDate);
-				System.out.println("Change Task"+"Tasknummer:"+t.getTaskNumber());
 			}
 		}
 	}
 	
 	
 	@FXML
-	private void saveToXML(ActionEvent event) throws ParserConfigurationException {
+	private void saveToXML(ActionEvent event){
 		FileChooser fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
 		fileChooser.getExtensionFilters().add(extFilter);

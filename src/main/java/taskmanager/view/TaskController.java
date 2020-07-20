@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.TableRow;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import category.Category;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,6 +39,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,15 +85,15 @@ public class TaskController implements Initializable{
 	@FXML
 	private Button addAttachmentButton;
 	@FXML
-	private Button deleteAttachmentButton;
+	private TableView<String> attachmentView;
 	@FXML
-	private ListView<String> attachmentsList = new ListView<>();
+	private TableColumn<String, String> attachmentNameColumn;
+	@FXML
+	private TableColumn<String, Boolean> deleteButtonAttachment;
 	@FXML
 	private TextField subtaskField;
 	@FXML
 	private Button addSubtaskButton;
-	@FXML
-	private Button deleteSubtaskButton;
 	@FXML
 	private TableView<Subtask> subtaskView;
 	@FXML
@@ -99,11 +101,17 @@ public class TaskController implements Initializable{
 	@FXML
 	private TableColumn<Subtask, Boolean> doneCheckBoxColumn;
 	@FXML
+	private TableColumn<Subtask, Boolean> deleteButtonSubtask;
+	@FXML
 	private Button addTaskButton;
 	@FXML
 	private Button editTaskButton;
 	@FXML
 	private Button backButton;
+	
+	private static final String LINKTOINFO = "InfoWindow.fxml";
+	private static final String LINKTOMAIN = "MainWindow.fxml";
+	private static final String TEXT = "\\d*";
 	
 	private static final Logger LOGGER = Logger.getLogger(TaskController.class.getName());
 	
@@ -113,7 +121,7 @@ public class TaskController implements Initializable{
 		timesOfRepititionsField.textProperty().addListener(new ChangeListener<String>() {
 		    @Override 
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		        if (newValue.matches("\\d*")) {
+		        if (newValue.matches(TEXT)) {
 		            repetitionDateField.setValue(null);
 		        } else {
 		        	timesOfRepititionsField.setText(oldValue);
@@ -148,7 +156,8 @@ public class TaskController implements Initializable{
 		}
 	
 		//Initialize AttachmentListView
-		attachmentsList.setItems(attachmentItems);
+		attachmentView.setItems(attachmentItems);
+		attachmentNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 		
 		//Initialize SubtasksListView
 		subtaskView.setItems(subtaskItems);
@@ -181,7 +190,54 @@ public class TaskController implements Initializable{
 			return property;
 		});
 		
+		
+		deleteButtonSubtask.setCellFactory(para -> new ButtonCell());
+		
+		deleteButtonAttachment.setCellFactory(para -> new ButtonCellAttachment());
+			
 		editTaskButton.setVisible(false);
+	}
+	
+	
+	private class ButtonCell extends TableCell<Subtask, Boolean>{
+		private final Button delete = new Button("delete");
+		
+		ButtonCell(){
+			
+			delete.setOnAction(e -> {subtaskItems.remove(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));subtaskView.setItems(subtaskItems);});
+
+		}
+		
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(delete);
+            }else {
+            	setGraphic(null);
+            }
+		}
+	}
+	
+	
+	private class ButtonCellAttachment extends TableCell<String, Boolean>{
+		private final Button delete = new Button("delete");
+		
+		ButtonCellAttachment(){
+			
+			delete.setOnAction(e -> {attachmentItems.remove(ButtonCellAttachment.this.getTableView().getItems().get(ButtonCellAttachment.this.getIndex()));attachmentView.setItems(attachmentItems);});
+
+		}
+		
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(delete);
+            }else {
+            	setGraphic(null);
+            }
+		}
 	}
 
 	//Ensures that it is not possible to select monthly and weekly at the same time
@@ -242,11 +298,11 @@ public class TaskController implements Initializable{
 		if(attachmentField.getText()!= null && attachmentField.getText().length()>8) {
 			if("https://".equals(attachmentField.getText().substring(0, 8))) {
 				attachmentItems.add(attachmentField.getText());
-				attachmentsList.setItems(attachmentItems);
+				attachmentView.setItems(attachmentItems);
 				attachmentField.setText("");
 			}
 		}else {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 			Parent root;
 			try {
 				root = loader.load();
@@ -263,13 +319,6 @@ public class TaskController implements Initializable{
 		}	
 	}
 	
-	//Delete Attachment
-	@FXML 
-	public void deleteAttachment(ActionEvent event) {
-		attachmentItems.remove(attachmentsList.getSelectionModel().getSelectedItem());
-		attachmentsList.setItems(attachmentItems);
-	}
-	
 	//Add Subtask to SubtaskItems
 		@FXML
 		public void addSubtask(ActionEvent event) {
@@ -278,7 +327,7 @@ public class TaskController implements Initializable{
 				subtaskView.setItems(subtaskItems);
 				subtaskField.setText("");
 			}else {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 				Parent root;
 				try {
 					root = loader.load();
@@ -295,13 +344,6 @@ public class TaskController implements Initializable{
 			}
 			
 		}
-		
-	//Delete SubtaskItem
-	@FXML 
-	public void deleteSubtask(ActionEvent event) {
-		subtaskItems.remove(subtaskView.getSelectionModel().getSelectedItem());
-		subtaskView.setItems(subtaskItems);
-	}
 	
 	//This Method adds a new Task
 	@FXML
@@ -338,25 +380,25 @@ public class TaskController implements Initializable{
 		if(recurrentBox.isSelected()) {
 			//wöchentlich
 			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentView.getItems(), (Weekday) weekday.getValue(), times, repetitionDateField.getValue());
 			//monatlich
 			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue().toString())))) {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), (int) monthday.getValue(), times, repetitionDateField.getValue());
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentView.getItems(), (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
-				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
+				taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentView.getItems());
 			}
 		}else {
-			taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems());
+			taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentView.getItems());
 		}
 		
 		taskNew.setCreationDate(LocalDate.of(2020, 1, 1)); //Änderen
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		Parent root = loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		controller.setData(taskNew);
 		
-		FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader.load(getClass().getResource(LINKTOMAIN));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -366,7 +408,7 @@ public class TaskController implements Initializable{
 	private boolean checkEntries() {
 		
 		if(taskDescriptionField.getText().isEmpty()) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 			Parent root;
 			try {
 				root = loader.load();
@@ -384,7 +426,7 @@ public class TaskController implements Initializable{
 		}
 		
 		if(dueDateField.getValue() == null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 			Parent root;
 			try {
 				root = loader.load();
@@ -403,7 +445,6 @@ public class TaskController implements Initializable{
 		return true;
 	}
 	
-	@FXML
 	public void initializeTask(Task task) {
 		
 		taskNumber = task.getTaskNumber();
@@ -470,23 +511,23 @@ public class TaskController implements Initializable{
 			times = Integer.parseInt(timesOfRepititionsField.getText());
 		}
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		Parent root = loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
 		if(recurrentBox.isSelected()) {
 			if((weeklyBox.isSelected()) && (!("".equals(weekday.getValue().toString())))) {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentView.getItems(), true, false, true, (Weekday) weekday.getValue(), 0, times, repetitionDateField.getValue());
 			}else if((monthlyBox.isSelected()) && (!("".equals(monthday.getValue().toString())))) {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentsList.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems, attachmentView.getItems(), true, true, false, null, (int) monthday.getValue(), times, repetitionDateField.getValue());
 			}else {
-				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
+				controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentView.getItems(), false, false, false, null, 0,0, null);
 			}
 		}else {
-			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentsList.getItems(), false, false, false, null, 0,0, null);
+			controller.editData(taskNumber, taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentView.getItems(), false, false, false, null, 0,0, null);
 		}
 		
-		FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader.load(getClass().getResource(LINKTOMAIN));
 		Scene scene = new Scene(root);//parent
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
@@ -496,7 +537,7 @@ public class TaskController implements Initializable{
 	//Navigate back to MainWindow
 	@FXML
 	public void backtoMain(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+		Parent parent = FXMLLoader.load(getClass().getResource(LINKTOMAIN));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);

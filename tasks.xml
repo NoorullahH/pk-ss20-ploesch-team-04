@@ -6,6 +6,7 @@
 <category>Telefonate</category>
 <category>Software Engineering</category>
 <category>Datenmodellierung</category>
+<category>ABC</category>
 </Categories>
 <Contributors>
 <contributor>Mara Vukadinovic</contributor>
@@ -14,7 +15,84 @@
 </Contributors>
 <Tasks>
 <Task>
+<taskNumber>10</taskNumber>
+<taskDescription>Test</taskDescription>
+<detailedTaskDescription/>
+<dueDate>2020-07-30</dueDate>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+<contributor>Dino Osmanagic</contributor>
+<contributor>Noorullah Hamid</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Haushalt</category>
+<category>Geschenke</category>
+</Categories>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks>
+<subtask type="false">A</subtask>
+<subtask type="false">B</subtask>
+<subtask type="false">HHB</subtask>
+</Subtasks>
+</Task>
+<Task>
+<taskNumber>1</taskNumber>
+<taskDescription>NEU</taskDescription>
+<detailedTaskDescription/>
+<dueDate>2020-07-23</dueDate>
+<Contributors>
+<contributor>Dino Osmanagic</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Telefonate</category>
+<category>Software Engineering</category>
+<category>ABC</category>
+</Categories>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>false</isDone>
+<Subtasks/>
+</Task>
+<Task>
 <taskNumber>3</taskNumber>
+<taskDescription>task2</taskDescription>
+<detailedTaskDescription>566sdfgydfg</detailedTaskDescription>
+<dueDate>2020-05-26</dueDate>
+<Contributors>
+<contributor>Mara Vukadinovic</contributor>
+<contributor>Noorullah Hamid</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories/>
+<Attachments/>
+<creationDate>2020-01-01</creationDate>
+<isDone>true</isDone>
+<Subtasks/>
+</Task>
+<Task>
+<taskNumber>2</taskNumber>
 <taskDescription>task3</taskDescription>
 <detailedTaskDescription>dess</detailedTaskDescription>
 <dueDate>2020-05-26</dueDate>
@@ -37,12 +115,11 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>2</taskNumber>
-<taskDescription>task2</taskDescription>
-<detailedTaskDescription>566sdfgydfg</detailedTaskDescription>
-<dueDate>2020-05-26</dueDate>
+<taskNumber>5</taskNumber>
+<taskDescription>tesrt</taskDescription>
+<detailedTaskDescription/>
+<dueDate>2020-05-22</dueDate>
 <Contributors>
-<contributor>Mara Vukadinovic</contributor>
 <contributor>Noorullah Hamid</contributor>
 </Contributors>
 <isRecurrent>false</isRecurrent>
@@ -55,11 +132,11 @@
 <Categories/>
 <Attachments/>
 <creationDate>2020-01-01</creationDate>
-<isDone>true</isDone>
+<isDone>false</isDone>
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>5</taskNumber>
+<taskNumber>4</taskNumber>
 <taskDescription>fsgdrfg</taskDescription>
 <detailedTaskDescription>adfsef</detailedTaskDescription>
 <dueDate>2020-05-22</dueDate>
@@ -84,28 +161,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>4</taskNumber>
-<taskDescription>tesrt</taskDescription>
-<detailedTaskDescription/>
-<dueDate>2020-05-22</dueDate>
-<Contributors>
-<contributor>Noorullah Hamid</contributor>
-</Contributors>
-<isRecurrent>false</isRecurrent>
-<isWeekly>false</isWeekly>
-<isMonthly>false</isMonthly>
-<monthday>0</monthday>
-<weekday>null</weekday>
-<numberOfRepititions>0</numberOfRepititions>
-<repetitionDate/>
-<Categories/>
-<Attachments/>
-<creationDate>2020-01-01</creationDate>
-<isDone>false</isDone>
-<Subtasks/>
-</Task>
-<Task>
-<taskNumber>1</taskNumber>
+<taskNumber>6</taskNumber>
 <taskDescription>task1</taskDescription>
 <detailedTaskDescription>tgs</detailedTaskDescription>
 <dueDate>2020-05-14</dueDate>

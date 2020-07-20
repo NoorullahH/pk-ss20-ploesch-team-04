@@ -3,28 +3,28 @@ package contributor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Contributormanager {
+public final class Contributormanager {
 	
-	private static Contributormanager INSTANCE;
+	private static Contributormanager instance;
 	
 	private ObservableList<Contributor> contributors;
-	
-	/**
-     * this method returns the single instance of the Contributormanager
-     * @return the single instance of the Contributormanager
-     */
-	public static synchronized Contributormanager getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new Contributormanager();
-		}
-		return INSTANCE;
-	}
 	
 	/**
      * private constructor which initializes the Contributormanager
      */
 	private Contributormanager() {
 		contributors = FXCollections.observableArrayList();
+	}
+	
+	/**
+     * this method returns the single instance of the Contributormanager
+     * @return the single instance of the Contributormanager
+     */
+	public static synchronized Contributormanager getInstance() {
+		if(instance == null) {
+			instance = new Contributormanager();
+		}
+		return instance;
 	}
 	
 	/**

@@ -33,20 +33,15 @@ public class Contributor {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-	   if (obj == null) {
+	   if (obj == null ||this.getClass() != obj.getClass() ) {
 		   return false;
-	   }
-	   if (this.getClass() != obj.getClass()) {
-		   return false;
-	   }
-	   if (!Contributor.class.isAssignableFrom(obj.getClass())) {
-	       return false;
 	   }
 	        
 	   Contributor other = (Contributor) obj;
-	   if ((this.person == null) ? (other.person != null) : !this.person.equals(other.person)) {
+	   if (this.person == null || other.person == null || !this.person.equals(other.person)) {
 	       return false;
 	   }
+	   
 	   return true;	
 	}	
 	

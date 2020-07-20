@@ -33,25 +33,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import weekday.Weekday;
 
-public class Taskmanager {
+public final class Taskmanager {
 	
-	private static Taskmanager INSTANCE;
+	private static Taskmanager instance;
 	
 	private ObservableList<Task> tasks;
 	private static int size;
 	
+	private static final String CATEGORIES = "Categories";
+	private static final String CATEGORY = "category";
+	private static final String CONTRIBUTORS = "Contributors";
+	private static final String CONTRIBUTOR = "contributor";
+	
 	private static final Logger LOGGER = Logger.getLogger(Taskmanager.class.getName());
 	
-	/**
-     * this method returns the single instance of the Taskmanager
-     * @return the single instance of the Taskmanager
-     */
-	public static synchronized Taskmanager getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new Taskmanager();
-		}
-		return INSTANCE;
-	}
 	
 	/**
      * private constructor which initializes the Taskmanager
@@ -60,6 +55,17 @@ public class Taskmanager {
 		this.tasks = FXCollections.observableArrayList();
 	}
 		
+	/**
+     * this method returns the single instance of the Taskmanager
+     * @return the single instance of the Taskmanager
+     */
+	public static synchronized Taskmanager getInstance() {
+		if(instance == null) {
+			instance = new Taskmanager();
+		}
+		return instance;
+	}
+	
 	/**
      * this method returns a list of the tasks
      * @return list of the tasks
@@ -79,8 +85,17 @@ public class Taskmanager {
 			return false;
 		}
 		tasks.add(task);
-		size++;
+		changeSize(true);
 		return true;
+	}
+	
+	
+	private static void changeSize(boolean b) {
+		if(b) {
+			size++;
+		}else {
+			size--;
+		}
 	}
 	
 	/**
@@ -104,7 +119,7 @@ public class Taskmanager {
 		}else {
 			tasks.remove(index);
 			System.out.println("Removed:"+ task.getTaskNumber());
-			size--;
+			changeSize(false);
 			return true;
 		}
 	}
@@ -177,52 +192,28 @@ public class Taskmanager {
 					t.setMonthday(28);
 				}
 				
-				if(t.getNumberOfRepetitions()>0){
-					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
-						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
-						tasks.add(newTask);
-						for(Task task:tasks) {
-							if(task.getTaskNumber()==t.getTaskNumber()) {
-								task.setNumberOfRepetitions(0);
-							}
-						}
-					}
-				}else if(t.getRepetitionDate()!=null) {
-					if(LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), 0, t.getRepetitionDate());
-						newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
-						tasks.add(newTask);
-						for(Task task:tasks) {
-							if(task.getTaskNumber()==t.getTaskNumber()) {
-								task.setRepetitionDate(null);
-							}
-						}
-					}
+				if(t.getNumberOfRepetitions()>0 && LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))){
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), (t.getNumberOfRepetitions()-1), null);
+					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
+					tasks.add(newTask);
+					t.setNumberOfRepetitions(0);
+				}else if(t.getRepetitionDate()!=null && LocalDate.now().isAfter(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()))) {
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null , t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getMonthday(), 0, t.getRepetitionDate());
+					newTask.setCreationDate(t.getCreationDate().plusMonths(1).withDayOfMonth(t.getMonthday()));
+					tasks.add(newTask);
+					t.setRepetitionDate(null);
 				}
 			}else if(t.isWeekly()) {
-				if(t.getNumberOfRepetitions()>0){
-					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
-						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
-						tasks.add(newTask);
-						for(Task task:tasks) {
-							if(task.getTaskNumber()==t.getTaskNumber()) {
-								task.setNumberOfRepetitions(0);
-							}
-						}
-					}
-				}else if(t.getRepetitionDate()!=null) {
-					if(LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
-						newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), 0 , t.getRepetitionDate());
-						newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
-						tasks.add(newTask);
-						for(Task task:tasks) {
-							if(task.getTaskNumber()==t.getTaskNumber()) {
-								task.setRepetitionDate(null);
-							}
-						}
-					}
+				if(t.getNumberOfRepetitions()>0 && LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))){
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), (t.getNumberOfRepetitions()-1), null);
+					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+					tasks.add(newTask);
+					t.setNumberOfRepetitions(0);
+				}else if(t.getRepetitionDate()!=null && LocalDate.now().isAfter(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())))) {
+					newTask = new Task(t.getTaskDescription(), t.getDetailedTaskDescription(), null, t.getContributorsList(), t.getCategoriesList(), t.getSubtasks(), t.getAttachments(), t.getWeekday(), 0 , t.getRepetitionDate());
+					newTask.setCreationDate(t.getCreationDate().plusWeeks(1).with(DayOfWeek.valueOf(t.getWeekday().toString())));
+					tasks.add(newTask);
+					t.setRepetitionDate(null);
 				}
 			}	
 		}
@@ -246,33 +237,37 @@ public class Taskmanager {
 	}
 	
 	
-	public void saveToXML(File fileName) throws ParserConfigurationException {		
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, Boolean.TRUE);
-		DocumentBuilder dBuilder;
+	public void saveToXML(File fileName) {	
+		if(fileName == null) {
+			LOGGER.log(Level.SEVERE, "File does not exist");
+		}
 		
 		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, Boolean.TRUE);
+			DocumentBuilder dBuilder;
+			
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.newDocument();
 			
 			Element rootElement = doc.createElement("Data");
 			doc.appendChild(rootElement);
 			
-			Element rootCategory = doc.createElement("Categories");
+			Element rootCategory = doc.createElement(CATEGORIES);
 			rootElement.appendChild(rootCategory);
 			
 			Categorymanager catManager = Categorymanager.getInstance();
 			for(Category c: catManager.getCategories()) {
-	        	Element e = doc.createElement("category");
+	        	Element e = doc.createElement(CATEGORY);
 	            e.appendChild(doc.createTextNode(c.getCategory()));
 	            rootCategory.appendChild(e);
 			}
 			
-			Element rootContributors = doc.createElement("Contributors");
+			Element rootContributors = doc.createElement(CONTRIBUTORS);
 			rootElement.appendChild(rootContributors);
 			Contributormanager conManager = Contributormanager.getInstance();
 			for(Contributor c: conManager.getContributors()) {
-				Element e = doc.createElement("contributor");
+				Element e = doc.createElement(CONTRIBUTOR);
 				e.appendChild(doc.createTextNode(c.getPerson()));
 				rootContributors.appendChild(e);
 			}
@@ -327,7 +322,7 @@ public class Taskmanager {
         
         task.appendChild(getTaskElements(doc, "dueDate", dueDate));
         
-        task.appendChild(getContributorsElements(doc, task, "contributor", contributors));
+        task.appendChild(getContributorsElements(doc, CONTRIBUTOR , contributors));
         
         task.appendChild(getTaskElements(doc, "isRecurrent", isRecurrent));
         
@@ -343,7 +338,7 @@ public class Taskmanager {
         
         task.appendChild(getTaskElements(doc, "repetitionDate", repetitionDate));
         
-        task.appendChild(getCategoriesElements(doc, "category", categories));
+        task.appendChild(getCategoriesElements(doc, CATEGORY , categories));
         
         task.appendChild(getAttachmentElements(doc, "attachment", attachments));
         
@@ -365,9 +360,9 @@ public class Taskmanager {
     }
     
   //utility method to create text node
-    private static Node getContributorsElements(Document doc, Element element, String name, ObservableList<Contributor> contributors) {
+    private static Node getContributorsElements(Document doc, String name, ObservableList<Contributor> contributors) {
     	Element e = null;
-    	Element con = doc.createElement("Contributors");
+    	Element con = doc.createElement(CONTRIBUTORS);
     
     	for(Contributor c:contributors) {
     		e = doc.createElement(name);
@@ -379,7 +374,7 @@ public class Taskmanager {
     
     private static Node getCategoriesElements(Document doc, String name, ObservableList<Category> categories) {
     	Element e = null;
-    	Element con = doc.createElement("Categories");
+    	Element con = doc.createElement(CATEGORIES);
     
     	for(Category c:categories) {
     		e = doc.createElement(name);
@@ -427,55 +422,44 @@ public class Taskmanager {
     		NodeList nodeList = doc.getElementsByTagName("Task");
     		//now XML is loaded as Document in memory, lets convert it to Object List
     		for (int i = 0; i < nodeList.getLength(); i++) {
-    			size++;
+    			changeSize(true);
     			Task t = getTask(nodeList.item(i));
     			t.setTaskNumber(size);
     			tasks.add(t);
-    			System.out.println("TaskNumber Import: "+t.getTaskNumber());
     		}
     		
     		Categorymanager catManager = Categorymanager.getInstance();
-    		NodeList nodeCatList = doc.getElementsByTagName("Categories");
-    		for(int i = 0; i < nodeCatList.getLength(); i++) {
-    			if(nodeCatList.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeCatList.item(i);
-    				NodeList category = eElement.getElementsByTagName("category");
-    				
-    				for(int j = 0; j < category.getLength(); j++) {
-    					Node node1 = category.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element c = (Element) node1;
-    						catManager.addCategory(c.getTextContent());
-    					}
-    				}
-    			}	
-    		}
+    		NodeList nodeCatList = doc.getElementsByTagName(CATEGORIES);
+    		if(nodeCatList.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeCatList.item(0);
+    			NodeList category = eElement.getElementsByTagName(CATEGORY);
+    			
+    			for(int j = 0; j < category.getLength(); j++) {
+    				Node node1 = category.item(j);
+    				Element c = (Element) node1;
+					catManager.addCategory(c.getTextContent());
+    			}
+    		}	
     		
     		Contributormanager conManager = Contributormanager.getInstance();
-    		NodeList nodeConList = doc.getElementsByTagName("Contributors");
-    		for(int i = 0; i < nodeConList.getLength(); i++) {
-    			if(nodeConList.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeConList.item(i);
-    				NodeList contributor = eElement.getElementsByTagName("contributor");
+    		NodeList nodeConList = doc.getElementsByTagName(CONTRIBUTORS);
+    		if(nodeConList.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeConList.item(0);
+    			NodeList contributor = eElement.getElementsByTagName(CONTRIBUTOR);
     				
-    				for(int j = 0; j < contributor.getLength(); j++) {
-    					Node node1 = contributor.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element c = (Element) node1;
-    						conManager.addContributor(c.getTextContent());
-    					}
-    				}
-    			}	
-    		}
+    			for(int j = 0; j < contributor.getLength(); j++) {
+    				Node node1 = contributor.item(j);
+    				Element c = (Element) node1;
+					conManager.addContributor(c.getTextContent());
+    			}
+    		}	
+    		
     	} catch (SAXException | ParserConfigurationException | IOException e1) {
     		LOGGER.log(Level.SEVERE, "Exception occured (read XML)", e1);
     	}
     }
 
     private static Task getTask(Node node) {
-    	//XMLReaderDOM domReader = new XMLReaderDOM();
     	Task emp = new Task();
     	if (node.getNodeType() == Node.ELEMENT_NODE) {
     		Element element = (Element) node;
@@ -488,84 +472,66 @@ public class Taskmanager {
     		emp.setTaskNumber(Integer.parseInt(getTagValue("taskNumber",element)));
     		
     		ObservableList<Contributor> contri = FXCollections.observableArrayList();
-    		NodeList nodeListCon = element.getElementsByTagName("Contributors");
-    		for(int i = 0; i < nodeListCon.getLength(); i++) {
-    			if(nodeListCon.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeListCon.item(i);
-    				NodeList contributor = eElement.getElementsByTagName("contributor");
+    		NodeList nodeListCon = element.getElementsByTagName(CONTRIBUTORS);
+    		if(nodeListCon.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeListCon.item(0);
+    			NodeList contributor = eElement.getElementsByTagName(CONTRIBUTOR);
     				
-    				for(int j = 0; j < contributor.getLength(); j++) {
-    					Node node1 = contributor.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element con = (Element) node1;
-    						contri.add(new Contributor(con.getTextContent()));
-    					}
-    				}
-    			}	
+    			for(int j = 0; j < contributor.getLength(); j++) {
+    				Node node1 = contributor.item(j);
+    				Element con = (Element) node1;
+					contri.add(new Contributor(con.getTextContent()));
+    			}
     		}
+    		
     		emp.setContributors(contri);
     		
-    		
     		ObservableList<Category> cat = FXCollections.observableArrayList();
-    		NodeList nodeListCat = element.getElementsByTagName("Categories");
-    		for(int i = 0; i < nodeListCat.getLength(); i++) {
-    			if(nodeListCat.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeListCat.item(i);
-    				NodeList category = eElement.getElementsByTagName("category");
+    		NodeList nodeListCat = element.getElementsByTagName(CATEGORIES);
+    		if(nodeListCat.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeListCat.item(0);
+    			NodeList category = eElement.getElementsByTagName(CATEGORY);
     				
-    				for(int j = 0; j < category.getLength(); j++) {
-    					Node node1 = category.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element c = (Element) node1;
-    						cat.add(new Category(c.getTextContent()));
-    					}
-    				}
+    			for(int j = 0; j < category.getLength(); j++) {
+    				Node node1 = category.item(j);
+    				Element c = (Element) node1;
+					cat.add(new Category(c.getTextContent()));
     			}	
     		}
+    		
     		emp.setCategories(cat);
     		
     		ObservableList<String> att = FXCollections.observableArrayList();
     		NodeList nodeListAtt = element.getElementsByTagName("Attachments");
-    		for(int i = 0; i < nodeListAtt.getLength(); i++) {
-    			if(nodeListAtt.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeListAtt.item(i);
-    				NodeList attachment = eElement.getElementsByTagName("attachment");
+    		if(nodeListAtt.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeListAtt.item(0);
+    			NodeList attachment = eElement.getElementsByTagName("attachment");
     				
-    				for(int j = 0; j < attachment.getLength(); j++) {
-    					Node node1 = attachment.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element a = (Element) node1;
-    						att.add(a.getTextContent());
-    					}
-    				}
+    			for(int j = 0; j < attachment.getLength(); j++) {
+    				Node node1 = attachment.item(j);
+    				Element a = (Element) node1;
+					att.add(a.getTextContent());
     			}	
     		}
-    		emp.setAttachments(att);
     		
+    		emp.setAttachments(att);
     		
     		ObservableList<Subtask> sub = FXCollections.observableArrayList();
     		NodeList nodeListSub = element.getElementsByTagName("Subtasks");
-    		for(int i = 0; i < nodeListSub.getLength(); i++) {
-    			if(nodeListSub.item(i).getNodeType()==Node.ELEMENT_NODE) {
-    				Element eElement = (Element) nodeListSub.item(i);
-    				NodeList subtask = eElement.getElementsByTagName("subtask");
+    		if(nodeListSub.item(0).getNodeType()==Node.ELEMENT_NODE) {
+    			Element eElement = (Element) nodeListSub.item(0);
+    			NodeList subtask = eElement.getElementsByTagName("subtask");
     				
-    				for(int j = 0; j < subtask.getLength(); j++) {
-    					Node node1 = subtask.item(j);
-    					
-    					if(node1.getNodeType() == node1.ELEMENT_NODE) {
-    						Element s = (Element) node1;
-    						Subtask newSubtask = new Subtask(s.getTextContent());
-    						String example = s.getAttribute("type");
-    						newSubtask.setDone("true".equals(example));
-    						sub.add(newSubtask);
-    					}
-    				}
+    			for(int j = 0; j < subtask.getLength(); j++) {
+    				Node node1 = subtask.item(j);
+    				Element s = (Element) node1;
+					Subtask newSubtask = new Subtask(s.getTextContent());
+					String example = s.getAttribute("type");
+					newSubtask.setDone("true".equals(example));
+					sub.add(newSubtask);
     			}	
     		}
+    		
     		emp.setSubtasks(sub);
     		
     		String dummy = getTagValue("isRecurrent", element);
@@ -591,23 +557,23 @@ public class Taskmanager {
     
     
     public static Weekday handleWeekday(String s) {
-    	if(s.equals("MONDAY")) {
-    		return Weekday.MONDAY;
-    	}else if(s.equals("TUESDAY")) {
-    		return Weekday.TUESDAY;
-    	}else if(s.equals("WEDNESDAY")) {
-    		return Weekday.WEDNESDAY;
-    	}else if(s.equals("THURSDAY")) {
-    		return Weekday.THURSDAY;
-    	}else if(s.equals("FRIDAY")) {
-    		return Weekday.FRIDAY;
-    	}else if(s.equals("SATURDAY")) {
-    		return Weekday.SATURDAY;
-    	}else if(s.equals("SUNDAY")) {
-    		return Weekday.SUNDAY;
-    	}else {
-    		return null;
+    	Weekday w = null;
+    	if("MONDAY".equals(s)) {
+    		w = Weekday.MONDAY;
+    	}else if("TUESDAY".equals(s)) {
+    		w = Weekday.TUESDAY;
+    	}else if("WEDNESDAY".equals(s)) {
+    		w = Weekday.WEDNESDAY;
+    	}else if("THURSDAY".equals(s)) {
+    		w = Weekday.THURSDAY;
+    	}else if("FRIDAY".equals(s)) {
+    		w = Weekday.FRIDAY;
+    	}else if("SATURDAY".equals(s)) {
+    		w = Weekday.SATURDAY;
+    	}else if("SUNDAY".equals(s)) {
+    		w = Weekday.SUNDAY;
     	}
+    	return w;
     }
 
     private static String getTagValue(String tag, Element element) {
@@ -618,7 +584,7 @@ public class Taskmanager {
     	if(nodeList.item(0) == null) {
     		return "";
     	}
-    	Node node = (Node) nodeList.item(0);
+    	Node node = nodeList.item(0);
     	return node.getNodeValue();
     }
     
@@ -635,9 +601,9 @@ public class Taskmanager {
 			csvWriter.append(";");
 			csvWriter.append("Due Date");
 			csvWriter.append(";");
-			csvWriter.append("Contributors");
+			csvWriter.append(CONTRIBUTORS);
 			csvWriter.append(";");
-			csvWriter.append("Categories");
+			csvWriter.append(CATEGORIES);
 			csvWriter.append(";");
 			csvWriter.append("Done");
 			csvWriter.append("\n");				

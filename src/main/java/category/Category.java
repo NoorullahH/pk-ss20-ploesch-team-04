@@ -28,27 +28,26 @@ public class Category {
 		this.name = category;
 	}
 
+
 	/**
 	 *@author Dino
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
+		if (obj == null || this.getClass() != obj.getClass()) {
 			return false;
 		}
 
 	    Category other = (Category) obj;
-	    if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-	    	return false;
+		if(this.name == null || other.name == null || !this.name.equals(other.name)) {
+			return false;
 	    }
+		
 	    return true;	
 	}
 
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}		
+	}	
 }

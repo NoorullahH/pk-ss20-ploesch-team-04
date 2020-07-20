@@ -75,7 +75,6 @@ public class CategoryController implements Initializable{
 	
 	@FXML
 	public void backtoMain(ActionEvent event) throws IOException {
-
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 		Scene scene = new Scene(parent);
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

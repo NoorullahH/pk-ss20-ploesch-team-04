@@ -10,48 +10,48 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1050.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanager.view.TaskController">
    <children>
-      <Label layoutX="424.0" layoutY="40.0" text="Add new Task" textFill="WHITE">
+      <Label layoutX="500.0" layoutY="44.0" text="Task" textFill="WHITE">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
       <Label layoutX="70.0" layoutY="140.0" text="Task description:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <TextField fx:id="taskDescriptionField" layoutX="280.0" layoutY="132.0" prefHeight="35.0" prefWidth="236.0">
          <font>
-            <Font size="16.0" />
+            <Font size="15.0" />
          </font></TextField>
-      <Label layoutX="660.0" layoutY="140.0" text="Detailed Task Description:" textFill="WHITE">
+      <Label layoutX="620.0" layoutY="140.0" text="Detailed Task Description:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextArea fx:id="detailedTaskDescriptionField" layoutX="660.0" layoutY="180.0" prefHeight="238.0" prefWidth="248.0">
+      <TextArea fx:id="detailedTaskDescriptionField" layoutX="620.0" layoutY="180.0" prefHeight="174.0" prefWidth="375.0">
          <font>
             <Font size="16.0" />
          </font></TextArea>
       <Label layoutX="70.0" layoutY="200.0" text="Contributors:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <Label layoutX="70.0" layoutY="312.0" text="Due Date:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <DatePicker fx:id="dueDateField" layoutX="280.0" layoutY="308.0" prefHeight="35.0" prefWidth="236.0" style="-fx-font-size: 14;" />
       <Label layoutX="70.0" layoutY="373.0" text="Category:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <Label layoutX="70.0" layoutY="485.0" text="Reccurent?" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <CheckBox fx:id="recurrentBox" layoutX="280.0" layoutY="483.0" mnemonicParsing="false">
@@ -72,25 +72,25 @@
       <ComboBox fx:id="weekday" layoutX="280.0" layoutY="590.0" onAction="#handleWeekday" prefHeight="30.0" prefWidth="175.0" style="-fx-font-size: 14;" />
       <Label layoutX="70.0" layoutY="647.0" text="Times?" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <TextField fx:id="timesOfRepititionsField" layoutX="280.0" layoutY="641.0" prefHeight="35.0" prefWidth="236.0" style="-fx-font-size: 14;">
          <font>
-            <Font size="16.0" />
+            <Font size="15.0" />
          </font></TextField>
       <ListView fx:id="contributorList" layoutX="280.0" layoutY="200.0" prefHeight="80.0" prefWidth="236.0" style="-fx-font-size: 14;" />
       <ListView fx:id="categoryList" layoutX="280.0" layoutY="378.0" prefHeight="80.0" prefWidth="236.0" style="-fx-font-size: 14;" />
-      <Label layoutX="660.0" layoutY="435.0" text="Attachment:" textFill="WHITE">
+      <Label layoutX="620.0" layoutY="386.0" text="Attachment:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="attachmentField" layoutX="769.0" layoutY="435.0" prefHeight="30.0" prefWidth="141.0">
+      <TextField fx:id="attachmentField" layoutX="724.0" layoutY="384.0" prefHeight="30.0" prefWidth="141.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Button fx:id="addTaskButton" layoutX="712.0" layoutY="728.0" mnemonicParsing="false" onAction="#addTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
+      <Button fx:id="addTaskButton" layoutX="725.0" layoutY="737.0" mnemonicParsing="false" onAction="#addTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Add Task" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -99,53 +99,49 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label layoutX="660.0" layoutY="575.0" text="Subtask:" textFill="WHITE">
+      <Label layoutX="620.0" layoutY="565.0" text="Subtask:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="subtaskField" layoutX="742.0" layoutY="575.0" prefHeight="30.0" prefWidth="165.0">
+      <TextField fx:id="subtaskField" layoutX="700.0" layoutY="563.0" prefHeight="30.0" prefWidth="165.0">
          <font>
-            <Font size="14.0" />
+            <Font size="13.0" />
          </font></TextField>
-      <Button fx:id="addSubtaskButton" layoutX="916.0" layoutY="574.0" mnemonicParsing="false" onAction="#addSubtask" prefHeight="29.0" prefWidth="126.0" text="Add Subtask">
+      <Button fx:id="addSubtaskButton" layoutX="877.0" layoutY="564.0" mnemonicParsing="false" onAction="#addSubtask" prefHeight="29.0" prefWidth="126.0" text="Add Subtask">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <ListView fx:id="attachmentsList" layoutX="660.0" layoutY="481.0" prefHeight="66.0" prefWidth="248.0" style="-fx-font-size: 14;" />
-      <Button fx:id="addAttachmentButton" layoutX="916.0" layoutY="436.0" mnemonicParsing="false" onAction="#addAttachment" prefHeight="29.0" prefWidth="126.0" text="Add Attachment">
+      <Button fx:id="addAttachmentButton" layoutX="877.0" layoutY="385.0" mnemonicParsing="false" onAction="#addAttachment" prefHeight="29.0" prefWidth="126.0" text="Add Attachment">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="deleteAttachmentButton" layoutX="916.0" layoutY="481.0" mnemonicParsing="false" onAction="#deleteAttachment" prefHeight="29.0" prefWidth="126.0" text="Delete Attachment">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="deleteSubtaskButton" layoutX="916.0" layoutY="616.0" mnemonicParsing="false" onAction="#deleteSubtask" prefHeight="29.0" prefWidth="126.0" text="Delete Subtask">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <TableView fx:id="subtaskView" layoutX="659.0" layoutY="616.0" prefHeight="90.0" prefWidth="250.0" style="-fx-font-size: 14;">
-        <columns>
-          <TableColumn fx:id="subtaskNameColumn" prefWidth="172.0" text="Subtasks" />
-          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="77.0" text="Done?" />
-        </columns>
-      </TableView>
       <DatePicker fx:id="repetitionDateField" layoutX="280.0" layoutY="702.0" onAction="#handleRepetitionDateField" prefHeight="35.0" prefWidth="236.0" style="-fx-font-size: 14;" />
       <Label layoutX="72.0" layoutY="706.0" text="Repeat until:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <Line endX="400.0" layoutX="505.0" layoutY="94.0" startX="-400.0" stroke="WHITE" strokeWidth="3.0" />
-      <Button fx:id="editTaskButton" layoutX="712.0" layoutY="728.0" mnemonicParsing="false" onAction="#editTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Edit Task" textFill="WHITE">
+      <Button fx:id="editTaskButton" layoutX="725.0" layoutY="737.0" mnemonicParsing="false" onAction="#editTask" prefHeight="44.0" prefWidth="165.0" style="-fx-background-color: #517E81;" text="Edit Task" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <TableView fx:id="attachmentView" layoutX="620.0" layoutY="430.0" prefHeight="113.0" prefWidth="382.0">
+        <columns>
+          <TableColumn fx:id="attachmentNameColumn" prefWidth="294.0" style="-fx-font-size: 12;" text="Attachment" />
+          <TableColumn fx:id="deleteButtonAttachment" prefWidth="87.0" style="-fx-font-size: 12; -fx-alignment: center;" text="Delete" />
+        </columns>
+      </TableView>
+      <TableView fx:id="subtaskView" layoutX="620.0" layoutY="606.0" prefHeight="113.0" prefWidth="382.0">
+        <columns>
+          <TableColumn fx:id="subtaskNameColumn" prefWidth="223.0" style="-fx-font-size: 12;" text="Subtask" />
+          <TableColumn fx:id="doneCheckBoxColumn" prefWidth="74.0" style="-fx-font-size: 12;" text="Done?" />
+            <TableColumn fx:id="deleteButtonSubtask" prefWidth="84.0" style="-fx-font-size: 12; -fx-alignment: center;" text="Delete" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

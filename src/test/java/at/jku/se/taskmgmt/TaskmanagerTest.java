@@ -30,7 +30,7 @@ public class TaskmanagerTest {
      */
 	@AfterEach
 	public void resetTaskManager() throws Exception{
-		Field instance = Taskmanager.class.getDeclaredField("INSTANCE");
+		Field instance = Taskmanager.class.getDeclaredField("instance");
 		instance.setAccessible(true);
 		instance.set(null, null);
 	}

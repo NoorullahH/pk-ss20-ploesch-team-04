@@ -17,11 +17,12 @@ import javafx.stage.Stage;
 public class StartWindowController {
 	
 	private boolean fileChosen;
+	private static final String LINKTOMAIN = "MainWindow.fxml";
 
 	@FXML
 	private void logIn(ActionEvent event) throws IOException, ParserConfigurationException {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
@@ -32,9 +33,11 @@ public class StartWindowController {
 			controller.taskList.readXML(file);
 		}
 	
-    	Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+    	Parent parent = FXMLLoader.load(getClass().getResource(LINKTOMAIN));
     	Scene scene = new Scene (parent);
     	Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	windowStage.setX(300);
+    	windowStage.setY(20);
     	windowStage.setScene(scene);
     	windowStage.show();
     }
@@ -49,7 +52,7 @@ public class StartWindowController {
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
 		fileChooser.getExtensionFilters().add(extFilter);
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		

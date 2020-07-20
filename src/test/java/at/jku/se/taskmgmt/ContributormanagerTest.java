@@ -21,7 +21,7 @@ private static Contributormanager cm;
      */
 	@AfterEach
 	public void resetContributorManager() throws Exception{
-		Field instance = Contributormanager.class.getDeclaredField("INSTANCE");
+		Field instance = Contributormanager.class.getDeclaredField("instance");
 		instance.setAccessible(true);
 		instance.set(null, null);
 	}

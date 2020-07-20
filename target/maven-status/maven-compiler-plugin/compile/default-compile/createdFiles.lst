@@ -2,9 +2,10 @@ filter\view\ChartBuilder.class
 task\Subtask.class
 taskmanager\view\ContributorController.class
 taskmanager\view\TaskController$1.class
+taskmanager\view\TaskController$ButtonCellAttachment.class
 filter\view\FilterController.class
+taskmanager\view\TaskController$ButtonCell.class
 dropbox\DropboxApi.class
-taskmanager\view\MainWindowController$3.class
 taskmanager\view\Main.class
 taskmanager\view\CategoryController.class
 taskmanager\view\TaskController.class
@@ -22,7 +23,6 @@ taskmanager\view\MainWindowController$2.class
 taskmanager\view\InfoWindowController.class
 weekday\Months.class
 category\Categorymanager.class
-taskmanager\view\MainWindowController$ButtonCell$1.class
 filter\view\FilterController$1.class
 contributor\Contributor.class
 taskmanager\view\MainWindowController$1.class

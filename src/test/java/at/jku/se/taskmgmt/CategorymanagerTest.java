@@ -20,7 +20,7 @@ public class CategorymanagerTest {
      */
 	@AfterEach
 	public void resetCategoryManager() throws Exception{
-		Field instance = Categorymanager.class.getDeclaredField("INSTANCE");
+		Field instance = Categorymanager.class.getDeclaredField("instance");
 		instance.setAccessible(true);
 		instance.set(null, null);
 	}

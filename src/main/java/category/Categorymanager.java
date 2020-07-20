@@ -4,28 +4,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-public class Categorymanager {
+public final class Categorymanager {
 	
-	private static Categorymanager INSTANCE;
+	private static Categorymanager instance;
 	
 	private ObservableList<Category> categories;
-	
-	/**
-     * this method returns the single instance of the Categorymanager
-     * @return the single instance of the Categorymanager
-     */
-	public static synchronized Categorymanager getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new Categorymanager();
-		}
-		return INSTANCE;
-	}
 	
 	/**
      * private constructor which initializes the Categorymanager
      */
 	private Categorymanager() {
 		categories = FXCollections.observableArrayList();
+	}
+	
+	/**
+     * this method returns the single instance of the Categorymanager
+     * @return the single instance of the Categorymanager
+     */
+	public static synchronized Categorymanager getInstance() {
+		if(instance == null) {
+			instance = new Categorymanager();
+		}
+		return instance;
 	}
 	
 	/**
