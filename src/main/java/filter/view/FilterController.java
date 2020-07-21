@@ -90,23 +90,16 @@ public class FilterController implements Initializable {
 	private ObservableList<Task> toFilterTasks;
 	private FilteredList<Task> filteredData;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
-
 	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
 	private static final String STYLE = "-fx-font-size: 15 ;";
-	
-
-	/**
-	 * @author Noorullah
-	 */
 	@FXML
 	private ComboBox cmbMonth;
 	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY,
 			Months.MARCH, Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER,
 			Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 
-	/**
-	 *
-	 */
+	private Parent rootCon;
+	private Parent rootCat;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -138,7 +131,7 @@ public class FilterController implements Initializable {
 				getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
 
 		try {
-			Parent rootCon = loaderCon.load();
+			rootCon = loaderCon.load();
 			ContributorController conController = loaderCon.<ContributorController>getController();
 			contributorList.setItems(conController.getContributorList());
 			contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -155,7 +148,7 @@ public class FilterController implements Initializable {
 		FXMLLoader loaderCat = new FXMLLoader(
 				getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 		try {
-			Parent rootCat = loaderCat.load();
+			rootCat = loaderCat.load();
 			CategoryController catController = loaderCat.<CategoryController>getController();
 			categoryList.setItems(catController.getCategoryList());
 			categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -359,107 +352,80 @@ public class FilterController implements Initializable {
 	 */
 	@FXML
 	public void performActionOnMonthCombo() {
-		String startDate = "";
-		String endDate = "";
 		String year = "2020";
 		if (cmbMonth.getSelectionModel().getSelectedItem() != null) {
 			Months month = (Months) cmbMonth.getSelectionModel().getSelectedItem();
 			if (("JANUARY").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-01-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-01-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart1 = LocalDate.parse(year + "-01-01");
+				this.from.setValue(valStart1);
+				LocalDate valEnd1 = LocalDate.parse(year + "-01-31");
+				this.until.setValue(valEnd1);
+				
 			} else if (("FEBRUARY").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-02-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-02-28";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart2 = LocalDate.parse(year + "-02-01");
+				this.from.setValue(valStart2);
+				LocalDate valEnd2 = LocalDate.parse(year + "-02-28");
+				this.until.setValue(valEnd2);
+				
 			} else if (("MARCH").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-03-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-03-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart3 = LocalDate.parse(year + "-03-01");
+				this.from.setValue(valStart3);
+				LocalDate valEnd3 = LocalDate.parse(year + "-03-31");
+				this.until.setValue(valEnd3);
+				
 			} else if (("APRIL").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-04-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-04-30";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart4 = LocalDate.parse(year + "-04-01");
+				this.from.setValue(valStart4);
+				LocalDate valEnd4 = LocalDate.parse(year + "-04-30");
+				this.until.setValue(valEnd4);
+				
 			} else if (("MAY").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-05-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-05-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart5 = LocalDate.parse(year + "-05-01");
+				this.from.setValue(valStart5);
+				LocalDate valEnd5 = LocalDate.parse(year + "-05-31");
+				this.until.setValue(valEnd5);
+				
 			} else if (("JUNE").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-06-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-06-30";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart6 = LocalDate.parse(year + "-06-01");
+				this.from.setValue(valStart6);
+				LocalDate valEnd6 = LocalDate.parse(year + "-06-30");
+				this.until.setValue(valEnd6);
+				
 			} else if (("JULY").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-07-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-07-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart7 = LocalDate.parse(year + "-07-01");
+				this.from.setValue(valStart7);
+				LocalDate valEnd7 = LocalDate.parse(year + "-07-31");
+				this.until.setValue(valEnd7);
+				
 			} else if (("AUGUST").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-08-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-08-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart8 = LocalDate.parse(year + "-08-01");
+				this.from.setValue(valStart8);
+				LocalDate valEnd8 = LocalDate.parse(year + "-08-31");
+				this.until.setValue(valEnd8);
+				
 			} else if (("SEPTEMBER").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-09-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-09-30";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart9 = LocalDate.parse(year + "-09-01");
+				this.from.setValue(valStart9);
+				LocalDate valEnd9 = LocalDate.parse(year + "-09-30");
+				this.until.setValue(valEnd9);
+				
 			} else if (("OCTOBER").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-10-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-10-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart10 = LocalDate.parse(year + "-10-01");
+				this.from.setValue(valStart10);
+				LocalDate valEnd10 = LocalDate.parse(year + "-10-31");
+				this.until.setValue(valEnd10);
+				
 			} else if (("NOVEMBER").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-11-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-11-30";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart11 = LocalDate.parse(year + "-11-01");
+				this.from.setValue(valStart11);
+				LocalDate valEnd11 = LocalDate.parse(year + "-11-30");
+				this.until.setValue(valEnd11);
+				
 			} else if (("DECEMBER").equalsIgnoreCase(month.toString())) {
-				startDate = year + "-12-01";
-				LocalDate valStart = LocalDate.parse(startDate);
-				this.from.setValue(valStart);
-
-				endDate = year + "-12-31";
-				LocalDate valEnd = LocalDate.parse(endDate);
-				this.until.setValue(valEnd);
+				LocalDate valStart12 = LocalDate.parse(year + "-12-01");
+				this.from.setValue(valStart12);
+				LocalDate valEnd12 = LocalDate.parse(year + "-12-31");
+				this.until.setValue(valEnd12);
 			}
 		}
 	}
