@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import com.dropbox.core.DbxException;
 
 import javafx.stage.FileChooser;
-import java.util.Comparator;
 
 import category.Category;
 import contributor.Contributor;
@@ -82,6 +81,7 @@ public class MainWindowController implements Initializable {
 	private Button filterTask;
 	
 	private static final String LINKTOTASK = "Task.fxml";
+	private static final String LINKTOINFO = "InfoWindow.fxml";
 	
 	private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
 
@@ -153,6 +153,7 @@ public class MainWindowController implements Initializable {
 		
 		//load Data
 		taskView.setItems(getTaskList());
+		taskView.getSortOrder().addAll(dueDateColumn);
 	}
 	
 	private class ButtonCell extends TableCell<Task, Boolean>{
@@ -178,35 +179,7 @@ public class MainWindowController implements Initializable {
 	
 	//This method will return an observableList of the Tasks
 	public ObservableList<Task> getTaskList() {
-		
-		// Sortieren nach der Highscoreliste
-		Comparator<Task> dateComparator = new Comparator<Task>() {
-	       	public int compare(Task orig, Task vgl) {
-	       		if(orig.getDueDate()!=null && vgl.getDueDate()!=null) {
-	       			if (orig.getDueDate().isAfter(vgl.getDueDate())) {
-	       				return -1;
-	       			}else if (orig.getDueDate().isBefore(vgl.getDueDate())) {
-	       				return 1;
-	       			}else {
-	       				if(orig.getTaskNumber()>vgl.getTaskNumber()) {
-	       					return -1;
-	       				}else {
-	       					return 1;
-	       				}
-	       			}
-	       		}else {
-	       			if(orig.getTaskNumber()>vgl.getTaskNumber()) {
-	       				return -1;
-	       			}else {
-	       				return 1;
-	       			}
-	       		}
-	       	}
-		};		
-		
-		ObservableList<Task> tasks = taskList.getTasks();
-		tasks.sort(dateComparator);
-		return tasks;
+		return taskList.getTasks();
 	}
 
 	@FXML
@@ -237,17 +210,34 @@ public class MainWindowController implements Initializable {
 	}
 	
 	@FXML
-	private void editTask(ActionEvent event) throws IOException {		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOTASK));
-		Parent root = loader.load();
-		TaskController controller = loader.<TaskController>getController();
-		controller.initializeTask(taskView.getSelectionModel().getSelectedItem());
+	private void editTask(ActionEvent event) throws IOException {
+		if(taskView.getSelectionModel().getSelectedItem() == null) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
+			Parent root;
+			try {
+				root = loader.load();
+				InfoWindowController controller = loader.<InfoWindowController>getController();
+				controller.setInfoText("Select a task to change it");
+				
+				Stage newstage = new Stage();
+				newstage.setTitle("Info");
+				newstage.setScene(new Scene(root));
+				newstage.showAndWait();
+			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "Exception occured (Change Task)", e);
+			}
+		}else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOTASK));
+			Parent root = loader.load();
+			TaskController controller = loader.<TaskController>getController();
+			controller.initializeTask(taskView.getSelectionModel().getSelectedItem());
 		
-		FXMLLoader.load(getClass().getResource(LINKTOTASK));
-		Scene scene = new Scene(root);//parent
-		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		windowStage.setScene(scene);
-		windowStage.show();
+			FXMLLoader.load(getClass().getResource(LINKTOTASK));
+			Scene scene = new Scene(root);//parent
+			Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			windowStage.setScene(scene);
+			windowStage.show();
+		}
 	}
 	
 	
@@ -353,7 +343,7 @@ public class MainWindowController implements Initializable {
 	private void dropboxUpload (ActionEvent event) throws IOException, DbxException {
 		DropboxApi dropboxuploader= new DropboxApi();
 		dropboxuploader.uploadFile("tasks.xml");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 		Parent root = loader.load();
 		InfoWindowController controller = loader.<InfoWindowController>getController();
 		controller.setInfoText("file uploaded to dropbox");
@@ -369,7 +359,7 @@ public class MainWindowController implements Initializable {
 
 		DropboxApi dropboxdownloader= new DropboxApi();
 		dropboxdownloader.downloadFile("tasks.xml");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
 		Parent root = loader.load();
 		InfoWindowController controller = loader.<InfoWindowController>getController();
 		controller.setInfoText("file downloaded from dropbox");

@@ -86,7 +86,7 @@ public class WeekChartBuilder extends Application {
 		stack2.setName("Closed Tasks");
 		int sWeek = 0;
 		int eWeek = 0;
-		if(filterStartDate != null && !("").equals(filterEndDate) && filterEndDate!= null && !filterEndDate.equals("")){
+		if(filterStartDate != null && !("").equals(filterStartDate) && filterEndDate!= null && !("").equals(filterEndDate)){
 			LocalDate sDate = LocalDate.parse(filterStartDate);
 			TemporalField woyS = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     sWeek = sDate.get(woyS);
@@ -94,12 +94,12 @@ public class WeekChartBuilder extends Application {
 		    TemporalField woyE = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     eWeek = eDate.get(woyE);
 		    showDataOnChart(sWeek, eWeek);
-		}else if(filterStartDate != null && !("").equals(filterEndDate) && (filterEndDate == null || ("").equals(filterEndDate))) {
+		}else if(filterStartDate != null && !("").equals(filterStartDate) && (filterEndDate == null || ("").equals(filterEndDate))) {
 			LocalDate sDate = LocalDate.parse(filterStartDate);
 			TemporalField woyS = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     sWeek = sDate.get(woyS);
 		     showDataOnChart(sWeek, 52);
-		}else if(filterEndDate != null && !("").equals(filterEndDate) && (filterStartDate == null || ("").equals(filterEndDate))) {
+		}else if(filterEndDate != null && !("").equals(filterEndDate) && (filterStartDate == null || ("").equals(filterStartDate))) {
 			LocalDate eDate = LocalDate.parse(filterEndDate);
 		    TemporalField woyE = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear(); 
 		     eWeek = eDate.get(woyE);

@@ -16,10 +16,8 @@ weekday\Weekday.class
 taskmanager\view\MainWindowController$ButtonCell.class
 filter\view\WeekChartBuilder.class
 category\Category.class
-taskmanager\view\TaskController$2.class
 filter\view\FilterBuilder.class
 task\Task.class
-taskmanager\view\MainWindowController$2.class
 taskmanager\view\InfoWindowController.class
 weekday\Months.class
 category\Categorymanager.class

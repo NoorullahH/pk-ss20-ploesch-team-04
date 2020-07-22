@@ -334,7 +334,7 @@ public class FilterController implements Initializable {
 	}
 
 	@FXML
-	private void removeAllFilters(ActionEvent event) throws IOException {
+	private void removeAllFilters(ActionEvent event) {
 		filters.clear();
 		this.cmbMonth.getItems().clear();
 		addMonthsInCombo();

@@ -81,7 +81,7 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></Button>
-               <Button fx:id="filterTask" mnemonicParsing="false" onAction="#filterTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Filter" textFill="WHITE">
+               <Button fx:id="filterTask" mnemonicParsing="false" onAction="#filterTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Filter / Chart" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

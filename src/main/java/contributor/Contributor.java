@@ -38,11 +38,11 @@ public class Contributor {
 	   }
 	        
 	   Contributor other = (Contributor) obj;
-	   if (this.person == null || other.person == null || !this.person.equals(other.person)) {
+	   if (this.person == null || other.person == null) {
 	       return false;
 	   }
 	   
-	   return true;	
+	   return this.person.equals(other.person);	
 	}	
 	
 	@Override

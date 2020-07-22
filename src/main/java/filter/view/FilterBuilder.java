@@ -98,9 +98,10 @@ public class FilterBuilder {
 	 * @return
 	 */
 	public static Predicate<Task> attachment(String attachment) {
-		if(attachment==null) {return null;};
-
-		if (attachment.equals("yes")) {
+		if(attachment==null) {
+			return null;
+		}
+		if ("yes".equals(attachment)) {
 			return task -> task.getAttachments().size() != 0;
 		} else {
 			return task -> task.getAttachments().size() == 0;
@@ -113,8 +114,10 @@ public class FilterBuilder {
 	 * @return
 	 */
 	public static Predicate<Task> status(String status) {
-		if(status==null) {return null;};
-		if (status.equals("open")) {
+		if(status==null) {
+			return null;
+		}
+		if ("open".equals(status)) {
 			return task -> task.getDone().getValue()== false;
 		} else {
 			return task -> task.getDone().getValue()== true;

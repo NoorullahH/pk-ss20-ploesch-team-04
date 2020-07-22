@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -305,7 +306,7 @@ public final class Taskmanager {
             transformer.transform(source, file);
             System.out.println("DONE");
 
-        } catch (Exception e) {
+        } catch (ParserConfigurationException | TransformerException e) {
         	LOGGER.log(Level.SEVERE, "Exception occured (Save To XML)", e);
         }
     }
@@ -556,22 +557,32 @@ public final class Taskmanager {
     }
     
     
-    public static Weekday handleWeekday(String s) {
+    public static Weekday handleWeekday(String s) {  	
     	Weekday w = null;
-    	if("MONDAY".equals(s)) {
-    		w = Weekday.MONDAY;
-    	}else if("TUESDAY".equals(s)) {
-    		w = Weekday.TUESDAY;
-    	}else if("WEDNESDAY".equals(s)) {
-    		w = Weekday.WEDNESDAY;
-    	}else if("THURSDAY".equals(s)) {
-    		w = Weekday.THURSDAY;
-    	}else if("FRIDAY".equals(s)) {
-    		w = Weekday.FRIDAY;
-    	}else if("SATURDAY".equals(s)) {
-    		w = Weekday.SATURDAY;
-    	}else if("SUNDAY".equals(s)) {
-    		w = Weekday.SUNDAY;
+    	switch(s) {
+    		case "MONDAY":
+    			w = Weekday.MONDAY;
+    			break;
+    		case "TUESDAY":
+    			w = Weekday.TUESDAY;
+    			break;
+    		case "WEDNESDAY":
+    			w = Weekday.WEDNESDAY;
+    			break;
+    		case "THURSDAY":
+    			w = Weekday.THURSDAY;
+    			break;
+    		case "FRIDAY":
+    			w = Weekday.FRIDAY;
+    			break;
+    		case "SATURDAY":
+    			w = Weekday.SATURDAY;
+    			break;
+    		case "SUNDAY":
+    			w = Weekday.SUNDAY;
+    			break;
+    		default:
+                break;
     	}
     	return w;
     }
@@ -607,7 +618,6 @@ public final class Taskmanager {
 			csvWriter.append(";");
 			csvWriter.append("Done");
 			csvWriter.append("\n");				
-			//System.out.println("Save to csv function:::::::::::::::::::");
 			//Adding data in CSV file
 			for (Task t:tasks) {
 				BooleanProperty done = t.getDone();

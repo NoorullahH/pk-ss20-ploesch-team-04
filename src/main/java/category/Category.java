@@ -39,11 +39,11 @@ public class Category {
 		}
 
 	    Category other = (Category) obj;
-		if(this.name == null || other.name == null || !this.name.equals(other.name)) {
+		if(this.name == null || other.name == null) {
 			return false;
 	    }
 		
-	    return true;	
+	    return this.name.equals(other.name);	
 	}
 
 	@Override

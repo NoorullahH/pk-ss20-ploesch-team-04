@@ -1,7 +1,6 @@
 package taskmanager.view;
 
 import contributor.Contributor;
-import javafx.beans.value.ChangeListener;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,7 +12,6 @@ import javafx.scene.control.TableRow;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import category.Category;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +41,7 @@ import javafx.scene.control.TableCell;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class TaskController implements Initializable{
 		
@@ -111,23 +110,15 @@ public class TaskController implements Initializable{
 	
 	private static final String LINKTOINFO = "InfoWindow.fxml";
 	private static final String LINKTOMAIN = "MainWindow.fxml";
-	private static final String TEXT = "\\d*";
 	
 	private static final Logger LOGGER = Logger.getLogger(TaskController.class.getName());
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
 		
-		timesOfRepititionsField.textProperty().addListener(new ChangeListener<String>() {
-		    @Override 
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		        if (newValue.matches(TEXT)) {
-		            repetitionDateField.setValue(null);
-		        } else {
-		        	timesOfRepititionsField.setText(oldValue);
-		        	repetitionDateField.setValue(null);
-		        }
-		    }
+		timesOfRepititionsField.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (Pattern.matches( "\\d*", newValue )) return;
+		    timesOfRepititionsField.setText(newValue.replaceAll("[^\\d]", ""));
 		});
 		
 		monthday.setItems(monthdayList);

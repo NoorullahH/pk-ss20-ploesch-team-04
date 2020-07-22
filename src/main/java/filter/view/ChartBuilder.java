@@ -111,16 +111,16 @@ public class ChartBuilder extends Application {
 			Calendar finishCalendar = Calendar.getInstance();
 
 			try {
-				if (date1 != null && !date1.equals("")) {
+				if (date1 != null && !("").equals(date1)) {
 					beginCalendar.setTime(formater.parse(date1));
 				}
-				if (date2 != null && !date2.equals("")) {
+				if (date2 != null && !("").equals(date2)) {
 					finishCalendar.setTime(formater.parse(date2));
 				}
 			} catch (ParseException e) {
 				LOGGER.log(Level.SEVERE, "Exception occured", e);
 			}
-			if (date1 != null && !date1.equals("") && date2 != null && !date2.equals("")) {
+			if (date1 != null && !("").equals(date1) && date2 != null && !("").equals(date2)) {
 				while (beginCalendar.before(finishCalendar) || beginCalendar.equals(finishCalendar)) {
 					// add one month to date per loop
 					String date = formater.format(beginCalendar.getTime()).toUpperCase();
@@ -134,9 +134,9 @@ public class ChartBuilder extends Application {
 					lstFilteredMonth.add(sdf.format(date12).toUpperCase());
 					beginCalendar.add(Calendar.MONTH, 1);
 				}
-			} else if (date1 != null && !date1.equals("") && (date2 != null && !date2.equals(""))) {
+			} else if (date1 != null && !("").equals(date1) && (date2 != null && !("").equals(date2))) {
 				String date = formater.format(beginCalendar.getTime()).toUpperCase();
-				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(dateInputPattern, Locale.ENGLISH);
+				SimpleDateFormat sdf = new SimpleDateFormat(dateInputPattern, Locale.ENGLISH);
 				java.util.Date date12 = sdf.parse(date);
 
 				sdf.applyPattern(dateTargetPattern);
@@ -161,12 +161,12 @@ public class ChartBuilder extends Application {
 			barChart.setTitle("Tasks of the month " + month);
 		}
 		// If user do not select month from combo then it shows Only Task
-		else if (this.filterStartDate != null && !this.filterStartDate.equals("") && this.filterEndDate != null
-				&& !this.filterEndDate.equals("")) {
+		else if (this.filterStartDate != null && !("").equals(this.filterStartDate) && this.filterEndDate != null
+				&& !("").equals(this.filterEndDate)) {
 			barChart.setTitle("Tasks");
 		}
 		// If user select only start date then it shows Only start date
-		else if (this.filterStartDate != null && !this.filterStartDate.equals("")) {
+		else if (this.filterStartDate != null && !("").equals(this.filterStartDate)) {
 			barChart.setTitle("Tasks of " + this.filterStartDate);
 		}
 
@@ -186,8 +186,8 @@ public class ChartBuilder extends Application {
 					String filterMonth = lstFilteredMonth.get(i);
 					if (months.toString().contentEquals(filterMonth)) {
 						getOpentaskCount(months.toString());
-						if (toogleGroupValue != null && !toogleGroupValue.equals("")) {
-							if (toogleGroupValue.equalsIgnoreCase("open")) {
+						if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
+							if ("open".equalsIgnoreCase(toogleGroupValue)) {
 							} else {
 								openTaskCount = 0;
 							}
@@ -200,8 +200,8 @@ public class ChartBuilder extends Application {
 			} else {
 
 				getOpentaskCount(months.toString());
-				if (toogleGroupValue != null && !toogleGroupValue.equals("")) {
-					if (toogleGroupValue.equalsIgnoreCase("open")) {
+				if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
+					if ("open".equalsIgnoreCase(toogleGroupValue)) {
 					} else {
 						openTaskCount = 0;
 					}
@@ -221,8 +221,8 @@ public class ChartBuilder extends Application {
 					String filterMonth = lstFilteredMonth.get(i);
 					if (months.toString().contentEquals(filterMonth)) {
 						getClosetaskCount(months.toString());
-						if (toogleGroupValue != null && !toogleGroupValue.equals("")) {
-							if (toogleGroupValue.equalsIgnoreCase("closed")) {
+						if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
+							if ("closed".equalsIgnoreCase(toogleGroupValue)) {
 							} else {
 								closeTaskCount = 0;
 							}
@@ -234,8 +234,8 @@ public class ChartBuilder extends Application {
 				}
 			} else {
 				getClosetaskCount(months.toString());
-				if (toogleGroupValue != null && !toogleGroupValue.equals("")) {
-					if (toogleGroupValue.equalsIgnoreCase("closed")) {
+				if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
+					if ("closed".equalsIgnoreCase(toogleGroupValue)) {
 					} else {
 						closeTaskCount = 0;
 					}
@@ -263,8 +263,8 @@ public class ChartBuilder extends Application {
 	 * This method counts all open tasks of a month or a period of time.
 	 */
 	public void getOpentaskCount(String month) {
-		if (this.filterStartDate != null && !this.filterStartDate.equals("")
-				&& (this.filterEndDate == null || this.filterEndDate.equals(""))) {
+		if (this.filterStartDate != null && !("").equals(this.filterStartDate)
+				&& (this.filterEndDate == null || ("").equals(this.filterEndDate))) {
 			LocalDate valStart = LocalDate.parse(filterStartDate);
 
 			System.out.println("h " + valStart);
@@ -301,8 +301,8 @@ public class ChartBuilder extends Application {
 	 */
 	public void getClosetaskCount(String month) {
 		// If user select only From date
-		if (this.filterStartDate != null && !this.filterStartDate.equals("")
-				&& (this.filterEndDate == null || this.filterEndDate.equals(""))) {
+		if (this.filterStartDate != null && !("").equals(this.filterStartDate)
+				&& (this.filterEndDate == null || ("").equals(this.filterEndDate))) {
 			LocalDate valStart = LocalDate.parse(filterStartDate);
 			filteredData.predicateProperty().bind(
 					Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
@@ -313,7 +313,7 @@ public class ChartBuilder extends Application {
 			filters.clear();
 		}
 		// If user select month or both dates
-		else if (month != null && !month.equals("")) {
+		else if (month != null && !("").equals(month)) {
 			String starAndEndDate = getStartAndEndDateOfMonth(month);
 			String[] date = starAndEndDate.split(",");
 			String startDate = date[0];
@@ -345,7 +345,7 @@ public class ChartBuilder extends Application {
 		String startDate = "";
 		String endDate = "";
 		String year = "2020";
-		if (month.toString().equals(JANUARY)) {
+		if (month.equalsIgnoreCase(JANUARY)) {
 			startDate = year + "-01-01";
 			endDate = year + "-01-31";
 		} else if (month.equalsIgnoreCase(FEBRUARY)) {
