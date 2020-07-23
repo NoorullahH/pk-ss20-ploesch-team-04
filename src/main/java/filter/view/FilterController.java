@@ -98,11 +98,10 @@ public class FilterController implements Initializable {
 			Months.MARCH, Months.APRIL, Months.MAY, Months.JUNE, Months.JULY, Months.AUGUST, Months.SEPTEMBER,
 			Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 
-	private Parent rootCon;
-	private Parent rootCat;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
 		addMonthsInCombo();
 
 		// initialize taskList
@@ -131,7 +130,7 @@ public class FilterController implements Initializable {
 				getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
 
 		try {
-			rootCon = loaderCon.load();
+			loaderCon.load();
 			ContributorController conController = loaderCon.<ContributorController>getController();
 			contributorList.setItems(conController.getContributorList());
 			contributorList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -148,7 +147,7 @@ public class FilterController implements Initializable {
 		FXMLLoader loaderCat = new FXMLLoader(
 				getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 		try {
-			rootCat = loaderCat.load();
+			loaderCat.load();
 			CategoryController catController = loaderCat.<CategoryController>getController();
 			categoryList.setItems(catController.getCategoryList());
 			categoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -202,7 +201,7 @@ public class FilterController implements Initializable {
 	 */
 	public void initData() {
 		this.toFilterTasks = this.taskList.getTasks();
-		this.filteredData = new FilteredList<Task>(toFilterTasks, prad -> true);
+		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 
 	/**
@@ -210,7 +209,7 @@ public class FilterController implements Initializable {
 	 * @throws IOException
 	 */
 	@FXML
-	private void submit(ActionEvent event) throws IOException {
+	private void submit(ActionEvent event){
 		// get selected Kategorien
 		ObservableList<String> newCat = categoryList.getSelectionModel().getSelectedItems();
 		ObservableList<Category> newCatList = FXCollections.observableArrayList();

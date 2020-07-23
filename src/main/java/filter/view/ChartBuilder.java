@@ -64,12 +64,12 @@ public class ChartBuilder extends Application {
 	private static final Logger LOGGER = Logger.getLogger(ChartBuilder.class.getName());
 
 	@FXML
-	private TableView<Task> taskView;
-	private final CategoryAxis xAxis = new CategoryAxis();
-	private final NumberAxis yAxis = new NumberAxis();
-	private final StackedBarChart<String, Number> barChart = new StackedBarChart<>(xAxis, yAxis);
-	private final XYChart.Series<String, Number> stack1 = new XYChart.Series<>();
-	private final XYChart.Series<String, Number> stack2 = new XYChart.Series<>();
+	private TableView<Task> taskViews;
+	private final CategoryAxis xHorizontal = new CategoryAxis();
+	private final NumberAxis yVertical = new NumberAxis();
+	private final StackedBarChart<String, Number> barCharts = new StackedBarChart<>(xHorizontal, yVertical);
+	private final XYChart.Series<String, Number> dataOne = new XYChart.Series<>();
+	private final XYChart.Series<String, Number> dataTwo = new XYChart.Series<>();
 	private int openTaskCount;
 	private int closeTaskCount;
 	private String toogleGroupValue = "";
@@ -83,7 +83,7 @@ public class ChartBuilder extends Application {
 	public ChartBuilder(Months month, FilteredList<Task> filteredData, String startDate, String endDate,
 			String toogleGroupValue) {
 		this.month = month;
-		this.filteredData = new FilteredList<Task>(filteredData);
+		this.filteredData = new FilteredList<>(filteredData);
 		this.filterStartDate = startDate;
 		this.filterEndDate = endDate;
 		this.toogleGroupValue = toogleGroupValue;
@@ -158,30 +158,28 @@ public class ChartBuilder extends Application {
 	public void start(Stage stage) {
 		stage.setTitle("Taskmanagement Chart");
 		if (month != null) {
-			barChart.setTitle("Tasks of the month " + month);
-		}
-		// If user do not select month from combo then it shows Only Task
-		else if (this.filterStartDate != null && !("").equals(this.filterStartDate) && this.filterEndDate != null
+			barCharts.setTitle("Tasks of the month " + month);
+			// If user do not select month from combo then it shows Only Task
+		} else if (this.filterStartDate != null && !("").equals(this.filterStartDate) && this.filterEndDate != null
 				&& !("").equals(this.filterEndDate)) {
-			barChart.setTitle("Tasks");
-		}
-		// If user select only start date then it shows Only start date
-		else if (this.filterStartDate != null && !("").equals(this.filterStartDate)) {
-			barChart.setTitle("Tasks of " + this.filterStartDate);
+			barCharts.setTitle("Tasks");
+			// If user select only start date then it shows Only start date
+		}else if (this.filterStartDate != null && !("").equals(this.filterStartDate)) {
+			barCharts.setTitle("Tasks of " + this.filterStartDate);
 		}
 
-		xAxis.setLabel("Months");
-		xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(JANUARY, FEBRUARY, MARCH, APRIL,
+		xHorizontal.setLabel("Months");
+		xHorizontal.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(JANUARY, FEBRUARY, MARCH, APRIL,
 				MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER)));
 
-		yAxis.setLabel("Tasks");
-		stack1.setName("Open Tasks");
+		yVertical.setLabel("Tasks");
+		dataOne.setName("Open Tasks");
 
 		// Make Open task Bars with Open task count
 		for (int count = 0; count < monthList.size(); count++) {
 			Months months = monthList.get(count);
 			openTaskCount = 0;
-			if (lstFilteredMonth != null && lstFilteredMonth.size() >= 1) {
+			if (lstFilteredMonth != null && !lstFilteredMonth.isEmpty()) {
 				for (int i = 0; i < lstFilteredMonth.size(); i++) {
 					String filterMonth = lstFilteredMonth.get(i);
 					if (months.toString().contentEquals(filterMonth)) {
@@ -192,9 +190,9 @@ public class ChartBuilder extends Application {
 								openTaskCount = 0;
 							}
 						}
-						stack1.getData().add(new XYChart.Data<String, Number>(months.toString(), openTaskCount));
+						dataOne.getData().add(new XYChart.Data<String, Number>(months.toString(), openTaskCount));
 					} else {
-						stack1.getData().add(new XYChart.Data<String, Number>(months.toString(), 0));
+						dataOne.getData().add(new XYChart.Data<String, Number>(months.toString(), 0));
 					}
 				}
 			} else {
@@ -206,17 +204,17 @@ public class ChartBuilder extends Application {
 						openTaskCount = 0;
 					}
 				}
-				stack1.getData().add(new XYChart.Data<String, Number>(months.toString(), openTaskCount));
+				dataOne.getData().add(new XYChart.Data<String, Number>(months.toString(), openTaskCount));
 			}
 		}
 
-		stack2.setName("Closed Tasks");
+		dataTwo.setName("Closed Tasks");
 		// Make Closed task Bars with Closed task count
 		for (int count = 0; count < monthList.size(); count++) {
 			Months months = monthList.get(count);
 			closeTaskCount = 0;
 
-			if (lstFilteredMonth != null && lstFilteredMonth.size() >= 1) {
+			if (lstFilteredMonth != null && !lstFilteredMonth.isEmpty()) {
 				for (int i = 0; i < lstFilteredMonth.size(); i++) {
 					String filterMonth = lstFilteredMonth.get(i);
 					if (months.toString().contentEquals(filterMonth)) {
@@ -227,9 +225,9 @@ public class ChartBuilder extends Application {
 								closeTaskCount = 0;
 							}
 						}
-						stack2.getData().add(new XYChart.Data<String, Number>(months.toString(), closeTaskCount));
+						dataTwo.getData().add(new XYChart.Data<String, Number>(months.toString(), closeTaskCount));
 					} else {
-						stack2.getData().add(new XYChart.Data<String, Number>(months.toString(), 0));
+						dataTwo.getData().add(new XYChart.Data<String, Number>(months.toString(), 0));
 					}
 				}
 			} else {
@@ -240,12 +238,12 @@ public class ChartBuilder extends Application {
 						closeTaskCount = 0;
 					}
 				}
-				stack2.getData().add(new XYChart.Data<String, Number>(months.toString(), closeTaskCount));
+				dataTwo.getData().add(new XYChart.Data<String, Number>(months.toString(), closeTaskCount));
 			}
 		}
 
-		Scene scene = new Scene(barChart, 800, 600);
-		barChart.getData().addAll(stack1, stack2);
+		Scene scene = new Scene(barCharts, 800, 600);
+		barCharts.getData().addAll(dataOne, dataTwo);
 		stage.setScene(scene);
 		stage.show();
 
@@ -255,7 +253,7 @@ public class ChartBuilder extends Application {
 	 * This method creates a new list of filtered data and assigns it to filteredData.
 	 */
 	public void initdata(FilteredList<Task> data) {
-		this.filteredData = new FilteredList<Task>(data);
+		this.filteredData = new FilteredList<>(data);
 	}
 
 	/**
@@ -275,11 +273,10 @@ public class ChartBuilder extends Application {
 			filters.add(FilterBuilder.date_filter_day(valStart));
 			filters.add(FilterBuilder.status("open"));
 			openTaskCount = filteredData.size();
-			initData();
+			initData4();
 			filters.clear();
-		}
-		// If user select month or both dates
-		else if (month != null && !("").equals(month)) {
+			// If user select month or both dates
+		} else if (month != null && !("").equals(month)) {
 			String starAndEndDate = getStartAndEndDateOfMonth(month);
 			String[] date = starAndEndDate.split(",");
 			String startDate = date[0];
@@ -291,7 +288,7 @@ public class ChartBuilder extends Application {
 			filters.add(FilterBuilder.date_filter(valStart, valEnd));
 			filters.add(FilterBuilder.status("open"));
 			openTaskCount = filteredData.size();
-			initData();
+			initData4();
 			filters.clear();
 		}
 	}
@@ -309,11 +306,10 @@ public class ChartBuilder extends Application {
 			filters.add(FilterBuilder.date_filter_day(valStart));
 			filters.add(FilterBuilder.status("close"));
 			closeTaskCount = filteredData.size();
-			initData();
+			initData4();
 			filters.clear();
-		}
-		// If user select month or both dates
-		else if (month != null && !("").equals(month)) {
+			// If user select month or both dates
+		} else if (month != null && !("").equals(month)) {
 			String starAndEndDate = getStartAndEndDateOfMonth(month);
 			String[] date = starAndEndDate.split(",");
 			String startDate = date[0];
@@ -325,16 +321,16 @@ public class ChartBuilder extends Application {
 			filters.add(FilterBuilder.date_filter(valStart, valEnd));
 			filters.add(FilterBuilder.status("close"));
 			closeTaskCount = filteredData.size();
-			initData();
+			initData4();
 			filters.clear();
 		}
 	}
 	/**
 	 * This method saves filtered open and closed tasks.
 	 */
-	public void initData() {
+	public void initData4() {
 		this.toFilterTasks = this.taskList.getTasks();
-		this.filteredData = new FilteredList<Task>(toFilterTasks, prad -> true);
+		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 	/**
 	 * @param month
