@@ -50,6 +50,13 @@
                   <Font size="15.0" />
                </font>
             </Button>
+               <Button fx:id="filterTask" mnemonicParsing="false" onAction="#filterTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Filter / Chart" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Button>
             <Button mnemonicParsing="false" onAction="#saveToXML" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Export to XML" textFill="WHITE" fx:id="xmlExport">
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -58,7 +65,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#saveToCsv" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="CSV" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#saveToCsv" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Export to CSV" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -74,25 +81,18 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updateTask" mnemonicParsing="false" onAction="#handleTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Update" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin></Button>
-               <Button fx:id="filterTask" mnemonicParsing="false" onAction="#filterTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Filter / Chart" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin></Button>
             <Button fx:id="importDropbox" mnemonicParsing="false" onAction="#importDropboxWriter" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Import from Dropbox" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button fx:id="updateTask" mnemonicParsing="false" onAction="#handleTasks" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #517E81;" text="Update" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
       <Label layoutX="14.0" layoutY="27.0" prefHeight="35.0" prefWidth="291.0" text="Taskmanagement" textFill="#fffdfd">

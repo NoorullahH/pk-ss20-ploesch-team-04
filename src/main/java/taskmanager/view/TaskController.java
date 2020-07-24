@@ -4,7 +4,6 @@ import contributor.Contributor;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.TableRow;
@@ -118,7 +117,7 @@ public class TaskController implements Initializable{
 		
 		timesOfRepititionsField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    if (Pattern.matches( "\\d*", newValue )) return;
-		    timesOfRepititionsField.setText(newValue.replaceAll("[^\\d]", ""));
+		    timesOfRepititionsField.setText(oldValue);
 		});
 		
 		monthday.setItems(monthdayList);
@@ -182,7 +181,7 @@ public class TaskController implements Initializable{
 		});
 		
 		
-		deleteButtonSubtask.setCellFactory(para -> new ButtonCell());
+		deleteButtonSubtask.setCellFactory(para -> new ButtonCellSubtask());
 		
 		deleteButtonAttachment.setCellFactory(para -> new ButtonCellAttachment());
 			
@@ -190,12 +189,12 @@ public class TaskController implements Initializable{
 	}
 	
 	
-	private class ButtonCell extends TableCell<Subtask, Boolean>{
+	private class ButtonCellSubtask extends TableCell<Subtask, Boolean>{
 		private final Button delete = new Button("delete");
 		
-		ButtonCell(){
+		ButtonCellSubtask(){
 			
-			delete.setOnAction(e -> {subtaskItems.remove(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));subtaskView.setItems(subtaskItems);});
+			delete.setOnAction(e -> {subtaskItems.remove(ButtonCellSubtask.this.getTableView().getItems().get(ButtonCellSubtask.this.getIndex()));subtaskView.setItems(subtaskItems);});
 
 		}
 		
@@ -293,48 +292,21 @@ public class TaskController implements Initializable{
 				attachmentField.setText("");
 			}
 		}else {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-			Parent root;
-			try {
-				root = loader.load();
-				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Invalid Attachment!");
-				
-				Stage newstage = new Stage();
-				newstage.setTitle("Info");
-				newstage.setScene(new Scene(root));
-				newstage.showAndWait();
-			} catch (IOException e) {
-				LOGGER.log(Level.SEVERE, "Exception occured (Add Attachment)", e);
-			}
+			loadInfoWindow("Invalid Attachment!");
 		}	
 	}
 	
 	//Add Subtask to SubtaskItems
-		@FXML
-		public void addSubtask(ActionEvent event) {
-			if(subtaskField.getText()!= null && !subtaskField.getText().isEmpty()) {
-				subtaskItems.add(new Subtask(subtaskField.getText()));
-				subtaskView.setItems(subtaskItems);
-				subtaskField.setText("");
-			}else {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-				Parent root;
-				try {
-					root = loader.load();
-					InfoWindowController controller = loader.<InfoWindowController>getController();
-					controller.setInfoText("Subtask name must be specified!");
-					
-					Stage newstage = new Stage();
-					newstage.setTitle("Info");
-					newstage.setScene(new Scene(root));
-					newstage.showAndWait();
-				} catch (IOException e) {
-					LOGGER.log(Level.SEVERE, "Exception occured (Add Subtask)", e);
-				}
-			}
-			
-		}
+	@FXML
+	public void addSubtask(ActionEvent event) {
+		if(subtaskField.getText()!= null && !subtaskField.getText().isEmpty()) {
+			subtaskItems.add(new Subtask(subtaskField.getText()));
+			subtaskView.setItems(subtaskItems);
+			subtaskField.setText("");
+		}else {
+			loadInfoWindow("Subtask name must be specified!");
+		}	
+	}
 	
 	//This Method adds a new Task
 	@FXML
@@ -381,8 +353,6 @@ public class TaskController implements Initializable{
 		}else {
 			taskNew = new Task(taskDescriptionField.getText(), detailedTaskDescriptionField.getText(), dueDateField.getValue(), newConList, newCatList, subtaskItems,attachmentView.getItems());
 		}
-		
-		taskNew.setCreationDate(LocalDate.of(2020, 1, 1)); //Änderen
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		Parent root = loader.load();
@@ -399,40 +369,15 @@ public class TaskController implements Initializable{
 	private boolean checkEntries() {
 		
 		if(taskDescriptionField.getText().isEmpty()) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-			Parent root;
-			try {
-				root = loader.load();
-				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Task Description must be specified!");
-				
-				Stage newstage = new Stage();
-				newstage.setTitle("Info");
-				newstage.setScene(new Scene(root));
-				newstage.showAndWait();
-				return false;
-			} catch (IOException e) {
-				LOGGER.log(Level.SEVERE, "Exception occured (Info Screen)", e);
-			}
+			loadInfoWindow("Task Description must be specified!");
+			return false;
 		}
 		
 		if(dueDateField.getValue() == null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-			Parent root;
-			try {
-				root = loader.load();
-				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Due date must be specified!");
-				
-				Stage newstage = new Stage();
-				newstage.setTitle("Info");
-				newstage.setScene(new Scene(root));
-				newstage.showAndWait();
-				return false;
-			} catch (IOException e) {
-				LOGGER.log(Level.SEVERE, "Exception occured (Info Screen)", e);
-			}	
+			loadInfoWindow("Due date must be specified!");
+			return false;
 		}
+		
 		return true;
 	}
 	
@@ -468,7 +413,7 @@ public class TaskController implements Initializable{
 		}
 		
 		//Initialize SubtasksListView
-		subtaskItems = task.getSubtasks();
+		subtaskItems = task.getSubtasksList();
 		subtaskView.setItems(subtaskItems);
 		
 		addTaskButton.setVisible(false);
@@ -523,6 +468,23 @@ public class TaskController implements Initializable{
 		Stage windowStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		windowStage.setScene(scene);
 		windowStage.show();
+	}
+	
+	
+	private void loadInfoWindow(String text) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
+			Parent root = loader.load();
+			InfoWindowController controller = loader.<InfoWindowController>getController();
+			controller.setInfoText(text);
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
+		} catch (IOException e) {
+			LOGGER.log(Level.SEVERE, "Exception occured (Info Window)", e);
+		}
 	}
 	
 	//Navigate back to MainWindow

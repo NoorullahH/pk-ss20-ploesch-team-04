@@ -53,8 +53,8 @@ public class TaskTest {
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
-		assertTrue(newOne.getSubtasks().containsAll(sub));
-		assertTrue(newOne.getAttachments().containsAll(att));
+		assertTrue(newOne.getSubtasksList().containsAll(sub));
+		assertTrue(newOne.getAttachmentsList().containsAll(att));
 		assertFalse(newOne.isRecurrent());
 	}
 	
@@ -82,8 +82,8 @@ public class TaskTest {
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
-		assertTrue(newOne.getSubtasks().containsAll(sub));
-		assertTrue(newOne.getAttachments().containsAll(att));
+		assertTrue(newOne.getSubtasksList().containsAll(sub));
+		assertTrue(newOne.getAttachmentsList().containsAll(att));
 		assertTrue(newOne.isRecurrent());
 		assertTrue(newOne.isWeekly());
 		assertFalse(newOne.isMonthly());
@@ -116,8 +116,8 @@ public class TaskTest {
 		assertEquals(newOne.getDueDate(), LocalDate.of(2020, 4, 23));
 		assertTrue(newOne.getContributorsList().containsAll(con));
 		assertTrue(newOne.getCategoriesList().containsAll(cat));
-		assertTrue(newOne.getSubtasks().containsAll(sub));
-		assertTrue(newOne.getAttachments().containsAll(att));
+		assertTrue(newOne.getSubtasksList().containsAll(sub));
+		assertTrue(newOne.getAttachmentsList().containsAll(att));
 		assertTrue(newOne.isRecurrent());
 		assertTrue(newOne.isMonthly());
 		assertFalse(newOne.isWeekly());
@@ -292,7 +292,7 @@ public class TaskTest {
     	sub.add(new Subtask("Submit the task"));
     	t.setSubtasks(sub);
     	for(Subtask s:sub) {
-			assertTrue(t.getSubtasks().contains(s));
+			assertTrue(t.getSubtasksList().contains(s));
     	}
     }
 
@@ -307,7 +307,7 @@ public class TaskTest {
     	att.add("URL3");
     	t.setAttachments(att);
     	for(String s:att) {
-			assertTrue(t.getAttachments().contains(s));
+			assertTrue(t.getAttachmentsList().contains(s));
     	}
     }
     

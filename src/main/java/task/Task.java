@@ -396,8 +396,20 @@ public class Task {
      * this method returns a list of the subtasks of this Task
      * @return list of subtasks of this Task
      */
-	public ObservableList<Subtask> getSubtasks() {
+	public ObservableList<Subtask> getSubtasksList() {
 		return FXCollections.observableList(this.subtasks);
+	}
+	
+	
+	public String getSubtasks() {
+		StringBuilder str = new StringBuilder();
+		for(Subtask c: subtasks) {
+			str.append(c.getSubtask()+", ");
+		}
+		if(!str.toString().isEmpty()){
+			str.delete(str.length()-2, str.length());
+		}
+		return str.toString();
 	}
 	
 	/**
@@ -412,8 +424,19 @@ public class Task {
      * this method returns a list of the attachments of this Task
      * @return list of attachments of this Task
      */
-	public ObservableList<String> getAttachments() {
+	public ObservableList<String> getAttachmentsList() {
 		return FXCollections.observableList(this.attachments);
+	}
+	
+	public String getAttachments() {
+		StringBuilder str = new StringBuilder();
+		for(String c: attachments) {
+			str.append(c+", ");
+		}
+		if(!str.toString().isEmpty()){
+			str.delete(str.length()-2, str.length());
+		}
+		return str.toString();
 	}
 	
 	/**

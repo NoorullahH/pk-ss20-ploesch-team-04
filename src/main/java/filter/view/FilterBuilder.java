@@ -102,9 +102,9 @@ public class FilterBuilder {
 			return null;
 		}
 		if ("yes".equals(attachment)) {
-			return task -> task.getAttachments().size() != 0;
+			return task -> task.getAttachmentsList().size() != 0;
 		} else {
-			return task -> task.getAttachments().size() == 0;
+			return task -> task.getAttachmentsList().size() == 0;
 		}
 	}
 

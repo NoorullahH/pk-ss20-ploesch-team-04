@@ -18,7 +18,7 @@ import com.dropbox.core.v2.files.WriteMode;
  */
 public class DropboxApi {
 private String key;
-private String access_token;
+private String accessToken;
 private String dropboxFoldername = "/tasks.xml";
 private DbxClientV2 dropboxClient;
 
@@ -27,10 +27,10 @@ private DbxClientV2 dropboxClient;
  */
 public DropboxApi() throws IOException{
 	 Properties prop = ReadPropertiesFile.get("app.properties");
-     this.key= prop.getProperty("APP_KEY");
-     this.access_token=  prop.getProperty("ACCESS_TOKEN");
+     this.key = prop.getProperty("APP_KEY");
+     this.accessToken = prop.getProperty("ACCESS_TOKEN");
 	 DbxRequestConfig pathConfig = DbxRequestConfig.newBuilder("/taskmgmt_g4").build();
-	 dropboxClient = new DbxClientV2(pathConfig, this.access_token);
+	 dropboxClient = new DbxClientV2(pathConfig, this.accessToken);
 
 }
 
@@ -40,7 +40,7 @@ public DropboxApi() throws IOException{
  * @throws DbxException
  * @throws IOException
  */
-public void uploadFile(String path2) throws UploadErrorException, DbxException, IOException {
+public void uploadFile(String path2) throws DbxException, IOException {
 	dropboxClient.files().uploadBuilder(this.dropboxFoldername).withMode(WriteMode.OVERWRITE).uploadAndFinish(new FileInputStream(path2));
 }
 
@@ -49,7 +49,7 @@ public void uploadFile(String path2) throws UploadErrorException, DbxException, 
  * @throws DeleteErrorException
  * @throws DbxException
  */
-public void deleteFile(String path) throws DeleteErrorException, DbxException {
+public void deleteFile(String path) throws DbxException {
 	dropboxClient.files().delete(path);
 }
 /**
@@ -58,7 +58,7 @@ public void deleteFile(String path) throws DeleteErrorException, DbxException {
  * @throws DbxException
  * @throws IOException
  */
-public void downloadFile( String path) throws FileNotFoundException, DbxException, IOException {
+public void downloadFile( String path) throws DbxException, IOException {
 	dropboxClient.files().downloadBuilder(this.dropboxFoldername).download(new FileOutputStream(path));
 
 }

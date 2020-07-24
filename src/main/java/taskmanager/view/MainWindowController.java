@@ -112,7 +112,7 @@ public class MainWindowController implements Initializable {
 			Task cellValue = cellData.getValue();
 			BooleanProperty property = cellValue.getDone();
 			boolean subtasksDone = true;
-			for(Subtask t:cellValue.getSubtasks()) {
+			for(Subtask t:cellValue.getSubtasksList()) {
 				if(!t.isDone()) {
 					subtasksDone = false;
 				}
@@ -212,20 +212,7 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void editTask(ActionEvent event) throws IOException {
 		if(taskView.getSelectionModel().getSelectedItem() == null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-			Parent root;
-			try {
-				root = loader.load();
-				InfoWindowController controller = loader.<InfoWindowController>getController();
-				controller.setInfoText("Select a task to change it");
-				
-				Stage newstage = new Stage();
-				newstage.setTitle("Info");
-				newstage.setScene(new Scene(root));
-				newstage.showAndWait();
-			} catch (IOException e) {
-				LOGGER.log(Level.SEVERE, "Exception occured (Change Task)", e);
-			}
+			loadInfoWindow("Select a task to change it");
 		}else {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOTASK));
 			Parent root = loader.load();
@@ -318,15 +305,14 @@ public class MainWindowController implements Initializable {
 		File file = fileChooser.showSaveDialog(window);
 
 		if (file != null) {
-			
 			file = new File(file.getPath());
-			
-				try {
-					taskList.saveToCsv(file);
-				} catch (IOException e) {
-					LOGGER.log(Level.SEVERE, "Exception occured (Save To CSV)", e);
+			try {
+				if(taskList.saveToCsv(file)) {
+					loadInfoWindow("Successfully exported to CSV");
 				}
-			
+			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "Exception occured (Save To CSV)", e);
+			}
 		}
 	}
 	
@@ -343,15 +329,7 @@ public class MainWindowController implements Initializable {
 	private void dropboxUpload (ActionEvent event) throws IOException, DbxException {
 		DropboxApi dropboxuploader= new DropboxApi();
 		dropboxuploader.uploadFile("tasks.xml");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-		Parent root = loader.load();
-		InfoWindowController controller = loader.<InfoWindowController>getController();
-		controller.setInfoText("file uploaded to dropbox");
-		
-		Stage newstage = new Stage();
-		newstage.setTitle("Info");
-		newstage.setScene(new Scene(root));
-		newstage.showAndWait();
+		loadInfoWindow("File uploaded to dropbox");
 	}
 	
 	@FXML
@@ -359,15 +337,22 @@ public class MainWindowController implements Initializable {
 
 		DropboxApi dropboxdownloader= new DropboxApi();
 		dropboxdownloader.downloadFile("tasks.xml");
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
-		Parent root = loader.load();
-		InfoWindowController controller = loader.<InfoWindowController>getController();
-		controller.setInfoText("file downloaded from dropbox");
-		
-		Stage newstage = new Stage();
-		newstage.setTitle("Info");
-		newstage.setScene(new Scene(root));
-		newstage.showAndWait();
+		loadInfoWindow("File downloaded from dropbox");
 	}
-
+	
+	private void loadInfoWindow(String text) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));
+			Parent root = loader.load();
+			InfoWindowController controller = loader.<InfoWindowController>getController();
+			controller.setInfoText(text);
+			
+			Stage newstage = new Stage();
+			newstage.setTitle("Info");
+			newstage.setScene(new Scene(root));
+			newstage.showAndWait();
+		} catch (IOException e) {
+			LOGGER.log(Level.SEVERE, "Exception occured (Info Window)", e);
+		}
+	}
 }
