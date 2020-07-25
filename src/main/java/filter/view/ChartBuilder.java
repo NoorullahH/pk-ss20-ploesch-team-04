@@ -54,7 +54,6 @@ public class ChartBuilder extends Application {
 			Months.OCTOBER, Months.NOVEMBER, Months.DECEMBER);
 
 	private FilteredList<Task> filteredData;
-	private ObservableList<Task> toFilterTasks;
 	private Taskmanager taskList;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
 	private Months month;
@@ -144,7 +143,7 @@ public class ChartBuilder extends Application {
 				lstFilteredMonth.add(sdf.format(date12).toUpperCase());
 			}
 
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			LOGGER.log(Level.SEVERE, "Exception occured (Filter Month List)", e);
 		}
 
@@ -186,6 +185,7 @@ public class ChartBuilder extends Application {
 						getOpentaskCount(months.toString());
 						if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
 							if ("open".equalsIgnoreCase(toogleGroupValue)) {
+								System.out.println(openTaskCount);
 							} else {
 								openTaskCount = 0;
 							}
@@ -200,6 +200,7 @@ public class ChartBuilder extends Application {
 				getOpentaskCount(months.toString());
 				if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
 					if ("open".equalsIgnoreCase(toogleGroupValue)) {
+						System.out.println(openTaskCount);
 					} else {
 						openTaskCount = 0;
 					}
@@ -221,6 +222,7 @@ public class ChartBuilder extends Application {
 						getClosetaskCount(months.toString());
 						if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
 							if ("closed".equalsIgnoreCase(toogleGroupValue)) {
+								System.out.println(closeTaskCount);
 							} else {
 								closeTaskCount = 0;
 							}
@@ -234,6 +236,7 @@ public class ChartBuilder extends Application {
 				getClosetaskCount(months.toString());
 				if (toogleGroupValue != null && !("").equals(toogleGroupValue)) {
 					if ("closed".equalsIgnoreCase(toogleGroupValue)) {
+						System.out.println(closeTaskCount);
 					} else {
 						closeTaskCount = 0;
 					}
@@ -329,7 +332,7 @@ public class ChartBuilder extends Application {
 	 * This method saves filtered open and closed tasks.
 	 */
 	public void initData4() {
-		this.toFilterTasks = this.taskList.getTasks();
+		ObservableList<Task> toFilterTasks = this.taskList.getTasks();
 		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 	/**

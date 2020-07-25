@@ -33,7 +33,6 @@ import task.Taskmanager;
 public class WeekChartBuilder extends Application {
 
     private FilteredList<Task> filteredData;
-    private ObservableList<Task> toFilterTasks;
     private Taskmanager taskList;
     private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
     private String filterStartDate = "";
@@ -127,7 +126,7 @@ public class WeekChartBuilder extends Application {
 	}
 	
 	public void initdata(FilteredList<Task> data) {
-		this.filteredData = new FilteredList<Task>(data);
+		this.filteredData = new FilteredList<>(data);
 	}
 	/**
 	 * @param week 
@@ -187,7 +186,7 @@ public class WeekChartBuilder extends Application {
 	}
 	
 	public void initData1() {
-		this.toFilterTasks = this.taskList.getTasks();
+	    ObservableList<Task> toFilterTasks = this.taskList.getTasks();
 		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 	

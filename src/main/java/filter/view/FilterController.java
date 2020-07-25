@@ -87,7 +87,6 @@ public class FilterController implements Initializable {
 	@FXML
 	private ToggleGroup task_done = new ToggleGroup();
 	private Taskmanager taskList;
-	private ObservableList<Task> toFilterTasks;
 	private FilteredList<Task> filteredData;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
 	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
@@ -200,7 +199,7 @@ public class FilterController implements Initializable {
 	 * 
 	 */
 	public void initData() {
-		this.toFilterTasks = this.taskList.getTasks();
+		ObservableList<Task> toFilterTasks = this.taskList.getTasks();
 		this.filteredData = new FilteredList<>(toFilterTasks, prad -> true);
 	}
 
@@ -262,18 +261,18 @@ public class FilterController implements Initializable {
 		// Get selected month from combobox
 		Months month = (Months) cmbMonth.getSelectionModel().getSelectedItem();
 
-		DateTimeFormatter formatter_1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 		// Format From date from Local date to String
 		String startdate = "";
 		if (this.from.getValue() != null) {
-			startdate = (this.from.getValue()).format(formatter_1);
+			startdate = (this.from.getValue()).format(formatter1);
 		}
 
 		// Format Until date from Local date to String
 		String endDate = "";
 		if (this.until.getValue() != null) {
-			endDate = (this.until.getValue()).format(formatter_1);
+			endDate = (this.until.getValue()).format(formatter1);
 		}
 
 		String toogleGroupValue = "";
@@ -300,17 +299,17 @@ public class FilterController implements Initializable {
 			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
-		DateTimeFormatter formatter_3 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		// Format From date from Local date to String
 		String startdate = "";
 		if (this.from.getValue() != null) {
-			startdate = (this.from.getValue()).format(formatter_3);
+			startdate = (this.from.getValue()).format(formatter2);
 		}
 
 		// Format Until date from Local date to String
 		String endDate = "";
 		if (this.until.getValue() != null) {
-			endDate = (this.until.getValue()).format(formatter_3);
+			endDate = (this.until.getValue()).format(formatter2);
 		}
 		// Calling WeekChartBuilder Class Constructor with param
 		WeekChartBuilder newChart = new WeekChartBuilder(filteredData, toogleGroupValue, startdate, endDate);
