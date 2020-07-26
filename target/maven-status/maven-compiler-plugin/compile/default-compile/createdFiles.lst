@@ -6,6 +6,7 @@ taskmanager\view\TaskController$ButtonCellAttachment.class
 filter\view\FilterController.class
 dropbox\DropboxApi.class
 taskmanager\view\TaskController$ButtonCellSubtask.class
+properties\PropertiesReader.class
 taskmanager\view\Main.class
 taskmanager\view\CategoryController.class
 taskmanager\view\TaskController.class

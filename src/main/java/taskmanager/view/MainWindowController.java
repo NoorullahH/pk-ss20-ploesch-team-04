@@ -328,7 +328,11 @@ public class MainWindowController implements Initializable {
 	@FXML
 	private void dropboxUpload (ActionEvent event) throws IOException, DbxException {
 		DropboxApi dropboxuploader= new DropboxApi();
-		dropboxuploader.uploadFile("tasks.xml");
+		try {
+			dropboxuploader.uploadFile("tasks.xml");
+		} catch (Exception e) {
+			  LOGGER.log(null, "context", e);
+		}
 		loadInfoWindow("File uploaded to dropbox");
 	}
 	
@@ -336,7 +340,11 @@ public class MainWindowController implements Initializable {
 	private void importDropboxWriter(ActionEvent event) throws IOException, DbxException {
 
 		DropboxApi dropboxdownloader= new DropboxApi();
-		dropboxdownloader.downloadFile("tasks.xml");
+		try {
+			dropboxdownloader.downloadFile("tasks.xml");
+		} catch (Exception e) {
+			  LOGGER.log(null, "context", e);
+		}
 		loadInfoWindow("File downloaded from dropbox");
 	}
 	

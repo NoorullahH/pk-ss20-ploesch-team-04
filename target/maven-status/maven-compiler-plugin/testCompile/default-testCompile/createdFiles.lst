@@ -3,5 +3,7 @@ at\jku\se\taskmgmt\CategoryTest.class
 at\jku\se\taskmgmt\CategorymanagerTest.class
 at\jku\se\taskmgmt\TaskTest.class
 at\jku\se\taskmgmt\ContributormanagerTest.class
+at\jku\se\taskmgmt\FilterBuilderTest.class
 at\jku\se\taskmgmt\SubtaskTest.class
 at\jku\se\taskmgmt\TaskmanagerTest.class
+at\jku\se\taskmgmt\DropboxApiTest.class
