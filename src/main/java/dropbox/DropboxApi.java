@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dropbox.core.DbxException;
@@ -42,12 +43,12 @@ public class DropboxApi {
 	 * @throws DbxException
 	 * @throws IOException
 	 */
-	public void uploadFile(String path2) throws Exception {
+	public void uploadFile(String path2) {
 		try {
 			dropboxClient.files().uploadBuilder(this.dropboxFoldername).withMode(WriteMode.OVERWRITE)
 					.uploadAndFinish(new FileInputStream(path2));
 		} catch (DbxException | IOException ex) {
-			  LOGGER.log(null, "context", ex);
+			  LOGGER.log(Level.SEVERE, "Exception occured (Dropbox upload File)", ex);
 
  		}
 	}
@@ -57,12 +58,11 @@ public class DropboxApi {
 	 * @throws Exception
 	 * @throws FileNotFoundException
 	 */
-	public void downloadFile(String path) throws Exception {
+	public void downloadFile(String path){
 		try {
-
 			dropboxClient.files().downloadBuilder(this.dropboxFoldername).download(new FileOutputStream(path));
 		} catch (DbxException | IOException ex) {
-			  LOGGER.log(null, "context", ex);
+			  LOGGER.log(Level.SEVERE, "Exception occured (Dropbox download File)", ex);
 
 		}
 

@@ -161,7 +161,7 @@ public class WeekChartBuilder extends Application {
 			LocalDate valEnd = LocalDate.parse(endDate);
 			filteredData.predicateProperty()
 			.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-				filters.add(FilterBuilder.date_filter(valStart, valEnd));
+				filters.add(FilterBuilder.dateFilter(valStart, valEnd));
 				filters.add(FilterBuilder.status("open"));
 				openTaskCount = filteredData.size();
 				initData1();
@@ -178,7 +178,7 @@ public class WeekChartBuilder extends Application {
 			LocalDate valEnd = LocalDate.parse(endDate);
 			filteredData.predicateProperty()
 			.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-				filters.add(FilterBuilder.date_filter(valStart, valEnd));
+				filters.add(FilterBuilder.dateFilter(valStart, valEnd));
 				filters.add(FilterBuilder.status("close"));
 				closeTaskCount = filteredData.size();
 				initData1();

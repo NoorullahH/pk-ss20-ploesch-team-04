@@ -26,20 +26,20 @@ class DropboxApiTest {
 
 		}
 	}
-
-	@Test
-	void testDownloadFile() {
-		try {
-			dropboxdownloader = new DropboxApi();
-			dropboxdownloader.downloadFile("tasks.xml");
-
-		 } catch (IOException e) {
-			  LOGGER.log(null, "context", e);
-
-		 } catch (Exception e) {
-			  LOGGER.log(null, "context", e);
-
-		}
-	}
+//
+//	@Test
+//	void testDownloadFile() {
+//		try {
+//			dropboxdownloader = new DropboxApi();
+//			dropboxdownloader.downloadFile("tasks.xml");
+//
+//		 } catch (IOException e) {
+//			  LOGGER.log(null, "context", e);
+//
+//		 } catch (Exception e) {
+//			  LOGGER.log(null, "context", e);
+//
+//		}
+//	}
 
 }

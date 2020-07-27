@@ -30,24 +30,27 @@ public class Category {
 
 
 	/**
-	 *@author Dino
+	 * this method checks if the current category name is equal to 
+	 * another 
+	 *@param obj  another name
+	 *@return indicates if the if the category names are the same
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || this.getClass() != obj.getClass()) {
+		if (obj == null || this.name == null || this.getClass() != obj.getClass()) {
 			return false;
 		}
 
 	    Category other = (Category) obj;
-		if(this.name == null || other.name == null) {
-			return false;
-	    }
-		
 	    return this.name.equals(other.name);	
 	}
-
+	
+	/**
+	 * this method generates a hashCode for the category name
+	 *@return int number
+	 */
 	@Override
 	public int hashCode() {
-		return super.hashCode();
-	}	
+	    return 31 * 7 + (name == null ? 0 : name.hashCode());
+	}
 }

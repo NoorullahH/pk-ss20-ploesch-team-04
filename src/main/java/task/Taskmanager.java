@@ -640,7 +640,6 @@ public final class Taskmanager {
 			}
 
 			csvWriter.flush();
-			csvWriter.close();
 			return true;
 
         } catch (Exception e) {

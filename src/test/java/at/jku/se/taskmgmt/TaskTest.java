@@ -282,10 +282,10 @@ public class TaskTest {
     }
 
     /**
-     * Test of getSubtasks, of class Task.
+     * Test of getSubtasksList, of class Task.
      */
     @Test
-    public void testGetSubtasks() {
+    public void testGetSubtasksList() {
     	ObservableList<Subtask> sub = FXCollections.observableArrayList();
     	sub.add(new Subtask("Define requirements"));
     	sub.add(new Subtask("Complete Task"));
@@ -295,12 +295,28 @@ public class TaskTest {
 			assertTrue(t.getSubtasksList().contains(s));
     	}
     }
-
+    
     /**
-     * Test of getAttachments, of class Task.
+     * Test of getSubtasks, of class Task.
      */
     @Test
-    public void testGetAttachments() {
+    public void testGetSubtasks() {
+    	ObservableList<Subtask> sub = FXCollections.observableArrayList();
+    	sub.add(new Subtask("Define requirements"));
+    	sub.add(new Subtask("Complete Task"));
+    	sub.add(new Subtask("Submit the task"));
+    	t.setSubtasks(sub);
+    	assertEquals("Define requirements, Complete Task, Submit the task", t.getSubtasks());
+    	ObservableList<Subtask> sub2 = FXCollections.observableArrayList();
+    	t.setSubtasks(sub2);
+    	assertEquals("", t.getSubtasks());
+    }
+
+    /**
+     * Test of getAttachmentsList, of class Task.
+     */
+    @Test
+    public void testGetAttachmentsList() {
     	ObservableList<String> att = FXCollections.observableArrayList();
     	att.add("URL1");
     	att.add("URL2");
@@ -312,9 +328,24 @@ public class TaskTest {
     }
     
     /**
+     * Test of getAttachments, of class Task.
+     */
+    @Test
+    public void testGetAttachments() {
+    	ObservableList<String> att = FXCollections.observableArrayList();
+    	att.add("URL1");
+    	att.add("URL2");
+    	att.add("URL3");
+    	t.setAttachments(att);
+    	assertEquals("URL1, URL2, URL3", t.getAttachments());
+    	ObservableList<String> att2 = FXCollections.observableArrayList();
+    	t.setAttachments(att2);;
+    	assertEquals("", t.getAttachments());
+    }
+    
+    /**
      * Test of addSubtask method, of class Task.
      */
-    //Test of addSubtask, of class Task.
     @Test
     public void testAddSubtask() {
     	assertFalse(t.addSubtask("Example"));

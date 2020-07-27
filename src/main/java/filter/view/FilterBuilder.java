@@ -28,8 +28,8 @@ public class FilterBuilder {
 	 * @param detail_desc
 	 * @return
 	 */
-	public static Predicate<Task> detail_desc(String detail_desc) {
-		return task -> task.getDetailedTaskDescription().contains(detail_desc);
+	public static Predicate<Task> detailDesc(String detailDesc) {
+		return task -> task.getDetailedTaskDescription().contains(detailDesc);
 	}
 
 	// filter date
@@ -38,14 +38,13 @@ public class FilterBuilder {
 	 * @param until
 	 * @return
 	 */
-	public static Predicate<Task> date_filter(LocalDate from, LocalDate until) {
+	public static Predicate<Task> dateFilter(LocalDate from, LocalDate until) {
 		if (from == null && until == null) {
 			return x -> true;
 		} else if (until == null) {
 			return task -> task.getDueDate().isAfter(from);
 		} else if (from == null) {
 			return task -> task.getDueDate().isBefore(until);
-
 		} else {
 			return task -> (task.getDueDate().isAfter(from) || task.getDueDate().equals(from)) && (task.getDueDate().isBefore(until) || task.getDueDate().equals(until));
 
@@ -57,7 +56,7 @@ public class FilterBuilder {
 		 * @param from
 		 * @return
 		 */
-		public static Predicate<Task> date_filter_day(LocalDate from) {
+		public static Predicate<Task> dateFilterDay(LocalDate from) {
 			if (from == null ) {
 				return x -> true;
 			}  else {
@@ -79,8 +78,8 @@ public class FilterBuilder {
 	 * @param Contributors
 	 * @return
 	 */
-	public static Predicate<Task> contributes(ObservableList<Contributor> Contributors) {
-		return task -> task.getContributorsList().containsAll(Contributors);
+	public static Predicate<Task> contributes(ObservableList<Contributor> contributors) {
+		return task -> task.getContributorsList().containsAll(contributors);
 	}
 	
 	// filter contributes
@@ -102,9 +101,9 @@ public class FilterBuilder {
 			return null;
 		}
 		if ("yes".equals(attachment)) {
-			return task -> task.getAttachmentsList().size() != 0;
+			return task -> !task.getAttachmentsList().isEmpty();
 		} else {
-			return task -> task.getAttachmentsList().size() == 0;
+			return task -> task.getAttachmentsList().isEmpty();
 		}
 	}
 

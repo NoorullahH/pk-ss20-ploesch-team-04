@@ -10,7 +10,6 @@ properties\PropertiesReader.class
 taskmanager\view\Main.class
 taskmanager\view\CategoryController.class
 taskmanager\view\TaskController.class
-ReadPropertiesFile.class
 dropbox\ReadPropertiesFile.class
 taskmanager\view\StartWindowController.class
 weekday\Weekday.class
