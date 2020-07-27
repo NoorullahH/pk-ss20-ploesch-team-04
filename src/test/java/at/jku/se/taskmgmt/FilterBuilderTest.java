@@ -1,7 +1,5 @@
 package at.jku.se.taskmgmt;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 class FilterBuilderTest {
@@ -11,15 +9,15 @@ class FilterBuilderTest {
 	}
 
 	@Test
-	void testDetail_desc() {
+	void testDetailDesc() {
 	}
 
 	@Test
-	void testDate_filter() {
+	void testDateFilter() {
 	}
 
 	@Test
-	void testDate_filter_day() {
+	void testDateFilterDay() {
 	}
 
 	@Test

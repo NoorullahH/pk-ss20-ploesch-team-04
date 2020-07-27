@@ -42,13 +42,12 @@ public class DropboxApi {
 	 * @throws DbxException
 	 * @throws IOException
 	 */
-	public void uploadFile(String path2) throws Exception {
+	public void uploadFile(String path2){
 		try {
 			dropboxClient.files().uploadBuilder(this.dropboxFoldername).withMode(WriteMode.OVERWRITE)
 					.uploadAndFinish(new FileInputStream(path2));
 		} catch (DbxException | IOException ex) {
 			  LOGGER.log(null, "context", ex);
-
  		}
 	}
 
@@ -57,15 +56,12 @@ public class DropboxApi {
 	 * @throws Exception
 	 * @throws FileNotFoundException
 	 */
-	public void downloadFile(String path) throws Exception {
+	public void downloadFile(String path) {
 		try {
-
 			dropboxClient.files().downloadBuilder(this.dropboxFoldername).download(new FileOutputStream(path));
 		} catch (DbxException | IOException ex) {
 			  LOGGER.log(null, "context", ex);
-
 		}
-
 	}
 
 }

@@ -93,7 +93,7 @@ public class ChartBuilder extends Application {
 		prepareFilterMonthList();
 
 	}
-
+	
 	/**
 	 * This function calculate the number of 
 	 * months between start and end date in the format only Month.
@@ -273,7 +273,7 @@ public class ChartBuilder extends Application {
 			// applying filter for open task and set list size on openTaskCount variable
 			filteredData.predicateProperty().bind(
 					Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-			filters.add(FilterBuilder.date_filter_day(valStart));
+			filters.add(FilterBuilder.dateFilterDay(valStart));
 			filters.add(FilterBuilder.status("open"));
 			openTaskCount = filteredData.size();
 			initData4();
@@ -288,7 +288,7 @@ public class ChartBuilder extends Application {
 			LocalDate valEnd = LocalDate.parse(endDate);
 			filteredData.predicateProperty().bind(
 					Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-			filters.add(FilterBuilder.date_filter(valStart, valEnd));
+			filters.add(FilterBuilder.dateFilter(valStart, valEnd));
 			filters.add(FilterBuilder.status("open"));
 			openTaskCount = filteredData.size();
 			initData4();
@@ -306,7 +306,7 @@ public class ChartBuilder extends Application {
 			LocalDate valStart = LocalDate.parse(filterStartDate);
 			filteredData.predicateProperty().bind(
 					Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-			filters.add(FilterBuilder.date_filter_day(valStart));
+			filters.add(FilterBuilder.dateFilterDay(valStart));
 			filters.add(FilterBuilder.status("close"));
 			closeTaskCount = filteredData.size();
 			initData4();
@@ -321,7 +321,7 @@ public class ChartBuilder extends Application {
 			LocalDate valEnd = LocalDate.parse(endDate);
 			filteredData.predicateProperty().bind(
 					Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
-			filters.add(FilterBuilder.date_filter(valStart, valEnd));
+			filters.add(FilterBuilder.dateFilter(valStart, valEnd));
 			filters.add(FilterBuilder.status("close"));
 			closeTaskCount = filteredData.size();
 			initData4();

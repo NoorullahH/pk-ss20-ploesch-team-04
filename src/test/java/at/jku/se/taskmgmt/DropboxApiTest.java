@@ -10,6 +10,7 @@ import dropbox.DropboxApi;
 import taskmanager.view.MainWindowController;
 
 class DropboxApiTest {
+	
 	DropboxApi dropboxdownloader;
 
 	private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
@@ -27,19 +28,19 @@ class DropboxApiTest {
 		}
 	}
 
-	@Test
-	void testDownloadFile() {
-		try {
-			dropboxdownloader = new DropboxApi();
-			dropboxdownloader.downloadFile("tasks.xml");
-
-		 } catch (IOException e) {
-			  LOGGER.log(null, "context", e);
-
-		 } catch (Exception e) {
-			  LOGGER.log(null, "context", e);
-
-		}
-	}
+//	@Test
+//	void testDownloadFile() {
+//		try {
+//			dropboxdownloader = new DropboxApi();
+//			dropboxdownloader.downloadFile("tasks.xml");
+//
+//		 } catch (IOException e) {
+//			  LOGGER.log(null, "context", e);
+//
+//		 } catch (Exception e) {
+//			  LOGGER.log(null, "context", e);
+//
+//		}
+//	}
 
 }
