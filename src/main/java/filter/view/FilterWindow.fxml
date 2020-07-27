@@ -18,69 +18,69 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1070.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="filter.view.FilterController">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: #3D5B5D;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="filter.view.FilterController">
    <children>
 
-     <TableView fx:id="taskView" layoutX="75.0" layoutY="240.0" prefHeight="546.0" prefWidth="980.0">
+     <TableView fx:id="taskView" layoutX="75.0" layoutY="241.0" prefHeight="650.0" prefWidth="1100.0">
         <columns>
-            <TableColumn fx:id="descriptionColumn" prefWidth="150.0" style="-fx-font-size: 14;" text="Description" />
-            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="150.0" style="-fx-font-size: 14;" text="Detail description" />
-            <TableColumn fx:id="dueDateColumn" prefWidth="150.0" sortType="DESCENDING" style="-fx-font-size: 14;" text="Due date" />
-            <TableColumn fx:id="contributorsColumn" prefWidth="150.0" style="-fx-font-size: 14;" text="Contributors" />
-            <TableColumn fx:id="categoriesColumn" prefWidth="150.0" style="-fx-font-size: 14;" text="Categories" />
-            <TableColumn fx:id="attachmentsColumn" prefWidth="150.0" style="-fx-font-size: 14;" text="Attachments" />
-            <TableColumn fx:id="doneCheckBoxColumn" style="-fx-font-size: 14;" text="Done?" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="138.13336563110352" text="Description" />
+            <TableColumn fx:id="detailedDescriptionColumn" prefWidth="143.46664428710938" text="Detail description" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="132.79995727539062" sortType="DESCENDING" text="Due date" />
+            <TableColumn fx:id="contributorsColumn" prefWidth="129.60000610351562" text="Contributors" />
+            <TableColumn fx:id="categoriesColumn" prefWidth="142.39996337890625" text="Categories" />
+            <TableColumn fx:id="attachmentsColumn" prefWidth="120.53326416015625" text="Attachments" />
+            <TableColumn fx:id="doneCheckBoxColumn" prefWidth="119.99996337890627" text="Done?" />
         </columns>
       </TableView>
-      <Pane layoutX="75.0" layoutY="77.0" prefHeight="158.0" prefWidth="980.0" style="-fx-background-color: #04B486;">
+      <Pane layoutX="75.0" layoutY="77.0" prefHeight="158.0" prefWidth="1100.0" style="-fx-background-color: #04B486;">
          <children>
             <TextField fx:id="taskDescriptionField" layoutX="24.0" layoutY="15.0" prefHeight="32.0" prefWidth="170.0" promptText="Description" />
             <TextField fx:id="detailedTaskDescriptionField" layoutX="24.0" layoutY="63.0" prefHeight="32.0" prefWidth="170.0" promptText="Detail description" />
-            <DatePicker fx:id="from" layoutX="207.0" layoutY="16.0" prefHeight="32.0" prefWidth="170.0" promptText="From" />
-            <DatePicker fx:id="until" layoutX="207.0" layoutY="64.0" prefHeight="32.0" prefWidth="170.0" promptText="Until" />
-             <ListView fx:id="contributorList" layoutX="391.0" layoutY="15.0" prefHeight="129.0" prefWidth="180.0" style="-fx-font-size: 12;" />
-      <ListView fx:id="categoryList" layoutX="581.0" layoutY="15.0" prefHeight="129.0" prefWidth="180.0" style="-fx-font-size: 12;" />
-            <Button fx:id="submit" layoutX="877.0" layoutY="106.0" mnemonicParsing="false" onAction="#submit" prefHeight="30.0" prefWidth="90.0" text="Submit" textAlignment="CENTER">
+            <DatePicker fx:id="from" layoutX="207.0" layoutY="16.0" prefHeight="32.0" prefWidth="219.0" promptText="From" />
+            <DatePicker fx:id="until" layoutX="207.0" layoutY="64.0" prefHeight="32.0" prefWidth="219.0" promptText="Until" />
+             <ListView fx:id="contributorList" layoutX="452.0" layoutY="16.0" prefHeight="129.0" prefWidth="197.0" />
+      <ListView fx:id="categoryList" layoutX="665.0" layoutY="16.0" prefHeight="129.0" prefWidth="197.0" />
+            <Button fx:id="submit" layoutX="990.0" layoutY="105.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="95.0" text="Submit" textAlignment="CENTER">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <RadioButton fx:id="no" layoutX="877.0" layoutY="74.0" mnemonicParsing="false" text="no" textFill="WHITE">
+            <RadioButton fx:id="no" layoutX="993.0" layoutY="74.0" mnemonicParsing="false" text="no" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="attachment" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="yes" layoutX="877.0" layoutY="46.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
-            <RadioButton fx:id="closed" layoutX="774.0" layoutY="74.0" mnemonicParsing="false" text="closed" textFill="WHITE">
+            <RadioButton fx:id="yes" layoutX="992.0" layoutY="46.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
+            <RadioButton fx:id="closed" layoutX="886.0" layoutY="74.0" mnemonicParsing="false" text="closed" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="task_done" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="open" layoutX="774.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
-            <Label fx:id="Attatchment" layoutX="877.0" layoutY="15.0" text="Attatchment" textFill="WHITE">
+            <RadioButton fx:id="open" layoutX="886.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
+            <Label fx:id="Attatchment" layoutX="990.0" layoutY="15.0" text="Attatchment" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="status" layoutX="774.0" layoutY="15.0" text="Status" textFill="WHITE">
+            <Label fx:id="status" layoutX="886.0" layoutY="15.0" text="Status" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="chart" layoutX="207.0" layoutY="105.0" mnemonicParsing="false" onAction="#chart" prefHeight="39.0" prefWidth="84.0" text="Month Chart" textAlignment="CENTER" />
-            <Button fx:id="resetFilters" layoutX="774.0" layoutY="106.0" mnemonicParsing="false" onAction="#removeAllFilters" prefHeight="30.0" prefWidth="90.0" text="Reset" textAlignment="CENTER">
+            <Button fx:id="chart" layoutX="207.0" layoutY="105.0" mnemonicParsing="false" onAction="#chart" prefHeight="39.0" prefWidth="106.0" text="Month Chart" textAlignment="CENTER" />
+            <Button fx:id="resetFilters" layoutX="882.0" layoutY="105.0" mnemonicParsing="false" onAction="#removeAllFilters" prefHeight="39.0" prefWidth="95.0" text="Reset" textAlignment="CENTER">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
             <ComboBox fx:id="cmbMonth" layoutX="24.0" layoutY="108.0" onAction="#performActionOnMonthCombo" prefHeight="32.0" prefWidth="170.0" promptText="Month" />
-            <Button fx:id="btnWeekChart" layoutX="297.0" layoutY="105.0" mnemonicParsing="false" onAction="#openWeekChart" prefHeight="39.0" prefWidth="82.0" text="Week Chart" textAlignment="CENTER" />
+            <Button fx:id="btnWeekChart" layoutX="319.0" layoutY="105.0" mnemonicParsing="false" onAction="#openWeekChart" prefHeight="39.0" prefWidth="106.0" text="Week Chart" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Label layoutX="75.0" layoutY="14.0" text="Advanced Task Search " textFill="WHITE">
+      <Label layoutX="62.0" layoutY="11.0" text="Advanced Task Search " textFill="WHITE">
          <font>
             <Font name="System Bold" size="39.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="756.0" mnemonicParsing="false" onAction="#backtoMain" text="Back">
+      <Button fx:id="backButton" layoutX="14.0" layoutY="855.0" mnemonicParsing="false" onAction="#backtoMain" text="Back">
          <font>
             <Font size="14.0" />
          </font>

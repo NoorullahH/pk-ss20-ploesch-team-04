@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.dropbox.core.DbxException;
+
 import javafx.stage.FileChooser;
 
 import category.Category;
@@ -324,25 +326,26 @@ public class MainWindowController implements Initializable {
 	}
 	
 	@FXML
-	private void dropboxUpload (ActionEvent event) {
+	private void dropboxUpload (ActionEvent event) throws IOException, DbxException {
+		DropboxApi dropboxuploader= new DropboxApi();
 		try {
-			DropboxApi dropboxuploader= new DropboxApi();
 			dropboxuploader.uploadFile("tasks.xml");
-			loadInfoWindow("File uploaded to dropbox");
-		} catch (IOException e) {
-			  LOGGER.log(Level.SEVERE, "Exception occured (upload to Dropbox)", e);
+		} catch (Exception e) {
+			  LOGGER.log(null, "context", e);
 		}
+		loadInfoWindow("File uploaded to dropbox");
 	}
 	
 	@FXML
-	private void importDropboxWriter(ActionEvent event) {
+	private void importDropboxWriter(ActionEvent event) throws IOException, DbxException {
+
+		DropboxApi dropboxdownloader= new DropboxApi();
 		try {
-			DropboxApi dropboxdownloader= new DropboxApi();
 			dropboxdownloader.downloadFile("tasks.xml");
-			loadInfoWindow("File downloaded from dropbox");
-		} catch (IOException e) {
-			  LOGGER.log(Level.SEVERE, "Exception occured (Import from Dropbox)", e);
+		} catch (Exception e) {
+			  LOGGER.log(null, "context", e);
 		}
+		loadInfoWindow("File downloaded from dropbox");
 	}
 	
 	private void loadInfoWindow(String text) {

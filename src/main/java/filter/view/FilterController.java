@@ -85,12 +85,12 @@ public class FilterController implements Initializable {
 	@FXML
 	private ToggleGroup attachment = new ToggleGroup();
 	@FXML
-	private ToggleGroup taskDone = new ToggleGroup();
+	private ToggleGroup task_done = new ToggleGroup();
 	private Taskmanager taskList;
 	private FilteredList<Task> filteredData;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
 	private static final Logger LOGGER = Logger.getLogger(FilterController.class.getName());
-	private static final String STYLE = "-fx-font-size: 13 ;";
+	private static final String STYLE = "-fx-font-size: 15 ;";
 	@FXML
 	private ComboBox cmbMonth;
 	private ObservableList<Months> monthList = FXCollections.observableArrayList(Months.JANUARY, Months.FEBRUARY,
@@ -125,9 +125,10 @@ public class FilterController implements Initializable {
 		doneCheckBoxColumn.setEditable(true);
 
 		// Initialize ContributorListView
+		FXMLLoader loaderCon = new FXMLLoader(
+				getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
+
 		try {
-			FXMLLoader loaderCon = new FXMLLoader(
-					getClass().getClassLoader().getResource("taskmanager/view/ContributorWindow.fxml"));
 			loaderCon.load();
 			ContributorController conController = loaderCon.<ContributorController>getController();
 			contributorList.setItems(conController.getContributorList());
@@ -136,14 +137,15 @@ public class FilterController implements Initializable {
 			LOGGER.log(Level.SEVERE, "Exception occured (Contributors)", e);
 		}
 
+		contributorList.setStyle("-fx-font-size: 16 ;");
+
 		/**
 		 * @author Noorullah
 		 * Initialize CategoryListView
 		 */ 
-		
+		FXMLLoader loaderCat = new FXMLLoader(
+				getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 		try {
-			FXMLLoader loaderCat = new FXMLLoader(
-					getClass().getClassLoader().getResource("taskmanager/view/CategoryWindow.fxml"));
 			loaderCat.load();
 			CategoryController catController = loaderCat.<CategoryController>getController();
 			categoryList.setItems(catController.getCategoryList());
@@ -152,6 +154,8 @@ public class FilterController implements Initializable {
 			LOGGER.log(Level.SEVERE, "Exception occured (Categories)", e);
 		}
 
+		categoryList.setStyle("-fx-font-size: 16 ;");
+
 		taskView.setEditable(true);
 		taskView.setRowFactory(row -> new TableRow<Task>() {
 			@Override
@@ -159,8 +163,14 @@ public class FilterController implements Initializable {
 				if (item == null || empty) {
 					setStyle("");
 				} else {
-					if (item.isDone()) {
+					if (!item.isDone()) {
+						setStyle("");
+					} else if (item.isDone()) {
 						setStyle("-fx-background-color: lightgreen;");
+					} else if (item.getDueDate() != null) {
+						if ((!item.isDone()) && item.getDueDate().isBefore(LocalDate.now())) {
+							setStyle("-fx-background-color: red;");
+						}
 					} else {
 						setStyle("");
 					}
@@ -224,8 +234,8 @@ public class FilterController implements Initializable {
 		filteredData.predicateProperty()
 				.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));
 		filters.add(FilterBuilder.description(this.taskDescriptionField.getText()));
-		filters.add(FilterBuilder.detailDesc(this.detailedTaskDescriptionField.getText()));
-		filters.add(FilterBuilder.dateFilter(this.from.getValue(), this.until.getValue()));
+		filters.add(FilterBuilder.detail_desc(this.detailedTaskDescriptionField.getText()));
+		filters.add(FilterBuilder.date_filter(this.from.getValue(), this.until.getValue()));
 		filters.add(FilterBuilder.category(newCatList));
 		filters.add(FilterBuilder.contributes(newConList));
 		if (attachment.getSelectedToggle() != null) {
@@ -233,11 +243,12 @@ public class FilterController implements Initializable {
 			String toogleGroupValue = selectedRadioButton.getText();
 			filters.add(FilterBuilder.attachment(toogleGroupValue));
 		}
-		if (taskDone.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton2 = (RadioButton) this.taskDone.getSelectedToggle();
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton2 = (RadioButton) this.task_done.getSelectedToggle();
 			String toogleGroupValue2 = selectedRadioButton2.getText();
 			filters.add(FilterBuilder.status(toogleGroupValue2));
 		}
+
 	}
 
 	/**
@@ -265,8 +276,8 @@ public class FilterController implements Initializable {
 		}
 
 		String toogleGroupValue = "";
-		if (taskDone.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.taskDone.getSelectedToggle();
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
 
@@ -284,8 +295,8 @@ public class FilterController implements Initializable {
 	@FXML
 	public void openWeekChart(ActionEvent event) {
 		String toogleGroupValue = "";
-		if (taskDone.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.taskDone.getSelectedToggle();
+		if (task_done.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -328,7 +339,7 @@ public class FilterController implements Initializable {
 		contributorList.getSelectionModel().clearSelection();
 		categoryList.getSelectionModel().clearSelection();
 		attachment.selectToggle(null);
-		taskDone.selectToggle(null);
+		task_done.selectToggle(null);
 		cmbMonth.setPromptText("Month");
 		this.from.setValue(null);
 		this.until.setValue(null);

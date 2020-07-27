@@ -413,7 +413,7 @@ public final class Taskmanager {
     }
     
     public void readXML(File fileName) throws ParserConfigurationException {
-   
+    	
     	File xmlFile =	fileName;
     	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     	dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, Boolean.TRUE);
@@ -640,6 +640,7 @@ public final class Taskmanager {
 			}
 
 			csvWriter.flush();
+			csvWriter.close();
 			return true;
 
         } catch (Exception e) {
