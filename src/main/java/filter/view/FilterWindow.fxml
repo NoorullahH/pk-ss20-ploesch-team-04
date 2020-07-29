@@ -52,9 +52,9 @@
             <RadioButton fx:id="yes" layoutX="872.0" layoutY="46.0" mnemonicParsing="false" text="yes" textFill="WHITE" toggleGroup="$attachment" />
             <RadioButton fx:id="closed" layoutX="769.0" layoutY="74.0" mnemonicParsing="false" text="closed" textFill="WHITE">
                <toggleGroup>
-                  <ToggleGroup fx:id="task_done" />
+                  <ToggleGroup fx:id="taskDone" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="open" layoutX="769.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$task_done" />
+            <RadioButton fx:id="open" layoutX="769.0" layoutY="46.0" mnemonicParsing="false" text="open" textFill="WHITE" toggleGroup="$taskDone" />
             <Label fx:id="Attatchment" layoutX="872.0" layoutY="15.0" text="Attatchment" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />

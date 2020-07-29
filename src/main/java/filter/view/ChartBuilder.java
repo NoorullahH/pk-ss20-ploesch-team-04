@@ -109,16 +109,13 @@ public class ChartBuilder extends Application {
 			Calendar beginCalendar = Calendar.getInstance();
 			Calendar finishCalendar = Calendar.getInstance();
 
-			try {
-				if (date1 != null && !("").equals(date1)) {
-					beginCalendar.setTime(formater.parse(date1));
-				}
-				if (date2 != null && !("").equals(date2)) {
-					finishCalendar.setTime(formater.parse(date2));
-				}
-			} catch (ParseException e) {
-				LOGGER.log(Level.SEVERE, "Exception occured", e);
+			if (date1 != null && !("").equals(date1)) {
+				beginCalendar.setTime(formater.parse(date1));
 			}
+			if (date2 != null && !("").equals(date2)) {
+				finishCalendar.setTime(formater.parse(date2));
+			}
+			
 			if (date1 != null && !("").equals(date1) && date2 != null && !("").equals(date2)) {
 				while (beginCalendar.before(finishCalendar) || beginCalendar.equals(finishCalendar)) {
 					// add one month to date per loop

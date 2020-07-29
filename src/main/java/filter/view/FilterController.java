@@ -85,7 +85,7 @@ public class FilterController implements Initializable {
 	@FXML
 	private ToggleGroup attachment = new ToggleGroup();
 	@FXML
-	private ToggleGroup task_done = new ToggleGroup();
+	private ToggleGroup taskDone = new ToggleGroup();
 	private Taskmanager taskList;
 	private FilteredList<Task> filteredData;
 	private ObservableList<Predicate<Task>> filters = FXCollections.observableArrayList();
@@ -232,8 +232,8 @@ public class FilterController implements Initializable {
 			String toogleGroupValue = selectedRadioButton.getText();
 			filters.add(FilterBuilder.attachment(toogleGroupValue));
 		}
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton2 = (RadioButton) this.task_done.getSelectedToggle();
+		if (taskDone.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton2 = (RadioButton) this.taskDone.getSelectedToggle();
 			String toogleGroupValue2 = selectedRadioButton2.getText();
 			filters.add(FilterBuilder.status(toogleGroupValue2));
 		}
@@ -266,8 +266,8 @@ public class FilterController implements Initializable {
 		}
 
 		String toogleGroupValue = "";
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+		if (taskDone.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.taskDone.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
 
@@ -285,8 +285,8 @@ public class FilterController implements Initializable {
 	@FXML
 	public void openWeekChart(ActionEvent event) {
 		String toogleGroupValue = "";
-		if (task_done.getSelectedToggle() != null) {
-			RadioButton selectedRadioButton = (RadioButton) this.task_done.getSelectedToggle();
+		if (taskDone.getSelectedToggle() != null) {
+			RadioButton selectedRadioButton = (RadioButton) this.taskDone.getSelectedToggle();
 			toogleGroupValue = selectedRadioButton.getText();
 		}
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -329,7 +329,7 @@ public class FilterController implements Initializable {
 		contributorList.getSelectionModel().clearSelection();
 		categoryList.getSelectionModel().clearSelection();
 		attachment.selectToggle(null);
-		task_done.selectToggle(null);
+		taskDone.selectToggle(null);
 		cmbMonth.setPromptText("Month");
 		this.from.setValue(null);
 		this.until.setValue(null);

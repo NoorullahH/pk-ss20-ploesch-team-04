@@ -12,7 +12,11 @@ import task.Task;
  * @author Dino
  *
  */
-public class FilterBuilder {
+public final class FilterBuilder {
+	
+	private FilterBuilder() {
+	    throw new IllegalStateException("Utility class");
+	}
 
 	// filter description
 	/**
@@ -117,9 +121,9 @@ public class FilterBuilder {
 			return null;
 		}
 		if ("open".equals(status)) {
-			return task -> task.getDone().getValue()== false;
+			return task -> !task.getDone().getValue();
 		} else {
-			return task -> task.getDone().getValue()== true;
+			return task -> task.getDone().getValue();
 		}
 	}
 

@@ -329,7 +329,7 @@ public class MainWindowController implements Initializable {
 			DropboxApi dropboxuploader= new DropboxApi();
 			dropboxuploader.uploadFile("tasks.xml");
 			loadInfoWindow("File uploaded to dropbox");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			  LOGGER.log(Level.SEVERE, "Exception occured (Upload to Dropbox)", e);
 		}
 	}
@@ -340,7 +340,7 @@ public class MainWindowController implements Initializable {
 			DropboxApi dropboxdownloader= new DropboxApi();
 			dropboxdownloader.downloadFile("tasks.xml");
 			loadInfoWindow("File downloaded from dropbox");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			  LOGGER.log(Level.SEVERE, "Exception occured (Import Dropbox)", e);
 		}
 	}

@@ -337,4 +337,26 @@ public class TaskmanagerTest {
     	Taskmanager.setSize(50);
     	assertEquals(50, Taskmanager.getSize());
     }
+    
+    @Test 
+    public void testSaveToXML() {
+    	tm = Taskmanager.getInstance();
+		assertTrue(tm.isEmpty());
+		ObservableList<Contributor> con = FXCollections.observableArrayList();
+    	con.add(new Contributor("Max"));
+    	con.add(new Contributor("Anna"));
+    	ObservableList<Category> cat = FXCollections.observableArrayList();
+    	cat.add(new Category("Homework"));
+    	cat.add(new Category("School"));
+    	ObservableList<Subtask> sub = FXCollections.observableArrayList();
+    	sub.add(new Subtask("Define requirements"));
+    	sub.add(new Subtask("Complete Task"));
+    	ObservableList<String> att = FXCollections.observableArrayList();
+    	att.add("URL1");
+    	att.add("URL2");
+		Task one = new Task("First Assignment", "Create a prototype", LocalDate.of(2020, 4, 23),con, cat, sub, att);		
+		assertTrue(tm.addTask(one));
+		Task two = new Task("Sekund Assigment", "Test", LocalDate.of(2020, 5, 10), con, cat, sub, att);
+		assertTrue(tm.addTask(two));
+    }
 }
