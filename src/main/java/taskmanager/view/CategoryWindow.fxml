@@ -27,7 +27,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Button fx:id="addCategoryButton" layoutX="116.0" layoutY="426.0" mnemonicParsing="false" onAction="#addCategory" style="-fx-background-color: #517E81;" text="Add Category" textFill="WHITE">
+            <Button fx:id="addCategoryButton" layoutX="140.0" layoutY="426.0" mnemonicParsing="false" onAction="#addCategory" style="-fx-background-color: #517E81;" text="Add Category" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

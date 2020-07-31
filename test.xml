@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+<Categories>
+<category>Homework</category>
+<category>School</category>
+</Categories>
+<Contributors>
+<contributor>Max</contributor>
+<contributor>Anna</contributor>
+</Contributors>
+<Tasks>
+<Task>
+<taskNumber>1</taskNumber>
+<taskDescription>First Assignment</taskDescription>
+<detailedTaskDescription>Create a prototype</detailedTaskDescription>
+<dueDate>2020-04-23</dueDate>
+<Contributors>
+<contributor>Max</contributor>
+<contributor>Anna</contributor>
+</Contributors>
+<isRecurrent>false</isRecurrent>
+<isWeekly>false</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>null</weekday>
+<numberOfRepititions>0</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Homework</category>
+<category>School</category>
+</Categories>
+<Attachments>
+<attachment>URL1</attachment>
+<attachment>URL2</attachment>
+</Attachments>
+<creationDate>2020-07-30</creationDate>
+<isDone>false</isDone>
+<Subtasks>
+<subtask type="false">Define requirements</subtask>
+<subtask type="false">Complete Task</subtask>
+</Subtasks>
+</Task>
+<Task>
+<taskNumber>2</taskNumber>
+<taskDescription>Sekund Assigment</taskDescription>
+<detailedTaskDescription>Test</detailedTaskDescription>
+<dueDate>2020-05-10</dueDate>
+<Contributors>
+<contributor>Max</contributor>
+<contributor>Anna</contributor>
+</Contributors>
+<isRecurrent>true</isRecurrent>
+<isWeekly>true</isWeekly>
+<isMonthly>false</isMonthly>
+<monthday>0</monthday>
+<weekday>MONDAY</weekday>
+<numberOfRepititions>5</numberOfRepititions>
+<repetitionDate/>
+<Categories>
+<category>Homework</category>
+<category>School</category>
+</Categories>
+<Attachments>
+<attachment>URL1</attachment>
+<attachment>URL2</attachment>
+</Attachments>
+<creationDate>2020-07-30</creationDate>
+<isDone>false</isDone>
+<Subtasks>
+<subtask type="false">Define requirements</subtask>
+<subtask type="false">Complete Task</subtask>
+</Subtasks>
+</Task>
+</Tasks>
+</Data>

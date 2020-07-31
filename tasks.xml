@@ -15,7 +15,7 @@
 </Contributors>
 <Tasks>
 <Task>
-<taskNumber>10</taskNumber>
+<taskNumber>1</taskNumber>
 <taskDescription>Test</taskDescription>
 <detailedTaskDescription/>
 <dueDate>2020-07-30</dueDate>
@@ -45,7 +45,7 @@
 </Subtasks>
 </Task>
 <Task>
-<taskNumber>1</taskNumber>
+<taskNumber>2</taskNumber>
 <taskDescription>NEU</taskDescription>
 <detailedTaskDescription/>
 <dueDate>2020-07-23</dueDate>
@@ -92,7 +92,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>2</taskNumber>
+<taskNumber>4</taskNumber>
 <taskDescription>task3</taskDescription>
 <detailedTaskDescription>dess</detailedTaskDescription>
 <dueDate>2020-05-26</dueDate>
@@ -136,7 +136,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>4</taskNumber>
+<taskNumber>6</taskNumber>
 <taskDescription>fsgdrfg</taskDescription>
 <detailedTaskDescription>adfsef</detailedTaskDescription>
 <dueDate>2020-05-22</dueDate>
@@ -161,7 +161,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>6</taskNumber>
+<taskNumber>7</taskNumber>
 <taskDescription>task1</taskDescription>
 <detailedTaskDescription>tgs</detailedTaskDescription>
 <dueDate>2020-05-14</dueDate>
@@ -184,7 +184,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>7</taskNumber>
+<taskNumber>8</taskNumber>
 <taskDescription>jhhjdjud</taskDescription>
 <detailedTaskDescription/>
 <dueDate>2020-05-12</dueDate>
@@ -205,7 +205,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>8</taskNumber>
+<taskNumber>9</taskNumber>
 <taskDescription>sfhdshsfh</taskDescription>
 <detailedTaskDescription>dagag</detailedTaskDescription>
 <dueDate>2020-04-14</dueDate>
@@ -228,7 +228,7 @@
 <Subtasks/>
 </Task>
 <Task>
-<taskNumber>9</taskNumber>
+<taskNumber>10</taskNumber>
 <taskDescription>adgadfgg</taskDescription>
 <detailedTaskDescription>dgaga</detailedTaskDescription>
 <dueDate>2020-03-11</dueDate>

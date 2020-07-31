@@ -283,10 +283,12 @@ public class MainWindowController implements Initializable {
                 file = new File(file.getPath() + ".xml");
             }
 			taskList.saveToXML(file);
+			loadInfoWindow("File saved to XML");
 		}else {
 			String xmlFile = "./tasks.xml";
 			File fileDefault = new File(xmlFile);
 			taskList.saveToXML(fileDefault);
+			loadInfoWindow("File saved to XML");
 		}
 	}
 	

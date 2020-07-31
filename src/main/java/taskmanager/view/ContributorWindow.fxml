@@ -25,7 +25,7 @@
                <font>
                   <Font size="18.0" />
                </font></TextField>
-            <Button fx:id="addContributorButton" layoutX="105.0" layoutY="426.0" mnemonicParsing="false" onAction="#addContributor" style="-fx-background-color: #517E81;" text="Add Contributor" textFill="WHITE">
+            <Button fx:id="addContributorButton" layoutX="135.0" layoutY="426.0" mnemonicParsing="false" onAction="#addContributor" style="-fx-background-color: #517E81;" text="Add Contributor" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

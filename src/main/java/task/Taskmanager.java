@@ -121,7 +121,6 @@ public final class Taskmanager {
 			return false;
 		}else {
 			tasks.remove(index);
-			System.out.println("Removed:"+ task.getTaskNumber());
 			changeSize(false);
 			return true;
 		}
@@ -239,6 +238,10 @@ public final class Taskmanager {
 		Taskmanager.size = size;
 	}
 	
+	public void setEmpty() {
+		tasks.clear();
+	}
+	
 	
 	public void saveToXML(File fileName) {	
 		if(fileName == null) {
@@ -280,7 +283,6 @@ public final class Taskmanager {
 			Element rootTasks = doc.createElement("Tasks");
 			rootElement.appendChild(rootTasks);
 			
-			System.out.println("Tasks Size: "+tasks.size());
 			for(Task t:tasks) {
 				if(t.getRepetitionDate() == null && t.getDueDate() == null) {
 					rootTasks.appendChild(getTask(doc, empty+t.getTaskNumber(), t.getTaskDescription(), empty+t.getDetailedTaskDescription(), empty, t.getContributorsList(), String.valueOf(t.isRecurrent()), String.valueOf(t.isWeekly()), String.valueOf(t.isMonthly()), empty+t.getMonthday(), empty+t.getWeekday(), empty+t.getNumberOfRepetitions(), t.getCategoriesList(), t.getAttachmentsList(), t.getCreationDate().toString(), String.valueOf(t.isDone()), t.getSubtasksList(), empty));

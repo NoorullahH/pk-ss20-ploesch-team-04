@@ -5,14 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+
+import java.io.File;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 
 import category.Category;
+import category.Categorymanager;
 import contributor.Contributor;
+import contributor.Contributormanager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import task.Subtask;
@@ -339,7 +345,7 @@ public class TaskmanagerTest {
     }
     
     @Test 
-    public void testSaveToXML() {
+    public void testSaveToXMLAndReadXML() throws ParserConfigurationException {
     	tm = Taskmanager.getInstance();
 		assertTrue(tm.isEmpty());
 		ObservableList<Contributor> con = FXCollections.observableArrayList();
@@ -356,7 +362,24 @@ public class TaskmanagerTest {
     	att.add("URL2");
 		Task one = new Task("First Assignment", "Create a prototype", LocalDate.of(2020, 4, 23),con, cat, sub, att);		
 		assertTrue(tm.addTask(one));
-		Task two = new Task("Sekund Assigment", "Test", LocalDate.of(2020, 5, 10), con, cat, sub, att);
+		Task two = new Task("Sekund Assigment", "Test", LocalDate.of(2020, 5, 10), con, cat, sub, att, Weekday.MONDAY, 5, null);
 		assertTrue(tm.addTask(two));
+		
+		Categorymanager catMan = Categorymanager.getInstance();
+		catMan.addCategory("Homework");
+		catMan.addCategory("School");
+		
+		Contributormanager conMan = Contributormanager.getInstance();
+		conMan.addContributor("Max");
+		conMan.addContributor("Anna");
+		
+		File xmlFile = new File("test.xml");
+		int sizeTasks = tm.getTasks().size();
+		tm.saveToXML(xmlFile);
+		tm.setEmpty();
+		assertTrue(tm.isEmpty());
+		tm.readXML(xmlFile);
+		assertFalse(tm.isEmpty());
+		assertEquals(sizeTasks, tm.getTasks().size());
     }
 }
