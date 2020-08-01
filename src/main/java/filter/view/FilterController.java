@@ -122,7 +122,12 @@ public class FilterController implements Initializable {
 		doneCheckBoxColumn.setStyle(STYLE);
 		doneCheckBoxColumn.setCellValueFactory(new PropertyValueFactory<Task, Boolean>("done"));
 		doneCheckBoxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(doneCheckBoxColumn));
-		doneCheckBoxColumn.setEditable(true);
+		doneCheckBoxColumn.setEditable(false);
+		
+		doneCheckBoxColumn.setCellValueFactory(cellData -> {
+			Task cellValue = cellData.getValue();
+			return cellValue.getDone();
+		});
 
 		// Initialize ContributorListView
 		try {
@@ -205,7 +210,6 @@ public class FilterController implements Initializable {
 		for (String s : newCat) {
 			newCatList.add(new Category(s));
 		}
-		System.out.println(newCat.toString());
 
 		// get selected Contributors
 		ObservableList<String> newCon = contributorList.getSelectionModel().getSelectedItems();
@@ -214,11 +218,6 @@ public class FilterController implements Initializable {
 		for (String s : newCon) {
 			newConList.add(new Contributor(s));
 		}
-		System.out.println(newCon.toString());
-		System.out.println(this.from.getValue());
-		System.out.println(this.until.getValue());
-		System.out.println(this.taskDescriptionField.getText());
-		System.out.println(this.detailedTaskDescriptionField.getText());
 
 		filteredData.predicateProperty()
 				.bind(Bindings.createObjectBinding(() -> filters.stream().reduce(x -> true, Predicate::and), filters));

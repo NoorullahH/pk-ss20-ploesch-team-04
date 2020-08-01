@@ -347,6 +347,7 @@ public class TaskmanagerTest {
     @Test 
     public void testSaveToXMLAndReadXML() throws ParserConfigurationException {
     	tm = Taskmanager.getInstance();
+    	tm.setEmpty();
 		assertTrue(tm.isEmpty());
 		ObservableList<Contributor> con = FXCollections.observableArrayList();
     	con.add(new Contributor("Max"));

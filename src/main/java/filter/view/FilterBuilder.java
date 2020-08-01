@@ -85,15 +85,6 @@ public final class FilterBuilder {
 	public static Predicate<Task> contributes(ObservableList<Contributor> contributors) {
 		return task -> task.getContributorsList().containsAll(contributors);
 	}
-	
-	// filter contributes
-		/**
-		 * @param Contributors
-		 * @return
-		 */
-		public static Predicate<Task> mulContributes() {
-			return task -> task.getContributorsList().size() > 1;
-		}
 
 	// filter attachment
 	/**
