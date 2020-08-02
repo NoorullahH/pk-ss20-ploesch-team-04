@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import dropbox.DropboxApi;
 import taskmanager.view.MainWindowController;
 
+// Die Klasse testDownloadFile() ist unter Anführungszeichen gesetzt, weil beim Hochladen auf Sonar Probleme verursacht.
+// Da wir die kostenlose Version von Dropbox für Entwickler verwenden, müssen wir jedesmal Access-token erneuern. Die Testklasse 
+//würde funktionieren, wenn wir unseren Access-token erneuern und dann auf Sonar hochladen. 
 class DropboxApiTest {
 	DropboxApi dropboxdownloader;
 
