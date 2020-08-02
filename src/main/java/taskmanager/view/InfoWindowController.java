@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 /**
  * This class controls the UI of an info screen
  * This info screen is used for confirmation and error messages
+ * @author Mara
  */
 public class InfoWindowController {
 	
@@ -26,6 +27,10 @@ public class InfoWindowController {
 
     }
     
+    /**
+     * closes the info screen
+     * @param event
+     */
     @FXML
 	private void closeInfoScreen(ActionEvent event) {
     	Stage stage = (Stage) okButton.getScene().getWindow();

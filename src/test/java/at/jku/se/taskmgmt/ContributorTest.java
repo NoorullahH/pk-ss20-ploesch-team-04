@@ -9,13 +9,17 @@ import org.junit.jupiter.api.Test;
 import category.Category;
 import contributor.Contributor;
 
+/**
+ * Test class for Contributor
+ * @author Mara
+ */
+
 public class ContributorTest {
 	
 	private final Contributor c = new Contributor("Chris");
 	
 	/**
-     * Test of getPerson method, of class Contributor
-     * checks if the person name is queried correctly
+     * Test of getPerson method
      */
 	@Test
 	public void testGetPersonName() {
@@ -23,8 +27,7 @@ public class ContributorTest {
 	}
 	
 	/**
-     * Test of setPerson method, of class Contributor.
-     * checks if the person name is changed correctly
+     * Test of setPerson method
      */
 	@Test
 	public void testSetPersonName() {
@@ -33,8 +36,7 @@ public class ContributorTest {
 	}
 	
 	/**
-     * Test of equals method, of class Contributor.
-     * checks if the contributor name is equal to another name
+     * Test of equals method
      */
 	@Test
 	public void testEquals() {
@@ -49,8 +51,7 @@ public class ContributorTest {
 	}
 	
 	/**
-     * Test of hashCode method, of class Contributor.
-     * checks if the hashCode is generated correctly
+     * Test of hashCode method
      */
 	@Test
 	public void testHashCode() {

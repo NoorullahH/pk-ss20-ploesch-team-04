@@ -22,8 +22,16 @@ import task.Subtask;
 import task.Task;
 import task.Taskmanager;
 
+/**
+ * Test class for FilterBuilder
+ * @author Mara
+ */
+
 class FilterBuilderTest {
 	
+	/**
+	 * Initializes the tasks before each test
+	 */
 	@BeforeEach
 	public void initializeTasks() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -58,7 +66,10 @@ class FilterBuilderTest {
     	tm.addTask(three);
     	assertEquals(3, tm.getTasks().size());
 	}
-
+	
+	/**
+	 * Tests the description Filter
+	 */
 	@Test
 	public void testDescription() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -73,7 +84,10 @@ class FilterBuilderTest {
 		List<Task> result2 = tasks.stream().filter(desc2).collect(Collectors.toList());
 		assertEquals(1, result2.size());
 	}
-
+	
+	/**
+	 * Tests the detailed description Filter
+	 */
 	@Test
 	public void testDetailDesc() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -84,7 +98,10 @@ class FilterBuilderTest {
 		List<Task> result = tasks.stream().filter(deDesc).collect(Collectors.toList());
 		assertEquals(1, result.size());
 	}
-
+	
+	/**
+	 * Tests the date Filter
+	 */
 	@Test
 	public void testDateFilter() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -107,7 +124,10 @@ class FilterBuilderTest {
 		List<Task> result4 = tasks.stream().filter(date4).collect(Collectors.toList());
 		assertEquals(3, result4.size());
 	}
-
+	
+	/**
+	 * Tests the day Filter
+	 */
 	@Test
 	public void testDateFilterDay() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -122,7 +142,10 @@ class FilterBuilderTest {
 		List<Task> result2 = tasks.stream().filter(date2).collect(Collectors.toList());
 		assertEquals(3, result2.size());
 	}
-
+	
+	/**
+	 * Tests the category Filter
+	 */
 	@Test
 	public void testCategory() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -141,7 +164,10 @@ class FilterBuilderTest {
     	List<Task> result2 = tasks.stream().filter(cate2).collect(Collectors.toList());
 		assertEquals(1, result2.size());
 	}
-
+	
+	/**
+	 * Tests the contributor Filter
+	 */
 	@Test
 	public void testContributes() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -160,7 +186,10 @@ class FilterBuilderTest {
     	List<Task> result2 = tasks.stream().filter(cont2).collect(Collectors.toList());
 		assertEquals(1, result2.size());
 	}
-
+	
+	/**
+	 * Tests the attachment Filter
+	 */
 	@Test
 	public void testAttachment() {
 		Taskmanager tm = Taskmanager.getInstance();
@@ -178,7 +207,10 @@ class FilterBuilderTest {
 		Predicate<Task> att3 = FilterBuilder.attachment(null);
 		assertThrows(NullPointerException.class, () -> tasks.stream().filter(att3).collect(Collectors.toList()));
 	}
-
+	
+	/**
+	 * Tests the status Filter
+	 */
 	@Test
 	public void testStatus() {
 		Taskmanager tm = Taskmanager.getInstance();

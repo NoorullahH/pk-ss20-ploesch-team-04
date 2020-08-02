@@ -3,7 +3,10 @@ package category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**
+ * Class which represents the existing categories
+ * @author Mara
+ */
 public final class Categorymanager {
 	
 	private static Categorymanager instance;

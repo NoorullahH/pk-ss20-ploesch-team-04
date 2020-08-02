@@ -8,13 +8,16 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.property.BooleanProperty;
 import task.Subtask;
 
+/**
+ * Test class for Subtask
+ * @author Mara
+ */
 public class SubtaskTest {
 	
 	private final Subtask s = new Subtask("Homework");
 	
 	/**
-     * Test of getSubtask method, of class Subtask.
-     * checks if the subtask name is queried correctly
+     * Test of getSubtask method
      */
 	@Test
 	public void testGetSubtaskName() {
@@ -22,8 +25,7 @@ public class SubtaskTest {
 	}
 	
 	/**
-     * Test of setSubtask method, of class Subtask.
-     * checks if the subtask name is changed correctly
+     * Test of setSubtask method
      */
 	@Test
 	public void testSetSubtaskName() {
@@ -32,8 +34,7 @@ public class SubtaskTest {
 	}
 	
 	/**
-     * Test of setDone method, of class Subtask.
-     * checks if the done value is changed correctly
+     * Test of setDone method
      */
 	@Test
 	public void testSetDone() {
@@ -43,8 +44,7 @@ public class SubtaskTest {
 	}
 	
 	/**
-     * Test of getDone method, of class Subtask.
-     * checks if the done value is returned correctly
+     * Test of getDone method
      */
 	@Test
 	public void testGetDoneProperty() {

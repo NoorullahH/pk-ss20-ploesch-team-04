@@ -11,6 +11,10 @@ import contributor.Contributor;
 import contributor.Contributormanager;
 import javafx.collections.ObservableList;
 
+/**
+ * Test class for Contributormanager
+ * @author Mara
+ */
 public class ContributormanagerTest {
 	
 private static Contributormanager cm;
@@ -27,7 +31,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of addContributor, removeContributor and isEmpty methods, of class Contributormanager, with empty list of contributors
+     * Test of addContributor, removeContributor and isEmpty methods with empty list of contributors
      * these methods must return all false because the list of contributors is not initialized
      */
 	@Test
@@ -40,8 +44,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of addContributor method, of class Contributormanager
-     * checks if the contributor name is added to the Contributormanager
+     * Test of addContributor method
      */
 	@Test
 	public void testAddContributor() {
@@ -53,7 +56,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of addContributor method, of class Contributormanager
+     * Test of addContributor method
      * contributors must be unique, it is checked if the contributor already exists
      */
 	@Test
@@ -67,8 +70,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of getInstance method, of class Contributormanager
-     * checks it the Contributormanager has a single instance
+     * Test of getInstance method
      */
 	@Test
 	public void testContributormanagerInstance() {
@@ -81,8 +83,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of removeContributor method, of class Contributormanager
-     * checks if the contributor name is removed from the Contributormanager
+     * Test of removeContributor method
      */
 	@Test
 	public void testRemoveContributor() {
@@ -95,7 +96,7 @@ private static Contributormanager cm;
 	}
 	
 	/**
-     * Test of removeContributor method, of class Contributormanager
+     * Test of removeContributor method
      * contributor which does not exist, can not be removed
      */
 	@Test
@@ -121,5 +122,4 @@ private static Contributormanager cm;
 			assertTrue(cm.getContributors().contains(c));
 		}
 	}
-
 }

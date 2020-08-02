@@ -1,5 +1,9 @@
 package contributor;
 
+/**
+ * Class which creates a contributor
+ * @author Mara
+ */
 public class Contributor {
 	
 	private String person;

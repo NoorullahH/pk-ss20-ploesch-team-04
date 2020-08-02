@@ -21,6 +21,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ *  Class which controls the contributor page of the application
+ * @author Mara
+ */
 public class ContributorController implements Initializable{
 
 	private Contributormanager contributors;
@@ -36,15 +40,22 @@ public class ContributorController implements Initializable{
 	@FXML
 	private Button deleteContributorButton;
 	
+	/**
+	 * this method initializes the categories
+	 * @param location
+	 * @param resources
+	 */
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL location, ResourceBundle resources) {
 		contributors = Contributormanager.getInstance();
-		
 		contributorList.setItems(getContributorList());
-		contributorList.setStyle("-fx-font-size: 16 ;");
+		contributorList.setStyle("-fx-font-size: 15 ;");
 	}
 	
-	//This method will return an observableList of the Categoryy
+	/**
+	 * this method will return an observableList of the contributors
+	 * @return ObservableList contributors
+	 */
 	public ObservableList<String> getContributorList() {
 		ObservableList<String> conList = FXCollections.observableArrayList();
 		ObservableList<Contributor> dummy = contributors.getContributors();
@@ -54,6 +65,10 @@ public class ContributorController implements Initializable{
 		return conList;
 	}
 	
+	/**
+	 * this method adds a new contributer to the contributors
+	 * @param event
+	 */
 	@FXML
 	public void addContributor(ActionEvent event) {
 		contributors.addContributor(contributorNameField.getText());
@@ -61,12 +76,21 @@ public class ContributorController implements Initializable{
 		contributorNameField.setText("");
 	}
 	
+	/**
+	 * this method deletes a contributor for the contributors
+	 * @param event
+	 */
 	@FXML 
 	public void deleteContributor(ActionEvent event) {
 		contributors.removeContributor(contributorList.getSelectionModel().getSelectedItem());
 		contributorList.setItems(getContributorList());
 	}
 	
+	/**
+	 * method to load MainWindow
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void backtoMain(Event event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));

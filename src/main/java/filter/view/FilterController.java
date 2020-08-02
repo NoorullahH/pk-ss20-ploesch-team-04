@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import calendar.Months;
 import category.Category;
 import contributor.Contributor;
 import javafx.beans.binding.Bindings;
@@ -30,7 +32,6 @@ import task.Task;
 import task.Taskmanager;
 import taskmanager.view.CategoryController;
 import taskmanager.view.ContributorController;
-import weekday.Months;
 
 /**
  * @author Dino

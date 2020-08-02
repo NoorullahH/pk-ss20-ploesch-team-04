@@ -1,15 +1,19 @@
 package task;
 
 import java.time.LocalDate;
+
+import calendar.Weekday;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import category.Category;
 import contributor.Contributor;
-import weekday.Weekday;
 
-
+/**
+ * Class which creates a task
+ * @author Mara
+ */
 public class Task {
 	
 	private static int numberOfTasks;

@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import calendar.Weekday;
 import javafx.stage.FileChooser;
 
 import category.Category;
@@ -34,8 +35,11 @@ import javafx.stage.Stage;
 import task.Task;
 import task.Subtask;
 import task.Taskmanager;
-import weekday.Weekday;
 
+/**
+ * Class which controls the main page of the application
+ * @author Mara
+ */
 public class MainWindowController implements Initializable {
 	
 	protected Taskmanager taskList;
@@ -74,7 +78,6 @@ public class MainWindowController implements Initializable {
 	private Button importDropbox;
 	@FXML
 	private Button exportDropbox;
-	//dino
 	@FXML
 	private Button filterTask;
 	
@@ -83,12 +86,19 @@ public class MainWindowController implements Initializable {
 	
 	private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
 
-	//this method adds a new Task to the List
+	/**
+	 * this method adds a new Task t to the List
+	 * @param t task
+	 */
 	public void setData(Task t) {
 		taskList.addTask(t);
 	}
 	
-	//this method initializes the main page
+	/**
+	 * this method initializes the main page
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//initialize taskList
@@ -151,9 +161,13 @@ public class MainWindowController implements Initializable {
 		
 		//load Data
 		taskView.setItems(getTaskList());
+		handleTasks();
 		taskView.getSortOrder().addAll(dueDateColumn);
 	}
 	
+	/**
+	 * this private class which creates a delete Button to delete the tasks
+	 */
 	private class ButtonCell extends TableCell<Task, Boolean>{
 		private final Button delete = new Button("delete");
 		
@@ -174,12 +188,19 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
-	
-	//This method will return an observableList of the Tasks
+	/**
+	 * this method will return an observableList of the Tasks
+	 * @return ObservableList tasks
+	 */
 	public ObservableList<Task> getTaskList() {
 		return taskList.getTasks();
 	}
-
+	
+	/**
+	 * method to load TaskWindow
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void addNewTask(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource(LINKTOTASK));
@@ -189,6 +210,11 @@ public class MainWindowController implements Initializable {
 		windowStage.show();
 	}
 	
+	/**
+	 * method to load CategoryWindow
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void editCategories(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("CategoryWindow.fxml"));
@@ -198,6 +224,11 @@ public class MainWindowController implements Initializable {
 		windowStage.show();
 	}
 	
+	/**
+	 * method to load ContributorWindow
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void editContributors(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("ContributorWindow.fxml"));
@@ -207,6 +238,11 @@ public class MainWindowController implements Initializable {
 		windowStage.show();
 	}
 	
+	/**
+	 * method to load TaskWindow with selected task
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void editTask(ActionEvent event) throws IOException {
 		if(taskView.getSelectionModel().getSelectedItem() == null) {
@@ -225,24 +261,44 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
-	
+	/**
+	 * method to delete categories
+	 * @param category
+	 */
 	public void deleteCategoryFromTask(String category) {
 		taskList.removeCategoryFromTasks(category);
 	}
 	
-	@FXML
-	private void handleTasks(ActionEvent event) {
-		int size = Taskmanager.getSize();
-		System.out.println("Recurrent Tasks handel: "+size);
+	/**
+	 * method to handle recurrent tasks
+	 */
+	private void handleTasks() {
 		for(Task t:taskList.getTasks()) {
 			if(t.isRecurrent()) {
 				taskList.handleRecurrentTasks(t);
-				System.out.println(t.getTaskNumber()+" is recurrent");
 			}
 		}
 		taskView.setItems(taskList.getTasks());
 	}
 	
+	/**
+	 * method to change a task
+	 * @param taskNumber
+	 * @param taskDes
+	 * @param detailedTaskDes
+	 * @param dueDate
+	 * @param contributors
+	 * @param categories
+	 * @param subtasks
+	 * @param attachments
+	 * @param recurrent
+	 * @param monthly
+	 * @param weekly
+	 * @param weekday
+	 * @param monthday
+	 * @param numberOfRepetitions
+	 * @param repetitionDate
+	 */
 	public void editData(int taskNumber, String taskDes, String detailedTaskDes, LocalDate dueDate, ObservableList<Contributor> contributors, ObservableList<Category> categories, ObservableList<Subtask> subtasks, ObservableList<String> attachments, boolean recurrent, boolean monthly, boolean weekly,  Weekday weekday, int monthday, int numberOfRepetitions, LocalDate repetitionDate) {
 		ObservableList<Task> tasks = taskList.getTasks();
 		for(Task t:tasks) {
@@ -265,7 +321,10 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
-	
+	/**
+	 * method to save the tasks to XML
+	 * @param event
+	 */
 	@FXML
 	private void saveToXML(ActionEvent event){
 		FileChooser fileChooser = new FileChooser();
@@ -292,7 +351,10 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
-	
+	/**
+	 * method to save the tasks to CSV
+	 * @param event
+	 */
 	@FXML
 	private void saveToCsv(ActionEvent event){
 		FileChooser fileChooser = new FileChooser();
@@ -316,6 +378,11 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
+	/**
+	 * method to change to open the FilterWindwo
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void filterTasks(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("filter/view/FilterWindow.fxml"));
@@ -325,6 +392,10 @@ public class MainWindowController implements Initializable {
 		windowStage.show();
 	}
 	
+	/**
+	 * method to upload the tasks to Dropbox
+	 * @param event
+	 */
 	@FXML
 	private void dropboxUpload (ActionEvent event) {
 		try {
@@ -336,6 +407,10 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
+	/**
+	 * method to import the tasks from Dropbox
+	 * @param event
+	 */
 	@FXML
 	private void importDropboxWriter(ActionEvent event) {
 		try {
@@ -347,6 +422,10 @@ public class MainWindowController implements Initializable {
 		}
 	}
 	
+	/**
+	 * method to load the InfoWindow
+	 * @param text
+	 */
 	private void loadInfoWindow(String text) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOINFO));

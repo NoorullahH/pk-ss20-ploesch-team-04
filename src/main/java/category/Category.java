@@ -1,5 +1,10 @@
 package category;
 
+/**
+ * Class which creates a category
+ * @author Mara
+ */
+
 public class Category {
 	
 	private String name;

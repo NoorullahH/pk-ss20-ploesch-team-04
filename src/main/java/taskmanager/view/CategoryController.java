@@ -19,6 +19,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Class which controls the category page of the application
+ * @author Mara
+ */
 public class CategoryController implements Initializable{
 	
 	private Categorymanager categories;
@@ -34,16 +38,22 @@ public class CategoryController implements Initializable{
 	@FXML
 	private Button deleteCategoryButton;
 	
-
+	/**
+	 * this method initializes the categories
+	 * @param location
+	 * @param resources
+	 */
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL location, ResourceBundle resources) {
 		categories = Categorymanager.getInstance();
-		
 		categoryList.setItems(getCategoryList());
-		categoryList.setStyle("-fx-font-size: 16 ;");
+		categoryList.setStyle("-fx-font-size: 15 ;");
 	}
 	
-	//This method will return an observableList of the Categoryy
+	/**
+	 * this method will return an observableList of the categories
+	 * @return ObservableList categories
+	 */
 	public ObservableList<String> getCategoryList() {
 		ObservableList<String> catList = FXCollections.observableArrayList();
 		ObservableList<Category> dummy = categories.getCategories();
@@ -53,7 +63,10 @@ public class CategoryController implements Initializable{
 		return catList;
 	}
 	
-	
+	/**
+	 * this method adds a new category to the categories
+	 * @param event
+	 */
 	@FXML
 	public void addCategory(ActionEvent event) {
 		categories.addCategory(categoryNameField.getText());
@@ -61,6 +74,11 @@ public class CategoryController implements Initializable{
 		categoryNameField.setText("");
 	}
 	
+	/**
+	 * this method deletes a category for the categories
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML 
 	public void deleteCategory(ActionEvent event) throws IOException {
 		String category = categoryList.getSelectionModel().getSelectedItem();
@@ -73,6 +91,11 @@ public class CategoryController implements Initializable{
 		categoryList.setItems(getCategoryList());	
 	}
 	
+	/**
+	 * method to load MainWindow
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void backtoMain(ActionEvent event) throws IOException {
 		Parent parent = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));

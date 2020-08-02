@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Test;
+
+import calendar.Weekday;
+
 import org.junit.jupiter.api.AfterEach;
 
 import category.Category;
@@ -24,8 +27,11 @@ import javafx.collections.ObservableList;
 import task.Subtask;
 import task.Task;
 import task.Taskmanager;
-import weekday.Weekday;
 
+/**
+ * Test class for Taskmanager
+ * @author Mara
+ */
 public class TaskmanagerTest {
 	
 	private static Taskmanager tm;
@@ -42,8 +48,7 @@ public class TaskmanagerTest {
 	}
 
 	/**
-     * Test of getInstance method, of class Taskmanager
-     * checks it the Taskmanager has a single instance
+     * Test of getInstance method
      */
 	@Test
 	public void testTaskmanagerInstance() {
@@ -55,7 +60,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of addTask, removeTask and isEmpty methods, of class Taskmanager, with empty list of tasks
+     * Test of addTask, removeTask and isEmpty methods with empty list of tasks
      * these methods must return all false because the list of tasks is not initialized
      */
 	@Test
@@ -69,8 +74,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of addTask method, of class Taskmanager
-     * checks if a Task is added to the Taskmanager
+     * Test of addTask method
      */
 	@Test
 	public void testAddTask() {
@@ -83,8 +87,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of removeTask method, of class Taskmanager
-     * checks if a Task is removed from the  Taskmanager
+     * Test of removeTask method
      */
 	@Test
 	public void testRemoveTask() {
@@ -102,10 +105,8 @@ public class TaskmanagerTest {
 		assertFalse(tm.getTasks().contains(newOne));
 	}
 	
-	
 	/**
-     * Test of removeCategoryFromTasks method, of class Taskmanager
-     * checks if a Category is removed from the tasks of the Taskmanager
+     * Test of removeCategoryFromTasks method
      */
 	@Test
 	public void testRemoveCategoryFromTasks() {
@@ -139,7 +140,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of handleRecurrentTask method, of class Taskmanager
+     * Test of handleRecurrentTask method
      * check if a weekly Task is added correctly
      */
 	@Test
@@ -172,7 +173,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of handleRecurrentTask method, of class Taskmanager
+     * Test of handleRecurrentTask method
      * check if a weekly Task is added correctly
      */
 	@Test
@@ -204,7 +205,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of handleRecurrentTask method, of class Taskmanager
+     * Test of handleRecurrentTask method
      * check if a monthly Task is added correctly
      */
 	@Test
@@ -274,7 +275,7 @@ public class TaskmanagerTest {
 	}
 
 	/**
-     * Test of handleRecurrentTask method, of class Taskmanager
+     * Test of handleRecurrentTask method
      * check if a monthly Task is added correctly
      */
 	@Test
@@ -306,7 +307,7 @@ public class TaskmanagerTest {
 	}
 	
 	/**
-     * Test of handleRecurrentTask method, of class Taskmanager
+     * Test of handleRecurrentTask method
      * check if a non-recurring Task is added correctly
      */
 	@Test
@@ -336,7 +337,7 @@ public class TaskmanagerTest {
 	}
 	
 	 /**
-     * Test of getSize method, of class Taskmanager.
+     * Test of getSize method
      */
     @Test
     public void testGetSize() {
@@ -344,6 +345,10 @@ public class TaskmanagerTest {
     	assertEquals(50, Taskmanager.getSize());
     }
     
+    /**
+     * Test of saveToXML and readXML methods
+     * @throws ParserConfigurationException
+     */
     @Test 
     public void testSaveToXMLAndReadXML() throws ParserConfigurationException {
     	tm = Taskmanager.getInstance();

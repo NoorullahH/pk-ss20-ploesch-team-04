@@ -9,13 +9,17 @@ import org.junit.jupiter.api.Test;
 import category.Category;
 import contributor.Contributor;
 
+/**
+ * Test class for Category
+ * @author Mara
+ */
+
 public class CategoryTest {
 	
 	private final Category c= new Category("Homework");
 	
 	/**
-     * Test of getCategory method, of class Category.
-     * checks if the category name is queried correctly
+     * Test of getCategory method
      */
 	@Test
 	public void testGetCategoryName() {
@@ -23,8 +27,7 @@ public class CategoryTest {
 	}
 	
 	/**
-     * Test of setCategory method, of class Category.
-     * checks if the category name is changed correctly
+     * Test of setCategory method
      */
 	@Test
 	public void testSetCategoryName() {
@@ -33,8 +36,7 @@ public class CategoryTest {
 	}
 	
 	/**
-     * Test of equals method, of class Category.
-     * checks if the category name is equal to another category name
+     * Test of equals method
      */
 	@Test
 	public void testEquals() {
@@ -49,8 +51,7 @@ public class CategoryTest {
 	}
 	
 	/**
-     * Test of hashCode method, of class Category.
-     * checks if the hashCode is generated correctly
+     * Test of hashCode method
      */
 	@Test
 	public void testHashCode() {

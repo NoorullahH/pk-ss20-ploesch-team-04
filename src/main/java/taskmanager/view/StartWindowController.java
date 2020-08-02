@@ -14,19 +14,29 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Class which controls the start page of the application
+ * manages the login of the user and the loading of the tasks
+ * @author Mara
+ */
 public class StartWindowController {
 	
 	private boolean fileChosen;
 	private static final String LINKTOMAIN = "MainWindow.fxml";
-
+	
+	/**
+	 * loads the main page and initializes the tasks
+	 * if no file is selected, the default file is selected
+	 * @param event
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 */
 	@FXML
 	private void logIn(ActionEvent event) throws IOException, ParserConfigurationException {
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(LINKTOMAIN));
 		loader.load();
 		MainWindowController controller = loader.<MainWindowController>getController();
 		
-		//if no file was selected
 		if(!fileChosen) {
 			String xmlFile = "./tasks.xml";
 			File file = new File(xmlFile);
@@ -42,6 +52,12 @@ public class StartWindowController {
     	windowStage.show();
     }
 	
+	/**
+	 * this method reads a XML document
+	 * @param event
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 */
 	@FXML
 	private void importXML(ActionEvent event) throws IOException, ParserConfigurationException {
 		Node source = (Node) event.getSource();

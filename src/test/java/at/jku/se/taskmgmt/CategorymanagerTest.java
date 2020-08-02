@@ -10,6 +10,10 @@ import category.Category;
 import category.Categorymanager;
 import javafx.collections.ObservableList;
 
+/**
+ * Test class for Categorymanager
+ * @author Mara
+ */
 public class CategorymanagerTest {
 	
 	private static Categorymanager cm;
@@ -26,8 +30,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of getInstance method, of class Categorymanager
-     * checks it the Categorymanager has a single instance
+     * Test of getInstance method
      */
 	@Test
 	public void testCategorymanagerInstance() {
@@ -40,7 +43,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of addCategory, removeCategory and isEmpty methods, of class Categorymanager, with empty list of categories
+     * Test of addCategory, removeCategory and isEmpty methods with empty list of categories
      * these methods must return all false because the list of categories is not initialized
      */
 	@Test
@@ -53,8 +56,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of addCategory method, of class Categorymanager
-     * checks if the category name is added to the Categorymanager
+     * Test of addCategory method
      */
 	@Test
 	public void testAddCategory() {
@@ -66,7 +68,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of addCategory method, of class Categorymanager
+     * Test of addCategory method
      * categories must be unique, it is checked if the category already exists
      */
 	@Test
@@ -80,8 +82,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of removeCategory method, of class Categorymanager
-     * checks if the category name is removed from the Categorymanager
+     * Test of removeCategory method
      */
 	@Test
 	public void testRemoveCategory() {
@@ -94,7 +95,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of removeCategory method, of class Categorymanager
+     * Test of removeCategory method
      * category which does not exist, can not be removed
      */
 	@Test
@@ -108,7 +109,7 @@ public class CategorymanagerTest {
 	}
 	
 	/**
-     * Test of getCategories method, of class Categorymanager
+     * Test of getCategories method
      */
 	@Test
 	public void testGetCategories() {
@@ -119,6 +120,5 @@ public class CategorymanagerTest {
 		for(Category c:cat) {
 			assertTrue(cm.getCategories().contains(c));
 		}
-	}
-	
+	}	
 }

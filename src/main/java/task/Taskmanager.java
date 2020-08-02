@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import calendar.Weekday;
 import category.Category;
 import category.Categorymanager;
 import contributor.Contributor;
@@ -32,8 +33,11 @@ import contributor.Contributormanager;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import weekday.Weekday;
 
+/**
+ * Class which represents the existing tasks
+ * @author Mara
+ */
 public final class Taskmanager {
 	
 	private static Taskmanager instance;
@@ -92,7 +96,10 @@ public final class Taskmanager {
 		return true;
 	}
 	
-	
+	/**
+	 * this method changes the size
+	 * @param b to reduce or increase the size
+	 */
 	private static void changeSize(boolean b) {
 		if(b) {
 			size++;
@@ -238,11 +245,17 @@ public final class Taskmanager {
 		Taskmanager.size = size;
 	}
 	
+	/**
+	 * this method clears the tasks
+	 */
 	public void setEmpty() {
 		tasks.clear();
 	}
 	
-	
+	/**
+	 * this method saves the tasks to XML
+	 * @param fileName
+	 */
 	public void saveToXML(File fileName) {	
 		if(fileName == null) {
 			LOGGER.log(Level.SEVERE, "File does not exist");
@@ -315,7 +328,28 @@ public final class Taskmanager {
         }
     }
 	
-		
+	/**
+	 * this method creates the XML structure	
+	 * @param doc
+	 * @param taskNumber
+	 * @param taskDescription
+	 * @param detailedTaskDescription
+	 * @param dueDate
+	 * @param contributors
+	 * @param isRecurrent
+	 * @param isWeekly
+	 * @param isMonthly
+	 * @param monthday
+	 * @param weekday
+	 * @param numberOfRepetitions
+	 * @param categories
+	 * @param attachments
+	 * @param creationDate
+	 * @param isDone
+	 * @param subtasks
+	 * @param repetitionDate
+	 * @return
+	 */
 	private static Node getTask(Document doc, String taskNumber, String taskDescription, String detailedTaskDescription, String dueDate, ObservableList<Contributor> contributors, String isRecurrent, String isWeekly, String isMonthly, String monthday, String weekday, String numberOfRepetitions, ObservableList<Category> categories, ObservableList<String> attachments, String creationDate, String isDone, ObservableList<Subtask> subtasks, String repetitionDate) {
         Element task = doc.createElement("Task");
         
@@ -356,15 +390,26 @@ public final class Taskmanager {
         return task;
     }
 
-
-    //utility method to create text node
+	/**
+	 * utility method to create text node for tasks
+	 * @param doc
+	 * @param name
+	 * @param value
+	 * @return
+	 */
     private static Node getTaskElements(Document doc, String name, String value) {
         Element node = doc.createElement(name);
         node.appendChild(doc.createTextNode(value));
         return node;
     }
     
-  //utility method to create text node
+    /**
+     * utility method to create text node for contributors
+     * @param doc
+     * @param name
+     * @param contributors
+     * @return
+     */
     private static Node getContributorsElements(Document doc, String name, ObservableList<Contributor> contributors) {
     	Element e = null;
     	Element con = doc.createElement(CONTRIBUTORS);
@@ -377,6 +422,13 @@ public final class Taskmanager {
         return con;
     }
     
+    /**
+     * utility method to create text node for categories
+     * @param doc
+     * @param name
+     * @param categories
+     * @return
+     */
     private static Node getCategoriesElements(Document doc, String name, ObservableList<Category> categories) {
     	Element e = null;
     	Element con = doc.createElement(CATEGORIES);
@@ -389,6 +441,13 @@ public final class Taskmanager {
         return con;
     }
     
+    /**
+     * utility method to create text node for attachments
+     * @param doc
+     * @param name
+     * @param attachments
+     * @return
+     */
     private static Node getAttachmentElements(Document doc, String name, ObservableList<String> attachments) {
     	Element e = null;
     	Element con = doc.createElement(ATTACHMENTS);
@@ -401,6 +460,13 @@ public final class Taskmanager {
         return con;
     }
     
+    /**
+     * utility method to create text node for subtasks
+     * @param doc
+     * @param name
+     * @param subtasks
+     * @return
+     */
     private static Node getSubtasksElements(Document doc, String name, ObservableList<Subtask> subtasks) {
     	Element e = null;
     	Element con = doc.createElement(SUBTASKS);
@@ -414,6 +480,11 @@ public final class Taskmanager {
         return con;
     }
     
+    /**
+     * this method reads a XML document
+     * @param fileName
+     * @throws ParserConfigurationException
+     */
     public void readXML(File fileName) throws ParserConfigurationException {
     	
     	File xmlFile =	fileName;
@@ -463,7 +534,12 @@ public final class Taskmanager {
     		LOGGER.log(Level.SEVERE, "Exception occured (read XML)", e1);
     	}
     }
-
+    
+    /**
+     * this method turns a node into a task
+     * @param node
+     * @return
+     */
     private static Task getTask(Node node) {
     	Task emp = new Task();
     	if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -560,7 +636,11 @@ public final class Taskmanager {
     	return emp;
     }
     
-    
+    /**
+     * this method returns a String s to a Weekday
+     * @param s
+     * @return
+     */
     public static Weekday handleWeekday(String s) {  	
     	Weekday w = null;
     	switch(s) {
@@ -590,7 +670,13 @@ public final class Taskmanager {
     	}
     	return w;
     }
-
+    
+    /**
+     * this methods returns the value of a Tag
+     * @param tag
+     * @param element
+     * @return
+     */
     private static String getTagValue(String tag, Element element) {
     	if(element.getElementsByTagName(tag).item(0).getChildNodes() == null) {
     		return "";
@@ -603,7 +689,12 @@ public final class Taskmanager {
     	return node.getNodeValue();
     }
     
-    
+    /**
+     * this method saves the task to CSV
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
     public boolean saveToCsv(File fileName) throws IOException{		
 		
 		try (FileWriter csvWriter = new FileWriter(fileName)){
@@ -647,7 +738,6 @@ public final class Taskmanager {
         } catch (Exception e) {
         	LOGGER.log(Level.SEVERE, "Exception occured (Save To CSV)", e);
         }
-		
 		return false;
     }
     

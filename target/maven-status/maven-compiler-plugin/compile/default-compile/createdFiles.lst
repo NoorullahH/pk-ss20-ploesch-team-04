@@ -1,5 +1,6 @@
 filter\view\ChartBuilder.class
 task\Subtask.class
+calendar\Weekday.class
 taskmanager\view\ContributorController.class
 taskmanager\view\TaskController$1.class
 taskmanager\view\TaskController$ButtonCellAttachment.class
@@ -12,14 +13,13 @@ taskmanager\view\CategoryController.class
 taskmanager\view\TaskController.class
 dropbox\ReadPropertiesFile.class
 taskmanager\view\StartWindowController.class
-weekday\Weekday.class
 taskmanager\view\MainWindowController$ButtonCell.class
 filter\view\WeekChartBuilder.class
 category\Category.class
+calendar\Months.class
 filter\view\FilterBuilder.class
 task\Task.class
 taskmanager\view\InfoWindowController.class
-weekday\Months.class
 category\Categorymanager.class
 filter\view\FilterController$1.class
 contributor\Contributor.class

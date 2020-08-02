@@ -3,6 +3,10 @@ package contributor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Class which represents the existing contributors
+ * @author Mara
+ */
 public final class Contributormanager {
 	
 	private static Contributormanager instance;

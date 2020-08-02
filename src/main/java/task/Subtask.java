@@ -3,6 +3,10 @@ package task;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+/**
+ * Class which creates a subtask
+ * @author Mara
+ */
 public class Subtask {
 	
 	private String task;

@@ -4,13 +4,13 @@ package at.jku.se.taskmgmt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import calendar.Weekday;
 import category.Category;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import task.Subtask;
 import task.Task;
-import weekday.Weekday;
 import contributor.Contributor;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,7 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
-
+/**
+ * Test class for Tasks
+ * @author Mara
+ */
 public class TaskTest {
     
 	private Task t;
@@ -30,7 +33,7 @@ public class TaskTest {
 	}
 	
 	 /**
-     * Test of non-recurring Task constructor, of class Task.
+     * Test of non-recurring Task constructor
      * checks if the parameters are queried correctly
      */
 	@Test
@@ -59,7 +62,7 @@ public class TaskTest {
 	}
 	
 	/**
-     * Test of weekly recurring Task constructor, of class Task.
+     * Test of weekly recurring Task constructor
      * checks if the parameters are queried correctly
      */
 	@Test
@@ -93,7 +96,7 @@ public class TaskTest {
 	}
 	
 	/**
-     * Test of monthly recurring Task constructor, of class Task.
+     * Test of monthly recurring Task constructor
      * checks if the parameters are queried correctly
      */
 	@Test
@@ -127,8 +130,7 @@ public class TaskTest {
 	}
 	
 	/**
-     * Test of getTaskDescription method, of class Task.
-     * checks if the task Description name is queried correctly
+     * Test of getTaskDescription method
      */
     @Test
     public void testGetTaskDescroption() {
@@ -137,8 +139,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getDetailedTaskDescription, of class Task.
-     * checks if the detailed task Description name is queried correctly
+     * Test of getDetailedTaskDescription
      */
     @Test
     public void testGetDetailedTaskDescription() {
@@ -147,8 +148,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getDueDate, of class Task.
-     * checks if the due Date is queried correctly
+     * Test of  getDueDate
      */
     @Test
     public void testGetDueDate() {
@@ -157,7 +157,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getContributorsList, of class Task.
+     * Test of getContributorsList
      */
     @Test
     public void testGetContributorsList() {
@@ -172,7 +172,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getContributors, of class Task.
+     * Test of getContributors
      */
     @Test
     public void testGetContributors() {
@@ -188,8 +188,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  isRecurrent, of class Task.
-     * checks if a Task is recurrent
+     * Test of  isRecurrent
      */
     @Test
     public void testIsRecurrent() {
@@ -200,8 +199,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  isWeekly, of class Task.
-     * checks if a Task is repeated weekly
+     * Test of  isWeekly
      */
     @Test
     public void testIsWeekly() {
@@ -212,7 +210,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getWeekday, of class Task.
+     * Test of  getWeekday
      */
     @Test
     public void testGetWeekday() {
@@ -221,8 +219,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  isMonthly, of class Task.
-     * checks if a Task is repeated monthly
+     * Test of  isMonthly
      */
     @Test
     public void testIsMonthly() {
@@ -233,7 +230,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getMonthday, of class Task.
+     * Test of  getMonthday
      */
     @Test
     public void testGetMonthday() {
@@ -242,7 +239,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getNumberOfRepetitions, of class Task.
+     * Test of  getNumberOfRepetitions
      */
     @Test
     public void testGetNumberOfRepetitions() {
@@ -251,7 +248,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getCategoriesList, of class Task.
+     * Test of getCategoriesList
      */
     @Test
     public void testGetCategoriesList() {
@@ -266,7 +263,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getCategories, of class Task.
+     * Test of getCategories
      */
     @Test
     public void testGetCategories() {
@@ -282,7 +279,7 @@ public class TaskTest {
     }
 
     /**
-     * Test of getSubtasksList, of class Task.
+     * Test of getSubtasksList
      */
     @Test
     public void testGetSubtasksList() {
@@ -297,7 +294,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getSubtasks, of class Task.
+     * Test of getSubtasks
      */
     @Test
     public void testGetSubtasks() {
@@ -313,7 +310,7 @@ public class TaskTest {
     }
 
     /**
-     * Test of getAttachmentsList, of class Task.
+     * Test of getAttachmentsList
      */
     @Test
     public void testGetAttachmentsList() {
@@ -328,7 +325,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getAttachments, of class Task.
+     * Test of getAttachments
      */
     @Test
     public void testGetAttachments() {
@@ -344,7 +341,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of addSubtask method, of class Task.
+     * Test of addSubtask method
      */
     @Test
     public void testAddSubtask() {
@@ -358,8 +355,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of removeSubtask method, of class Task
-     * checks if the subtask name is removed correctly
+     * Test of removeSubtask method
      */
     @Test
     public void testRemoveSubtask() {
@@ -374,8 +370,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getCreationDate, of class Task.
-     * checks if the creation Date is queried correctly
+     * Test of  getCreationDate
      */
     @Test
     public void testGetCreationDate() {
@@ -384,8 +379,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of  getRepetitionDate, of class Task.
-     * checks if the repetition Date is queried correctly
+     * Test of  getRepetitionDate
      */
     @Test
     public void testGetRepetitionDate() {
@@ -394,7 +388,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getNumberOfTasks method, of class Task.
+     * Test of getNumberOfTasks method
      */
     @Test
     public void testGetNumberOfTasks() {
@@ -403,7 +397,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of getTaskNumber method, of class Task.
+     * Test of getTaskNumber method
      */
     @Test
     public void testGetTaskNumber() {
@@ -412,8 +406,7 @@ public class TaskTest {
     }
     
     /**
-     * Test of setDone method, of class Task.
-     * checks if the done value is changed correctly
+     * Test of setDone method
      */
 	@Test
 	public void testSetDone() {
@@ -423,8 +416,7 @@ public class TaskTest {
 	}
 	
 	/**
-     * Test of getDone method, of class Task.
-     * checks if the done value is returned correctly
+     * Test of getDone method
      */
 	@Test
 	public void testGetDoneProperty() {
